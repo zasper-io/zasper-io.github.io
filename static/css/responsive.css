@@ -602,17 +602,6 @@
 	.header-text {
 	    padding-left: 15px;
 	}
-	.owl-carousel .owl-item img {
-	    display: block;
-	    width: 120%;
-	}
-	#sidebar {
-	    margin-left: -320px;
-	}
-    #sidebar.active {
-	    margin-left: 0;
-	    z-index: 9999;
-	}
 	#content {
 	    min-height: 100vh;
 	    transition: all 0.3s;
@@ -635,18 +624,6 @@
 	    justify-content: center;
 	    top: 50%;
 	    transform: translate(-25%, -50%);
-	}
-	.team-bottom-item {
-	    box-shadow: 0px 3px 16px #654cd029;
-	    border-radius: 20px;
-	    padding: 35px 25px;
-	    width: 80%;
-	    margin: 0 auto;
-	    margin-bottom: 20px;
-	}
-	section#team-bottom {
-	    padding: 60px 0px;
-	    padding-top: 30px;
 	}
 	g.menu-arrow {
 	    transform: translate(799.436px, 1677.895px) rotate(
@@ -726,13 +703,6 @@
 	#header-bottom {
 	    padding-bottom: 30px;
 	}
-	#support-tools {
-	    padding: 30px 0px;
-	}
-	.support-tools-wraper {
-	    padding: 30px 20px;
-	    margin-top: 30px;
-	}
 	#community-sec {
 	    padding: 30px 0px;
 	}
@@ -772,12 +742,6 @@
 	}
 	.footer-info {
 	    margin-bottom: 40px;
-	}
-	.support-tools-wraper > div {
-	    width: 26%;
-	}
-	.support-tools-wraper > div img {
-	    width: 70%;
 	}
 	.btn-border {
 	    padding: 6px 20px;
@@ -825,25 +789,6 @@
 	    padding: 25px 25px 25px;
 	    margin-bottom: 25px;
 	}
-	.dashboard-taks-items {
-	    width: 45%;
-	    padding-left: 15px;
-	    margin-bottom: 35px;
-	}
-	.dashboard-taks-wrapre {
-	    flex-wrap: wrap;
-	}
-	.dashboard-menu {
-	    position: fixed;
-	    right: 0;
-	    top: 0;
-	}
-	.dashboard-content {
-	    width: calc(100% - 0px);
-	}
-	.login-section .col-12:after {
-	    height: 65px;
-	}
 	.under-cons-image img {
 	    width: auto;
 	    max-width: 85%;
@@ -853,76 +798,6 @@
 	}
 	section#under-cons {
 	    padding-bottom: 70px;
-	}
-	.pricing-wraper > div {
-	    width: 80%;
-	}
-	section#pricing-sec {
-	    padding: 70px 0px;
-	    padding-bottom: 70px;
-	}
-	.premium-package {
-	    transform: inherit;
-	}
-	section#enterprise-header {
-	    height: auto;
-	    min-height: auto;
-	    padding: 70px 0px;
-	}
-	.enterprise-header-content{
-	    margin-top: 40px;
-	}
-	section#enterprise-option-sec {
-	    padding: 20px 15px;
-	    padding-top: 50px;
-	}
-	section#team-option-sec {
-    	padding: 20px 15px;
-	}
-	#enterprise-option-sec .section-title {
-	    text-align: center;
-	    margin-bottom: 40px;
-	}
-	.team-bottom-item {
-	    width: 100%;
-	}
-	.update-profile-profile-wraper {
-	    flex-wrap: wrap;
-	}
-	.update-profile-profile-wraper .update-profile-popup-left {
-	    width: 100%;
-	    max-width: 100%;
-	    min-width: 100%;
-	    text-align: center;
-	    background: #E8E7F0;
-	}
-	.public-profile-right {
-	    width: calc(100% - 0px);
-	    padding: 15px 15px;
-	}
-	.update-profile-profile-wraper {
-	    padding: 10px;
-	    padding-right: 10px;
-	}
-	.personal-billing-items {
-	    flex-wrap: wrap;
-	}
-	.personal-billing-items > div {
-	    width: 47%;
-	}
-	.current-plan-item {
-	    width: 32%;
-	    margin-top: 35px;
-	    min-width: 220px;
-	}
-	.billing-information-wraper > div {
-	    padding: 20px 20px;
-	}
-	.add-new-key {
-	    padding: 25px 25px;
-	}
-	.input-three {
-	    width: 48.5%;
 	}
 }
 
@@ -1001,50 +876,6 @@
 	    width: 25%;
 	    padding-left: 20px;
 	}
-	.create-team-wraper ul li button {
-	    font-size: 14px;
-	}
-	.create-team-wraper ul li button .pills-serial {
-	    width: 20px;
-	    height: 20px;
-	    font-size: 13px;
-	    margin-right: 2px;
-	    top: 0px;
-	}
-	.create-team-wraper .tab-content {
-	    padding: 30px 20px;
-	    margin-top: 30px;
-	}
-	.create-team-wraper h3 {
-	    font-size: 22px;
-	    font-weight: 400;
-	    border-bottom: none;
-	}
-	.select-card {
-	    display: block;
-	}
-	.billing-page a {
-	    font-size: 14px;
-	    width: fit-content;
-	}
-	.select-card-right{
-		margin-top: 20px;
-	}
-	.create-team-wraper .tab-content {
-	    height: auto;
-	}
-	.input-three {
-	    width: 100%;
-	}
-	.jupyter-tab-form {
-	    background: #F7F7F7;
-	    padding: 25px 20px;
-	    margin-top: 30px;
-	}
-	.jupyter-tab-inner-top-title h3 {
-	    font-size: 22px;
-	}
-
 }
 @media (max-width: 500px) {
 	.dashboard-taks-items {
@@ -1060,32 +891,6 @@
 	.search-wraper {
 	    position: relative;
 	    width: 100%;
-	}
-	.dashboard-top-menu-wraper {
-	    height: 100px;
-	}
-	.dashboard-top-menu-wraper {
-	    padding: 10px 10px;
-	    height: 100px;
-	}
-	.search-wraper input {
-	    padding: 5px 12px;
-	    padding-left: 40px;
-	}
-	.dashboard-profile img {
-	    width: 35px;
-	}
-	.dashboard-notification-profile {
-	    width: 100%;
-	    margin-bottom: 9px;
-	}
-	.dashboard-menu-logo {
-	    height: 100px;
-	    padding: 22px 8px;
-	}
-	.dashboard-content-features-icon svg {
-	    width: 35px;
-	    height: auto;
 	}
 	section#under-cons {
 	    padding-bottom: 50px;
@@ -1125,46 +930,6 @@
 	    text-align: center;
 	    margin-right: 10px;
 	    min-width: 60px;
-	}
-	.keys-item {
-	    width: 100%;
-	    padding: 20px;
-	    padding-right: 45px;
-	}
-	.add-new-key {
-	    padding: 20px 15px;
-	}
-	.create-team-wraper ul li button .pills-serial{
-		display: none;
-	}
-	.create-team-wraper ul li button {
-	    font-size: 13px;
-	}
-	.available-cards {
-	    padding: 13px 17px;
-	}
-	.projects-item a {
-	    width: 100%;
-	}
-	.projects-item {
-	    width: 340px;
-	}
-	.jupyter-tab-inner {
-	    padding: 20px 10px !important;
-	}
-	.repository-secters-title {
-	    width: 32%;
-	}
-	.projects-footer-main-items h5 {
-	    width: 60px;
-	    height: 60px;
-	    font-size: 22px;
-	}
-	.projects-title h4 {
-	    font-size: 16px;
-	}
-	.product-section {
-    	padding: 25px 0;
 	}
 }
 @media (max-width: 400px) {
