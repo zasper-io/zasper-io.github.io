@@ -157,60 +157,6 @@
 	    width: 90%;
 	    font-size: 18px;
 	}
-	.enterprise-option-container {
-	    padding: 0px 50px;
-	}
-	.enterprise-header-content .font-h1 {
-	    font-size: 50px !important;
-	}
-	.owl-carousel .owl-item img {
-	    display: block;
-	    width: 129%;
-	}
-	.public-profile-right-content .input-group {
-	    width: 83%;
-	}
-	.public-profile-right-content {
-	    padding-left: 0px;
-	}
-	.public-profile-persona-info {
-	    margin-top: 40px;
-	    padding-left: 0px;
-	}
-	.current-plan-left {
-	    width: 200px;
-	    min-width: 200px;
-	    background: transparent linear-gradient(
-	180deg, #FFFFFF 0%, #F2F6FF 100%);
-	    border-radius: 16px;
-	    padding: 24px 25px;
-	    text-align: center;
-	    margin-right: 30px;
-	}
-	.keys-item-image {
-	    width: 80px;
-	    text-align: center;
-	    margin-right: 20px;
-	    min-width: 80px;
-	}
-	.keys-item {
-	    padding-right: 40px;
-	}
-	.repository-secters h4 {
-	    font-size: 14px;
-	}
-	.repository-secters-action a {
-	    font-size: 14px;
-	}
-	.repository-secters-status {
-	    width: 180px;
-	    min-width: 180px;
-	    margin-right: 20px;
-	}
-	.projects-item {
-	    width: 45%;
-	}
-
 }
 @media (max-width: 1290px) {
 }
@@ -254,19 +200,6 @@
 	}
 	.support-tools-wraper {
 	    padding: 52px 30px;
-	}
-	.login-signup-content-slider {
-	    width: 100%;
-	}
-	.login-signup-content {
-	    padding: 40px 25px;
-	}
-	.login-signup-form {
-	    padding: 40px 25px;
-	}
-	.click-to-join-btn a {
-	    padding: 10px 10px;
-	    font-size: 14px;
 	}
 	.click-to-join-btn a i {
 	    margin-right: 5px;
@@ -366,49 +299,6 @@
 	.basic-content-inner p {
 	    font-size: 16px;
 	    line-height: 29px;
-	}
-	
-	
-
-
-	.repository-secters-content {
-	    border-bottom: 1px solid #BCBCBC;
-	    padding: 15px 25px;
-	}
-	.repository-secters-action a {
-	    font-size: 14px;
-	    padding: 5px 15px !important;
-	}
-	.repository-secters-action {
-	    width: fit-content;
-	    min-width: 185px;
-	}
-	.repository-secters-status {
-	    width: 135px;
-	    min-width: 135px;
-	    margin-right: 20px;
-	}
-	.repository-secters-title img {
-	    width: 12px;
-	    margin-right: 10px;
-	}
-	.projects-item {
-	    width: 43%;
-	}
-	.solution-product-item {
-	    width: 48%;
-	}
-	.platform-product-image img {
-	    width: 170px;
-	}
-	.platform-product-content h2 {
-	    font-size: 20px;
-	}
-	.platform-product-content {
-	    min-height: 140px;
-	}
-	.platform-product-sec .section-title h4 {
-	    font-size: 20px !important;
 	}
 }
 
@@ -577,28 +467,6 @@
 	    text-align: center;
 	    color: #9892B2;
 	}
-	.login-signup-wraper {
-	    display: block;
-	}
-	.login-signup-wraper > div {
-	    width: 100%;
-	}
-	.login-signup-content-slider {
-	    width: 70%;
-	}
-	.login-signup-wraper {
-	    display: flex;
-	    flex-direction: column-reverse;
-	}
-	.login-signup-form {
-	    padding: 40px 40px;
-	}
-	.login-signup-content {
-	    padding: 40px 40px;
-	}
-	.login-signup-form-top h4 {
-	    margin-bottom: 10px;
-	}
 	.header-text {
 	    padding-left: 15px;
 	}
@@ -761,34 +629,6 @@
 	.font-h4 {
 	    font-size: 22px !important;
 	}
-	.login-signup-wraper {
-	    border-radius: 20px;
-	}
-	.login-signup-form {
-	    padding: 30px 30px;
-	}
-	.login-signup-content {
-	    padding: 30px 30px;
-	}
-	.login-signup-content-slider {
-	    width: 90%;
-	}
-	.login-signup-form-top h4 {
-	    margin-bottom: 10px;
-	    font-size: 27px !important;
-	}
-	.dashboard-content-features-wraper {
-	    display: flex;
-	    justify-content: space-between;
-	    margin-top: 45px;
-	    padding: 0px 0px;
-	    flex-wrap: wrap;
-	}
-	.dashboard-content-features {
-	    width: 48%;
-	    padding: 25px 25px 25px;
-	    margin-bottom: 25px;
-	}
 	.under-cons-image img {
 	    width: auto;
 	    max-width: 85%;
@@ -849,11 +689,6 @@
 	.dropdown-btn span {
 	    font-size: 14px;
 	}
-	.dashboard-menu {
-	    position: fixed;
-	    right: 0;
-	    top: 0;
-	}
 	.font-36 {
 	    font-size: 30px !important;
 	}
@@ -878,16 +713,6 @@
 	}
 }
 @media (max-width: 500px) {
-	.dashboard-taks-items {
-	    width: 100%;
-	}
-	.dashboard-top-menu {
-	    display: flex;
-	    justify-content: end;
-	    align-items: center;
-	    flex-wrap: wrap;
-	    flex-direction: column-reverse;
-	}
 	.search-wraper {
 	    position: relative;
 	    width: 100%;
@@ -1049,25 +874,5 @@
 	}
 	a.nav-link {
 	    font-size: 16px;
-	}
-	.login-section {
-	    margin-top: 40px;
-	    padding-bottom: 50px;
-	}
-	.click-to-join-btn a {
-	    padding: 10px 10px;
-	    font-size: 14px;
-	    width: 100%;
-	    margin-bottom: 10px;
-	    font-size: 16px;
-	    margin-left: 0px;
-	    margin-right: 0px;
-	}
-	.click-to-join-btn {
-	    flex-wrap: wrap;
-	}
-	.or {
-	    margin-top: 20px;
-	    margin-bottom: 20px;
 	}
 }
