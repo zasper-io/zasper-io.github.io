@@ -829,6 +829,12 @@ ul.pagination li a:hover{
     line-height: 30px;
 }
 
+.blog-img{
+    width: 80%;
+    margin-top: 30px;
+    margin-bottom: 30px; 
+}
+
 .blog-description p:last-child{
     margin-bottom: 0px;
 }

@@ -14,7 +14,7 @@ It's perfectly suited for running REPL-style data applications, with Jupyter not
 
 **Zasper uses one fourth of RAM and one fourth of CPU used by Jupterlab. While Jupyterlab uses around 104.8 MB of RAM and 0.8 CPUs, Zasper uses 26.7 MB of RAM and 0.2 CPUs.**
 
-<img height="700px" width="auto" src="/static/images/zasper-intro.png">
+<img class="blog-img" src="/static/images/zasper-intro.png">
 
 Currently Zasper is supported on Linux and Mac.
 
@@ -33,7 +33,7 @@ Python's Event Loop: Ideal for I/O-bound applications that need to handle a lot 
 
 Zasper backend is written in Gorilla. The ipython kernel is reused from Project Jupyter. Zasper backend communicates with ipython kernel via zeromq sockets.
 
-<img src="/static/images/zasper.drawio.svg">
+<img class="blog-img" src="/static/images/zasper.drawio.svg">
 
 (About Zeromq: ZeroMQ (also known as ØMQ, 0MQ, or zmq) looks like an embeddable networking library but acts like a concurrency framework. It gives 
 you sockets that carry atomic messages across various transports like in-process, inter-process, TCP, and multicast.)

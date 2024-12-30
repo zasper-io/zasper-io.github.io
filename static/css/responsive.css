@@ -959,6 +959,14 @@
 	    min-height: 100%;
 	    transition: .3s ease;
 	}
+
+	.blog-img {
+	    width: 100%;
+	    min-height: 100%;
+	    transition: .3s ease;
+	}
+
+	
 	
 }
 
