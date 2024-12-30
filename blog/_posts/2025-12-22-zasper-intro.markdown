@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Zasper IDE"
+title:  "Zasper: a modern IDE for Data Science."
 date:   2024-12-22 07:39:59 +0530
 categories: usage
 permalink: /:title
@@ -8,12 +8,69 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis nisi ac eros convallis, a sagittis turpis pretium. Vestibulum nec sodales augue. Nam accumsan iaculis mollis. Sed fringilla ligula felis, eu porta massa venenatis a. Aliquam erat volutpat. Curabitur pellentesque sem eget dui tincidunt, vel viverra dolor imperdiet. Integer aliquet neque quis risus imperdiet, et congue augue sagittis. Cras lobortis dui sed sapien sagittis, in ultrices ex molestie. Phasellus lorem eros, egestas sit amet imperdiet at, varius in massa. Nam sollicitudin massa eget elit accumsan, ut placerat risus feugiat. Curabitur sit amet aliquam libero. Morbi vestibulum venenatis dui, eu hendrerit dui semper eu. Duis consequat odio in felis viverra, ac pellentesque velit consectetur.
+Zasper is an IDE designed from the ground up to support massive concurrency. It provides a minimal memory footprint, exceptional speed, and the ability to handle numerous concurrent connections.
 
-Fusce lacinia, lectus quis lobortis efficitur, turpis elit dapibus libero, sit amet congue ex urna in tellus. In vehicula eleifend arcu a lacinia. Praesent vehicula, mauris id fermentum euismod, est metus tempor tellus, at malesuada ante erat et dolor. Ut nec turpis sed nibh maximus suscipit id ac nibh. Donec non molestie leo. Nulla cursus quam nec mauris sollicitudin malesuada. Proin nec dui ac augue sodales aliquam eget at nunc. Nunc id elit nec ante placerat lobortis a sit amet nunc. Suspendisse vel lectus urna. Vestibulum non arcu sit amet mi lobortis fringilla et ut massa. Quisque risus dui, elementum quis diam at, dictum imperdiet ipsum.
+It's perfectly suited for running REPL-style data applications, with Jupyter notebooks being one example.
 
-Vivamus sit amet neque augue. Nunc imperdiet ante sit amet erat porttitor, quis iaculis nibh blandit. Fusce pulvinar vel turpis eget molestie. Mauris suscipit nibh massa, sit amet malesuada est scelerisque id. Morbi ultrices convallis pretium. In tempor fermentum tincidunt. Donec scelerisque dolor et ligula maximus, non vulputate velit faucibus. Quisque faucibus vehicula quam, id ultricies enim porttitor quis. Aliquam mattis eu mi non laoreet. Sed congue cursus suscipit. Cras tincidunt, nulla quis mollis pellentesque, ante nunc imperdiet ipsum, ut vulputate massa turpis non orci. Nullam laoreet mattis volutpat. Nulla pellentesque lorem et justo congue cursus. Quisque tristique iaculis aliquam.
+**Zasper uses one fourth of RAM and one fourth of CPU used by Jupterlab. While Jupyterlab uses around 104.8 MB of RAM and 0.8 CPUs, Zasper uses 26.7 MB of RAM and 0.2 CPUs.**
 
-Donec luctus et dui in scelerisque. Vivamus finibus est metus, sed malesuada nisl pulvinar hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla consequat augue sit amet diam efficitur mollis. Ut faucibus commodo fringilla. Suspendisse consequat vestibulum felis, sit amet accumsan est dictum sodales. Sed venenatis egestas sem, quis cursus tortor aliquam vitae. Suspendisse ante nibh, gravida eu erat vitae, aliquet pulvinar diam. Donec vitae rutrum tellus, quis facilisis nibh.
+<img height="700px" width="auto" src="/static/images/zasper-intro.png">
 
-Phasellus consequat id sapien eget mollis. Morbi sit amet pharetra neque. Maecenas lobortis congue velit a lobortis. Duis ullamcorper tincidunt vehicula. Vivamus non odio mattis, egestas nibh pellentesque, mollis tortor. Proin pellentesque viverra dictum. In placerat dictum ex eu pulvinar. Donec efficitur augue ac dui interdum euismod. Vestibulum aliquet iaculis convallis. Sed ullamcorper sapien ac auctor laoreet. Vestibulum commodo sem sed eros dapibus ultrices. Proin sit amet justo nec mi blandit rutrum at vel turpis.
+Currently Zasper is supported on Linux and Mac.
+
+# Why I built Zasper ?
+
+There are several proprietary JupyterLab-like frontend tools available in the market, such as Databricks Notebooks and Deepnote Notebooks. However, none of them are free or open-source, and most require users to work in the cloud. Even the modest personal computers these days are typically equipped with at least 8 GB of RAM, an 8-core CPU, and a decent 4 GB GPU, I saw an opportunity to create a solution that works seamlessly on local machines. That’s why I decided to build Zasper which can effectively utilize the resources available and guarantee maximum efficiency.
+
+Originally I wrote https://github.com/zasper-io/zasper_py (now in Private mode) to build a new frontend around Jupyter. During the process I realized, Go is the ideal choice to rebuild the Jupyter project. Go has excellent support for REST, RPC, WS protocols. Concurrency and Performance are the areas where Go shines.
+
+Go's Concurrency: Better suited for applications requiring both concurrency and parallelism, as it leverages multiple cores effectively. It's easier to handle blocking operations without freezing the system.
+
+Python's Event Loop: Ideal for I/O-bound applications that need to handle a lot of asynchronous tasks without blocking. However, it struggles with CPU-bound tasks and lacks native parallelism unless additional worker threads are used.
+
+
+## Architecture
+
+Zasper backend is written in Gorilla. The ipython kernel is reused from Project Jupyter. Zasper backend communicates with ipython kernel via zeromq sockets.
+
+<img src="/static/images/zasper.drawio.svg">
+
+(About Zeromq: ZeroMQ (also known as ØMQ, 0MQ, or zmq) looks like an embeddable networking library but acts like a concurrency framework. It gives 
+you sockets that carry atomic messages across various transports like in-process, inter-process, TCP, and multicast.)
+
+## Messaging
+
+Zasper follows [the Wire Protocol](https://jupyter-client.readthedocs.io/en/stable/messaging.html) as established by Jupyter community. 
+
+## How is it different ?
+
+Jupyter server is reimplemented in Go. Every Jupyter Notebook runs with a Jupyter kernel (IPython kernel, IJulia kernel). The JupyterLab Server 
+is responsible for managing the Jupyter kernels and serves as a broker between  Jupyter Notebook running in LabApp(frontend) and Jupyter Kernel. 
+Zasper replaces Jupterlab by reimplementing most of the implementations. 
+
+Jupterlab's  wire protocol is built using Tornado server and AsyncIO. Python's AsyncIO runs on a single core and gets problematic when scaling.
+
+Zasper on the other hand uses Gorilla and coroutines that easily scales to multiple cores. Coroutines are light weight and work independently.
+
+Even if you read the code, Zasper's implementation is much more easier to understand compared to Jupyterlab. You wouldn't get lost in Future and callbacks.
+
+I will publish a separate blog post regarding this.
+
+
+
+
+# Extensibilty
+
+Zasper is designed with extensibility at its core. For example, if you want to create an internal, Google Colab-like interface within your private cloud and store your notebook files on Google Drive, this can be easily accomplished by modifying the content_manager module of Zasper. By implementing custom content readers and writers for Google Drive, you can seamlessly integrate it as a storage backend. 
+
+Similarly, many organizations prefer using MinIO for object storage, and they can achieve a Google Colab-like experience by adapting the same approach.
+
+# Future Roadmap
+
+Data Scientists and AI Engineers spend most of their time running Notebooks on IDEs and hence need a robust ecosystem. Zasper aspires to be a full fledged IDE and the future development will be along making it more efficient by:
+
+* Allowing custom data apps support rather than just Jupyter Notebooks.
+* Easier integration with the existing tools.
+* Zasper Hub for Self Hosted deployment in the cloud.
+
+
