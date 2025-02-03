@@ -7,6 +7,7 @@
           <div class="col-12 col-md-12 col-lg-9">
 
             {% for post in site.posts %}
+            {% if post.categories contains 'blog' %}
             <div class="blog-list-item wow fadeInUp">
               <a href="{{ post.url }}.html">
                 <div class="blog-list-item-image">
@@ -23,6 +24,7 @@
                 </div>
               </a>
             </div>
+            {% endif %}
             {% endfor %}
           </div>
 
