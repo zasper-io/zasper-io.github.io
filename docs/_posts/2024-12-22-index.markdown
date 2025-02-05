@@ -9,7 +9,7 @@ banner: /static/images/logo.svg
 ---
 
 <p align="center">
-  <img src="/static/images/logo.svg" alt="Zasper">
+  <img height="100px" width="auto" src="/static/images/logo.svg" alt="Zasper">
 </p>
 <p align="center">
     ⚡ High Performance IDE 🚀 Massive concurrency 🐥  Inspired by Jupyter
@@ -51,29 +51,27 @@ Hence the Go version of Zasper was born!
 
 ### 📷 Screenshots
 
-#### Editor 
-<img height="400px" width="auto" src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main//editor.png"/><br><br>
+### Editor
+![Editor](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main//editor.png)
 
-#### Terminal
-<img height="400px" width="auto" src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/terminal.png"/><br><br>
+### Terminal
+![Editor](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/terminal.png)
 
-#### Launcher
-<img height="400px" width="auto" src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/launcher.png"/><br><br>
+### Launcher
+![Launcher](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/launcher.png) 
 
-#### Jupyter Notebook
-<img height="400px" width="auto" src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/notebook.png"/><br><br>
+### Jupyter Notebook
+![Notebook](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/notebook.png) 
 
-#### Version Control
-<img height="400px" width="auto" src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/git.png"/><br><br>
+### Version Control
+![Version Control](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/git.png) 
 
-#### Command Palette
-<img height="400px" width="auto" src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/commandPalette.png"/><br><br>
+### Command Palette
+![Command Palette](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/commandPalette.png)
 
-#### Dark Mode
-<img height="400px" width="auto" src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/dark.png"/><br><br>
+### Dark Mode
+![Dark mode](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/dark.png) 
 
-
-<img height="400px" width="auto" src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/darkNotebook.png"/><br><br> 
-
+![Dark Notebook mode](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/darkNotebook.png) 
 
 

@@ -1022,6 +1022,10 @@ span.documentation-date {
     margin-bottom: 25px;
     margin-top: 20px;
 }
+
+.documentation-main-content img {
+    width: 100%;
+}
 .documentation-main-content > ul {
     font-size: 14px;
     color: #484848;
