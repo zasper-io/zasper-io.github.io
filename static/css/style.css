@@ -11,9 +11,14 @@ a{
 button{
     transition: .3s ease;
 }
-h1, h2, h3, h4, h5, h6, p{
-    margin-bottom: 0px;
+h1, h2, h3, h4, h5, h6{
+    margin: 24px 0;
 }
+
+p {
+    margin: 10px 0;
+}
+
 .font-h1{
     font-size: 76px !important;
 }
@@ -195,9 +200,9 @@ nav.navbar.navbar-expand-lg {
     color: #fff;
     text-align: center;
     padding: 0px 50px;
-    padding-top: 130px;
+    padding-top: 70px;
     border-radius: 40px;
-    margin-top: -164px;
+    margin-top: -104px;
     position: relative;
 }
 .section-title p {
@@ -457,6 +462,7 @@ section#copyright p{
 }
 .header-text h3, .header-text h1 {
     color: #281964;
+    margin: 10px 0;
 }
 .navbar-collapse button.colse-btn {
     display: none;
@@ -1014,6 +1020,16 @@ span.documentation-date {
     margin-top: 6px;
     display: inline-block;
 }
+
+.documentation-main-content{
+    color: #484848;
+}
+.documentation-main-content {
+    h1,h2,h3,h4,h5,h6 {
+        color: #281964;
+    }
+}
+
 .documentation-main-content p {
     font-weight: 300;
     font-size: 16px;

@@ -2,11 +2,12 @@
 layout: docs
 title:  "Installation Webapp"
 date:   2024-12-22 07:39:59 +0530
-categories: usage
-permalink: docs/installing-webapp
+index: 1
+categories: docs
+permalink: docs/:title
 author: Prasun Anand
-banner: /static/images/logo.svg
 ---
+
 
 
 #### Build the frontend
@@ -54,4 +55,4 @@ Go to any directory you want to serve and run `zasper`. This starts zasper serve
 
 ```
 
-Go to `http://localhost:8888`
+Go to `http://localhost:8048`

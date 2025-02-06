@@ -2,7 +2,7 @@
 layout: post
 title:  "Zasper: A Supercharged IDE for Data Science."
 date:   2024-12-22 07:39:59 +0530
-categories: usage
+categories: blog
 permalink: blog/:title
 author: Prasun Anand
 banner: /static/images/logo.svg

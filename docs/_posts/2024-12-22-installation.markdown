@@ -3,6 +3,7 @@ layout: docs
 title:  "Installation"
 date:   2024-12-22 07:39:59 +0530
 categories: usage
+index: 2
 permalink: docs/:title
 author: Prasun Anand
 banner: /static/images/logo.svg

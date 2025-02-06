@@ -1,0 +1,7 @@
+{% assign site_docs = site.posts | where: "categories", "docs" | sort: "index" %}
+
+{% for post in site_docs %}
+  <a href="{{ post.url | escape }}">
+    <img src="/static/images/link-arrow.svg" alt="Link"> {{ post.title }}
+  </a>
+{% endfor %}

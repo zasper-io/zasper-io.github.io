@@ -2,8 +2,9 @@
 layout: docs
 title:  "Home"
 date:   2024-12-22 07:39:59 +0530
-categories: usage
-permalink: docs/
+index: 0
+categories: docs
+permalink: docs/:title
 author: Prasun Anand
 banner: /static/images/logo.svg
 ---
