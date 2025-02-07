@@ -1,5 +1,5 @@
 
-@media (min-width: 1700px){
+@media (min-width: 1700px) {
 	.container{
 	    max-width: 1637px;
 	}
@@ -756,6 +756,12 @@
 	    margin-right: 10px;
 	    min-width: 60px;
 	}
+
+	.trusted-companies-logo{
+		display: block;
+		align-content: center;
+		text-align: center;
+	}
 }
 @media (max-width: 400px) {
 	button.navbar-toggler {
@@ -886,7 +892,7 @@
 	/*
 	    End zasper collection
 	*/
-}
+/* } */
 
 
 @media (max-width: 1700px) {
@@ -1404,15 +1410,10 @@
 	}
 
 }
-*/
 
+/* docs */
 
-
-/*
-docs
-*/
-
-@media (min-width: 1700px){
+@media (min-width: 1700px) {
 	.container{
 	    max-width: 1637px;
 	}

@@ -262,6 +262,32 @@ nav.navbar.navbar-expand-lg {
 .section-title {
     text-align: center;
 }
+
+.trusted-companies-logo{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+#zerodha-logo {
+    width: 250px;
+}
+
+.trusted-companies-logo img {
+    width: 150px;
+    margin: 50px;
+    margin-bottom: 0;
+}
+.trusted-on-us-wraper {
+    justify-content: center;
+    align-items: center;
+}
+.trusted-companies-logo {
+    margin-left: 15px;
+}
+section#trusted-on-us {
+    padding: 75px 0px;
+}
+
 .support-tools-wraper {
     background: #ffffff;
     display: flex;
