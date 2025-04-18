@@ -77,7 +77,7 @@ a.navbar-brand img{
 .btn-bg {
     border: 1px solid #583BD8 !important;
     background: #583BD8;
-    padding: 8px 20px;
+    /* padding: 8px 20px; */
     color: #fff;
     border-radius: 7px;
 }
