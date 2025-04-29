@@ -155,7 +155,14 @@ nav.navbar.navbar-expand-lg {
     width: 548px;
     line-height: 30px;
     margin-top: 15px;
-    font-weight: 300;
+    font-weight: 400;
+}
+.header-text ul {
+    color: #484848;
+    width: 548px;
+    line-height: 30px;
+    margin-top: 15px;
+    font-weight: 400;
 }
 .header-form .form-group {
     width: 100%;
@@ -953,6 +960,9 @@ ul.pagination li a:hover{
     line-height: 30px;
     margin-bottom: 25px;
     margin-top: 20px;
+}
+.blog-description img {
+    max-width: 100%;
 }
 
 .blog-description li {
