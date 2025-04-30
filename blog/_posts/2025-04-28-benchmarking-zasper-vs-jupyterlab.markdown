@@ -8,7 +8,13 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-# Introduction
+The primary goal of this benchmarking exercise is to compare the performance of Zasper against the traditional Jupyter Server. Through this comparison, we aim to determine how Zasper performs in a real-world scenario where multiple execute requests are made, with particular interest in resource consumption and efficiency. The focus areas for evaluation are:
+
+* CPU Usage
+* RAM Usage
+* Throughput
+* Latency
+* Resilience
 
 Zasper is an IDE designed from the ground up to support massive concurrency. It provides a minimal memory footprint, exceptional speed, and the ability to handle numerous concurrent connections.
 
@@ -17,15 +23,6 @@ It implements [Jupyter's wire protocol](https://jupyter-client.readthedocs.io/en
 [Project Github Link](https://github.com/zasper-io/zasper) |
 [Benchmark Code Github Link](https://github.com/zasper-io/zasper-benchmark)
 
-The primary goal of this benchmarking exercise is to compare the performance of Zasper against the traditional Jupyter Server. The focus areas for evaluation are:
-
-* CPU Usage
-* RAM Usage
-* Throughput
-* Latency
-* Resilience
-
-Through this comparison, we aim to determine how Zasper performs in a real-world scenario where multiple execute requests are made, with particular interest in resource consumption and efficiency.
 
 ## Key Findings at a Glance
 
