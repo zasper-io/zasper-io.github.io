@@ -699,7 +699,7 @@ button.owl-dot.active {
 
 
 /*
-Blog 
+Blog
 */
 
 .blog-list-item a{
@@ -975,7 +975,7 @@ ul.pagination li a:hover{
 .blog-img{
     width: 80%;
     margin-top: 30px;
-    margin-bottom: 30px; 
+    margin-bottom: 30px;
 }
 
 .blog-description p:last-child{
@@ -1180,9 +1180,11 @@ span.documentation-date {
     width: 100%;
 }
 .documentation-main-content > ul {
-    font-size: 14px;
-    color: #484848;
     margin-bottom: 15px;
+    color: #484848;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 300;
 }
 .documentation-topic h6 {
     font-size: 14px;

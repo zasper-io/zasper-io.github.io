@@ -2,7 +2,7 @@
 layout: docs
 title:  "Key Bindings"
 date:   2025-02-05 07:39:59 +0530
-index: 3
+index: 5
 categories: docs
 permalink: docs/:title
 author: Prasun Anand
@@ -92,4 +92,3 @@ Not all of the below bindings are supported. It's a reference
 |---------|--------------|-------|
 | Toggle Sidebar | Ctrl+B | Cmd+B |
 | Show/Hide Explorer | Ctrl+Shift+E | Cmd+Shift+E |
-
