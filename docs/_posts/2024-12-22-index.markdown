@@ -1,6 +1,6 @@
 ---
 layout: docs
-title:  "Home"
+title:  "Introduction"
 date:   2024-12-22 07:39:59 +0530
 index: 0
 categories: docs
@@ -9,23 +9,25 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper is a new open-source IDE for working with Jupyter notebooks. It’s built from scratch to be:
+Zasper is an open-source High Performance IDE for working with Jupyter notebooks. It’s built from scratch to be:
 
 * 🚀 Blazing fast
 * 🧠 Highly concurrent
 * 💾 Low on resource usage
 * 💥 Crash-resistant, even under heavy loads
 
-It is cross-platform.
+It is cross-platform:
 
 * ✅ Fully supported: macOS & Linux
 * ⚠️ Limited support: Windows — for the best experience, use via WSL
 
+---
+
 # Benchmarks
 
-How is Zasper better than JupyterLab ?
+How is Zasper better than JupyterLab?
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/main/assets/summary_resources.png)
+<img src="https://raw.githubusercontent.com/zasper-io/zasper-benchmark/main/assets/summary_resources.png" alt="Benchmark summary" width="600" />
 
 * Up to 5X Less CPU usage
 * Up to 40X Less RAM usage
@@ -33,30 +35,39 @@ How is Zasper better than JupyterLab ?
 * Lower latency
 * Highly resilient under very high loads
 
-Benchmark comparision report can be accessed [here](https://github.com/zasper-io/zasper-benchmark?tab=readme-ov-file#benchmarking-zasper-vs-jupyterlab).
+Benchmark comparison report can be accessed [here](https://github.com/zasper-io/zasper-benchmark?tab=readme-ov-file#benchmarking-zasper-vs-jupyterlab).
 
+---
 
 ### 📷 Screenshots
 
-### Editor
-![Editor](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main//editor.png)
+##### Editor
 
-### Terminal
-![Editor](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/terminal.png)
+<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/editor.png" alt="Editor" style="max-width:600px; width:100%; height:auto;"  />
 
-### Launcher
-![Launcher](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/launcher.png)
+##### Terminal
 
-### Jupyter Notebook
-![Notebook](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/notebook.png)
+<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/terminal.png" alt="Terminal" style="max-width:600px; width:100%; height:auto;"  />
 
-### Version Control
-![Version Control](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/git.png)
+##### Launcher
 
-### Command Palette
-![Command Palette](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/commandPalette.png)
+<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/launcher.png" alt="Launcher" style="max-width:600px; width:100%; height:auto;"  />
 
-### Dark Mode
-![Dark mode](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/dark.png)
+##### Jupyter Notebook
 
-![Dark Notebook mode](https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/darkNotebook.png)
+<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/notebook.png" alt="Notebook" style="max-width:600px; width:100%; height:auto;"  />
+
+##### Version Control
+
+<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/git.png" alt="Version Control" style="max-width:600px; width:100%; height:auto;"  />
+
+##### Command Palette
+
+<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/commandPalette.png" alt="Command Palette" style="max-width:600px; width:100%; height:auto;"  />
+
+##### Dark Mode
+
+<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/dark.png" alt="Dark Mode" style="max-width:600px; width:100%; height:auto;"  />
+
+
+<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/darkNotebook.png" alt="Dark Notebook Mode" style="max-width:600px; width:100%; height:auto;"  />
