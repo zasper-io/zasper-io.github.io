@@ -45,7 +45,7 @@ sudo snap install zasper
 ### 📦 Conda
 
 ```
-conda install -c conda-forge zasper
+conda install zasper -c conda-forge
 ```
 
 ---
