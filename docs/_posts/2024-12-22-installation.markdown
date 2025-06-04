@@ -42,9 +42,11 @@ sudo snap install zasper
 
 ---
 
-### 📦 Conda (Coming Soon)
+### 📦 Conda
 
-We’re working on a Conda package for the Web App. Stay tuned for a `conda install -c conda-forge zasper` release!
+```
+conda install -c conda-forge zasper
+```
 
 ---
 
