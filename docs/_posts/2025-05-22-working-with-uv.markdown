@@ -16,6 +16,8 @@ reproducible Python environments — perfect for use with **Zasper**.
 This guide shows how to create and configure a Python project using UV and register it as a
 Jupyter kernel for use in **Zasper**.
 
+This tutorial assumes that you have already installed Zasper from the one of the options documented on the [Installation page](#installation)
+
 
 ### 🔧 Step 1: Create a new project
 
