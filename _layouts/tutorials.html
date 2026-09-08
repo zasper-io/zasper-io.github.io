@@ -3,28 +3,22 @@
 
 <div class="mk-blog">
   <div class="mk-docs-body mk-blog-head">
-    <h1>Blog</h1>
+    <h1>Tutorials</h1>
     <p style="color: var(--z-fg-muted); font-size: 18px; margin: 0 0 8px">
-      Notes on building Zasper — releases and benchmarks against JupyterLab, as they happen.
+      Walkthroughs for getting things done in Zasper, start to finish.
     </p>
   </div>
 
   <div class="mk-blog-list">
-    {% assign posts = site.posts | where: "categories", "blog" %}
+    {% assign posts = site.posts | where: "categories", "tutorials" %}
     {% for post in posts %}
-    {% assign now = site.time | date: "%s" %}
-    {% assign post_date = post.date | date: "%s" %}
-    {% assign days_old = now | minus: post_date | divided_by: 86400 %}
     <article class="mk-blog-card">
       <a class="mk-blog-card-link" href="{{ post.url }}">
         <span class="mk-blog-card-mark" aria-hidden="true">
           <img src="/static/images/logo-icon.svg" alt="" />
         </span>
         <span>
-          <span class="mk-blog-card-meta">
-            {% if days_old < 30 %}<span class="mk-blog-card-badge">New</span>{% endif %}
-            {{ post.date | date: "%-d %B %Y" }} · {{ post.author }}
-          </span>
+          <span class="mk-blog-card-meta">{{ post.date | date: "%-d %B %Y" }} · {{ post.author }}</span>
           <h2>{{ post.title }}</h2>
           <p>{{ post.content | strip_html | truncate: 200 }}</p>
         </span>

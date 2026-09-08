@@ -1,32 +1,53 @@
-{% include header2.html %}
-
-    <section id="documentation-sec">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="documentation-sec-wraper">
-              <div class="documentation-page-links wow fadeInUp">
-                {% include docs-links.html %}
-              </div>
-
-              <div class="documentation-content-main">
-                <div class="documentation-content-wraper">
-                  <div class="documentation-title wow fadeInUp">
-                    <h3 class="font-h3 fontw-400">{{ page.title }}</h3>
-                  </div>
-                  <div class="documentation-main-content wow fadeInUp">
-                    <div markdown="1" class="col-sm-12"></div>{{ page.content }}</div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
+{% include head.html %}
 {% include nav.html %}
+
+{% assign site_docs = site.posts | where: "categories", "docs" | sort: "index" %}
+{% for post in site_docs %}
+  {% if post.url == page.url %}
+    {% unless forloop.first %}
+      {% assign prev_index = forloop.index0 | minus: 1 %}
+      {% assign prev_post = site_docs[prev_index] %}
+    {% endunless %}
+    {% unless forloop.last %}
+      {% assign next_index = forloop.index0 | plus: 1 %}
+      {% assign next_post = site_docs[next_index] %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+
+<div class="mk-docs">
+  <details class="mk-docs-side" open>
+    <summary class="mk-docs-mobile-toggle">
+      Contents
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+    </summary>
+    {% include docs-links.html %}
+  </details>
+
+  <article class="mk-docs-body">
+    <nav class="mk-docs-crumbs" aria-label="Breadcrumb">
+      <a href="/docs">Docs</a><span aria-hidden="true">/</span><span>{{ page.group }}</span>
+    </nav>
+    <h1>{{ page.title }}</h1>
+    {{ content }}
+
+    <nav class="mk-docs-pager" aria-label="Pagination">
+      {% if prev_post %}
+      <a class="mk-docs-prev" href="{{ prev_post.url }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        <span><em>Previous</em>{{ prev_post.title }}</span>
+      </a>
+      {% endif %}
+      {% if next_post %}
+      <a class="mk-docs-next" href="{{ next_post.url }}">
+        <span><em>Next</em>{{ next_post.title }}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+      </a>
+      {% endif %}
+    </nav>
+  </article>
+
+  <nav class="mk-docs-toc" aria-label="On this page" id="docs-toc"></nav>
+</div>
 
 {% include footer.html %}

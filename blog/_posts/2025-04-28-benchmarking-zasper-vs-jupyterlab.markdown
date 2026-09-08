@@ -40,7 +40,7 @@ Note: Jupyter Server powers Jupyterlab. Hence, I use the terms interchangeably.
 
 
 
-# Understanding Jupyter Server Architecture
+## Understanding Jupyter Server Architecture
 
 To establish a baseline, it is important to understand how a Jupyter Server operates internally. Here's a simplified breakdown:
 
@@ -60,7 +60,7 @@ The Jupyter kernel communicates with the server over five dedicated channels:
 * iopub – for publishing results back to the client.
 * heartbeat – for kernel liveliness checks.
 
-📌 For this benchmarking exercise, we focus only on:
+For this benchmarking exercise, we focus only on:
 
 * Shell channel – used to send execution requests (e.g., `2+2`, `print("Hello World!")`)
 * IOPub channel – used to receive outputs from the kernel (e.g., `4`, `Hello World!`)
@@ -233,7 +233,7 @@ For example:
 
 This relationship is crucial for understanding how the system behaves under different loads and how delay impacts the throughput.
 
-# Results
+## Results
 
 The graph shows a clear performance difference between Zasper and Jupyter Server across the selected metrics.
 
@@ -425,24 +425,24 @@ Zasper is designed around the principle of **“Use More to Save More.”** As r
 * Cost Efficiency: Lower resource usage translates to fewer cloud compute instances required.
 * Better Scalability: Efficient resource handling allows support for more users and sessions per node.
 
-# Conclusion
+## Conclusion
 
 This benchmarking study highlights Zasper's performance advantages over the traditional Jupyter Server. Whether for individual developers or large-scale enterprise deployments, Zasper demonstrates meaningful improvements in resource efficiency and execution throughput, making it a promising alternative for interactive computing environments.
 
 
-# 🙏 Thanks to Jupyter Community
+## Thanks to the Jupyter Community
 
 Zasper would not exist without the incredible work of the Jupyter community. Zasper uses the Jupyter wire protocol and draws inspiration from its architecture. Deep thanks to all Jupyter contributors for laying the groundwork. Data Science Notebooks would not have existed without them.
 
-# 🤞 Support Zasper
+## Support Zasper
 
 If you like Zasper and want to support me in my mission, please consider [sponsoring me on GitHub](https://github.com/sponsors/prasunanand).
 
-# Discussions
+## Discussions
 
 Please feel free to mail me at `prasun@zasper.io` to report any corrections or irregularities.
 
 
-# Copyright
+## Copyright
 
 Prasun Anand

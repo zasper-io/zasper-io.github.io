@@ -1,0 +1,35 @@
+<!--
+Every page's <head>, plus the opening of <body> — the two used to be split across header.html and
+header2.html, which existed only because header.html opened a <section> that home.html, and nothing
+else, happened to close 34 lines into its own markup. One include now, closed by nothing but itself.
+
+Title and description are per-page: docs and blog posts already carry `title` in their front matter,
+so this reads that before falling back to the site default, and a page can set `description` in its
+own front matter to override the shared one below.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include meta.html %}
+    <title>{% if page.title %}{{ page.title }} · Zasper{% else %}Zasper: High Performance IDE for Jupyter Notebooks{% endif %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <link rel="icon" href="/static/images/zasper_logo.ico" type="image/x-icon" sizes="32x32" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G239XHJ88R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-G239XHJ88R');
+    </script>
+  </head>
+  <body>

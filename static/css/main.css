@@ -1,0 +1,1166 @@
+/*
+The site's only stylesheet. It replaces six: bootstrap.min.css (163 KB), animate.css (57 KB),
+owl.carousel.min.css + owl.theme.default.min.css (4 KB), nice-select.css (4 KB), responsive.css
+(33 KB) and style.css (23 KB) — about 280 KB, none of it shared with the product. Neither is this file:
+it is a hand-written port of the `.mk-*` design in zasper-io/zasper-prototype (`landing.html`,
+`docs.html`, `blog.html`), which is where any future change to this site's look should be made and
+proven before it lands here. The token values below are that repository's `teal-light` theme, read
+live and copied in as plain hex — this site has no theme switcher, so there is nothing to switch.
+
+Two libraries this site no longer loads, and why: `owl.carousel` was wired to
+`.login-sign-up-form-slider`, a class that exists in main.js and nowhere in any page; `nice-select` was
+wired to `select`, and no page has one. Both were dead weight for as long as anyone can tell.
+*/
+
+/* --- Tokens --------------------------------------------------------------- */
+:root {
+  /* the teal ramp, `css/accents.css` in the prototype */
+  --a-50: #eaf5f4;
+  --a-100: #cfe9e7;
+  --a-200: #a3d5d1;
+  --a-400: #2c8f88;
+  --a-600: #0c6862;
+  --a-700: #0a5651;
+  --a-800: #084541;
+  --a-900: #063733;
+
+  --z-accent: var(--a-600);
+  --z-accent-hover: var(--a-700);
+  --z-accent-active: var(--a-800);
+  --z-fg-accent: var(--a-600);
+  --z-fg-on-accent: #ffffff;
+
+  --z-bg-app: #e4e4e5;
+  --z-bg-panel: #ffffff;
+  --z-bg-panel-alt: var(--a-50);
+  --z-bg-code: #f4f4f4;
+  --z-bg-login-page: linear-gradient(119deg, #ffffff 0%, var(--a-100) 100%);
+  --z-bg-login-hero: linear-gradient(133deg, var(--a-600) 0%, var(--a-900) 100%);
+
+  --z-border: var(--a-100);
+  --z-border-strong: #969696;
+  --z-border-subtle: #f3f2f6;
+
+  --z-fg-default: #393939;
+  --z-fg-muted: #6d6d6d;
+  --z-fg-subtle: #767676;
+
+  --z-status-idle: #139513;
+  --z-shadow-panel: 0 3px 20px #0000001c;
+
+  --z-ui-font-family:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --z-mono-font-family:
+    'JetBrains Mono', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono',
+    monospace;
+  --z-ui-font-size: 13px;
+  --z-ui-font-size-sm: 11px;
+  --z-ui-line-height: 1.4;
+  --z-font-size-body: 14px;
+  --z-font-size-heading: 20px;
+  --z-line-height-body: 1.5;
+
+  --mk-wrap: 1080px;
+}
+
+/* --- Reset ------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-color: #b7b7b7 transparent;
+}
+
+body {
+  margin: 0;
+  font-family: var(--z-ui-font-family);
+  color: var(--z-fg-default);
+  background: var(--z-bg-panel);
+  /* macOS renders Inter noticeably heavier without this. */
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--z-mono-font-family);
+  font-variant-ligatures: none;
+}
+
+a {
+  color: inherit;
+}
+
+/* --- Page shell ------------------------------------------------------------ */
+/* `.mk-page` used to also carry `--z-mark-cut`, for a mark that took its colour from the surface it
+   sat on. The logo files this site ships now are fixed colour — see `static/images/logo*.svg` — so
+   there is nothing left for a surface to hand them. */
+.mk-band {
+  padding: 72px 24px;
+}
+
+.mk-wrap {
+  max-width: var(--mk-wrap);
+  margin: 0 auto;
+}
+
+.mk-band-hero {
+  background: var(--z-bg-login-page);
+  padding-top: 40px;
+}
+
+.mk-band-alt {
+  background: var(--z-bg-panel-alt);
+  border-top: 1px solid var(--z-border);
+  border-bottom: 1px solid var(--z-border);
+}
+
+.mk-band-dark {
+  background: var(--z-bg-login-hero);
+  color: #fff;
+}
+
+.mk-hero {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.mk-hero-copy {
+  flex: 1 1 420px;
+}
+
+.mk-hero-art {
+  flex: 1 1 320px;
+  max-width: 560px;
+}
+
+/* A screenshot framed like an open editor tab, rather than a bare image — the bar names what's on
+   screen the way a real tab strip would. */
+.mk-shot {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--z-shadow-panel);
+}
+
+.mk-shot-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px;
+  background: var(--a-800);
+  color: #eef2f0;
+  font-family: var(--z-mono-font-family);
+  font-size: 8px;
+}
+
+.mk-shot-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--a-200);
+}
+
+.mk-shot-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mk-shot img {
+  display: block;
+  width: 100%;
+}
+
+.mk-tools-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.mk-tools-row img {
+  height: 32px;
+}
+
+.mk-supporters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.mk-supporters-row img {
+  height: 36px;
+}
+
+.mk-video-frame {
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--z-shadow-panel);
+}
+
+.mk-video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* --- Nav --------------------------------------------------------------- */
+.mk-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: var(--mk-wrap);
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.mk-nav-logo {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  height: 24px;
+}
+
+.mk-nav-logo img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.mk-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.mk-nav a {
+  color: var(--z-fg-muted);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.mk-nav a:hover {
+  color: var(--z-fg-default);
+}
+
+.mk-nav a.is-current {
+  color: var(--z-fg-accent);
+  font-weight: 500;
+}
+
+.mk-nav-github {
+  display: inline-flex;
+  color: var(--z-fg-muted);
+}
+
+.mk-nav-github:hover {
+  color: var(--z-fg-default);
+}
+
+.mk-nav-github svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* The three-bar toggle that appears under 760px, and the drawer it opens — see main.js. Bootstrap's
+   `offcanvas` did this with a JS component and 6 KB of transition CSS; this is one class flip. */
+.mk-nav-toggle {
+  display: none;
+  border: 0;
+  background: transparent;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--z-fg-default);
+}
+
+.mk-nav-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 760px) {
+  .mk-nav-toggle {
+    display: flex;
+  }
+
+  .mk-nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 12px 24px 20px;
+    background: var(--z-bg-panel);
+    border-bottom: 1px solid var(--z-border);
+    box-shadow: var(--z-shadow-panel);
+  }
+
+  .mk-nav {
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  .mk-nav.is-open .mk-nav-links {
+    display: flex;
+  }
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+.mk-hero-title {
+  margin: 0 0 16px;
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+}
+
+.mk-hero-title strong {
+  font-weight: 600;
+}
+
+.mk-hero-sub {
+  margin: 0 0 28px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--z-fg-muted);
+  max-width: 56ch;
+}
+
+.mk-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mk-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--z-accent);
+  color: var(--z-fg-on-accent);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mk-button:hover {
+  background: var(--z-accent-hover);
+}
+
+.mk-button-quiet {
+  background: transparent;
+  border-color: var(--z-border-strong);
+  color: var(--z-fg-default);
+}
+
+.mk-button-quiet:hover {
+  background: var(--z-bg-panel-alt);
+}
+
+.mk-install {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 10px 14px;
+  border: 1px solid var(--z-border);
+  border-radius: 6px;
+  background: var(--z-bg-code);
+  font-family: var(--z-mono-font-family);
+  font-size: 14px;
+  color: var(--z-fg-default);
+}
+
+.mk-install button {
+  border: 0;
+  background: transparent;
+  color: var(--z-fg-subtle);
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+}
+
+.mk-install button:hover {
+  color: var(--z-fg-default);
+}
+
+.mk-shot {
+  margin: 40px auto 0;
+  max-width: var(--mk-wrap);
+  border: 1px solid var(--z-border);
+  border-radius: 10px;
+  box-shadow: var(--z-shadow-panel);
+  overflow: hidden;
+  background: var(--z-bg-app);
+}
+
+.mk-shot img {
+  display: block;
+  width: 100%;
+}
+
+/* --- Claims / numbers ------------------------------------------------------ */
+.mk-section-title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.mk-section-sub {
+  margin: 0 0 32px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--z-fg-muted);
+  max-width: 62ch;
+}
+
+.mk-band-dark .mk-section-sub {
+  color: #ffffffb3;
+}
+
+.mk-claims {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.mk-claim svg {
+  width: 24px;
+  height: 24px;
+  color: var(--z-fg-accent);
+  margin-bottom: 12px;
+}
+
+.mk-band-dark .mk-claim svg {
+  color: #fff;
+}
+
+.mk-claim h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.mk-claim p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--z-fg-muted);
+}
+
+.mk-band-dark .mk-claim p {
+  color: #ffffffb3;
+}
+
+.mk-kernels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mk-kernel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--z-border);
+  border-radius: 20px;
+  background: var(--z-bg-panel);
+  font-size: 14px;
+}
+
+.mk-numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+.mk-number strong {
+  display: block;
+  font-size: 40px;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.mk-number span {
+  font-size: 14px;
+  color: var(--z-fg-muted);
+}
+
+.mk-band-dark .mk-number span {
+  color: #ffffffb3;
+}
+
+/* --- Footer ------------------------------------------------------------ */
+.mk-footer-band {
+  padding: 56px 24px 0;
+}
+
+.mk-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+  font-size: 14px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--z-border);
+}
+
+.mk-footer-brand {
+  max-width: 32ch;
+}
+
+.mk-footer-brand img {
+  height: 24px;
+  margin-bottom: 12px;
+}
+
+.mk-footer-brand p {
+  margin: 0;
+  color: var(--z-fg-muted);
+  line-height: 1.6;
+}
+
+.mk-footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.mk-footer-social a {
+  color: var(--z-fg-muted);
+}
+
+.mk-footer-social a:hover {
+  color: var(--z-fg-default);
+}
+
+.mk-footer-social svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mk-footer-groups {
+  display: flex;
+  gap: 56px;
+  margin-left: auto;
+}
+
+.mk-footer-group h6 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--z-fg-subtle);
+}
+
+.mk-footer-group {
+  display: grid;
+  gap: 8px;
+}
+
+.mk-footer-group a {
+  color: var(--z-fg-muted);
+  text-decoration: none;
+}
+
+.mk-footer-group a:hover {
+  color: var(--z-fg-default);
+}
+
+.mk-copyright {
+  padding: 20px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--z-fg-subtle);
+}
+
+@media (max-width: 760px) {
+  .mk-claims,
+  .mk-numbers {
+    grid-template-columns: 1fr;
+  }
+
+  .mk-hero-title {
+    font-size: 34px;
+  }
+
+  .mk-footer-groups {
+    margin-left: 0;
+    gap: 32px;
+  }
+}
+
+/* --- Docs ------------------------------------------------------------------ */
+/* 720px, the same reading measure the prototype's `.proto-main` uses — about 80 characters of Inter
+   at 16px, and a three-column grid rather than Bootstrap's `col-sm-12` single column. */
+.mk-docs {
+  display: grid;
+  grid-template-columns: 216px minmax(0, 1fr) 176px;
+  gap: 40px;
+  align-items: start;
+  max-width: var(--mk-wrap);
+  margin: 0 auto;
+  padding: 40px 24px 96px;
+}
+
+.mk-docs-side,
+.mk-docs-toc {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.mk-docs-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.mk-docs-group-name {
+  margin-bottom: 6px;
+  color: var(--z-fg-subtle);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mk-docs-side a {
+  padding: 4px 0 4px 10px;
+  border-left: 2px solid var(--z-border-subtle);
+  color: var(--z-fg-muted);
+  text-decoration: none;
+  line-height: 1.45;
+}
+
+.mk-docs-side a:hover {
+  border-left-color: var(--z-border);
+  color: var(--z-fg-default);
+}
+
+.mk-docs-side a.is-current {
+  border-left-color: var(--z-fg-accent);
+  color: var(--z-fg-accent);
+  font-weight: 500;
+}
+
+.mk-docs-toc {
+  color: var(--z-fg-subtle);
+}
+
+.mk-docs-toc a {
+  padding: 3px 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.mk-docs-toc a:hover {
+  color: var(--z-fg-default);
+}
+
+.mk-docs-body {
+  /* A grid item's default min-width is `auto`, which means "don't shrink past your content" — a
+     table with an unbreakable cell like "Cmd+Option+Right-Arrow/Left-Arrow" was forcing the whole
+     grid track wider than the viewport instead of scrolling internally. */
+  min-width: 0;
+  max-width: 720px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--z-fg-default);
+}
+
+.mk-docs-table-scroll {
+  overflow-x: auto;
+  margin: 0 0 20px;
+}
+
+.mk-docs-table-scroll table {
+  margin-bottom: 0;
+}
+
+.mk-docs-body h1 {
+  margin: 0 0 12px;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.mk-docs-body h2 {
+  margin: 40px 0 12px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.mk-docs-body h3 {
+  margin: 28px 0 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.mk-docs-body p {
+  margin: 0 0 16px;
+}
+
+.mk-docs-body ul,
+.mk-docs-body ol {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.mk-docs-body li + li {
+  margin-top: 4px;
+}
+
+.mk-docs-body a {
+  color: var(--z-fg-accent);
+}
+
+.mk-docs-body img {
+  border-radius: 6px;
+  border: 1px solid var(--z-border);
+  margin: 8px 0 20px;
+}
+
+.mk-docs-body code {
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--z-bg-code);
+  font-size: 0.88em;
+}
+
+.mk-docs-body pre {
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  border: 1px solid var(--z-border);
+  border-radius: 6px;
+  background: var(--z-bg-code);
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.mk-docs-body pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+/* kramdown's own markdown tables come out as plain <table><thead><tr><th>, no classes to hang a
+   selector on — every keybinding table in the docs was riding on the browser's UA styles until this
+   was added. */
+.mk-docs-body table {
+  width: 100%;
+  margin: 0 0 20px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.mk-docs-body th {
+  padding: 0 12px 8px 0;
+  border-bottom: 1px solid var(--z-border);
+  color: var(--z-fg-subtle);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.mk-docs-body td {
+  padding: 9px 12px 9px 0;
+  border-bottom: 1px solid var(--z-border-subtle);
+  vertical-align: baseline;
+}
+
+.mk-docs-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  color: var(--z-fg-subtle);
+  font-size: 13px;
+}
+
+.mk-docs-crumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mk-docs-crumbs a:hover {
+  color: var(--z-fg-default);
+}
+
+.mk-docs-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--z-border);
+}
+
+.mk-docs-pager a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--z-border);
+  border-radius: 6px;
+  color: var(--z-fg-default);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.mk-docs-pager a:hover {
+  border-color: var(--z-fg-accent);
+  color: var(--z-fg-accent);
+}
+
+.mk-docs-pager span {
+  display: flex;
+  flex-direction: column;
+}
+
+.mk-docs-pager em {
+  color: var(--z-fg-subtle);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.mk-docs-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.mk-docs-mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .mk-docs {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .mk-docs-toc {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .mk-docs {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-top: 16px;
+  }
+
+  /* A `<details>` disclosure rather than Bootstrap's `offcanvas` — no JS, no backdrop, no
+     `data-bs-*` wiring, and it degrades to a plain open list if CSS fails to load at all. */
+  .mk-docs-side {
+    position: static;
+    border: 1px solid var(--z-border);
+    border-radius: 6px;
+    padding: 4px 12px;
+  }
+
+  .mk-docs-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mk-docs-mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .mk-docs-mobile-toggle svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.15s;
+  }
+
+  .mk-docs-side[open] .mk-docs-mobile-toggle svg {
+    transform: rotate(180deg);
+  }
+}
+
+/* --- Blog / tutorials ---------------------------------------------------- */
+.mk-blog {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px 0;
+}
+
+.mk-blog-head {
+  padding-bottom: 0;
+}
+
+.mk-blog-list {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+
+.mk-blog-card + .mk-blog-card {
+  border-top: 1px solid var(--z-border-subtle);
+}
+
+.mk-blog-card-link {
+  display: flex;
+  gap: 16px;
+  padding: 24px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.mk-blog-card-mark {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--z-accent);
+}
+
+.mk-blog-card-mark img {
+  height: 20px;
+  width: auto;
+}
+
+.mk-blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  color: var(--z-fg-subtle);
+  font-size: 13px;
+}
+
+.mk-blog-card-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: var(--z-accent);
+  color: #fff;
+  font-size: var(--z-ui-font-size-sm);
+  font-weight: 500;
+}
+
+.mk-blog-card h2 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--z-fg-default);
+}
+
+.mk-blog-card-link:hover h2 {
+  color: var(--z-fg-accent);
+}
+
+.mk-blog-card p {
+  margin: 0;
+  color: var(--z-fg-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.mk-blog-post {
+  padding-top: 8px;
+  padding-bottom: 64px;
+}
+
+.mk-blog-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  color: var(--z-fg-subtle);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.mk-blog-back:hover {
+  color: var(--z-fg-default);
+}
+
+.mk-blog-back svg {
+  width: 14px;
+  height: 14px;
+}
+
+.mk-blog-post-meta {
+  margin: -4px 0 24px;
+  color: var(--z-fg-subtle);
+  font-size: 14px;
+}
+
+.mk-blog-related {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--z-border);
+  font-size: 14px;
+}
+
+.mk-blog-related-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 6px;
+  padding: 8px 0;
+  color: var(--z-fg-default);
+  text-decoration: none;
+}
+
+.mk-blog-related-item:hover {
+  color: var(--z-fg-accent);
+}
+
+.mk-blog-related-item em {
+  color: var(--z-fg-subtle);
+  font-style: normal;
+}
+
+@media (max-width: 600px) {
+  .mk-blog-card-link {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* --- Downloads ------------------------------------------------------------ */
+.mk-install-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.mk-install-method {
+  padding: 16px;
+  border: 1px solid var(--z-border);
+  border-radius: 8px;
+  background: var(--z-bg-panel);
+}
+
+.mk-install-method h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mk-install-method .mk-install {
+  margin-top: 0;
+  width: 100%;
+  font-size: 13px;
+}
+
+.mk-install-method .mk-install span {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.mk-downloads-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.mk-downloads-table th {
+  padding: 0 12px 10px 0;
+  border-bottom: 1px solid var(--z-border);
+  color: var(--z-fg-subtle);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.mk-downloads-table td {
+  padding: 12px 12px 12px 0;
+  border-bottom: 1px solid var(--z-border-subtle);
+  vertical-align: middle;
+}
+
+.mk-downloads-table td:first-child {
+  color: var(--z-fg-default);
+  font-weight: 500;
+}
+
+.mk-download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--z-fg-accent);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.mk-download-link:hover {
+  text-decoration: underline;
+}
+
+.mk-download-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.mk-download-soon {
+  color: var(--z-fg-subtle);
+  font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .mk-install-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .mk-downloads-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

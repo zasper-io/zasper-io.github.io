@@ -1,7 +1,20 @@
+<!--
+Grouped by each post's own `group` front matter, in `index` order — group_by preserves the order it
+receives, so sorting by index first is what keeps "Get started" first and "Guides" last rather than
+alphabetical. `is-current` never needs a size check against the trailing slash Jekyll adds: `page.url`
+and `post.url` are both permalinks here, so they compare equal or they don't.
+-->
 {% assign site_docs = site.posts | where: "categories", "docs" | sort: "index" %}
-
-{% for post in site_docs %}
-  <a href="{{ post.url | escape }}">
-    <img src="/static/images/link-arrow.svg" alt="Link"> {{ post.title }}
-  </a>
+{% assign doc_groups = site_docs | group_by: "group" %}
+{% for group in doc_groups %}
+<div class="mk-docs-group">
+  <span class="mk-docs-group-name">{{ group.name }}</span>
+  {% for post in group.items %}
+  <a
+    href="{{ post.url | escape }}"
+    {% if post.url == page.url %}class="is-current" aria-current="page"{% endif %}
+    >{{ post.title }}</a
+  >
+  {% endfor %}
+</div>
 {% endfor %}

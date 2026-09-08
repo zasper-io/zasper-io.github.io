@@ -2,40 +2,41 @@
 layout: docs
 title:  "Developer Guide"
 date:   2024-12-22 07:39:59 +0530
-index: 6
+index: 7
+group: Guides
 categories: docs
 permalink: docs/:title
 author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
+## Build from Source
 
-## Build from source
-
-#### Download source
+### Download the Source
 
 ```bash
 git clone https://github.com/zasper-io/zasper
 ```
 
-
-#### Build the frontend
+### Install Dependencies
 
 ```bash
 make init
 ```
 
-#### Start the backend
+This installs the frontend's npm dependencies.
 
+### Build the Project
 
-Go to project home and start the server
+From the project root, build both the frontend and the backend:
 
 ```bash
 make build
 ```
-This will crate a binary called `zasper`. Now add this binary to your path.
 
-Run zasper in any directory to see if the installation was done correctly.
+This creates a binary called `zasper`. Add it to your `PATH`.
+
+Run `zasper` in any directory to confirm the installation succeeded:
 
 ```
 % zasper -h
@@ -46,10 +47,14 @@ Usage of ../zasper:
     	sets log level to debug
   -port string
     	port to start the server on (default ":8048")
+  -protected
+    	enable protected mode
+  -tracking
+    	enable usage tracking (default true)
 ```
 
-
-Go to any directory you want to serve and run `zasper`. This starts zasper server in the directory.
+Go to any directory you want to serve and run `zasper`. This starts the Zasper server in that
+directory:
 
 ```
 prasunanand@Prasuns-Mac-mini example % zasper
@@ -62,7 +67,7 @@ prasunanand@Prasuns-Mac-mini example % zasper
      ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
 
                     Zasper Server
-                Version: 0.1.0-alpha
+                Version: 0.2.0-beta
 ----------------------------------------------------------
  ✅ Server started successfully!
  📡 Listening on:         http://localhost:8048
@@ -71,4 +76,4 @@ prasunanand@Prasuns-Mac-mini example % zasper
 ==========================================================
 ```
 
-Go to `http://localhost:8048`
+Go to `http://localhost:8048`.

@@ -1,51 +1,35 @@
-{% include header2.html %}
+{% include head.html %}
+{% include nav.html %}
 
-    <section id="blog-sec">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-md-12 col-lg-9">
-            <div class="blog-details-wraper">
+<div class="mk-blog mk-blog-post">
+  <a class="mk-blog-back" href="/{{ page.categories | first }}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+    {{ page.categories | first | capitalize }}
+  </a>
 
-              <div class="blog-title wow fadeInUp">
-                <h2>{{ page.title }}</h2>
-              </div>
+  <div class="mk-docs-body">
+    <h1>{{ page.title }}</h1>
+    <p class="mk-blog-post-meta">{{ page.date | date: "%-d %B %Y" }} · {{ page.author }}</p>
+    {{ content }}
+  </div>
 
-              <div class="blog-published-info wow fadeInUp">
-                <span class="blog-post-date">{{ page.date | date: "%-d %B %Y" }} by</span>
-                <span class="blog-post-author">{{ page.author }}</span>
-              </div>
-
-              <div class="blog-description wow fadeInUp">
-              	<p>{{ page.content }}</p>
-              </div>
-            </div>
-
-            <div class="related-blog-wraper wow fadeInUp">
-              <h6>Related Blog</h6>
-
-              {% for post in site.posts limit:2 %}
-              {% if post.categories contains 'blog' %}
-
-              <div class="related-blog-item latest-post-item wow fadeInUp" data-wow-delay="0.1s">
-                <a href="{{ post.url }}.html">
-                  <div class="latest-post-item-image">
-                    <img src="{{ post.banner }}" alt="#">
-                  </div>
-                  <div class="latest-post-item-content">
-                    <h2>{{ post.title }}</h2>
-                    <span>{{ post.date | date: "%-d %B %Y"}}</span>
-                  </div>
-                </a>
-              </div>
-              {% endif %}
-              {% endfor %}
-
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-    </section>
+  <!-- Related posts share this post's own first category — a tutorial gets other tutorials, a blog
+       post gets other blog posts — and this post is excluded from its own "related" list. Before this,
+       every post in the site's one `categories: blog` collection related to itself, since the old
+       `site.posts limit:2` never checked which post it was building the page for. -->
+  {% assign this_category = page.categories | first %}
+  {% assign related = site.posts | where: "categories", this_category | where_exp: "p", "p.url != page.url" | limit: 2 %}
+  {% if related.size > 0 %}
+  <nav class="mk-blog-related" aria-label="Related">
+    <span class="mk-docs-group-name">Related</span>
+    {% for post in related %}
+    <a class="mk-blog-related-item" href="{{ post.url }}">
+      <span>{{ post.title }}</span>
+      <em>{{ post.date | date: "%-d %B %Y" }}</em>
+    </a>
+    {% endfor %}
+  </nav>
+  {% endif %}
+</div>
 
 {% include footer.html %}

@@ -2,114 +2,104 @@
 layout: docs
 title:  "Installation"
 date:   2024-12-22 07:39:59 +0530
-categories: usage
+categories: docs
 index: 1
+group: Get started
 permalink: docs/:title
 author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper ships in **two flavors**:
+Zasper ships in two forms:
 
-| Type            | Description                                      |
-| --------------- | ------------------------------------------------ |
-| **Web App**     | Terminal-first, lightweight CLI-based experience |
-| **Desktop App** | Full native GUI, OS-integrated Jupyter launcher  |
+| Type            | Description                                       |
+| ---------------- | -------------------------------------------------- |
+| **Web App**     | Terminal-first, lightweight, CLI-based experience  |
+| **Desktop App** | Full native GUI, OS-integrated Jupyter launcher    |
 
----
+## Web App
 
-## 🌐 Web App (Terminal-based)
+Install the Web App via Homebrew, Snap, or Conda.
 
-You can install the Web App via Homebrew, Snap, or (soon) Conda.
-
-### 🍺 Homebrew (macOS)
+### Homebrew (macOS)
 
 ```bash
 brew install zasper-io/tap/zasper
 ```
 
-> ✅ Works on macOS 11+ (Intel & Apple Silicon)
+Works on macOS 11 and later, Intel and Apple Silicon.
 
----
-
-### 🐧 Snap (Linux)
+### Snap (Linux)
 
 ```bash
 sudo snap install zasper
 ```
 
-> ✅ Works on Ubuntu 18.04+, Fedora, Arch, and other Snap-supported distros.
+Works on Ubuntu 18.04+, Fedora, Arch, and other Snap-supported distributions.
 
----
+### Conda
 
-### 📦 Conda
-
-```
+```bash
 conda install zasper -c conda-forge
 ```
 
----
+## Desktop App
 
-## 🖥️ Desktop App (Native GUI)
+For a native experience with a built-in kernel manager, download the Desktop app from the
+[Downloads page](/downloads) or directly from
+[GitHub Releases](https://github.com/zasper-io/zasper/releases). It bundles a launcher, a kernel
+manager, and an integrated session runner.
 
-For a native experience with a built-in kernel manager, download the Desktop app:
+## Current Release
 
-👉 Visit our [Downloads Page](https://zasper.io/downloads)
-Or head straight to [GitHub Releases](https://github.com/zasper-io/zasper/releases)
+**Version:** `v0.2.0-beta` — see the [Downloads page](/downloads) for the exact binary for every
+platform.
 
-> 🧹 The Desktop app bundles a launcher, kernel manager, and integrated session runner.
+### Platform Support
 
----
+| OS                  | Minimum Version | Web App | Desktop App |
+| ------------------- | ---------------- | :-----: | :---------: |
+| macOS (Apple Silicon) | macOS 11        |   Yes   |     Yes     |
+| macOS (Intel)         | macOS 11        |   Yes   |     Yes     |
+| Debian (AMD64)        | Debian 10       |   Yes   |     Yes     |
+| Debian (ARM64)        | Debian 10       |   Yes   |     Yes     |
+| Debian (i386)         | Debian 10       |   Yes   |   Planned   |
+| Red Hat (AMD64)       | RHEL 8          |   Yes   |   Planned   |
+| Red Hat (ARM64)       | RHEL 8          |   Yes   |   Planned   |
+| Red Hat (i386)        | RHEL 8          |   Yes   |   Planned   |
+| Windows (AMD64)       | Windows 10+     |   Yes   |   Planned   |
+| Windows (ARM64)       | Windows 11      |   Yes   |     Yes     |
+| Windows (i386)        | Windows 10+     |   Yes   |   Planned   |
 
-## 📦 Current Release
+Additional platforms are being tested and will be supported in upcoming releases.
 
-**Version:** `v0.1.0-alpha`
-
-### ✅ Platform Support
-
-| OS                  | Min Version | Web App | Desktop App |
-| ------------------- | ----------- | :-----: | :---------: |
-| **macOS (Silicon)** | macOS 11    |    ✅    |      ✅      |
-| **macOS (Intel)**   | macOS 11    |    ✅    |      ✅      |
-| **Debian (AMD64)**  | Debian 10   |    ✅    |      ✅      |
-| **Debian (ARM64)**  | Debian 10   |    ✅    |      ✅      |
-| **Debian (i386)**   | Debian 10   |    ✅    |      ✅      |
-| **RedHat (AMD64)**  | RHEL 8      |    ✅    |      ❌      |
-| **RedHat (ARM64)**  | RHEL 8      |    ✅    |      ❌      |
-| **RedHat (i386)**   | RHEL 8      |    ✅    |      ❌      |
-| **Windows (AMD64)** | Win 10+     |    ✅    |      ❌      |
-| **Windows (ARM64)** | Win 11      |    ✅    |      ✅      |
-| **Windows (i386)**  | Win 10+     |    ✅    |      ❌      |
-
-> ⏳ **Additional platforms** are being tested and will be supported in upcoming releases.
-
----
-
-## ⚖️ Web App vs Desktop App
+## Web App vs. Desktop App
 
 | Feature                             | Web App | Desktop App |
-| ----------------------------------- | :-----: | :---------: |
-| Launch kernels                      |    ✅    |      ✅      |
-| Works in terminal-only environments |    ✅    |      ❌      |
-| Native OS UI (menus, dialogs)       |    ❌    |      ✅      |
-| Auto kernel discovery               |    ✅    |      ✅      |
-| Lightweight install                 |    ✅    |      ❌      |
-| Suitable for remote servers         |    ✅    |      ❌      |
+| ------------------------------------ | :-----: | :----------: |
+| Launch kernels                      |   Yes   |     Yes      |
+| Works in terminal-only environments |   Yes   |      No      |
+| Native OS UI (menus, dialogs)       |   No    |     Yes      |
+| Auto kernel discovery               |   Yes   |     Yes      |
+| Lightweight install                 |   Yes   |      No      |
+| Suitable for remote servers         |   Yes   |      No      |
 
----
+## Troubleshooting
 
-## 🛠️ Troubleshooting Installation
-
-* **Command not found?**
+**Command not found?**
 
 Make sure `brew`, `snap`, or `conda` is correctly installed and added to your `PATH`.
 
-
-
-* **Kernel not showing up?**
+**Kernel not showing up?**
 
 Run `jupyter kernelspec list` to confirm it's installed and registered.
 
-* **Desktop app not launching?**
+**Desktop app not launching?**
 
-Ensure your OS version meets the minimum requirement. Check logs via terminal:
+Ensure your OS version meets the minimum requirement. Zasper has no separate log file — it logs to
+standard output — so run it from a terminal rather than by double-clicking, and pass `--debug` for
+more detail:
+
+```bash
+zasper --debug
+```

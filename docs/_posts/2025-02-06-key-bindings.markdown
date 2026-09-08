@@ -2,7 +2,8 @@
 layout: docs
 title:  "Key Bindings"
 date:   2025-02-05 07:39:59 +0530
-index: 5
+index: 6
+group: Guides
 categories: docs
 permalink: docs/:title
 author: Prasun Anand

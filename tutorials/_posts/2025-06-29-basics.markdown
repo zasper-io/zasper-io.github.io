@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Zasper: A Supercharged IDE for Data Science."
+title:  "Basics"
 date:   2024-12-22 07:39:59 +0530
-categories: blog
-permalink: blog/:title
+categories: tutorials
+permalink: tutorials/:title
 author: Prasun Anand
 banner: /static/images/logo.svg
 ---
@@ -12,7 +12,7 @@ Zasper is an IDE designed from the ground up to support massive concurrency. It 
 
 It's perfectly suited for running REPL-style data applications, with Jupyter notebooks being one example.
 
-**Zasper uses up to 5X less CPU and up to 40X less RAM than JupyterLab.** See the [full benchmark](/blog/benchmarking-zasper-vs-jupyterlab) for the methodology and the numbers at every load level — the gap widens as concurrent load increases.
+**Zasper uses up to 5X less CPU and up to 40X less RAM than JupyterLab.** See the [full benchmark](/blog/benchmarking-zasper-vs-jupyterlab) for the methodology and the numbers at every load level.
 
 <img class="blog-img" src="/static/images/zasper-intro.png">
 
@@ -35,18 +35,18 @@ Zasper backend is written in Gorilla. The ipython kernel is reused from Project 
 
 <img class="blog-img" src="/static/images/zasper.drawio.svg">
 
-(About Zeromq: ZeroMQ (also known as ØMQ, 0MQ, or zmq) looks like an embeddable networking library but acts like a concurrency framework. It gives 
+(About Zeromq: ZeroMQ (also known as ØMQ, 0MQ, or zmq) looks like an embeddable networking library but acts like a concurrency framework. It gives
 you sockets that carry atomic messages across various transports like in-process, inter-process, TCP, and multicast.)
 
 ## Messaging
 
-Zasper follows [the Wire Protocol](https://jupyter-client.readthedocs.io/en/stable/messaging.html) as established by Jupyter community. 
+Zasper follows [the Wire Protocol](https://jupyter-client.readthedocs.io/en/stable/messaging.html) as established by Jupyter community.
 
 ## How Is It Different?
 
-Jupyter server is reimplemented in Go. Every Jupyter Notebook runs with a Jupyter kernel (IPython kernel, IJulia kernel). The JupyterLab Server 
-is responsible for managing the Jupyter kernels and serves as a broker between the Jupyter Notebook running in LabApp(frontend) and Jupyter Kernel. 
-Zasper replaces JupyterLab by reimplementing most of the implementations. 
+Jupyter server is reimplemented in Go. Every Jupyter Notebook runs with a Jupyter kernel (IPython kernel, IJulia kernel). The JupyterLab Server
+is responsible for managing the Jupyter kernels and serves as a broker between the Jupyter Notebook running in LabApp(frontend) and Jupyter Kernel.
+Zasper replaces JupyterLab by reimplementing most of the implementations.
 
 JupyterLab's wire protocol is built using Tornado server and AsyncIO. Python's AsyncIO runs on a single core and gets problematic when scaling.
 
@@ -61,7 +61,7 @@ I will publish a separate blog post regarding this.
 
 ## Extensibility
 
-Zasper is designed with extensibility at its core. For example, if you want to create an internal, Google Colab-like interface within your private cloud and store your notebook files on Google Drive, this can be easily accomplished by modifying the content_manager module of Zasper. By implementing custom content readers and writers for Google Drive, you can seamlessly integrate it as a storage backend. 
+Zasper is designed with extensibility at its core. For example, if you want to create an internal, Google Colab-like interface within your private cloud and store your notebook files on Google Drive, this can be easily accomplished by modifying the content_manager module of Zasper. By implementing custom content readers and writers for Google Drive, you can seamlessly integrate it as a storage backend.
 
 Similarly, many organizations prefer using MinIO for object storage, and they can achieve a Google Colab-like experience by adapting the same approach.
 
@@ -72,5 +72,3 @@ Data Scientists and AI Engineers spend most of their time running Notebooks on I
 * Allowing custom data apps support rather than just Jupyter Notebooks.
 * Easier integration with the existing tools.
 * Zasper Hub for Self Hosted deployment in the cloud.
-
-

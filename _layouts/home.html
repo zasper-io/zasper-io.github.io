@@ -1,140 +1,140 @@
-{% include header.html %}
+{% include head.html %}
+{% include nav.html %}
 
-<div class="header-content">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-12 col-lg-6">
-          <div class="header-text wow fadeInUp" data-wow-delay="0.2s">
-            <h3 class="font-h3 fontw-500">High Performance IDE</h3>
-            <h3 class="font-h4 fontw-300">for Jupyter Notebooks</h3>
-            <p class="font-p">
-              How is Zasper better than JupyterLab ?
-            </p>
-            <p class="font-p">
-              <ul class="font-p">
-                <li>Up to 5X Less CPU usage</li>
-                <li>Up to 40X Less RAM usage </li>
-                <li>Lower latency</li>
-                <li>Higher throughput</li>
-                <li>Highly resilient under very high loads</li>
-              </ul>
-            </p>
-            <div class="header-form wow fadeInUp" data-wow-delay="0.2s">
-               <a href="/downloads" target="_blank" class="btn custom-btn btn-bg hover-bg" id="banner-signup">Download Zasper today!</a>
-            </div>
-          </div>
+<div class="mk-band mk-band-hero">
+  <div class="mk-wrap mk-hero">
+    <div class="mk-hero-copy">
+      <h1 class="mk-hero-title">High performance IDE for <strong>Jupyter Notebooks</strong></h1>
+      <p class="mk-hero-sub">
+        Zasper is built from the ground up for massive concurrency: a minimal memory footprint,
+        exceptional speed, and thousands of connections at once.
+      </p>
+      <p class="mk-hero-sub">
+        It speaks Jupyter's wire protocol, so it runs the notebooks you already have.
+      </p>
+      <div class="mk-cta">
+        <a class="mk-button" href="/downloads">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
+          Download Zasper today!
+        </a>
+        <a class="mk-button mk-button-quiet" href="https://github.com/zasper-io/zasper-benchmark?tab=readme-ov-file#benchmarking-zasper-vs-jupyter-server" target="_blank">Read the benchmark</a>
+      </div>
+      <div class="mk-install">
+        <span id="install-cmd">brew install zasper-io/tap/zasper</span>
+        <button type="button" aria-label="Copy" data-copy="install-cmd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mk-hero-art">
+      <div class="mk-shot">
+        <div class="mk-shot-bar">
+          <span class="mk-shot-dot"></span>
+          <span class="mk-shot-label">python_plotting_libraries_showcase.ipynb</span>
         </div>
-        <div class="col-12 col-md-12 col-lg-6">
-          <div class="header-image wow fadeInUp" data-wow-delay="0.4s">
-            <img src="/static/images/header-image.svg" alt="#">
-          </div>
-        </div>
+        <img
+          src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/notebook.png"
+          alt="A Zasper notebook with a rendered chart output"
+        />
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="header-bottom">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="header-bottom-wraper">
-          <div class="section-title wow fadeInUp" data-wow-delay="0.2s">
-            <h2 class="font-h2 fontw-300">blazingly fast & <span class="fontw-500">Super Efficient</span></h2>
-            <p class="font-p">Zasper scales to all your CPU cores unlike Jupyterlab.</p>
-            <a href="https://github.com/zasper-io/zasper-benchmark?tab=readme-ov-file#benchmarking-zasper-vs-jupyter-server" class="btn-bg-white fontw-500" target="_blank">Read Benchmark Report</a>
-          </div>
-          <div class="header-bottom-image wow fadeInUp" data-wow-delay="0.4s">
-            <img src="/static/images/screen-image.png" alt="#">
-          </div>
-        </div>
+<div class="mk-band mk-band-dark">
+  <div class="mk-wrap">
+    <div class="mk-numbers">
+      <div class="mk-number">
+        <strong>5&times;</strong>
+        <span>less CPU than JupyterLab</span>
+      </div>
+      <div class="mk-number">
+        <strong>40&times;</strong>
+        <span>less RAM than JupyterLab</span>
+      </div>
+      <div class="mk-number">
+        <strong>7</strong>
+        <span>kernel families, and every Jupyter kernel</span>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="gray-white-gradient">
-  <div class="container">
-    <div class="row">
-      <div id="support-tools">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="section-title wow fadeInUp" data-wow-delay="0.2s">
-                <h4 class="font-h4 fontw-300">zasper supports tools</h4>
-                <h2 class="font-h2 fontw-500">that you already use</h2>
-              </div>
-
-              <div class="support-tools-wraper wow fadeInUp" data-wow-delay="0.4s">
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.1s">
-                  <img src="/static/images/support/support-tools-logo1.png" alt="#" />
-                </div>
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.2s">
-                  <img src="/static/images/support/support-tools-logo2.png" alt="#" />
-                </div>
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.3s">
-                  <img src="/static/images/support/support-tools-logo3.png" alt="#" />
-                </div>
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.4s">
-                  <img src="/static/images/support/support-tools-logo4.png" alt="#" />
-                </div>
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.5s">
-                  <img src="/static/images/support/support-tools-logo5.png" alt="#" />
-                </div>
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.6s">
-                  <img src="/static/images/support/support-tools-logo6.png" alt="#" />
-                </div>
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.7s">
-                  <img src="/static/images/support/support-tools-logo7.png" alt="#" />
-                </div>
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.8s">
-                  <img src="/static/images/support/support-tools-logo8.png" alt="#" />
-                </div>
-                <div class="support-tools-logo wow fadeInUp" data-wow-delay="0.9s">
-                  <img src="/static/images/support/support-tools-logo9.png" alt="#" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="mk-band">
+  <div class="mk-wrap">
+    <h2 class="mk-section-title">Three things, and it does them well</h2>
+    <p class="mk-section-sub">
+      Every claim below has a <a href="https://github.com/zasper-io/zasper-benchmark">benchmark</a>
+      behind it rather than an adjective.
+    </p>
+    <div class="mk-claims">
+      <div class="mk-claim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 19 22 12 13 5 13 19" /><polygon points="2 19 11 12 2 5 2 19" /></svg>
+        <h3>Fast</h3>
+        <p>
+          A Go server and a single binary. No Python process to boot before the first cell can run,
+          and the editor is painted before the kernel has answered.
+        </p>
       </div>
-
-      <div id="community-sec">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="section-title wow fadeInUp" data-wow-delay="0.2s">
-                <h2 class="font-h2 fontw-300">take a look at </h2>
-                <h2><span class="fontw-500">what we built</span></h2>
-              </div>
-              <div class="community-wraper">
-                <iframe class="demoFrame" src="https://www.youtube.com/embed/LvVOkYL_LzQ" frameborder="0" allowfullscreen></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="mk-claim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2" /><rect width="6" height="6" x="9" y="9" /><path d="M15 2v2" /><path d="M15 20v2" /><path d="M2 15h2" /><path d="M2 9h2" /><path d="M20 15h2" /><path d="M20 9h2" /><path d="M9 2v2" /><path d="M9 20v2" /></svg>
+        <h3>Concurrent</h3>
+        <p>
+          Designed for many connections at once and resilient under very high loads — see the
+          <a href="/blog/benchmarking-zasper-vs-jupyterlab">full benchmark</a> against JupyterLab.
+        </p>
+      </div>
+      <div class="mk-claim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+        <h3>Jupyter, exactly</h3>
+        <p>
+          It implements Jupyter's wire protocol, reads and writes <code>.ipynb</code> at its own
+          nbformat version, and runs every kernel you already have installed.
+        </p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="trusted-on-us">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="trusted-on-us-wraper">
-          <div class="section-title wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-            <h4 class="font-h4 fontw-300">proud to be</h4>
-            <h2 class="font-h2 fontw-500">supported by</h2>
-          </div>
-          <div class="trusted-companies-logo wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-            <img src="/static/images/zerodha.png" id="zerodha-logo" alt="#">
-            <img src="/static/images/foss-united.png" alt="#">
-          </div>
-        </div>
-      </div>
+<div class="mk-band mk-band-alt">
+  <div class="mk-wrap">
+    <h2 class="mk-section-title">Zasper supports tools that you already use</h2>
+    <div class="mk-tools-row">
+      <img src="/static/images/support/support-tools-logo1.png" alt="TensorFlow" />
+      <img src="/static/images/support/support-tools-logo2.png" alt="Keras" />
+      <img src="/static/images/support/support-tools-logo3.png" alt="PyTorch" />
+      <img src="/static/images/support/support-tools-logo4.png" alt="pandas" />
+      <img src="/static/images/support/support-tools-logo5.png" alt="scikit-learn" />
+      <img src="/static/images/support/support-tools-logo6.png" alt="Amazon S3" />
+      <img src="/static/images/support/support-tools-logo7.png" alt="Azure Storage" />
+      <img src="/static/images/support/support-tools-logo8.png" alt="NumPy" />
+      <img src="/static/images/support/support-tools-logo9.png" alt="Dask" />
     </div>
   </div>
-</section>
+</div>
+
+<div class="mk-band">
+  <div class="mk-wrap">
+    <h2 class="mk-section-title">Take a look at what we built</h2>
+    <div class="mk-video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/LvVOkYL_LzQ"
+        title="Zasper demo"
+        loading="lazy"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="mk-band mk-band-alt">
+  <div class="mk-wrap">
+    <h2 class="mk-section-title">Proud to be supported by</h2>
+    <div class="mk-supporters-row">
+      <img src="/static/images/zerodha.png" alt="Zerodha" />
+      <img src="/static/images/foss-united.png" alt="FOSS United" />
+    </div>
+  </div>
+</div>
 
 {% include footer.html %}
