@@ -127,27 +127,37 @@ a {
   color: #fff;
 }
 
+/* Copy above the screenshot rather than beside it. Side by side, the shot was held to 464px — a
+   0.31 scale of a 1500px capture, illegible, and capped so it did not grow past 1280px either. That
+   made the first product image on the page the smallest one on it, against the 1078px launcher and
+   terminal shots a section below. Stacked, it gets the full measure. */
 .mk-hero {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 48px;
-  flex-wrap: wrap;
+  gap: 36px;
+  text-align: center;
 }
 
+/* Narrower than the shot beneath it: centred prose needs a short line to stay readable, and the
+   contrast between the measured column of text and the full-width image is what gives the shot its
+   size. */
 .mk-hero-copy {
-  flex: 1 1 420px;
+  max-width: 660px;
 }
 
 .mk-hero-art {
-  flex: 1 1 320px;
-  max-width: 560px;
+  width: 100%;
 }
 
 /* A screenshot framed like an open editor tab, rather than a bare image — the bar names what's on
    screen the way a real tab strip would. */
 .mk-shot {
+  max-width: var(--mk-wrap);
+  border: 1px solid var(--z-border);
   border-radius: 10px;
   overflow: hidden;
+  background: var(--z-bg-app);
   box-shadow: var(--z-shadow-panel);
 }
 
@@ -379,13 +389,14 @@ a {
 }
 
 /* --- Hero ---------------------------------------------------------------- */
+/* Larger than it was in the two-column hero, and centred: `max-width: 18ch` was there to stop the
+   headline running into the screenshot beside it, which is no longer where the screenshot is. */
 .mk-hero-title {
-  margin: 0 0 16px;
-  font-size: 44px;
+  margin: 0 0 18px;
+  font-size: 52px;
   font-weight: 300;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  max-width: 18ch;
+  line-height: 1.1;
+  letter-spacing: -0.022em;
 }
 
 .mk-hero-title strong {
@@ -393,16 +404,23 @@ a {
 }
 
 .mk-hero-sub {
-  margin: 0 0 28px;
+  margin: 0 auto 24px;
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--z-fg-muted);
   max-width: 56ch;
+}
+
+/* The two paragraphs read as one block of copy, not as two spaced-apart statements — and the space
+   this saves goes to the screenshot, which is what the fold is competing for. */
+.mk-hero-sub:not(:last-of-type) {
+  margin-bottom: 12px;
 }
 
 .mk-cta {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
 }
@@ -460,23 +478,16 @@ a {
   display: inline-flex;
 }
 
+/* Without this the icon is 0x0 and the button is invisible and unclickable: an inline <svg> with no
+   width/height attributes and no CSS size collapses inside a flex container. Every other icon button
+   here carries the same pair. */
+.mk-install button svg {
+  width: 16px;
+  height: 16px;
+}
+
 .mk-install button:hover {
   color: var(--z-fg-default);
-}
-
-.mk-shot {
-  margin: 40px auto 0;
-  max-width: var(--mk-wrap);
-  border: 1px solid var(--z-border);
-  border-radius: 10px;
-  box-shadow: var(--z-shadow-panel);
-  overflow: hidden;
-  background: var(--z-bg-app);
-}
-
-.mk-shot img {
-  display: block;
-  width: 100%;
 }
 
 /* --- Claims / numbers ------------------------------------------------------ */
@@ -584,7 +595,7 @@ a {
 }
 
 .mk-feature-copy {
-  margin-bottom: 16px;
+  margin-bottom: 22px;
   max-width: 62ch;
 }
 
@@ -883,6 +894,14 @@ a {
   font-size: 0.88em;
 }
 
+/* Inline code only — a block has its own scrollbar, but an inline span has nowhere to go. A long
+   unbroken token in prose (a flag, a path, a package name) is one word to the line breaker, so at
+   390px it pushed the whole page wider than the phone rather than wrapping, exactly as the docs
+   tables did before they were given a scroll container. */
+.mk-docs-body :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+
 .mk-docs-body pre {
   margin: 0 0 20px;
   padding: 14px 16px;
@@ -898,6 +917,71 @@ a {
   padding: 0;
   background: none;
   font-size: inherit;
+}
+
+/* --- Copy button on code blocks -------------------------------------------- */
+/* The wrapper is added by main.js around every <pre> in a doc body. It, not the <pre>, is the
+   positioning context: the <pre> scrolls horizontally, and a button anchored inside it would slide
+   away with the code. */
+.mk-code {
+  position: relative;
+}
+
+/* Room for the button, so the first line of a command does not start underneath it. */
+.mk-code > pre {
+  padding-right: 52px;
+}
+
+/* Always present rather than revealed on hover: a hover-only control is unreachable on a touch
+   screen, which is where a reader is least able to select the text by hand instead. It stays quiet
+   until pointed at. */
+.mk-code-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--z-border);
+  border-radius: 5px;
+  /* Opaque, not transparent: a long line scrolls underneath this button. */
+  background: var(--z-bg-panel);
+  color: var(--z-fg-subtle);
+  cursor: pointer;
+  opacity: 0.75;
+  transition:
+    opacity 0.12s ease,
+    color 0.12s ease;
+}
+
+.mk-code-copy svg {
+  width: 15px;
+  height: 15px;
+}
+
+.mk-code:hover .mk-code-copy,
+.mk-code-copy:focus-visible {
+  opacity: 1;
+}
+
+.mk-code-copy:hover {
+  opacity: 1;
+  color: var(--z-fg-default);
+}
+
+.mk-code-copy.is-copied {
+  color: var(--z-fg-accent);
+  border-color: var(--z-fg-accent);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mk-code-copy {
+    transition: none;
+  }
 }
 
 /* kramdown's own markdown tables come out as plain <table><thead><tr><th>, no classes to hang a
