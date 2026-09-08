@@ -294,11 +294,15 @@ a {
   padding: 16px 24px;
 }
 
+/* 32px, not the 24px an icon takes elsewhere in this bar: the lockup spends most of its height on
+   the disc, so the wordmark inside it sets far smaller than its box — at 24px "zasper" read a size
+   below the 15px nav links sitting next to it. 32px is where the wordmark's cap height matches
+   theirs, and it still leaves the 16px padding above and below intact. */
 .mk-nav-logo {
   display: flex;
   align-items: center;
   margin-right: auto;
-  height: 24px;
+  height: 32px;
 }
 
 .mk-nav-logo img {
@@ -671,8 +675,10 @@ a {
   max-width: 32ch;
 }
 
+/* Same 32px as the nav, for the same reason — at 24px the wordmark set smaller than the paragraph
+   directly beneath it. */
 .mk-footer-brand img {
-  height: 24px;
+  height: 32px;
   margin-bottom: 12px;
 }
 

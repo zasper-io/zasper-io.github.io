@@ -155,8 +155,32 @@
       </div>
     </div>
 
+    <div class="mk-feature">
+      <div class="mk-feature-copy">
+        <h3>Version control, not an extension</h3>
+        <p>
+          Branch, stage, commit and read a side-by-side diff in the window you are already working
+          in. JupyterLab ships no source control at all; git there is a third-party extension you
+          install and maintain yourself.
+        </p>
+      </div>
+      <div class="mk-shot">
+        <div class="mk-shot-bar">
+          <span class="mk-shot-dot"></span>
+          <span class="mk-shot-label">Source control</span>
+        </div>
+        <img
+          src="/static/images/screens/git.png"
+          alt="Zasper's source control panel on branch main, listing two changed files and one untracked file above the last commit, with a side-by-side diff of src/train.py open in a tab beside it."
+          width="1400"
+          height="640"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
     <p class="mk-charts-note">
-      Underneath both: Zasper speaks Jupyter's wire protocol, reads and writes <code>.ipynb</code> at
+      Underneath all three: Zasper speaks Jupyter's wire protocol, reads and writes <code>.ipynb</code> at
       its own nbformat version, and runs the kernels you already have — so the notebooks in the
       screenshots above are the notebooks you have now.
     </p>
