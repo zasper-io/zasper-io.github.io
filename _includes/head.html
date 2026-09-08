@@ -11,7 +11,7 @@ own front matter to override the shared one below.
 <html lang="en">
   <head>
     {% include meta.html %}
-    <title>{% if page.title %}{{ page.title }} · Zasper{% else %}Zasper: High Performance IDE for Jupyter Notebooks{% endif %}</title>
+    <title>{{ meta_title }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +20,13 @@ own front matter to override the shared one below.
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/static/css/main.css" />
-    <link rel="icon" href="/static/images/zasper_logo.ico" type="image/x-icon" sizes="32x32" />
+    <!-- favicon.ico lives at the site root because that is the path browsers request on their own,
+         with or without a link tag. The SVG is preferred where supported and scales to any density;
+         the PNGs cover the rest. -->
+    <link rel="icon" href="/static/images/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/static/images/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/static/images/favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png" sizes="180x180" />
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G239XHJ88R"></script>
     <script>

@@ -1,11 +1,53 @@
+{% comment %}
+Per-page metadata. Everything here used to be hardcoded to the homepage: og:url pointed at
+https://zasper.io/ from every page, so a shared doc or blog post previewed as the front page, and
+`description` was present but empty. The values are computed once here and reused by head.html for
+the <title>, so a page's name is written in one place rather than two.
+
+There is no _config.yml in this repo — GitHub Pages builds it with its own defaults — so the site
+title, description and base URL are literals below rather than site.* lookups.
+{% endcomment %}
+{%- assign site_name = "Zasper" -%}
+{%- assign site_title = "Zasper: High Performance IDE for Jupyter Notebooks" -%}
+{%- assign site_desc = "Zasper is a high-performance IDE for Jupyter notebooks: up to 5× less CPU and 40× less RAM than Jupyter Server, in a single 8 MB binary." -%}
+{%- assign base_url = "https://zasper.io" -%}
+
+{%- if page.title -%}
+  {%- assign meta_title = page.title | append: " · Zasper" -%}
+{%- else -%}
+  {%- assign meta_title = site_title -%}
+{%- endif -%}
+{%- assign meta_desc = page.description | default: site_desc -%}
+{% comment %} GitHub Pages serves downloads.html at /downloads, which is where the nav points, so the
+     canonical has to drop the extension too — otherwise one page advertises two URLs. {% endcomment %}
+{%- assign meta_path = page.url | remove: "index.html" | remove: ".html" -%}
+{%- assign meta_url = base_url | append: meta_path -%}
+{%- if page.date -%}
+  {%- assign meta_type = "article" -%}
+{%- else -%}
+  {%- assign meta_type = "website" -%}
+{%- endif -%}
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="title" content="Zasper: High Performance IDE for Jupyter Notebooks">
-<meta name="description" content="">
+<meta name="description" content="{{ meta_desc | escape }}">
+<meta name="theme-color" content="#0c6862">
+<link rel="canonical" href="{{ meta_url }}">
+
 <meta property="og:locale" content="en_US">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Zasper: High Performance IDE for Jupyter Notebooks">
-<meta property="og:description" content="Zasper is a high performance IDE for Jupyter Notebooks, designed to be super efficient and scalable. It uses 5X less CPU and 40X less RAM compared to JupyterLab, making it ideal for data science tasks.">
-<meta property="og:url" content="https://zasper.io/">
-<meta property="og:site_name" content="Zasper: A Supercharged IDE for Data Science">
-<meta property="og:image" content="https://zasper.io/static/images/social_preview.png">
+<meta property="og:type" content="{{ meta_type }}">
+<meta property="og:site_name" content="{{ site_name }}">
+<meta property="og:title" content="{{ meta_title | escape }}">
+<meta property="og:description" content="{{ meta_desc | escape }}">
+<meta property="og:url" content="{{ meta_url }}">
+<meta property="og:image" content="{{ base_url }}/static/images/og-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Zasper — high performance IDE for Jupyter Notebooks. Up to 5× less CPU, up to 40× less RAM, 8 MB single binary.">
+
+{% comment %} Without an explicit card type X renders a small square thumbnail; the preview image is a 1.91:1
+     banner and only reads at the large size. {% endcomment %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title | escape }}">
+<meta name="twitter:description" content="{{ meta_desc | escape }}">
+<meta name="twitter:image" content="{{ base_url }}/static/images/og-preview.png">

@@ -33,8 +33,10 @@
           <span class="mk-shot-label">python_plotting_libraries_showcase.ipynb</span>
         </div>
         <img
-          src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/notebook.png"
+          src="/static/images/screens/notebook-hero.png"
           alt="A Zasper notebook with a rendered chart output"
+          width="1500"
+          height="865"
         />
       </div>
     </div>
@@ -53,44 +55,8 @@
         <span>less RAM than JupyterLab</span>
       </div>
       <div class="mk-number">
-        <strong>7</strong>
-        <span>kernel families, and every Jupyter kernel</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="mk-band">
-  <div class="mk-wrap">
-    <h2 class="mk-section-title">Three things, and it does them well</h2>
-    <p class="mk-section-sub">
-      Every claim below has a <a href="https://github.com/zasper-io/zasper-benchmark">benchmark</a>
-      behind it rather than an adjective.
-    </p>
-    <div class="mk-claims">
-      <div class="mk-claim">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 19 22 12 13 5 13 19" /><polygon points="2 19 11 12 2 5 2 19" /></svg>
-        <h3>Fast</h3>
-        <p>
-          A Go server and a single binary. No Python process to boot before the first cell can run,
-          and the editor is painted before the kernel has answered.
-        </p>
-      </div>
-      <div class="mk-claim">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2" /><rect width="6" height="6" x="9" y="9" /><path d="M15 2v2" /><path d="M15 20v2" /><path d="M2 15h2" /><path d="M2 9h2" /><path d="M20 15h2" /><path d="M20 9h2" /><path d="M9 2v2" /><path d="M9 20v2" /></svg>
-        <h3>Concurrent</h3>
-        <p>
-          Designed for many connections at once and resilient under very high loads — see the
-          <a href="/blog/benchmarking-zasper-vs-jupyterlab">full benchmark</a> against JupyterLab.
-        </p>
-      </div>
-      <div class="mk-claim">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
-        <h3>Jupyter, exactly</h3>
-        <p>
-          It implements Jupyter's wire protocol, reads and writes <code>.ipynb</code> at its own
-          nbformat version, and runs every kernel you already have installed.
-        </p>
+        <strong>8 MB</strong>
+        <span>to download — the whole app, one binary</span>
       </div>
     </div>
   </div>
@@ -98,18 +64,119 @@
 
 <div class="mk-band mk-band-alt">
   <div class="mk-wrap">
-    <h2 class="mk-section-title">Zasper supports tools that you already use</h2>
-    <div class="mk-tools-row">
-      <img src="/static/images/support/support-tools-logo1.png" alt="TensorFlow" />
-      <img src="/static/images/support/support-tools-logo2.png" alt="Keras" />
-      <img src="/static/images/support/support-tools-logo3.png" alt="PyTorch" />
-      <img src="/static/images/support/support-tools-logo4.png" alt="pandas" />
-      <img src="/static/images/support/support-tools-logo5.png" alt="scikit-learn" />
-      <img src="/static/images/support/support-tools-logo6.png" alt="Amazon S3" />
-      <img src="/static/images/support/support-tools-logo7.png" alt="Azure Storage" />
-      <img src="/static/images/support/support-tools-logo8.png" alt="NumPy" />
-      <img src="/static/images/support/support-tools-logo9.png" alt="Dask" />
+    <h2 class="mk-section-title">The gap widens as the load does</h2>
+    <p class="mk-section-sub">
+      Both servers were run against the same workload — 10 requests per second per kernel, on an
+      Apple M4 — from 2 concurrent kernels up to 100. Zasper starts ahead and stays ahead, and the
+      distance grows with concurrency rather than shrinking.
+    </p>
+    <div class="mk-charts">
+      <figure class="mk-chart">
+        <img
+          src="/static/images/benchmark/avg-cpu-usage-zasper-vs-jupyter-10rps.svg"
+          alt="Average CPU use against concurrent kernels, 2 to 100. Jupyter Server rises from 2.7% to a peak of 15.5% at 64 kernels; Zasper rises from 0.8% to 12%. The widest gap is 5 times less, at 4 kernels."
+          width="960"
+          height="600"
+          loading="lazy"
+        />
+      </figure>
+      <figure class="mk-chart">
+        <img
+          src="/static/images/benchmark/peak-ram-usage-zasper-vs-jupyter-10rps.svg"
+          alt="Peak RAM use against concurrent kernels, 2 to 100. Jupyter Server holds near 90 MB to 32 kernels, then climbs to 1.9 GB at 100; Zasper stays under 50 MB throughout. The widest gap is 38 times less, at 100 kernels."
+          width="960"
+          height="600"
+          loading="lazy"
+        />
+      </figure>
     </div>
+    <p class="mk-charts-note">
+      CPU is averaged across each run; RAM is the highest figure observed, which is what &ldquo;up to
+      40&times;&rdquo; reports. At light load the difference is closer to 3&ndash;4&times; on both —
+      the advantage is a function of concurrency, not a constant. Every point is recomputed from the
+      raw runs in
+      <a href="https://github.com/zasper-io/zasper-benchmark">zasper-benchmark</a>, where the harness
+      and the methodology are public.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band">
+  <div class="mk-wrap">
+    <h2 class="mk-section-title">And it is a real IDE</h2>
+    <p class="mk-section-sub">
+      The numbers above are only half the question. Every screen below is a running session, not a
+      mock-up.
+    </p>
+
+    <div class="mk-feature">
+      <div class="mk-feature-copy">
+        <h3>Your environments, already found</h3>
+        <p>
+          Conda, uv, venv and every Jupyter kernel you have installed — detected on open and one
+          click from a blank notebook or a shell. Nothing to register by hand.
+        </p>
+      </div>
+      <div class="mk-shot">
+        <div class="mk-shot-bar">
+          <span class="mk-shot-dot"></span>
+          <span class="mk-shot-label">Launcher</span>
+        </div>
+        <img
+          src="/static/images/screens/launcher.png"
+          alt="Zasper's file explorer beside the launcher, showing nine detected Python environments — including conda, uv and xeus kernels — each one click from a new notebook, and a Terminal tile below them."
+          width="1400"
+          height="405"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <div class="mk-feature">
+      <div class="mk-feature-copy">
+        <h3>A real shell, in the same window</h3>
+        <p>
+          Not an emulation. A full terminal that restores its session on reopen, in a tab beside the
+          notebook it belongs to.
+        </p>
+      </div>
+      <div class="mk-shot">
+        <div class="mk-shot-bar">
+          <span class="mk-shot-dot"></span>
+          <span class="mk-shot-label">Terminal 1</span>
+        </div>
+        <img
+          src="/static/images/screens/terminal.png"
+          alt="A terminal tab open beside two notebook tabs in Zasper, showing the message “Restored session” followed by a directory listing at the shell prompt."
+          width="1400"
+          height="280"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <p class="mk-charts-note">
+      Underneath both: Zasper speaks Jupyter's wire protocol, reads and writes <code>.ipynb</code> at
+      its own nbformat version, and runs the kernels you already have — so the notebooks in the
+      screenshots above are the notebooks you have now.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band mk-band-alt">
+  <div class="mk-wrap">
+    <h2 class="mk-section-title">Every kernel you already run</h2>
+    <p class="mk-section-sub">
+      Zasper launches kernels through Jupyter's own kernelspec mechanism, so a kernel that runs under
+      Jupyter runs here — without being registered again.
+    </p>
+    {% include kernel-row.html %}
+    <p class="mk-charts-note">
+      Python covers both implementations: <code>ipykernel</code> and Xeus (<code>xeus-python</code>).
+      Conda, uv and venv environments are detected on open — the launcher above is showing nine of
+      them, two of which are Xeus kernels.
+      <a href="/docs/installing-jupyter-kernels">Installing kernels</a> walks through adding your own.
+    </p>
   </div>
 </div>
 

@@ -178,21 +178,74 @@ a {
   text-overflow: ellipsis;
 }
 
+/* `height: auto` is load-bearing, not tidying: the screenshots carry width/height attributes so the
+   browser reserves their space before they load, and without this the attribute height wins over the
+   scaled width and every shot renders vertically stretched. */
 .mk-shot img {
   display: block;
   width: 100%;
+  height: auto;
 }
 
-.mk-tools-row {
+/* Kernel tiles, deliberately echoing the launcher's own tiles in the screenshot above: the same
+   shape appears in the product a section earlier, so the row reads as "these are the things that
+   show up in that grid" rather than as a generic logo wall. Each mark keeps its brand colour, which
+   is what makes the row scannable — you look for your language, not at the layout. */
+.mk-kernel-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.mk-kernel-tile {
   display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
+  flex-direction: column;
   align-items: center;
-  margin-top: 24px;
+  text-align: center;
+  gap: 4px;
+  padding: 20px 8px 16px;
+  border: 1px solid var(--z-border);
+  border-radius: 10px;
+  background: var(--z-bg-panel);
 }
 
-.mk-tools-row img {
-  height: 32px;
+.mk-kernel-tile svg {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 6px;
+}
+
+/* A wordmark that occupies only the middle band of its viewBox reads smaller than a mark that fills
+   it. Scaled to match the others by eye rather than by number. */
+.mk-kernel-tile svg.mk-kernel-wide {
+  width: 42px;
+  height: 42px;
+  margin: -6px 0 0;
+}
+
+.mk-kernel-tile strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mk-kernel-tile span {
+  font-size: 12px;
+  color: var(--z-fg-subtle);
+  font-family: var(--z-mono-font-family);
+}
+
+/* Seven across needs about 90px a tile before the sub-labels start wrapping mid-word. */
+@media (max-width: 860px) {
+  .mk-kernel-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .mk-kernel-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .mk-supporters-row {
@@ -519,6 +572,73 @@ a {
 
 .mk-band-dark .mk-number span {
   color: #ffffffb3;
+}
+
+/* --- Feature screenshots ---------------------------------------------------- */
+/* Copy above the shot, not beside it. These are wide strips of real UI (1400x405, 1400x280), and a
+   side column costs the image about a third of its width — at 786px a 1400px screenshot renders at
+   0.56 and its labels stop being legible. Full width keeps them near 0.77. `.mk-shot` is the frame
+   the hero already uses. */
+.mk-feature {
+  margin-bottom: 48px;
+}
+
+.mk-feature-copy {
+  margin-bottom: 16px;
+  max-width: 62ch;
+}
+
+.mk-feature-copy h3 {
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.mk-feature-copy p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--z-fg-muted);
+}
+
+/* --- Benchmark charts ------------------------------------------------------ */
+/* The charts are drawn on white, so on `.mk-band-alt`'s grey they read as cards without needing a
+   fill of their own. Text inside them is real SVG paths at a fixed 9.6:6 ratio, which is why the
+   figures are given no padding — anything that shrinks them shrinks their axis labels too. */
+.mk-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.mk-chart {
+  margin: 0;
+  border: 1px solid var(--z-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.mk-chart img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mk-charts-note {
+  margin: 24px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--z-fg-subtle);
+  max-width: 72ch;
+}
+
+/* Below this the two charts sit one above the other, which is the point at which each is wide enough
+   again for its own axis labels — side by side on a phone they are unreadable, not merely small. */
+@media (max-width: 900px) {
+  .mk-charts {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* --- Footer ------------------------------------------------------------ */
