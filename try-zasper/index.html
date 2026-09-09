@@ -1,0 +1,47 @@
+<!doctype html>
+<!--
+  The default theme, spelled out here as well as in src/themes/index.ts, because IDE.tsx cannot write
+  these attributes until it has read the config: without them the first paint of every boot is the
+  purple in `:root`, and the window changes colour once the config arrives. Keep in step with
+  `defaultTheme`. /login has no config to read at all, so this is the theme it always renders in.
+-->
+<html lang="en" data-theme="light" data-accent="teal">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      Icons, generated from assets/brand/favicon.svg in the prototype by its scripts/genicons.mjs.
+      favicon.ico stays at the root because that is the path a browser asks for on its own; the SVG
+      is preferred where supported, the PNGs cover the rest, and apple-touch-icon is a PNG because
+      iOS will not take an .ico — it was pointed at one here, so the home-screen icon never resolved.
+    -->
+    <link rel="icon" href="/try-zasper/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/try-zasper/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/try-zasper/favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/try-zasper/apple-touch-icon.png" sizes="180x180" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="/try-zasper/manifest.json" />
+
+    <!-- Fonts are self-hosted and imported by src/lite/fonts.ts; see the note there. -->
+
+    <!-- Everything else is bundled by Vite from src/styles/index.scss. -->
+
+    <title>Zasper — Data Science 101</title>
+    <script type="module" crossorigin src="/try-zasper/assets/index-BGadWLVp.js"></script>
+    <link rel="stylesheet" crossorigin href="/try-zasper/assets/style-BtJUjN2e.css">
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      The in-page server goes in before the app: main.tsx pulls in modules that read
+      globalThis.WebSocket and fetch as they load, so the patches have to be installed by a script
+      that runs first. Module scripts run in document order, which is what guarantees it.
+    -->
+  </body>
+</html>
