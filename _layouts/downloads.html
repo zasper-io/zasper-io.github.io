@@ -1,7 +1,9 @@
 {% include head.html %}
 {% include nav.html %}
 
-{% assign version = "v0.2.0-beta" %}
+{% assign version = "1.0.0" %}
+{% assign base = "https://github.com/zasper-io/zasper/releases/download/v" | append: version | append: "/zasper-webapp-" | append: version %}
+{% capture icon %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>{% endcapture %}
 
 <div class="mk-docs-body" style="max-width: var(--mk-wrap); margin: 0 auto; padding: 40px 24px 0">
   <h1>Download Zasper today!</h1>
@@ -39,76 +41,69 @@
   </div>
 
   <h2 style="font-size: 22px; font-weight: 500; margin: 0 0 16px">
-    Binaries — {{ version }}
+    Binaries — v{{ version }}
   </h2>
   <div style="overflow-x: auto">
     <table class="mk-downloads-table">
       <thead>
         <tr>
           <th>Platform</th>
-          <th>Web app</th>
-          <th>Desktop app</th>
+          <th>Architecture</th>
+          <th>Download</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Mac Apple Silicon</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-darwin-arm64.tar.gz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper_0.1.0-alpha_arm64_mac.dmg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
+          <td>macOS</td>
+          <td>Apple Silicon</td>
+          <td><a class="mk-download-link" href="{{ base }}-darwin-arm64.tar.gz">{{ icon }}Download</a></td>
         </tr>
         <tr>
-          <td>Mac AMD 64</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-darwin-amd64.tar.gz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper_0.1.0-alpha_x64_mac.dmg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
+          <td>macOS</td>
+          <td>Intel</td>
+          <td><a class="mk-download-link" href="{{ base }}-darwin-amd64.tar.gz">{{ icon }}Download</a></td>
         </tr>
         <tr>
-          <td>Linux Debian (AMD64)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-linux-amd64.tar.gz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper_0.1.0-alpha_amd64_linux.deb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
+          <td>Linux</td>
+          <td>x86-64</td>
+          <td><a class="mk-download-link" href="{{ base }}-linux-amd64.tar.gz">{{ icon }}Download</a></td>
         </tr>
         <tr>
-          <td>Linux Debian (ARM64)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-linux-arm64.tar.gz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper_0.1.0-alpha_arm64_linux.deb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
+          <td>Linux</td>
+          <td>ARM64</td>
+          <td><a class="mk-download-link" href="{{ base }}-linux-arm64.tar.gz">{{ icon }}Download</a></td>
         </tr>
         <tr>
-          <td>Linux Debian (i386)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-linux-386.tar.gz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><span class="mk-download-soon">Coming soon</span></td>
+          <td>Linux</td>
+          <td>i386</td>
+          <td><a class="mk-download-link" href="{{ base }}-linux-386.tar.gz">{{ icon }}Download</a></td>
         </tr>
         <tr>
-          <td>Linux Red Hat (AMD64)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-linux-amd64.tar.gz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><span class="mk-download-soon">Coming soon</span></td>
+          <td>Windows</td>
+          <td>x86-64</td>
+          <td><a class="mk-download-link" href="{{ base }}-windows-amd64.zip">{{ icon }}Download</a></td>
         </tr>
         <tr>
-          <td>Linux Red Hat (ARM64)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-linux-arm64.tar.gz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><span class="mk-download-soon">Coming soon</span></td>
+          <td>Windows</td>
+          <td>ARM64</td>
+          <td><a class="mk-download-link" href="{{ base }}-windows-arm64.zip">{{ icon }}Download</a></td>
         </tr>
         <tr>
-          <td>Linux Red Hat (i386)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-linux-386.tar.gz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><span class="mk-download-soon">Coming soon</span></td>
-        </tr>
-        <tr>
-          <td>Windows (AMD64)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-windows-amd64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><span class="mk-download-soon">Coming soon</span></td>
-        </tr>
-        <tr>
-          <td>Windows (ARM64)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-windows-arm64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper_0.1.0-alpha_arm64_win.exe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-        </tr>
-        <tr>
-          <td>Windows (i386)</td>
-          <td><a class="mk-download-link" href="https://github.com/zasper-io/zasper/releases/download/{{ version }}/zasper-webapp-windows-386.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>Download</a></td>
-          <td><span class="mk-download-soon">Coming soon</span></td>
+          <td>Windows</td>
+          <td>i386</td>
+          <td><a class="mk-download-link" href="{{ base }}-windows-386.zip">{{ icon }}Download</a></td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <p>
+    The macOS builds are signed and notarized. The Linux builds are static binaries that run on any
+    distribution. To verify a download, fetch
+    <a href="https://github.com/zasper-io/zasper/releases/download/v{{ version }}/zasper_{{ version }}_checksums.txt">zasper_{{ version }}_checksums.txt</a>
+    and run <code>sha256sum -c zasper_{{ version }}_checksums.txt --ignore-missing</code> beside it.
+    Older versions are on <a href="https://github.com/zasper-io/zasper/releases">GitHub Releases</a>.
+  </p>
 </div>
 
 {% include footer.html %}

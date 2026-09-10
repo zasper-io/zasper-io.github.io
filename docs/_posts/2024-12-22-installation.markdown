@@ -10,96 +10,127 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper ships in two forms:
+Zasper is a single binary of about 8 MB with no runtime dependencies. It runs a server on your own
+machine, and you use it in your browser: Chrome, Firefox, Safari or Edge.
 
-| Type            | Description                                       |
-| ---------------- | -------------------------------------------------- |
-| **Web App**     | Terminal-first, lightweight, CLI-based experience  |
-| **Desktop App** | Full native GUI, OS-integrated Jupyter launcher    |
+## Requirements
 
-## Web App
+- **A Jupyter kernel.** Zasper runs notebooks on Jupyter kernels but does not install one.
+  `pip install ipykernel` is enough to get started; [Installing Jupyter
+  Kernels](/docs/installing-jupyter-kernels) covers other languages. Without a kernel Zasper still
+  starts, and the Launcher tells you what to install.
+- **A modern browser.**
 
-Install the Web App via Homebrew, Snap, or Conda.
-
-### Homebrew (macOS)
+## Homebrew (macOS)
 
 ```bash
 brew install zasper-io/tap/zasper
 ```
 
-Works on macOS 11 and later, Intel and Apple Silicon.
-
-### Snap (Linux)
+## Snap (Linux)
 
 ```bash
 sudo snap install zasper
 ```
 
-Works on Ubuntu 18.04+, Fedora, Arch, and other Snap-supported distributions.
-
-### Conda
+## Conda
 
 ```bash
 conda install zasper -c conda-forge
 ```
 
-## Desktop App
+## Prebuilt Binaries
 
-For a native experience with a built-in kernel manager, download the Desktop app from the
-[Downloads page](/downloads) or directly from
-[GitHub Releases](https://github.com/zasper-io/zasper/releases). It bundles a launcher, a kernel
-manager, and an integrated session runner.
+Download the archive for your platform from the [Downloads page](/downloads) or from
+[GitHub Releases](https://github.com/zasper-io/zasper/releases), unpack it, and put `zasper`
+somewhere on your `PATH`:
 
-## Current Release
+```bash
+tar -xzf zasper-webapp-1.0.0-linux-amd64.tar.gz
+sudo mv zasper /usr/local/bin/
+```
 
-**Version:** `v0.2.0-beta` — see the [Downloads page](/downloads) for the exact binary for every
-platform.
+Every release carries a checksum file. To verify what you downloaded, run this in the folder that
+has both:
 
-### Platform Support
+```bash
+sha256sum -c zasper_1.0.0_checksums.txt --ignore-missing      # Linux
+shasum -a 256 -c zasper_1.0.0_checksums.txt --ignore-missing  # macOS
+```
 
-| OS                  | Minimum Version | Web App | Desktop App |
-| ------------------- | ---------------- | :-----: | :---------: |
-| macOS (Apple Silicon) | macOS 11        |   Yes   |     Yes     |
-| macOS (Intel)         | macOS 11        |   Yes   |     Yes     |
-| Debian (AMD64)        | Debian 10       |   Yes   |     Yes     |
-| Debian (ARM64)        | Debian 10       |   Yes   |     Yes     |
-| Debian (i386)         | Debian 10       |   Yes   |   Planned   |
-| Red Hat (AMD64)       | RHEL 8          |   Yes   |   Planned   |
-| Red Hat (ARM64)       | RHEL 8          |   Yes   |   Planned   |
-| Red Hat (i386)        | RHEL 8          |   Yes   |   Planned   |
-| Windows (AMD64)       | Windows 10+     |   Yes   |   Planned   |
-| Windows (ARM64)       | Windows 11      |   Yes   |     Yes     |
-| Windows (i386)        | Windows 10+     |   Yes   |   Planned   |
+The macOS binaries are signed and notarized by Apple, so Gatekeeper opens them without a warning.
 
-Additional platforms are being tested and will be supported in upcoming releases.
+## Check That It Works
 
-## Web App vs. Desktop App
+```bash
+zasper --version
+```
 
-| Feature                             | Web App | Desktop App |
-| ------------------------------------ | :-----: | :----------: |
-| Launch kernels                      |   Yes   |     Yes      |
-| Works in terminal-only environments |   Yes   |      No      |
-| Native OS UI (menus, dialogs)       |   No    |     Yes      |
-| Auto kernel discovery               |   Yes   |     Yes      |
-| Lightweight install                 |   Yes   |      No      |
-| Suitable for remote servers         |   Yes   |      No      |
+This prints `1.0.0`. Then start Zasper in the folder you want to work in:
+
+```bash
+cd ~/notebooks
+zasper
+```
+
+and open [http://127.0.0.1:8048](http://127.0.0.1:8048).
+
+## Platform Support
+
+| Platform                 | Architectures              | Status                                                       |
+| ------------------------ | -------------------------- | ------------------------------------------------------------ |
+| macOS 12 or later        | Apple Silicon, Intel       | Fully supported                                              |
+| Linux, any distribution  | x86-64, ARM64, i386        | Fully supported                                              |
+| Windows 10 or later      | x86-64, ARM64, i386        | Runs, but the terminal and some kernel paths are less tested; use WSL for the best experience |
+
+The Linux archives are static binaries, so one build works on every distribution, Debian and Red
+Hat alike.
+
+## Upgrading from 0.2.0-beta
+
+1.0.0 is the first stable release. From here on, Zasper's HTTP and WebSocket API, its configuration
+file and its command-line flags follow semantic versioning and will not break within 1.x. A few
+things changed on the way there:
+
+- **The server binds `127.0.0.1` by default** instead of every interface. If you reach Zasper from
+  another machine, start it with `--host=0.0.0.0` and turn on `--protected=true` at the same time;
+  see [Deploying on Cloud](/docs/deploying-on-cloud).
+- **The desktop app is gone.** Zasper is now only the local server you open in a browser. Install
+  it with any of the methods above.
+- **`DELETE /ws/kernels/{kernel_id}` has been removed.** Use `DELETE /api/kernels/{kernelId}`,
+  which is unchanged.
+- **Kernel connection files have moved** from the system temp directory to `~/.zasper/runtime`.
+  They are now readable only by you and are deleted when the kernel stops.
+- **Zasper sends anonymous usage data** unless you turn it off. See
+  [Configuration](/docs/configuration#anonymous-usage-data) for what is sent and how to stop it.
+
+The full list is in the
+[changelog](https://github.com/zasper-io/zasper/blob/main/CHANGELOG.md).
 
 ## Troubleshooting
 
-**Command not found?**
+**`zasper: command not found`**
 
-Make sure `brew`, `snap`, or `conda` is correctly installed and added to your `PATH`.
+The folder you put `zasper` in is not on your `PATH`. For Homebrew, snap or conda, check that the
+package manager itself is on your `PATH`.
 
-**Kernel not showing up?**
+**A kernel doesn't show up**
 
-Run `jupyter kernelspec list` to confirm it's installed and registered.
+Run `jupyter kernelspec list` to confirm the kernel is registered, then restart Zasper. Kernels
+installed while it is running are picked up on the next start.
 
-**Desktop app not launching?**
+**Zasper can't be reached from another machine**
 
-Ensure your OS version meets the minimum requirement. Zasper has no separate log file — it logs to
-standard output — so run it from a terminal rather than by double-clicking, and pass `--debug` for
-more detail:
+By default Zasper binds only `127.0.0.1`. See
+[Deploying on Cloud](/docs/deploying-on-cloud#reaching-it-from-another-machine).
+
+**Something else is wrong**
+
+Zasper logs to standard output, not to a file. Run it from a terminal with `--debug` to see more:
 
 ```bash
 zasper --debug
 ```
+
+If that doesn't explain it, [open an issue](https://github.com/zasper-io/zasper/issues) with that
+output.

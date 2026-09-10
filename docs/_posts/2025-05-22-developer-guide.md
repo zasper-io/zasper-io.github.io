@@ -2,7 +2,7 @@
 layout: docs
 title:  "Developer Guide"
 date:   2024-12-22 07:39:59 +0530
-index: 7
+index: 9
 group: Guides
 categories: docs
 permalink: docs/:title
@@ -10,70 +10,87 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-## Build from Source
+## Requirements
 
-### Download the Source
+- Go 1.25 or newer
+- Node.js 22.12 or newer. The repository's `.nvmrc` pins it, so `nvm use` picks it up.
+- `git` and `make`
+
+## Build from Source
 
 ```bash
 git clone https://github.com/zasper-io/zasper
-```
-
-### Install Dependencies
-
-```bash
+cd zasper
 make init
 ```
 
-This installs the frontend's npm dependencies.
-
-### Build the Project
-
-From the project root, build both the frontend and the backend:
+`make init` installs the frontend's npm dependencies. Then build:
 
 ```bash
 make build
 ```
 
-This creates a binary called `zasper`. Add it to your `PATH`.
+This builds the frontend, embeds it in the Go binary, and writes `zasper` to the project root. To
+install it into your Go bin directory instead, which needs that directory on your `PATH`:
 
-Run `zasper` in any directory to confirm the installation succeeded:
+```bash
+make webapp-install
+```
+
+Check that it worked:
 
 ```
 % zasper -h
-Usage of ../zasper:
+Usage of zasper:
   -cwd string
     	base directory of project (default ".")
   -debug
     	sets log level to debug
+  -host string
+    	interface to bind; 0.0.0.0 puts the server on the network (default "127.0.0.1")
   -port string
     	port to start the server on (default ":8048")
   -protected
     	enable protected mode
   -tracking
     	enable usage tracking (default true)
+  -version
+    	print the version and exit
 ```
 
-Go to any directory you want to serve and run `zasper`. This starts the Zasper server in that
-directory:
+[Configuration](/docs/configuration) explains every flag and environment variable.
 
-```
-prasunanand@Prasuns-Mac-mini example % zasper
-==========================================================
-     ███████╗ █████╗ ███████╗██████╗ ███████╗██████╗
-     ╚══███╔╝██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗
-       ███╔╝ ███████║███████╗██████╔╝█████╗  ██████╔╝
-      ███╔╝  ██╔══██║╚════██║██╔═══╝ ██╔══╝  ██╔══██╗
-     ███████╗██║  ██║███████║██║     ███████╗██║  ██║
-     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
+## Develop
 
-                    Zasper Server
-                Version: 0.2.0-beta
-----------------------------------------------------------
- ✅ Server started successfully!
- 📡 Listening on:         http://localhost:8048
- 🖥️ Webapp available at:  http://localhost:8048
- 🔒 Protected Mode:       disabled
-==========================================================
+```bash
+make dev
 ```
 
-Go to `http://localhost:8048`.
+This runs the Vite dev server on port 3000 with hot reload, alongside the Go server on port 8048.
+Open [http://localhost:3000](http://localhost:3000).
+
+These help while you work:
+
+```bash
+zasper --debug --tracking=false   # debug logs, no usage data from your test runs
+ZASPER_ACCESS_LOG=1 zasper        # log every HTTP request
+```
+
+## Test
+
+```bash
+make test
+```
+
+This runs the frontend tests and the Go tests, with the race detector on. The end-to-end suite runs
+the frontend against a real server; see
+[e2e/README.md](https://github.com/zasper-io/zasper/blob/main/e2e/README.md).
+
+## Further Reading
+
+- [CONTRIBUTING.md](https://github.com/zasper-io/zasper/blob/main/CONTRIBUTING.md): how to send a
+  change
+- [docs/API.md](https://github.com/zasper-io/zasper/blob/main/docs/API.md): the HTTP and WebSocket
+  API, covered by semantic versioning from 1.0.0
+- [CHANGELOG.md](https://github.com/zasper-io/zasper/blob/main/CHANGELOG.md): what changed in each
+  release

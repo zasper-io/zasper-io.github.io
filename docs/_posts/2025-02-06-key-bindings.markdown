@@ -2,94 +2,77 @@
 layout: docs
 title:  "Key Bindings"
 date:   2025-02-05 07:39:59 +0530
-index: 6
+index: 7
 group: Guides
 categories: docs
 permalink: docs/:title
 author: Prasun Anand
 ---
 
+Every action here is also in the command palette (`⇧⌘P` / `Ctrl+Shift+P`), which shows each
+command's key binding beside it. If you forget a shortcut, the palette is the place to look.
 
-Not all of the below bindings are supported. It's a reference
+Where a row gives two macOS bindings, both work. `⌘` is the usual editor convention; `⌃` is what
+Zasper used first, and it still works.
 
-### General Navigation
+### Global
 
-| Command | Windows/Linux| macOS |
-|---------|--------------|-------|
-|Open File| Ctrl+O | Cmd+O |
-|Save File| Ctrl+S | Cmd+S |
-|Close File/Tab| Ctrl+W | Cmd+W |
-|Close All Files/Tabs| Ctrl+K W | Cmd+Option+W|
-|Switch Between Tabs| Ctrl+Tab| Cmd+Option+Right-Arrow/Left- Arrow|
-|Go to File| Ctrl+P | Cmd+P |
-|Go to Line| Ctrl+G | Cmd+L |
+| Action | macOS | Windows / Linux |
+| --- | --- | --- |
+| Show All Commands | `⇧⌘P` or `⌃⇧P` | `Ctrl+Shift+P` |
+| Go to File | `⇧⌘O` or `⌃⇧O` | `Ctrl+Shift+O` |
+| Zoom In | `⌘=` or `⌘+` | `Ctrl+=` or `Ctrl++` |
+| Zoom Out | `⌘-` | `Ctrl+-` |
+| Reset Zoom | `⌘0` | `Ctrl+0` |
 
+Zoom scales the whole window, including toolbars and menus. To change only the size of code,
+terminal text and cell output, use **Increase / Decrease Font Size** from the palette. Those have
+no key binding.
 
-### Editing
+### Notebook
 
-| Command | Windows/Linux| macOS |
-|---------|--------------|-------|
-| Undo | Ctrl+Z | Cmd+Z |
-| Redo | Ctrl+Y | Cmd+Shift+Z |
-| Cut | Ctrl+X | Cmd+X |
-| Copy | Ctrl+C | Cmd+C |
-| Paste | Ctrl+V | Cmd+V |
-| Select All | Ctrl+A | Cmd+A |
-| Find | Ctrl+F | Cmd+F |
-| Replace | Ctrl+H | Cmd+Option+F |
+| Action | macOS | Windows / Linux |
+| --- | --- | --- |
+| Save Notebook | `⌘S` or `⌃S` | `Ctrl+S` |
+| Run Cell | `⌃⏎` | `Ctrl+Enter` |
+| Run Cell and Select Next | `⇧⏎` | `Shift+Enter` |
+| Insert Cell Above | `⌃⇧A` | `Ctrl+Shift+A` |
+| Insert Cell Below | `⌃⇧B` | `Ctrl+Shift+B` |
+| Move Cell Up | `⌃⇧↑` | `Ctrl+Shift+Up` |
+| Move Cell Down | `⌃⇧↓` | `Ctrl+Shift+Down` |
+| Delete Cell | `⌃⇧D` | `Ctrl+Shift+D` |
+| Undo Cell Operation | `⇧⌘Z` | `Ctrl+Shift+Z` |
+| Change Cell to Code | `⌃⇧Y` | `Ctrl+Shift+Y` |
+| Change Cell to Markdown | `⌃⇧M` | `Ctrl+Shift+M` |
 
+Cell operations use `⌃⇧` rather than a bare `⌃` on purpose. `⌃A`, `⌃B`, `⌃E` and `⌃K` are the
+system text-editing bindings on macOS, and `Ctrl+A` is select-all everywhere else, so a bare
+binding would be caught before the cell's editor received it.
 
-### Code Navigation and Refactoring
+**Undo Cell Operation** is the notebook's own history. It undoes an inserted, deleted, cut, pasted
+or retyped cell, and a cleared output. `⌘Z` inside a cell still undoes the text you typed there.
 
-| Command | Windows/Linux| macOS |
-|---------|--------------|-------|
-| Go to Definition/Declaration | F12 or Ctrl+Click | Cmd+Click |
-| Find References | Shift+F12 | Cmd+Shift+F12 |
-| Rename Symbol | F2 | Cmd+Option+R |
-| Jump to Next Error/Warning | F8 | Cmd+Option+F8 |
-| Jump to Previous Error/Warning |  Shift+F8 | Cmd+Option+Shift+F8 |
-| Code Formatting|  Ctrl+Shift+F | Cmd+Option+L |
+**Move Cell Up / Down** reorders the notebook. It is not the same as **Select Next / Previous
+Cell**, which only moves the selection. A cell's hover toolbar has both: the chevrons move the
+selection and the arrows move the cell. Focus moves with the cell, so you can hold the binding to
+move one cell several places.
 
+These actions have no key binding; run them from the palette: **Run All Cells**, **Cut / Copy /
+Paste Cell**, **Select Next / Previous Cell**, **Change Cell to Raw**, **Expand or Collapse
+Output**, **Clear Cell Output**, **Clear All Outputs**, **Interrupt Kernel**, **Restart Kernel**,
+**Restart Kernel and Run All Cells**, **Reconnect to Kernel** and **Change Kernel**. The notebook
+toolbar and a cell's hover toolbar reach most of them in one click.
 
-### Debugging
+### Inside a Cell
 
-| Command | Windows/Linux| macOS |
-|---------|--------------|-------|
-| Start Debugging | F5 | Cmd+Shift+D |
-| Stop Debugging | Shift+F5 | Cmd+Shift+F5 |
-| Step Over | F10 | Cmd+Option+F10 |
-| Step Into | F11 | Cmd+Option+F11 |
-| Step Out | Shift+F11 | Cmd+Shift+Option+F11 |
+These keys belong to the editor rather than to a command, because what they do depends on where
+the cursor is.
 
+| Key | What it does |
+| --- | --- |
+| `Tab` | Accepts the highlighted completion; with a word to the left of the cursor, asks the kernel for completions; otherwise indents |
+| `↑` on the first line, `↓` on the last | Moves to the cell above or below |
+| Double-click, or `Enter` on a selected markdown cell | Opens its source for editing |
+| `Escape`, or running the cell, in a markdown cell | Renders it again |
 
-### Search and Replace
-
-| Command | Windows/Linux| macOS |
-|---------|--------------|-------|
-| Global Search | Ctrl+Shift+F | Cmd+Shift+F |
-| Global Replace | Ctrl+Shift+H | Cmd+Shift+H |
-
-
-### Git Integration
-
-| Command | Windows/Linux| macOS |
-|---------|--------------|-------|
-| Commit Changes | Ctrl+Enter | Cmd+Enter |
-| View Git Log | Ctrl+Shift+G | Cmd+Shift+G |
-
-
-### Terminal/Command Palette
-
-| Command | Windows/Linux| macOS |
-|---------|--------------|-------|
-| Open Terminal | Ctrl + ` | Cmd + ` |
-| Open Command Palette | Ctrl+Shift+P | Cmd+Shift+P |
-
-
-### Project Management
-
-
-| Command | Windows/Linux| macOS |
-|---------|--------------|-------|
-| Toggle Sidebar | Ctrl+B | Cmd+B |
-| Show/Hide Explorer | Ctrl+Shift+E | Cmd+Shift+E |
+A single click on a rendered markdown cell only selects it; it stays rendered.
