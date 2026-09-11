@@ -51,17 +51,23 @@ uv pip install ipykernel
 
 You can also install any additional libraries your project needs at this stage.
 
-### Step 4: Register the Kernel
+If you open this folder in Zasper now, it already lists the environment: a project's own `.venv` with
+`ipykernel` in it appears first in the Launcher as **Python 3.x (.venv)**, with no registration
+needed. Zasper's **Set up a Python kernel** button does steps 1 to 3 for you when a project has no
+kernel yet — see [Installing Jupyter Kernels](/docs/installing-jupyter-kernels).
 
-Make the environment available to Jupyter (and Zasper) by registering it as a named kernel:
+### Step 4: Register the Kernel (Optional)
+
+Register the environment only if you want to use it from other projects too, or from Jupyter itself:
 
 ```bash
 uv run python -m ipykernel install --user --name=exampleUV
 ```
 
 This creates a new kernel spec named `exampleUV`. It will now appear as an option in the Zasper
-kernel selector.
+kernel selector wherever Zasper is opened.
 
 ## You're All Set
 
-Launch Zasper, select the `exampleUV` kernel, and run code in your new environment.
+Launch Zasper in the `exampleUV` folder, choose **Python 3.x (.venv)** — or the `exampleUV` kernel if
+you registered it — and run code in your new environment.

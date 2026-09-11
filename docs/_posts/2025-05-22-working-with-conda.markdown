@@ -58,6 +58,13 @@ python -m ipykernel install --user --name=torchEnv
 
 This registers `torchEnv` as a selectable kernel for experimenting inside Zasper.
 
+Registering is what makes the environment available wherever you open Zasper. Without it, Zasper
+still finds a conda environment that has `ipykernel` when you start Zasper from a shell with that
+environment activated, and your base Anaconda, Miniconda or Miniforge install when its Python has
+`ipykernel` — those appear in the Launcher as **Python 3.x (torchEnv)** or **Python 3.x
+(miniconda3)** without a kernelspec. See [Installing Jupyter
+Kernels](/docs/installing-jupyter-kernels#how-zasper-finds-kernels).
+
 ## You're All Set
 
 Your `torchEnv` Conda environment is now ready to use as a kernel in Zasper. Launch the app, select

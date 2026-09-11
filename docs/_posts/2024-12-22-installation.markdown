@@ -15,10 +15,11 @@ machine, and you use it in your browser: Chrome, Firefox, Safari or Edge.
 
 ## Requirements
 
-- **A Jupyter kernel.** Zasper runs notebooks on Jupyter kernels but does not install one.
+- **A Jupyter kernel.** Zasper runs notebooks on Jupyter kernels and never installs one on its own.
   `pip install ipykernel` is enough to get started; [Installing Jupyter
   Kernels](/docs/installing-jupyter-kernels) covers other languages. Without a kernel Zasper still
-  starts, and the Launcher tells you what to install.
+  starts, and the Launcher offers **Set up a Python kernel**, which makes a `.venv` with ipykernel in
+  your project when you click it.
 - **A modern browser.**
 
 ## Homebrew (macOS)
@@ -116,8 +117,10 @@ package manager itself is on your `PATH`.
 
 **A kernel doesn't show up**
 
-Run `jupyter kernelspec list` to confirm the kernel is registered, then restart Zasper. Kernels
-installed while it is running are picked up on the next start.
+Run `jupyter kernelspec list` to confirm the kernel is registered, then reload the page: Zasper reads
+the kernel list again each time the Launcher asks for it. Restart Zasper only if you have installed a
+new version of Python since it started. [Installing Jupyter
+Kernels](/docs/installing-jupyter-kernels#troubleshooting) has more.
 
 **Zasper can't be reached from another machine**
 
