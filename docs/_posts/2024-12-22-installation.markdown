@@ -47,7 +47,7 @@ Download the archive for your platform from the [Downloads page](/downloads) or 
 somewhere on your `PATH`:
 
 ```bash
-tar -xzf zasper-webapp-1.0.0-linux-amd64.tar.gz
+tar -xzf zasper-webapp-1.1.0-linux-amd64.tar.gz
 sudo mv zasper /usr/local/bin/
 ```
 
@@ -55,8 +55,8 @@ Every release carries a checksum file. To verify what you downloaded, run this i
 has both:
 
 ```bash
-sha256sum -c zasper_1.0.0_checksums.txt --ignore-missing      # Linux
-shasum -a 256 -c zasper_1.0.0_checksums.txt --ignore-missing  # macOS
+sha256sum -c zasper_1.1.0_checksums.txt --ignore-missing      # Linux
+shasum -a 256 -c zasper_1.1.0_checksums.txt --ignore-missing  # macOS
 ```
 
 The macOS binaries are signed and notarized by Apple, so Gatekeeper opens them without a warning.
@@ -67,14 +67,16 @@ The macOS binaries are signed and notarized by Apple, so Gatekeeper opens them w
 zasper --version
 ```
 
-This prints `1.0.0`. Then start Zasper in the folder you want to work in:
+This prints `1.1.0`. Then start Zasper in the folder you want to work in:
 
 ```bash
 cd ~/notebooks
 zasper
 ```
 
-and open [http://127.0.0.1:8048](http://127.0.0.1:8048).
+Zasper opens [http://127.0.0.1:8048](http://127.0.0.1:8048) in your browser, already signed in. If
+no browser opens, for example because you passed `--no-browser` or are connected over SSH, open the
+**Sign in with** link that Zasper prints when it starts.
 
 ## Platform Support
 
@@ -87,6 +89,22 @@ and open [http://127.0.0.1:8048](http://127.0.0.1:8048).
 The Linux archives are static binaries, so one build works on every distribution, Debian and Red
 Hat alike.
 
+## Upgrading from 1.0.0
+
+Three changes need attention if you run Zasper anywhere other than your own machine:
+
+- **Every server now requires the access token.** Protected mode is always on. `--protected` is
+  still accepted, so scripts that pass it keep starting, but `--protected=false` is ignored. A
+  client that called the API without signing in has to exchange the access token at `/auth/login`
+  first; see [docs/API.md](https://github.com/zasper-io/zasper/blob/main/docs/API.md#authentication).
+- **`ZASPER_JWT_SECRET` has been removed.** If you set it to keep sessions valid across restarts,
+  set `ZASPER_ACCESS_TOKEN` to a fixed token instead. Changing that token signs everyone out.
+- **Zasper opens your browser on startup**, already signed in. It only does this when it is running
+  in a terminal, and on Linux only when there is a display, so SSH sessions, Docker and systemd are
+  left alone. Pass `--no-browser` to turn it off.
+
+[Deploying on Cloud](/docs/deploying-on-cloud) shows the new setup for servers, Docker and systemd.
+
 ## Upgrading from 0.2.0-beta
 
 1.0.0 is the first stable release. From here on, Zasper's HTTP and WebSocket API, its configuration
@@ -94,8 +112,7 @@ file and its command-line flags follow semantic versioning and will not break wi
 things changed on the way there:
 
 - **The server binds `127.0.0.1` by default** instead of every interface. If you reach Zasper from
-  another machine, start it with `--host=0.0.0.0` and turn on `--protected=true` at the same time;
-  see [Deploying on Cloud](/docs/deploying-on-cloud).
+  another machine, start it with `--host=0.0.0.0`; see [Deploying on Cloud](/docs/deploying-on-cloud).
 - **The desktop app is gone.** Zasper is now only the local server you open in a browser. Install
   it with any of the methods above.
 - **`DELETE /ws/kernels/{kernel_id}` has been removed.** Use `DELETE /api/kernels/{kernelId}`,
@@ -114,6 +131,12 @@ The full list is in the
 
 The folder you put `zasper` in is not on your `PATH`. For Homebrew, snap or conda, check that the
 package manager itself is on your `PATH`.
+
+**The sign-in page asks for a token**
+
+Paste the **Server Access Token** that Zasper printed when it started, or open the **Sign in with**
+link instead. The token changes every time Zasper starts unless `ZASPER_ACCESS_TOKEN` is set, so a
+token from an earlier run no longer works.
 
 **A kernel doesn't show up**
 
