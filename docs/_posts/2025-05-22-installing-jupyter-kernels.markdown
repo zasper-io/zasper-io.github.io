@@ -66,6 +66,8 @@ same places Jupyter does, in the same order:
   activated — before your own folder inside a virtualenv or a non-base conda environment, as Jupyter
   does, and `JUPYTER_PREFER_ENV_PATH` decides either way;
 - the system: `/usr/local/share/jupyter` and `/usr/share/jupyter`, or `%PROGRAMDATA%\jupyter`;
+- on Windows, the Microsoft Store's Python, whose own folder is read-only, so `pip install ipykernel`
+  puts the kernel under that Python's `LocalCache` folder instead (from 1.1.0);
 - Anaconda, Miniconda and Miniforge in your home folder, and on macOS, Homebrew and every Python's
   own folder — each version under `~/Library/Python`, the Command Line Tools' Python and the
   python.org installers.
