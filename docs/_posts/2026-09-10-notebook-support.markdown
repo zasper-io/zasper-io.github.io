@@ -28,30 +28,28 @@ cannot leave a half-written notebook.
 | `text/plain`, stdout/stderr, tracebacks | ✅ |
 | `text/html` | ✅ |
 | `image/png` | ✅ |
+| `image/jpeg` | ✅ |
+| `image/svg+xml` | ✅ |
+| `text/latex` | ✅ |
 | Plotly figures (`application/vnd.plotly.v1+json`) | ✅ |
 | ipywidgets (`application/vnd.jupyter.widget-view+json`) | ✅ |
 | `application/json` | ✅ |
 | Markdown cells: GFM tables, task lists, raw HTML, LaTeX via KaTeX | ✅ |
-| `image/svg+xml` | Not yet |
-| `text/latex` | Not yet |
-| `image/jpeg` | Not yet |
 
-The three missing types are worth knowing about before you run into them:
-
-- `text/latex` is what SymPy produces after `init_printing()`.
-- `image/svg+xml` is what graphviz and networkx produce, and what matplotlib produces under
-  `%config InlineBackend.figure_format = 'svg'`.
-- `image/jpeg` covers `display()` of a JPEG.
-
-Cells that produce these still run correctly; only the display is missing. These are the first
-things planned after 1.0.
+`text/latex`, which SymPy produces after `init_printing()` and IPython's `Latex` and `Math` display,
+is typeset with KaTeX, the same renderer markdown cells use. `image/svg+xml`, which graphviz and
+networkx produce, and matplotlib under `%config InlineBackend.figure_format = 'svg'`, is placed
+directly in the page rather than inside an `<img>`, so a figure that sizes itself to the cell still
+can. SVG, JPEG and LaTeX output render from 1.1.0.
 
 ## Known Limitations
 
-- **Widget state is not saved in the notebook.** If you reopen a notebook without a running kernel,
-  widgets show a placeholder instead of their last state. Run the cell again to draw them.
-- **A cell's output area ignores `clear_output`.**
+- **Widget state is not saved in the notebook.** Closing and reopening a tab is fine: the kernel
+  keeps running, and the widgets redraw from it. But the state lives only in the kernel, so once the
+  kernel is gone, for example after the server restarts or when the file is opened somewhere else,
+  such as on GitHub, a widget shows a placeholder until you run its cell again. JupyterLab can save
+  widget state into the file so it renders without a kernel; Zasper does not do this yet.
 - **Notebooks are not signed or trusted.** Zasper does not yet implement Jupyter's notebook trust
   system. Saved `text/html` output can contain scripts that run when the notebook is opened; that
   is how Plotly and Bokeh outputs draw themselves. Treat a notebook you did not write like any other
-  downloaded file, and open one you don't trust in [protected mode](/docs/deploying-on-cloud).
+  downloaded file.
