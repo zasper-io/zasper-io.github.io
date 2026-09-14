@@ -1,0 +1,61 @@
+---
+layout: post
+title:  "Zasper 1.0.0"
+date:   2026-09-10 09:00:00 +0530
+categories: blog
+permalink: blog/:title
+author: Prasun Anand
+banner: /static/images/logo.svg
+---
+
+Zasper 1.0.0 is the first stable release. From this version on, Zasper's HTTP and WebSocket API,
+its configuration file and its command-line flags follow semantic versioning: they will not break
+within 1.x.
+
+```bash
+brew install zasper-io/tap/zasper     # macOS
+sudo snap install zasper              # Linux
+conda install zasper -c conda-forge   # anywhere conda runs
+```
+
+Prebuilt binaries for macOS, Linux and Windows are on the [Downloads page](/downloads).
+
+## What's New
+
+**Source control.** A Git panel with real status, staging, discard and commits of staged changes
+only; creating, switching and deleting branches; syncing with a remote; a readable history;
+side-by-side diffs; and `git init` for a folder that isn't a repository yet.
+
+**Notebook outputs.** ipywidgets, Plotly figures, GitHub Flavored Markdown with tables, and LaTeX in
+markdown cells through KaTeX.
+
+**Notebook editing.** Reordering cells from the keyboard, insert options and context menus,
+autocompletion from the kernel, and a dialog that catches unsaved changes when you close a tab.
+
+**Notebooks round-trip exactly.** Notebooks in formats 2 and 3 are converted to 4.5 when opened,
+4.x files keep their own minor version when saved, and a saved notebook is byte-for-byte what Jupyter
+would have written. Saves are atomic, so a crash or a full disk can't leave a truncated notebook.
+[Notebook Support](/docs/notebook-support) has the details.
+
+**Terminals** that open in your project folder, and **a command palette** that searches files and
+every command in one place.
+
+**Nine themes**, all built from one set of design tokens, and zoom for the whole window.
+
+**Logging that stays out of the way.** Readable output in a terminal, JSON for a log collector, and
+by default only what changed or failed.
+
+## Upgrading from 0.2.0-beta
+
+- **The server binds `127.0.0.1` by default** instead of every interface. To reach Zasper from
+  another machine, start it with `--host=0.0.0.0` and turn on protected mode. (From 1.1.0, protected
+  mode is always on; see [Deploying on Cloud](/docs/deploying-on-cloud).)
+- **The Electron desktop app is gone.** Zasper is a local server you open in your browser.
+- **`DELETE /ws/kernels/{kernel_id}` has been removed.** Use `DELETE /api/kernels/{kernelId}`.
+- **Kernel connection files moved** to `~/.zasper/runtime`, readable only by you and deleted when
+  the kernel stops.
+- **Zasper sends anonymous usage data** unless you turn it off with `--tracking=false`;
+  [Configuration](/docs/configuration#anonymous-usage-data) lists exactly what is sent.
+
+The [changelog](https://github.com/zasper-io/zasper/blob/main/CHANGELOG.md) has the complete list,
+including the security fixes in this release.
