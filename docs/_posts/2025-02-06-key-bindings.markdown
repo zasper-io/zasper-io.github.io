@@ -10,7 +10,8 @@ author: Prasun Anand
 ---
 
 Every action here is also in the command palette (`⇧⌘P` / `Ctrl+Shift+P`), which shows each
-command's key binding beside it. If you forget a shortcut, the palette is the place to look.
+command's key binding beside it. The **Help** tab (`F1`) lists every shortcut in one place, with a
+filter. If you forget a shortcut, either one is the place to look.
 
 Where a row gives two macOS bindings, both work. `⌘` is the usual editor convention; `⌃` is what
 Zasper used first, and it still works.
@@ -19,8 +20,11 @@ Zasper used first, and it still works.
 
 | Action | macOS | Windows / Linux |
 | --- | --- | --- |
+| Search Files and Commands | `⌘K` | `Ctrl+K` |
 | Show All Commands | `⇧⌘P` or `⌃⇧P` | `Ctrl+Shift+P` |
 | Go to File | `⇧⌘O` or `⌃⇧O` | `Ctrl+Shift+O` |
+| Toggle Sidebar | `⌘B` | `Ctrl+B` |
+| Keyboard Shortcuts (Help tab) | `F1` | `F1` |
 | Zoom In | `⌘=` or `⌘+` | `Ctrl+=` or `Ctrl++` |
 | Zoom Out | `⌘-` | `Ctrl+-` |
 | Reset Zoom | `⌘0` | `Ctrl+0` |
@@ -28,6 +32,25 @@ Zasper used first, and it still works.
 Zoom scales the whole window, including toolbars and menus. To change only the size of code,
 terminal text and cell output, use **Increase / Decrease Font Size** from the palette. Those have
 no key binding.
+
+On Windows and Linux, a shell uses some of these keys itself: `Ctrl+B` moves the cursor back one
+character and `Ctrl+K` deletes to the end of the line. While a terminal has focus, shortcuts on those
+keys go to the shell rather than to Zasper. Click outside the terminal, or use the search box and the
+sidebar button in the top bar.
+
+### Tabs
+
+| Action | macOS | Windows / Linux |
+| --- | --- | --- |
+| Close | `⌥W` | `Alt+W` |
+| Close Others | `⌥⇧O` | `Alt+Shift+O` |
+| Close to the Right | `⌥⇧R` | `Alt+Shift+R` |
+| Close to the Left | `⌥⇧L` | `Alt+Shift+L` |
+| Close Saved | `⌥⇧S` | `Alt+Shift+S` |
+| Close All | `⌥⇧W` | `Alt+Shift+W` |
+
+Right-click a tab for the same actions, plus **Copy Path** and **Reveal in File Explorer**. When the
+tabs you close have unsaved changes, Zasper asks about all of them in one dialog.
 
 ### Notebook
 
