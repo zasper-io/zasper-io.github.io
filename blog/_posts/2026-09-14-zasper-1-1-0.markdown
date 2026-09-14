@@ -1,0 +1,69 @@
+---
+layout: post
+title:  "Zasper 1.1.0"
+date:   2026-09-14 09:00:00 +0530
+categories: blog
+permalink: blog/:title
+author: Prasun Anand
+banner: /static/images/logo.svg
+---
+
+Zasper 1.1.0 makes signing in part of every server, sets up a Python kernel for you when there
+isn't one, and fills in the notebook outputs and file types that 1.0.0 left out.
+
+```bash
+brew upgrade zasper                   # Homebrew
+sudo snap refresh zasper              # Snap
+conda update zasper -c conda-forge    # conda
+```
+
+Prebuilt binaries are on the [Downloads page](/downloads).
+
+## Signing In, Everywhere
+
+Every Zasper server now requires its access token. When you start Zasper on your own machine it
+opens your browser already signed in, so for most people nothing changes. On a server, the startup
+banner prints a **Sign in with** link, and `ZASPER_ACCESS_TOKEN` keeps the same token, and the same
+sessions, across restarts. [Deploying on Cloud](/docs/deploying-on-cloud) walks through servers,
+Docker and systemd.
+
+## A Python Kernel in One Click
+
+If Zasper finds no kernel at all, the Launcher offers **Set up a Python kernel**. It creates a
+`.venv` in your project, installs `ipykernel` into it (with uv when you have it) and lists it as a
+kernel. It never touches your system or Homebrew Python. On Windows, Zasper now also finds kernels
+installed for the Microsoft Store's Python. See
+[Installing Jupyter Kernels](/docs/installing-jupyter-kernels).
+
+## More Outputs, More Files
+
+- **Notebook outputs:** LaTeX from SymPy and IPython's `Latex` and `Math`, SVG from graphviz,
+  networkx and matplotlib, and JPEG images.
+- **PDFs** open in your browser's viewer, with a Download button.
+- **Markdown files** have Edit, Preview and Side by side views.
+
+## Tabs That Come Back
+
+Zasper remembers the tabs you had open in each project and reopens them next time. Right-click a tab
+to close others, close to the left or right, close saved tabs, copy its path or reveal it in the file
+explorer, and every close action has a shortcut. There is a **Help** tab (`F1`) listing every
+shortcut, and **Toggle Sidebar** (`⌘B` / `Ctrl+B`). [Files and Tabs](/docs/files-and-tabs) covers
+all of it.
+
+## Fixes
+
+- Opening a file no longer makes the whole window scrollable.
+- A terminal resizes to its pane when you switch back to its tab.
+- Closing a tab behind the active one no longer changes the active tab.
+- Undo straight after a file loads no longer empties the editor.
+- Closing a notebook while its kernel is still connecting no longer leaves that connection open.
+
+## Upgrading from 1.0.0
+
+- **Every server requires the access token.** `--protected=false` is ignored.
+- **`ZASPER_JWT_SECRET` has been removed.** Set `ZASPER_ACCESS_TOKEN` instead.
+- **Zasper opens your browser on startup** when it runs in a terminal. Pass `--no-browser` to turn
+  it off.
+
+[Installation](/docs/installation#upgrading-from-100) explains each one, and the
+[changelog](https://github.com/zasper-io/zasper/blob/main/CHANGELOG.md) has the full list.
