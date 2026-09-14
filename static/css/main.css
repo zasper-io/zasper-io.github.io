@@ -393,7 +393,14 @@ a {
 
 .mk-nav-github {
   display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--z-fg-muted);
+}
+
+.mk-nav-stars {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
 }
 
 .mk-nav-github:hover {
