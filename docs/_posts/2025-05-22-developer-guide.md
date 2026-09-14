@@ -34,7 +34,7 @@ This builds the frontend, embeds it in the Go binary, and writes `zasper` to the
 install it into your Go bin directory instead, which needs that directory on your `PATH`:
 
 ```bash
-make webapp-install
+make install
 ```
 
 Check that it worked:
@@ -48,10 +48,12 @@ Usage of zasper:
     	sets log level to debug
   -host string
     	interface to bind; 0.0.0.0 puts the server on the network (default "127.0.0.1")
+  -no-browser
+    	do not open the app in a browser on startup
   -port string
     	port to start the server on (default ":8048")
   -protected
-    	enable protected mode
+    	deprecated and ignored: Zasper always runs in protected mode (default true)
   -tracking
     	enable usage tracking (default true)
   -version
@@ -66,8 +68,10 @@ Usage of zasper:
 make dev
 ```
 
-This runs the Vite dev server on port 3000 with hot reload, alongside the Go server on port 8048.
-Open [http://localhost:3000](http://localhost:3000).
+This runs the Vite dev server on port 3000 with hot reload, alongside the Go server on port 8048,
+which `make dev` starts with `--no-browser`. Open [http://localhost:3000](http://localhost:3000)
+and sign in with the access token the Go server prints. Set `ZASPER_ACCESS_TOKEN` to keep the same
+token, and stay signed in, while you restart the server.
 
 These help while you work:
 
@@ -89,7 +93,8 @@ the frontend against a real server; see
 ## Further Reading
 
 - [CONTRIBUTING.md](https://github.com/zasper-io/zasper/blob/main/CONTRIBUTING.md): how to send a
-  change
+  change. Your first pull request asks you to sign the
+  [Contributor License Agreement](https://github.com/zasper-io/zasper/blob/main/CLA.md)
 - [docs/API.md](https://github.com/zasper-io/zasper/blob/main/docs/API.md): the HTTP and WebSocket
   API, covered by semantic versioning from 1.0.0
 - [CHANGELOG.md](https://github.com/zasper-io/zasper/blob/main/CHANGELOG.md): what changed in each
