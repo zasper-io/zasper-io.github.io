@@ -17,12 +17,15 @@ in the app are stored in `~/.zasper/config.json`.
 | Flag | Default | What it does |
 | --- | --- | --- |
 | `--cwd` | `.` | The folder to open as the project |
-| `--host` | `127.0.0.1` | The network interface to listen on. `0.0.0.0` makes the server reachable from other machines; use it together with `--protected=true` |
+| `--host` | `127.0.0.1` | The network interface to listen on. `0.0.0.0` makes the server reachable from other machines; see [Deploying on Cloud](/docs/deploying-on-cloud) |
 | `--port` | `:8048` | The port to listen on. `8888` and `:8888` both work |
-| `--protected` | `false` | Require an access token to log in; see [Deploying on Cloud](/docs/deploying-on-cloud) |
+| `--no-browser` | `false` | Don't open Zasper in a browser on startup. Zasper only opens one when it is running in a terminal, and on Linux only when there is a display |
 | `--tracking` | `true` | Send [anonymous usage data](#anonymous-usage-data) |
 | `--debug` | `false` | Log at debug level |
 | `--version` | | Print the version and exit |
+
+Every Zasper server requires the access token it prints at startup. `--protected` is still
+accepted so that older scripts keep starting, but it is ignored.
 
 A `--port` that includes a host, such as `--port=0.0.0.0:8048`, still listens on exactly that
 address. This keeps scripts written before 1.0 working unchanged.
@@ -31,10 +34,12 @@ address. This keeps scripts written before 1.0 working unchanged.
 
 | Variable | What it does |
 | --- | --- |
-| `ZASPER_JWT_SECRET` | The key used to sign login sessions in protected mode. Without it, Zasper generates a random key on every start, so a restart logs everyone out |
+| `ZASPER_ACCESS_TOKEN` | A fixed access token, instead of a new one on every start. Sessions are signed with a key derived from it, so while it stays the same they survive a restart, and changing it signs everyone out |
 | `ZASPER_TELEMETRY` | `0`, `false`, `off` or `no` turns usage data off for this run; `1`, `true`, `on` or `yes` turns it on |
 | `ZASPER_LOG_FORMAT` | `console` or `json`. By default Zasper uses console format in a terminal and JSON otherwise |
 | `ZASPER_ACCESS_LOG` | `1`, `true`, `on` or `yes` logs every HTTP request |
+
+`ZASPER_JWT_SECRET` was removed in 1.1.0 and is ignored; use `ZASPER_ACCESS_TOKEN` instead.
 
 ## Files
 
@@ -49,8 +54,9 @@ Zasper writes its logs to standard output. By default it logs only changes and f
 requests and routine kernel activity appear only with `--debug`.
 
 In a terminal, logs are formatted for reading. When the output goes elsewhere, such as a pipe, a
-file, systemd or a container's log collector, each line is JSON. Set `ZASPER_LOG_FORMAT` to override
-this. To log every HTTP request without turning on all debug logging, set `ZASPER_ACCESS_LOG=1`.
+file, systemd or a container's log collector, each line is JSON, and the startup banner becomes a
+single line whose `access_token` field carries the token. Set `ZASPER_LOG_FORMAT` to override this.
+To log every HTTP request without turning on all debug logging, set `ZASPER_ACCESS_LOG=1`.
 
 ## Anonymous Usage Data
 
