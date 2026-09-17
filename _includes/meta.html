@@ -4,13 +4,14 @@ https://zasper.io/ from every page, so a shared doc or blog post previewed as th
 `description` was present but empty. The values are computed once here and reused by head.html for
 the <title>, so a page's name is written in one place rather than two.
 
-There is no _config.yml in this repo — GitHub Pages builds it with its own defaults — so the site
-title, description and base URL are literals below rather than site.* lookups.
+These four used to be literals here, because the repository had no _config.yml. It has one now, so
+they are read from it: the site's name, its description and its URL are written in one place, and the
+feed and the sitemap read the same values.
 {% endcomment %}
 {%- assign site_name = "Zasper" -%}
-{%- assign site_title = "Zasper: High Performance IDE for Jupyter Notebooks" -%}
-{%- assign site_desc = "Zasper is a high-performance IDE for Jupyter notebooks: up to 5× less CPU and 40× less RAM than Jupyter Server, in a single 8 MB binary." -%}
-{%- assign base_url = "https://zasper.io" -%}
+{%- assign site_title = site.title -%}
+{%- assign site_desc = site.description -%}
+{%- assign base_url = site.url | append: site.baseurl -%}
 
 {%- if page.title -%}
   {%- assign meta_title = page.title | append: " · Zasper" -%}
@@ -18,8 +19,9 @@ title, description and base URL are literals below rather than site.* lookups.
   {%- assign meta_title = site_title -%}
 {%- endif -%}
 {%- assign meta_desc = page.description | default: site_desc -%}
-{% comment %} GitHub Pages serves downloads.html at /downloads, which is where the nav points, so the
-     canonical has to drop the extension too — otherwise one page advertises two URLs. {% endcomment %}
+{% comment %} /downloads and /community are directories now, so what is left to trim is an index page
+     and any .html a future page is written as: one page, one URL, in the canonical and the sitemap
+     alike. {% endcomment %}
 {%- assign meta_path = page.url | remove: "index.html" | remove: ".html" -%}
 {%- assign meta_url = base_url | append: meta_path -%}
 {%- if page.date -%}
@@ -33,6 +35,11 @@ title, description and base URL are literals below rather than site.* lookups.
 <meta name="description" content="{{ meta_desc | escape }}">
 <meta name="theme-color" content="#0c6862">
 <link rel="canonical" href="{{ meta_url }}">
+{%- if page.noindex %}
+{% comment %} For the pages that exist to be arrived at rather than found: the 404 and the redirect
+     stubs. `follow` so the links on them still pass through. {% endcomment %}
+<meta name="robots" content="noindex, follow">
+{%- endif %}
 
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="{{ meta_type }}">
@@ -43,7 +50,11 @@ title, description and base URL are literals below rather than site.* lookups.
 <meta property="og:image" content="{{ base_url }}/static/images/og-preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Zasper — high performance IDE for Jupyter Notebooks. Up to 5× less CPU, up to 40× less RAM, 8 MB single binary.">
+{% comment %} The alt describes the picture, so it says what the picture says: the artwork's third
+     stat still reads "8 MB / one binary". That wording is the download size under a label that reads
+     as the binary's, and correcting it means regenerating the image — see marketing-claims.md in the
+     prototype. {% endcomment %}
+<meta property="og:image:alt" content="Zasper — high performance IDE for Jupyter Notebooks. Up to 5× less CPU, up to 40× less RAM, {{ site.download_size }} to download.">
 
 {% comment %} Without an explicit card type X renders a small square thumbnail; the preview image is a 1.91:1
      banner and only reads at the large size. {% endcomment %}
@@ -51,3 +62,10 @@ title, description and base URL are literals below rather than site.* lookups.
 <meta name="twitter:title" content="{{ meta_title | escape }}">
 <meta name="twitter:description" content="{{ meta_desc | escape }}">
 <meta name="twitter:image" content="{{ base_url }}/static/images/og-preview.png">
+
+{%- if page.date %}
+{% comment %} A post says when it was written, which is what a search result's date comes from and what
+     tells a reader whether a release note is the current one. {% endcomment %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<meta property="article:author" content="{{ page.author | default: site.author }}">
+{%- endif %}

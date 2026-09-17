@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Deploying on Cloud"
+description: "Host Zasper on your own server: signing in, making it reachable, keeping the access token across restarts, HTTPS, Docker and running it as a service."
 date:   2024-12-22 07:39:59 +0530
 index: 5
 group: Guides

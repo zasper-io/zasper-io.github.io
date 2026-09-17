@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Installation"
+description: "Install Zasper on macOS, Linux or Windows with Homebrew, Snap, conda or a prebuilt binary, then check it works and upgrade an older release."
 date:   2024-12-22 07:39:59 +0530
 categories: docs
 index: 1
@@ -10,7 +11,7 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper is a single binary of about 8 MB with no runtime dependencies. It runs a server on your own
+Zasper is one static binary with no runtime dependencies — {{ site.download_size }} to download, {{ site.binary_size }} on disk once it is unpacked. It runs a server on your own
 machine, and you use it in your browser: Chrome, Firefox, Safari or Edge.
 
 ## Requirements
@@ -42,7 +43,7 @@ conda install zasper -c conda-forge
 
 ## Prebuilt Binaries
 
-Download the archive for your platform from the [Downloads page](/downloads) or from
+Download the archive for your platform from the [Downloads page](/downloads/) or from
 [GitHub Releases](https://github.com/zasper-io/zasper/releases), unpack it, and put `zasper`
 somewhere on your `PATH`:
 

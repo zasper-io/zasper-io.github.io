@@ -16,6 +16,9 @@ gem "minima", "~> 2.5"
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
+  # On GitHub Pages' allowlist, like jekyll-feed — unlike jekyll-minifier below, which is why that one
+  # is not named in _config.yml's `plugins:`.
+  gem "jekyll-sitemap", "~> 1.4"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

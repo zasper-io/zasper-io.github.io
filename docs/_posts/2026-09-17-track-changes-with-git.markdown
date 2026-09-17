@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Track Changes with Git"
+description: "Use Zasper's source control panel: see what changed, read a diff, stage and commit, fetch and push, and keep notebook commits clean."
 date:   2026-09-17 09:10:00 +0530
 index: 12
 group: Tutorials

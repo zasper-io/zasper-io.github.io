@@ -1,0 +1,45 @@
+# The site's configuration, and the reason it exists: without this file Jekyll builds on its defaults,
+# which is why `jekyll-feed` sat in the Gemfile inert for a year — a plugin cannot load without being
+# named in `plugins:`. The values below are the same literals `_includes/meta.html` used to carry,
+# moved here so the site name, description and base URL are written once.
+#
+# `jekyll-minifier` is deliberately absent from `plugins:`: it is not on GitHub Pages' allowlist, so
+# naming it here would break the build the day Pages reads this file. That, and whether this site is
+# built by Pages or pushed from a local build, is the open question in the prototype's
+# `documentation-todos.md`.
+
+title: "Zasper: High Performance IDE for Jupyter Notebooks"
+description: "Zasper is a high-performance IDE for Jupyter notebooks: up to 5× less CPU and 40× less RAM than Jupyter Server, in one static binary with no runtime."
+
+# The two sizes, in the one place that states them. Everything that quotes a size reads these, because
+# a number written into five pages is a number that will be right in three of them after the next
+# release. Measured on the v1.1.0 darwin-arm64 release: the archive is 8.2 MB, the binary inside it is
+# 20.8 MB. They are different numbers and the copy has to say which one it means — `download_size` is
+# what you fetch, `binary_size` is what ends up on disk.
+download_size: "8 MB"
+binary_size: "about 20 MB"
+url: "https://zasper.io"
+baseurl: ""
+lang: en_US
+author: "Prasun Anand"
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Repository files that are not the site. Jekyll's own defaults already drop the Gemfile and vendor/;
+# these are the ones particular to this repository.
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .jekyll-cache
+  - s3_website.yml
+
+# /feed.xml carries every post, docs pages included, which is not what anyone subscribes for: the
+# `categories` list makes jekyll-feed write /feed/blog.xml as well, and that is the one `<head>` points
+# at — releases and benchmarks, not an edit to the key bindings page.
+feed:
+  path: feed.xml
+  categories:
+    - blog

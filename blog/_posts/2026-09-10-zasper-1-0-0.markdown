@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Zasper 1.0.0"
+description: "Zasper 1.0.0 is the first stable release: the HTTP and WebSocket API, the configuration file and the flags now follow semantic versioning."
 date:   2026-09-10 09:00:00 +0530
 categories: blog
 permalink: blog/:title
@@ -18,7 +19,7 @@ sudo snap install zasper              # Linux
 conda install zasper -c conda-forge   # anywhere conda runs
 ```
 
-Prebuilt binaries for macOS, Linux and Windows are on the [Downloads page](/downloads).
+Prebuilt binaries for macOS, Linux and Windows are on the [Downloads page](/downloads/).
 
 ## What's New
 

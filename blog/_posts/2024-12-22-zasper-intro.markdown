@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Zasper: A Supercharged IDE for Data Science."
+description: "Why Zasper was built, how a Go implementation of the Jupyter protocol is put together, and what it does differently from JupyterLab."
 date:   2024-12-22 07:39:59 +0530
 categories: blog
 permalink: blog/:title
@@ -14,7 +15,7 @@ It's perfectly suited for running REPL-style data applications, with Jupyter not
 
 **Zasper uses up to 5X less CPU and up to 40X less RAM than JupyterLab.** See the [full benchmark](/blog/benchmarking-zasper-vs-jupyterlab) for the methodology and the numbers at every load level — the gap widens as concurrent load increases.
 
-<img class="blog-img" src="/static/images/zasper-intro.png">
+<img class="blog-img" src="/static/images/zasper-intro.png" alt="Zasper open on a notebook, with the file explorer on the left and a chart in the cell output">
 
 Zasper runs on macOS, Linux and Windows. On Windows, WSL gives the best experience.
 
@@ -33,7 +34,7 @@ Python's Event Loop: Ideal for I/O-bound applications that need to handle a lot 
 
 Zasper backend is written in Gorilla. The ipython kernel is reused from Project Jupyter. Zasper backend communicates with ipython kernel via zeromq sockets.
 
-<img class="blog-img" src="/static/images/zasper.drawio.svg">
+<img class="blog-img" src="/static/images/zasper.drawio.svg" alt="Zasper's architecture: the browser client, the Go server, and the ZeroMQ channels to each Jupyter kernel">
 
 (About Zeromq: ZeroMQ (also known as ØMQ, 0MQ, or zmq) looks like an embeddable networking library but acts like a concurrency framework. It gives 
 you sockets that carry atomic messages across various transports like in-process, inter-process, TCP, and multicast.)

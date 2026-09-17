@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Developer Guide"
+description: "Build Zasper from source: the Go and Node versions it needs, the development servers for the backend and the UI, and how to run the tests."
 date:   2024-12-22 07:39:59 +0530
 index: 10
 group: Guides

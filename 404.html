@@ -1,0 +1,35 @@
+---
+permalink: /404.html
+title: "Page not found"
+description: "That page is not here. The documentation, the blog and the downloads are."
+sitemap: false
+noindex: true
+---
+{% include head.html %}
+{% include nav.html %}
+
+<!--
+GitHub Pages serves this for any path it does not have, so it is a page rather than a layout: `head.html`
+already carries the nav and the metadata, and what is left is a sentence and the three places someone who
+landed here was probably looking for. `sitemap: false` keeps it out of the sitemap, and the title still
+reads as "Page not found · Zasper" in the tab.
+-->
+<div class="mk-docs" style="grid-template-columns: minmax(0, 1fr)">
+  <article class="mk-docs-body">
+    <h1>Page not found</h1>
+    <p class="mk-docs-lede">
+      The link that brought you here points at something that has moved or never existed.
+    </p>
+    <ul>
+      <li><a href="/docs">The documentation</a> — installing Zasper, kernels, key bindings and the tutorials.</li>
+      <li><a href="/blog">The blog</a> — releases and benchmarks.</li>
+      <li><a href="/downloads/">Downloads</a> — every way to install it.</li>
+    </ul>
+    <p>
+      If you followed a link from somewhere on this site, it is a bug worth
+      <a href="https://github.com/zasper-io/zasper/issues">reporting</a>.
+    </p>
+  </article>
+</div>
+
+{% include footer.html %}

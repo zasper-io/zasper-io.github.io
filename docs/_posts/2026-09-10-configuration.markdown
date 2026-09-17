@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Configuration"
+description: "Zasper's command-line flags and environment variables, and the settings it keeps in ~/.zasper/config.json."
 date:   2026-09-10 09:00:00 +0530
 index: 6
 group: Guides

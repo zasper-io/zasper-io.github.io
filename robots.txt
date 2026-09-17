@@ -1,0 +1,16 @@
+---
+permalink: /robots.txt
+sitemap: false
+---
+# Everything here is meant to be read. The one line that matters is the last: a sitemap a crawler has
+# to guess at is a sitemap it finds late, and jekyll-sitemap writes this one on every build.
+User-agent: *
+Allow: /
+
+# The WebAssembly demo is a build of the app itself, not a page about it — thousands of asset files
+# under one URL, and nothing in them is worth a search result.
+Disallow: /try-zasper/assets/
+Disallow: /try-zasper/pyodide/
+Disallow: /try-zasper/pypi/
+
+Sitemap: {{ site.url }}/sitemap.xml

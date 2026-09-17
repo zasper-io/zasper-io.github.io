@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Working with UV"
+description: "Use uv to build fast, reproducible Python environments and register them as Jupyter kernels for Zasper."
 date:   2024-12-22 07:39:59 +0530
 index: 4
 group: Environments

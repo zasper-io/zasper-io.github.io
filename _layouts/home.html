@@ -13,7 +13,7 @@
         It speaks Jupyter's wire protocol, so it runs the notebooks you already have.
       </p>
       <div class="mk-cta">
-        <a class="mk-button" href="/downloads">
+        <a class="mk-button" href="/downloads/">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
           Download Zasper today!
         </a>
@@ -55,7 +55,7 @@
         <span>less RAM than JupyterLab</span>
       </div>
       <div class="mk-number">
-        <strong>8 MB</strong>
+        <strong>{{ site.download_size }}</strong>
         <span>to download — the whole app, one binary</span>
       </div>
     </div>
@@ -68,13 +68,15 @@
     <p class="mk-section-sub">
       Both servers were run against the same workload — 10 requests per second per kernel, on an
       Apple M4 — from 2 concurrent kernels up to 100. Zasper starts ahead and stays ahead, and the
-      distance grows with concurrency rather than shrinking.
+      distance grows with concurrency rather than shrinking. Past 64 kernels the comparison stops
+      being about cost: Jupyter Server begins losing kernel connections, and by 100 it has lost all
+      of them, while Zasper answers every request at both loads.
     </p>
     <div class="mk-charts">
       <figure class="mk-chart">
         <img
           src="/static/images/benchmark/avg-cpu-usage-zasper-vs-jupyter-10rps.svg"
-          alt="Average CPU use against concurrent kernels, 2 to 100. Jupyter Server rises from 2.7% to a peak of 15.5% at 64 kernels; Zasper rises from 0.8% to 12%. The widest gap is 5 times less, at 4 kernels."
+          alt="Average CPU use against concurrent kernels, 2 to 100. Jupyter Server rises from 2.7% to a peak of 15.5% at 64 kernels; Zasper rises from 0.8% to 12%. The widest gap is 5 times less, at 4 kernels. Crosses mark Jupyter Server losing kernel connections from 64 kernels, and all of them at 100."
           width="960"
           height="600"
           loading="lazy"
@@ -83,7 +85,7 @@
       <figure class="mk-chart">
         <img
           src="/static/images/benchmark/peak-ram-usage-zasper-vs-jupyter-10rps.svg"
-          alt="Peak RAM use against concurrent kernels, 2 to 100. Jupyter Server holds near 90 MB to 32 kernels, then climbs to 1.9 GB at 100; Zasper stays under 50 MB throughout. The widest gap is 38 times less, at 100 kernels."
+          alt="Peak RAM use against concurrent kernels, 2 to 100. Jupyter Server holds near 90 MB to 32 kernels, then climbs to 1.9 GB at 100; Zasper stays under 50 MB throughout. The widest gap is 38 times less, at 100 kernels. Crosses mark Jupyter Server losing kernel connections from 64 kernels, and all of them at 100."
           width="960"
           height="600"
           loading="lazy"
@@ -93,7 +95,10 @@
     <p class="mk-charts-note">
       CPU is averaged across each run; RAM is the highest figure observed, which is what &ldquo;up to
       40&times;&rdquo; reports. At light load the difference is closer to 3&ndash;4&times; on both —
-      the advantage is a function of concurrency, not a constant. Every point is recomputed from the
+      the advantage is a function of concurrency, not a constant. The crosses are measured the same
+      way as the lines: replies received against requests sent, which is flat at five replies per
+      request until a server stops answering — so Jupyter's 14% CPU at 100 kernels is 14% while
+      returning nothing. Every point is recomputed from the
       raw runs in
       <a href="https://github.com/zasper-io/zasper-benchmark">zasper-benchmark</a>, where the harness
       and the methodology are public.

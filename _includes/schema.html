@@ -1,0 +1,92 @@
+{% comment %}
+Structured data, which is the one part of this site's metadata a reader never sees: the tags in
+meta.html say what a page *is* to a crawler that already has it, and this says how the pages relate —
+that the docs are an ordered set under /docs, that a post has a date and an author, that the thing all
+of it describes is a piece of software you can install for nothing.
+
+Three shapes, and a page gets whichever fits:
+
+  a docs page   TechArticle, plus the BreadcrumbList that renders as Docs › Guides › Key Bindings in a
+                result rather than a bare URL. `page.group` is the front matter the sidebar already
+                groups on, so the trail costs nothing to keep true.
+  a blog post   BlogPosting, same fields, no trail — /blog is flat.
+  the home page SoftwareApplication. Deliberately without an aggregateRating: there is no review data
+                behind one, and inventing it is the kind of markup that earns a manual action.
+
+Written as one file with three conditions rather than three includes: what differs between them is a
+handful of lines, and a Liquid tag inside a comment is still parsed, so the conditions are named in
+prose here rather than quoted.
+{% endcomment %}
+
+{%- assign page_url = meta_url -%}
+{%- if page.categories contains "docs" -%}
+  {%- assign schema_type = "TechArticle" -%}
+{%- elsif page.date -%}
+  {%- assign schema_type = "BlogPosting" -%}
+{%- endif -%}
+
+{%- if schema_type %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ schema_type }}",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ meta_desc | jsonify }},
+  "url": {{ page_url | jsonify }},
+  "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page_url | jsonify }} },
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "inLanguage": "en",
+  "author": { "@type": "Person", "name": {{ page.author | default: site.author | jsonify }} },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zasper",
+    "url": {{ site.url | jsonify }},
+    "logo": { "@type": "ImageObject", "url": "{{ site.url }}/static/images/logo.svg" }
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": {{ site.url | jsonify }}
+  }
+}
+</script>
+{%- endif %}
+
+{%- if page.group %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Docs", "item": "{{ site.url }}/docs" },
+    { "@type": "ListItem", "position": 2, "name": {{ page.group | jsonify }} },
+    { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }}, "item": {{ page_url | jsonify }} }
+  ]
+}
+</script>
+{%- endif %}
+
+{%- if page.url == "/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Zasper",
+  "description": {{ site.description | jsonify }},
+  "url": {{ site.url | jsonify }},
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "Integrated Development Environment",
+  "operatingSystem": "macOS, Linux, Windows",
+  "softwareRequirements": "A modern browser: Chrome, Firefox, Safari or Edge",
+  "downloadUrl": "{{ site.url }}/downloads/",
+  "installUrl": "{{ site.url }}/docs/installation",
+  "softwareHelp": "{{ site.url }}/docs",
+  "license": "https://github.com/zasper-io/zasper/blob/main/LICENSE",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": {{ site.author | jsonify }} },
+  "image": "{{ site.url }}/static/images/og-preview.png",
+  "sameAs": ["https://github.com/zasper-io/zasper"]
+}
+</script>
+{%- endif %}

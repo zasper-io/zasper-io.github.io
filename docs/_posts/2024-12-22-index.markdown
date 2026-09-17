@@ -1,11 +1,15 @@
 ---
 layout: docs
 title:  "Introduction"
+description: "What Zasper is: an open-source IDE for Jupyter notebooks, written in Go for fast starts, low memory and many concurrent kernels."
 date:   2024-12-22 07:39:59 +0530
 index: 0
 group: Get started
 categories: docs
-permalink: docs/:title
+# Not `docs/:title`, which built this post to /docs/index: the section's landing page is /docs, which
+# is what the nav and every internal link point at, and a canonical nobody links to is a page competing
+# with itself.
+permalink: /docs/
 author: Prasun Anand
 banner: /static/images/logo.svg
 ---

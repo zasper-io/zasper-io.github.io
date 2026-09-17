@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Zasper 1.1.0"
+description: "Zasper 1.1.0 makes signing in part of every server, sets up a Python kernel when there isn't one, and fills in more outputs and file types."
 date:   2026-09-14 09:00:00 +0530
 categories: blog
 permalink: blog/:title
@@ -17,7 +18,7 @@ sudo snap refresh zasper              # Snap
 conda update zasper -c conda-forge    # conda
 ```
 
-Prebuilt binaries are on the [Downloads page](/downloads).
+Prebuilt binaries are on the [Downloads page](/downloads/).
 
 ## Signing In, Everywhere
 

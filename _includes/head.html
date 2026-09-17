@@ -20,6 +20,14 @@ own front matter to override the shared one below.
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/static/css/main.css" />
+    <!-- The blog's feed, not /feed.xml: that one carries the docs posts too, and nobody subscribes to a
+         documentation page. Without this line the feed exists and nothing can find it. -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Zasper — blog"
+      href="{{ '/feed/blog.xml' | absolute_url }}"
+    />
     <!-- favicon.ico lives at the site root because that is the path browsers request on their own,
          with or without a link tag. The SVG is preferred where supported and scales to any density;
          the PNGs cover the rest. -->
@@ -37,5 +45,6 @@ own front matter to override the shared one below.
       gtag('js', new Date());
       gtag('config', 'G-G239XHJ88R');
     </script>
+    {% include schema.html %}
   </head>
   <body>

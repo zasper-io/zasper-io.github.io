@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Work in a Terminal"
+description: "Open a terminal inside Zasper, which shell it runs, and the two things to know: terminals are not restored, and are unavailable on Windows."
 date:   2026-09-17 09:20:00 +0530
 index: 13
 group: Tutorials

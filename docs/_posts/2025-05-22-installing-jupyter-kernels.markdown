@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Installing Jupyter Kernels"
+description: "Zasper runs any Jupyter kernel. How to install kernels for Python, R, Julia, Go and JavaScript, and where Zasper looks for the ones you have."
 date:   2024-12-22 07:39:59 +0530
 index: 2
 group: Environments

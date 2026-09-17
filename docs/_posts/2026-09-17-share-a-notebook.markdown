@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Share a Notebook"
+description: "Export a Zasper notebook as an HTML page, as Markdown or as a script: what each one keeps, and what the HTML export asks first."
 date:   2026-09-17 09:30:00 +0530
 index: 14
 group: Tutorials

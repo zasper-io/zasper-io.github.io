@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Notebook Support"
+description: "How Zasper reads and writes .ipynb files: saving leaves no unwanted diff, which outputs render, and the limitations worth knowing."
 date:   2026-09-10 09:00:00 +0530
 index: 8
 group: Guides

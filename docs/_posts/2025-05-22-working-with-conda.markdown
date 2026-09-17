@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Working with Conda"
+description: "Make a conda environment into a kernel Zasper can run, so binary packages like PyTorch, TensorFlow and NumPy install cleanly."
 date:   2024-12-22 07:39:59 +0530
 index: 3
 group: Environments

@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Key Bindings"
+description: "Every key binding in Zasper for macOS, Windows and Linux: the window, tabs, the notebook, and the keys a cell's editor keeps for itself."
 date:   2025-02-05 07:39:59 +0530
 index: 7
 group: Guides

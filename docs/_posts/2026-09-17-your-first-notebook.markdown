@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "Your First Notebook"
+description: "A first notebook in Zasper, step by step: make it, put it on a kernel, run a cell, read the output, write Markdown and save it."
 date:   2026-09-17 09:00:00 +0530
 index: 11
 group: Tutorials
