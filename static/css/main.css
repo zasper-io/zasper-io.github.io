@@ -60,6 +60,51 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
   --z-font-size-heading: 20px;
   --z-line-height-body: 1.5;
 
+  /* The IDE's own tokens, for the tutorial figures — the same teal-light values, read live out of the
+     prototype. Nothing on the marketing side uses these: a figure is a picture of the product, so it is
+     drawn in the product's colours rather than the page's. */
+  --z-bg-topbar: #084541;
+  --z-bg-banner: #0a5651;
+  --z-bg-editor: #ffffff;
+  --z-bg-overlay: #ffffff;
+  --z-bg-cell: #f8f8f8;
+  --z-bg-cell-output: #eaf5f4;
+  --z-bg-field: #f8f8f8;
+  --z-bg-row-selected: #cfe9e7;
+  --z-bg-modal-header: #0a5651;
+  --z-bg-tab-active: #0a5651;
+  --z-bg-tab-inactive: #0c6862;
+  --z-border-field: #d0d0d0;
+  --z-border-divider: #cccccc;
+  --z-border-kernel-status: #1f1f1f;
+  --z-fg-on-chrome: #ffffff;
+  --z-fg-editor: #000000;
+  --z-fg-field: #084541;
+  --z-fg-icon: #084541;
+  --z-mark-notebook: #c7530a;
+  --z-status-error: #aa1a1a;
+  --z-overlay-backdrop: rgba(0, 0, 0, 0.5);
+  --z-shadow-high: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --z-shadow-wide: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  --z-font-size-code: 13px;
+  --z-line-height-code: 1.55;
+  --z-ui-row-height: 22px;
+  --z-ui-control-height: 24px;
+  --z-layer-dialog: 3000;
+  --z-layer-menu: 1000;
+
+  /* The second batch, for the git, terminal and export figures. */
+  --z-bg-terminal: #063733;
+  --z-fg-on-terminal: #ffffff;
+  --z-border-breadcrumb: #cfe9e7;
+  --z-git-modified: #a06000;
+  --z-git-added: #1a7f37;
+  --z-git-deleted: #aa1a1a;
+  --z-bg-diff-added: color-mix(in srgb, #1a7f37 14%, transparent);
+  --z-bg-diff-deleted: color-mix(in srgb, #aa1a1a 14%, transparent);
+  --z-mark-python: #3572a5;
+  --z-mark-json: #957116;
+
   --mk-wrap: 1080px;
 }
 
@@ -1146,8 +1191,26 @@ a {
   font-style: normal;
 }
 
+/* The same fix as the install button's, and the pager is where it showed worst: an inline <svg> with a
+   viewBox and no width or height is a 300x150 replaced box, so as a flex item beside the title it took
+   the row and left "Files and Tabs" stacked one word to a line. */
+.mk-docs-pager a svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+}
+
+/* Each half takes the room it needs and no more, which is what keeps a two-word title on one line; the
+   cap is for the long ones, where wrapping at the measure beats a button the width of the page. */
+.mk-docs-pager a {
+  max-width: 45%;
+}
+
+/* `justify-content` does nothing while the button is only as wide as its label; it is here for the
+   phone layout below, where the two stack full width and the next one's label belongs on the right. */
 .mk-docs-next {
   margin-left: auto;
+  justify-content: flex-end;
   text-align: right;
 }
 
@@ -1170,6 +1233,17 @@ a {
     grid-template-columns: 1fr;
     gap: 16px;
     padding-top: 16px;
+  }
+
+  /* Stacked, because two halves of a 400px screen is 180px each and every title but the shortest wraps
+     in the middle. Full width each, previous above next, in the order they are read. */
+  .mk-docs-pager {
+    flex-direction: column;
+  }
+
+  .mk-docs-pager a {
+    max-width: none;
+    margin-left: 0;
   }
 
   /* A `<details>` disclosure rather than Bootstrap's `offcanvas` — no JS, no backdrop, no
@@ -1447,4 +1521,1004 @@ a {
     display: block;
     overflow-x: auto;
   }
+}
+
+/* --- Tutorial figures ------------------------------------------------------- */
+/*
+A figure in a tutorial is a piece of the IDE, at size, inside the document — drawn from the app's own
+markup rather than photographed, so it follows a change to a row's height instead of going stale, and
+so it is readable at the measure. `tutorial-basics.html` in the prototype is where the format was
+settled and where a change to it should be made first; the rules below are the port of its
+`css/tutorial.css`, plus the fragments' share of `css/shell.css` and `css/components.css`.
+
+Everything from those two sheets is scoped under `.tut-shot`. `.cell`, `.tab` and `.tree` are ordinary
+words, this is one global stylesheet, and a figure is the only place on the site that draws any of them.
+*/
+
+.tut-figure {
+  margin: 0 0 24px;
+  /* The strip figures keep their width and scroll rather than being clipped by the frame's own
+     `overflow: hidden` on a phone. */
+  overflow-x: auto;
+}
+
+.tut-shot {
+  position: relative;
+  border: 1px solid var(--z-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--z-bg-app);
+  box-shadow: var(--z-shadow-low, 0 1px 2px rgba(0, 0, 0, 0.08));
+  /* The document is 16px Inter at 1.65; a fragment of the IDE is 13px at its own rhythm, and inherits
+     neither. */
+  font-family: var(--z-ui-font-family);
+  font-size: var(--z-ui-font-size);
+  line-height: normal;
+  color: var(--z-fg-default);
+}
+
+/* The file explorer's own width, so the panel is cropped where the splitter would be. */
+.tut-shot.is-panel {
+  width: 248px;
+}
+
+/* A strip out of the window — the toolbar, the tab bar — is 30px tall, and a pointer has nowhere to go
+   that is not on top of what it points at. The band above it is that room. */
+.tut-shot.is-strip {
+  /* The toolbar's own content measures 542px — the buttons, the cell-type select and the kernel pill
+     that is pinned to the right of them — so anything narrower clips the pill off the picture rather
+     than scrolling to it. */
+  min-width: 560px;
+  padding-top: 26px;
+}
+
+/* The export menu hangs off its button, so the frame has to leave room under the strip for it — the
+   same call `story-export.html` makes, and for the same reason: the menu is positioned, and a frame that
+   closed at the toolbar would clip it. */
+.tut-shot.has-menu {
+  /* Room under the strip for the menu, which is positioned and would otherwise be clipped by the
+     frame, and the same 560px the strips keep so the toolbar is not squeezed on a phone. */
+  min-width: 560px;
+  padding-bottom: 108px;
+}
+
+.tut-shot .export-anchor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.tut-shot .export-menu-mock {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 200px;
+}
+
+/* A figure whose content is code — a cell, a diff — keeps a readable width and scrolls with the figure
+   on a phone, rather than letting each pane scroll its own lines behind a reader's back. */
+.tut-shot.is-wide {
+  min-width: 520px;
+}
+
+/* A dialog has to be shown on something: it is drawn over the window, and a box centred on white is not
+   what a reader will meet. */
+.tut-shot.is-stage {
+  height: 240px;
+  background: var(--z-bg-editor);
+}
+
+/* The notebook pane's bottom padding is runway for a scrolling pane: nothing scrolls in a figure, and
+   40px of it under the last cell reads as the picture having been cropped badly. */
+.tut-shot .notebook {
+  padding-bottom: 12px;
+}
+
+/*
+What is being pointed at, and the reason a pointer is two elements rather than one: a dot centred on a
+22px button covers the button. The ring goes round the control and the number sits against its edge.
+
+`--tut-x` / `--tut-y` are lengths off the frame's top-left corner rather than percentages, because a
+fragment's rows are fixed heights: 45px down is the project strip at every width the page is read at.
+*/
+.tut-ring {
+  position: absolute;
+  left: var(--tut-x);
+  top: var(--tut-y);
+  width: var(--tut-w, 22px);
+  height: var(--tut-h, 22px);
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--z-accent);
+  border-radius: 5px;
+  /* A hairline of the page around the ring: the accent on the dark chrome of a tab strip or a project
+     banner is two teals against each other. */
+  box-shadow: 0 0 0 1px var(--z-bg-app);
+  pointer-events: none;
+}
+
+.tut-mark {
+  position: absolute;
+  left: var(--tut-x);
+  top: var(--tut-y);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--z-bg-app);
+  background: var(--z-accent);
+  color: var(--z-fg-on-accent);
+  font-family: var(--z-ui-font-family);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Anchored to the right edge instead, for a control that is: the kernel pill is `margin-left: auto`, so
+   how far it sits from the left is a function of how wide the figure is. */
+.tut-mark.is-right,
+.tut-ring.is-right {
+  left: auto;
+  right: var(--tut-x);
+  transform: translate(50%, -50%);
+}
+
+/* The same dot, in the list under the figure, where there is nothing to position it against. */
+.tut-mark.is-inline {
+  position: static;
+  transform: none;
+  flex: 0 0 auto;
+  box-shadow: none;
+}
+
+/* Qualified, and so is the rule below it: `.mk-docs-body ul` and `li + li` carry the document's own list
+   metrics, and a bare class ties with them. */
+ul.tut-legend {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--z-fg-muted);
+}
+
+ul.tut-legend li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 6px 0 0;
+}
+
+ul.tut-legend .tut-mark {
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+/* A caption in the document's voice, under the picture it belongs to. */
+.tut-caption {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--z-fg-muted);
+}
+
+/* The icon size the fragments assume, from the prototype's `.z-icon`. Both the fill and the stroke are
+   restated here because the symbols are referenced by `<use>`. */
+.tut-shot .z-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  vertical-align: -3px;
+  fill: none;
+  stroke: currentColor;
+}
+
+/* The 11px uppercase treatment, which is `.z-label` in `css/type.css` rather than a rule of any one
+   component: a panel's title carries it. */
+.tut-shot .z-label {
+  font-size: var(--z-ui-font-size-sm);
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/*
+The document styles `pre`, `code` and `table` for prose — a bordered plate at 13.5px, an uppercase
+table head — and a figure is not prose: the same elements inside it are a cell's source and a printed
+DataFrame. Cleared here so the IDE's own rules below start from the browser's defaults rather than
+from the page's.
+*/
+.tut-shot pre,
+.tut-shot code {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.tut-shot table {
+  width: auto;
+  margin: 0;
+  font-size: inherit;
+}
+
+.tut-shot th,
+.tut-shot td {
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: inherit;
+  vertical-align: baseline;
+}
+
+/* --- the fragments' share of the IDE's own sheets --------------------------- */
+
+.tut-shot .z-icon-sm {
+  width: 12px;
+  height: 12px;
+  vertical-align: -2px;
+}
+
+.tut-shot .z-button {
+  font: inherit;
+  font-weight: 400;
+  border: 1px solid var(--z-border);
+  border-radius: 4px;
+  padding: 4px 14px;
+  color: var(--z-fg-on-accent);
+  background: var(--z-accent);
+  box-shadow: var(--z-shadow-wide);
+}
+
+.tut-shot .z-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.75;
+}
+
+.tut-shot .z-icon-button.on-chrome {
+  color: var(--z-fg-on-chrome);
+}
+
+.tut-shot .z-field {
+  height: var(--z-ui-control-height);
+  font: inherit;
+  padding: 0 6px;
+  color: var(--z-fg-field);
+  background: var(--z-bg-field);
+  border: 1px solid var(--z-border-field);
+  border-radius: 3px;
+}
+
+.tut-shot .z-field-inline {
+  height: 18px;
+  padding: 0 4px;
+  font-size: var(--z-ui-font-size);
+  border-color: var(--z-fg-accent);
+  outline: none;
+}
+
+.tut-shot .panel-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: var(--z-ui-row-height);
+  padding: 0 12px 0 16px;
+  font-size: var(--z-ui-font-size);
+  color: var(--z-fg-default);
+}
+
+.tut-shot .panel-row.is-selected {
+  background: var(--z-bg-row-selected);
+}
+
+.tut-shot .panel-row.is-active {
+  background: var(--z-accent);
+  color: var(--z-fg-on-accent);
+}
+
+.tut-shot .panel-row-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tut-shot .file-mark {
+  flex: 0 0 18px;
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+  font-family: var(--z-mono-font-family);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.tut-shot .file-mark-notebook {
+  color: var(--z-mark-notebook);
+}
+
+.tut-shot .panel-row.is-active .file-mark, .tut-shot .tab .file-mark {
+  color: currentColor;
+  opacity: 0.85;
+}
+
+.tut-shot .tabHeader {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 1px;
+  height: 30px;
+  padding: 0;
+  background: var(--z-bg-topbar);
+}
+
+.tut-shot .tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px 0 10px;
+  max-width: 200px;
+  background: var(--z-bg-tab-inactive);
+  color: var(--z-fg-on-chrome);
+  font-size: var(--z-ui-font-size);
+}
+
+.tut-shot .tab .label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tut-shot .tab.is-active {
+  background: var(--z-bg-tab-active);
+  font-weight: 500;
+}
+
+.tut-shot .tab .dirty {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: currentColor;
+}
+
+.tut-shot .tab .z-icon-button {
+  width: 18px;
+  height: 18px;
+}
+
+.tut-shot .tab .z-icon-button .z-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.tut-shot .kernelStatus {
+  flex: 0 0 auto;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--z-border-kernel-status);
+}
+
+.tut-shot .ks-idle, .tut-shot .ks-connected {
+  background-color: var(--z-status-idle);
+}
+
+.tut-shot .z-overlay {
+  background: var(--z-bg-overlay);
+  color: var(--z-fg-default);
+  border: 1px solid var(--z-border-divider);
+  border-radius: 6px;
+  box-shadow: var(--z-shadow-high);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.tut-shot .z-overlay .panel-row.is-selected {
+  background: var(--z-bg-row-selected);
+}
+
+.tut-shot .z-dialog {
+  width: 380px;
+  z-index: var(--z-layer-dialog);
+}
+
+.tut-shot .z-dialog header {
+  padding: 10px 16px;
+  background: var(--z-bg-modal-header);
+  color: var(--z-fg-on-chrome);
+  font-weight: 500;
+}
+
+.tut-shot .z-dialog p {
+  margin: 0;
+  padding: 16px;
+  font-size: var(--z-font-size-body);
+  line-height: var(--z-line-height-body);
+}
+
+.tut-shot .z-dialog footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 16px 16px;
+}
+
+.tut-shot .z-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--z-overlay-backdrop);
+  z-index: var(--z-layer-dialog);
+}
+
+.tut-shot .inner-text {
+  margin: 8px 0 0 44px;
+  padding: 6px 10px;
+  border-radius: 2px;
+  overflow: auto;
+  background: var(--z-bg-cell-output);
+  line-height: 18px;
+}
+
+.tut-shot .inner-text pre {
+  margin: 0;
+  font-family: var(--z-mono-font-family);
+  font-size: var(--z-font-size-code);
+  white-space: pre-wrap;
+}
+
+.tut-shot .inner-text > * + * {
+  margin-top: 6px;
+}
+
+.tut-shot .output-error {
+  border-left: 2px solid var(--z-status-error);
+  padding-left: 8px;
+}
+
+.tut-shot .output-error .ename {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--z-status-error);
+  font-family: var(--z-mono-font-family);
+  font-size: var(--z-font-size-code);
+  font-weight: 700;
+}
+
+.tut-shot .output-error .frame {
+  color: var(--z-fg-muted);
+}
+
+.tut-shot .z-form-field {
+  margin-bottom: 12px;
+}
+
+.tut-shot .z-form-field:last-child {
+  margin-bottom: 0;
+}
+
+.tut-shot .z-form-label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--z-fg-muted);
+  font-size: var(--z-ui-font-size);
+}
+
+.tut-shot .z-form-field .z-field, .tut-shot .z-form-field .z-select {
+  width: 100%;
+}
+
+.tut-shot .z-select {
+  display: grid;
+  grid-template-areas: 'select';
+  align-items: center;
+  height: var(--z-ui-control-height);
+  border: 1px solid var(--z-border-field);
+  border-radius: 3px;
+  font-size: var(--z-ui-font-size);
+  cursor: pointer;
+}
+
+.tut-shot .z-select select, .tut-shot .z-select::after {
+  grid-area: select;
+}
+
+.tut-shot .z-select select {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0 10px;
+  border: none;
+  border-radius: inherit;
+  background: var(--z-bg-field);
+  color: var(--z-fg-field);
+  font: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  appearance: none;
+  outline: none;
+}
+
+.tut-shot .z-select::after {
+  content: '';
+  justify-self: end;
+  width: 0.8em;
+  height: 0.5em;
+  margin-right: 8px;
+  background: var(--z-fg-icon);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+.tut-shot .sidebar {
+  flex: 0 0 248px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--z-bg-panel);
+}
+
+.tut-shot .panel-title {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  padding: 0 8px 0 12px;
+  border-bottom: 1px solid var(--z-border);
+  color: var(--z-fg-muted);
+}
+
+.tut-shot .projectBanner {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  padding: 0 4px 0 12px;
+  background: var(--z-bg-banner);
+  color: var(--z-fg-on-chrome);
+}
+
+.tut-shot .projectBanner .pathTrail {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tut-shot .projectBanner .crumb {
+  opacity: 0.7;
+}
+
+.tut-shot .projectBanner .buttons {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 0;
+}
+
+.tut-shot .treeToolbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px 4px 12px;
+  border-bottom: 1px solid var(--z-border);
+  color: var(--z-fg-muted);
+}
+
+.tut-shot .treeToolbar .z-field {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 20px;
+}
+
+.tut-shot .tree {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4px 4px 8px;
+  list-style: none;
+  margin: 0;
+}
+
+.tut-shot .text-editor-tool {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 30px;
+  padding: 0 8px;
+  background: var(--z-bg-panel);
+  border-bottom: 1px solid var(--z-border);
+  color: var(--z-fg-icon);
+}
+
+.tut-shot .text-editor-tool .sep {
+  width: 1px;
+  height: 16px;
+  margin: 0 6px;
+  background: var(--z-border);
+}
+
+.tut-shot .text-editor-tool .editor-select {
+  width: 110px;
+}
+
+.tut-shot .kernel-pill {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  height: 22px;
+  border: 1px solid var(--z-border);
+  border-radius: 11px;
+  background: var(--z-bg-panel-alt);
+  color: var(--z-fg-muted);
+  font-size: var(--z-ui-font-size);
+}
+
+.tut-shot .notebook {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 16px 40px;
+  background: var(--z-bg-editor);
+}
+
+.tut-shot .cell {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.tut-shot .cell .serial {
+  flex: 0 0 44px;
+  padding-top: 4px;
+  text-align: right;
+  font-family: var(--z-mono-font-family);
+  font-size: var(--z-ui-font-size-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--z-fg-subtle);
+}
+
+.tut-shot .cell .body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.tut-shot .cell .source {
+  margin: 0;
+}
+
+.tut-shot .cell .body > .inner-text {
+  margin-left: 0;
+}
+
+.tut-shot .cell .source {
+  padding: 6px 10px;
+  border: 1px solid var(--z-border);
+  border-left: 2px solid var(--z-border);
+  border-radius: 4px;
+  background: var(--z-bg-cell);
+  font-family: var(--z-mono-font-family);
+  font-size: var(--z-font-size-code);
+  line-height: var(--z-line-height-code);
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--z-fg-editor);
+}
+
+.tut-shot .cell.is-active .source {
+  border-left-color: var(--z-accent);
+}
+
+.tut-shot .cell .markdown {
+  padding: 2px 0;
+  font-size: var(--z-font-size-body);
+  line-height: var(--z-line-height-body);
+}
+
+.tut-shot .cell .markdown > :first-child {
+  margin-top: 0;
+}
+
+.tut-shot .cell .markdown > :last-child {
+  margin-bottom: 0;
+}
+
+.tut-shot .cell .markdown h2 {
+  font-size: var(--z-font-size-heading);
+  letter-spacing: -0.01em;
+}
+
+.tut-shot .cell .markdown p {
+  margin: 0 0 8px;
+  color: var(--z-fg-muted);
+}
+
+.tut-shot .tok-kw {
+  color: #a626a4;
+}
+
+.tut-shot .tok-str {
+  color: #50a14f;
+}
+
+.tut-shot .tok-num {
+  color: #986801;
+}
+
+.tut-shot .tok-com {
+  color: var(--z-fg-subtle);
+  font-style: italic;
+}
+
+.tut-shot .cell.is-queued .serial {
+  opacity: 0.5;
+}
+
+.tut-shot .z-field-inline {
+  height: 18px;
+  padding: 0 4px;
+  font-size: var(--z-ui-font-size);
+  border-color: var(--z-fg-accent);
+  outline: none;
+}
+
+.tut-shot table.dataframe {
+  border-collapse: collapse;
+  min-width: 40%;
+  border: 1px solid var(--z-border);
+  border-radius: 4px;
+  overflow: hidden;
+  
+  font-size: var(--z-ui-font-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.tut-shot table.dataframe thead {
+  border-bottom: 1px solid var(--z-border-strong);
+}
+
+.tut-shot table.dataframe th {
+  padding: 4px 8px;
+  border-right: 1px solid var(--z-border);
+  color: var(--z-fg-default);
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tut-shot table.dataframe td {
+  padding: 4px 8px;
+  border-right: 1px solid var(--z-border);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tut-shot table.dataframe tbody tr {
+  border-bottom: 1px solid var(--z-border);
+}
+
+
+/* --- the git, terminal and export figures' share of the same sheets ---------- */
+
+.tut-shot .panel-row-meta {
+  flex: 0 4 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--z-ui-font-size-sm);
+  color: var(--z-fg-subtle);
+}
+
+.tut-shot .panel-row-flag {
+  flex: 0 0 12px;
+  text-align: center;
+  font-size: var(--z-ui-font-size-sm);
+  font-weight: 600;
+}
+
+.tut-shot .flag-modified {
+  color: var(--z-git-modified);
+}
+
+.tut-shot .flag-added {
+  color: var(--z-git-added);
+}
+
+.tut-shot .flag-deleted {
+  color: var(--z-git-deleted);
+}
+
+.tut-shot .file-mark-python {
+  color: var(--z-mark-python);
+}
+
+.tut-shot .file-mark-json {
+  color: var(--z-mark-json);
+}
+
+.tut-shot .panel-section-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: var(--z-ui-row-height);
+  padding: 0 12px 0 8px;
+  border: none;
+  background: none;
+  color: var(--z-fg-muted);
+  font: inherit;
+  text-align: left;
+}
+
+.tut-shot .panel-section-title {
+  font-size: var(--z-ui-font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tut-shot .panel-section-count {
+  font-variant-numeric: tabular-nums;
+  color: var(--z-fg-subtle);
+}
+
+.tut-shot .panel-section-toggle .panel-section-count {
+  margin-left: auto;
+}
+
+.tut-shot .panel-section-body {
+  padding: 4px 16px 8px;
+}
+
+.tut-shot .z-overlay-list {
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tut-shot .z-overlay-group {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  padding: 0 8px;
+  background: var(--z-bg-overlay);
+  color: var(--z-fg-subtle);
+}
+
+.tut-shot .z-menu {
+  min-width: 168px;
+  z-index: var(--z-layer-menu);
+}
+
+.tut-shot .z-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--z-ui-row-height);
+  
+  padding: 0 12px 0 8px;
+  margin: 0;
+  color: var(--z-fg-muted);
+  font-size: var(--z-ui-font-size);
+}
+
+.tut-shot .launchSection > .z-note {
+  padding: 0;
+  margin-top: 12px;
+  font-size: inherit;
+  height: auto;
+}
+
+.tut-shot .terminalContainer {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 8px;
+  overflow: hidden;
+  background: var(--z-bg-terminal);
+  --z-scrollbar-track: var(--z-bg-terminal);
+  --z-scrollbar-thumb: var(--a-400);
+  scrollbar-color: var(--z-scrollbar-thumb) var(--z-scrollbar-track);
+}
+
+.tut-shot .terminalArea {
+  height: 100%;
+  overflow: auto;
+  color: var(--z-fg-on-terminal);
+  font-family: var(--z-mono-font-family);
+  font-size: var(--z-font-size-code);
+  line-height: var(--z-line-height-code);
+  white-space: pre-wrap;
+}
+
+.tut-shot .diff-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--z-border-breadcrumb);
+  background: var(--z-bg-editor);
+  color: var(--z-fg-muted);
+  font-size: var(--z-ui-font-size);
+}
+
+.tut-shot .diff-refresh {
+  margin-left: auto;
+}
+
+.tut-shot .diff-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: auto;
+  background: var(--z-bg-editor);
+  color: var(--z-fg-editor);
+  font-family: var(--z-mono-font-family);
+  font-size: var(--z-font-size-code);
+  line-height: var(--z-line-height-code);
+}
+
+.tut-shot .diff-pane + .diff-pane {
+  border-left: 1px solid var(--z-border);
+}
+
+.tut-shot .diff-line {
+  display: flex;
+  gap: 8px;
+  padding: 0 8px 0 0;
+  white-space: pre;
+}
+
+.tut-shot .diff-line .n {
+  flex: 0 0 34px;
+  padding-right: 6px;
+  text-align: right;
+  color: var(--z-fg-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.tut-shot .diff-line.is-added {
+  background: var(--z-bg-diff-added);
+}
+
+.tut-shot .diff-line.is-removed {
+  background: var(--z-bg-diff-deleted);
+}
+
+.tut-shot .diff-line.is-blank {
+  background: var(--z-bg-panel-alt);
 }

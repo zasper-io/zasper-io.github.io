@@ -1,0 +1,31 @@
+<figure class="tut-figure">
+  <div class="tut-shot is-wide">
+    <span class="tut-ring" style="--tut-x: 50px; --tut-y: 24px; --tut-w: 30px; --tut-h: 20px"></span>
+    <span class="tut-mark" style="--tut-x: 26px; --tut-y: 24px">1</span>
+    <span class="tut-ring" style="--tut-x: 50px; --tut-y: 163px; --tut-w: 30px; --tut-h: 20px"></span>
+    <span class="tut-mark" style="--tut-x: 26px; --tut-y: 163px">2</span>
+
+    <div class="notebook">
+      <div class="cell">
+        <span class="serial">[1]</span>
+        <div class="body">
+          <pre class="source"><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
+readings = pd.read_csv(<span class="tok-str">"data/measurements.csv"</span>)
+<span class="tok-kw">print</span>(<span class="tok-str">f"{len(readings)} rows"</span>)</pre>
+          <div class="inner-text"><pre>20160 rows</pre></div>
+        </div>
+      </div>
+
+      <div class="cell is-queued">
+        <span class="serial">[*]</span>
+        <div class="body">
+          <pre class="source">drift = readings.resample(<span class="tok-str">"1min"</span>, on=<span class="tok-str">"t"</span>).mean().diff()</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="tut-legend">
+    <li><span class="tut-mark is-inline">1</span><span>The first thing this kernel ran.</span></li>
+    <li><span class="tut-mark is-inline">2</span><span>Sent, and waiting its turn — the kernel runs one cell at a time.</span></li>
+  </ul>
+</figure>

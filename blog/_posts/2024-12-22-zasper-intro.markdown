@@ -16,7 +16,7 @@ It's perfectly suited for running REPL-style data applications, with Jupyter not
 
 <img class="blog-img" src="/static/images/zasper-intro.png">
 
-Currently Zasper is supported on Linux and Mac.
+Zasper runs on macOS, Linux and Windows. On Windows, WSL gives the best experience.
 
 ## Why I Built Zasper
 

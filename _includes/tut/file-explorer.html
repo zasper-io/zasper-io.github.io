@@ -1,0 +1,54 @@
+<figure class="tut-figure">
+  <div class="tut-shot is-panel">
+    <span class="tut-ring" style="--tut-x: 233px; --tut-y: 45px"></span>
+    <span class="tut-mark" style="--tut-x: 233px; --tut-y: 65px">1</span>
+    <span class="tut-ring" style="--tut-x: 124px; --tut-y: 150px; --tut-w: 240px; --tut-h: 24px"></span>
+    <span class="tut-mark" style="--tut-x: 30px; --tut-y: 166px">2</span>
+
+    <div class="sidebar">
+      <div class="panel-title">
+        <span class="z-label">File explorer</span>
+        <button class="z-icon-button" title="Refresh"><svg class="z-icon"><use href="#i-refresh-cw"></use></svg></button>
+      </div>
+
+      <div class="projectBanner">
+        <span class="pathTrail"><span class="crumb">work</span> / <span class="crumb">analysis</span></span>
+        <span class="buttons">
+          <button class="z-icon-button on-chrome" title="New file"><svg class="z-icon"><use href="#i-file-plus"></use></svg></button>
+          <button class="z-icon-button on-chrome" title="New folder"><svg class="z-icon"><use href="#i-folder-plus"></use></svg></button>
+          <button class="z-icon-button on-chrome" title="New notebook"><svg class="z-icon"><use href="#i-notebook-pen"></use></svg></button>
+        </span>
+      </div>
+
+      <div class="treeToolbar">
+        <input class="z-field" type="text" placeholder="Filter files" readonly />
+      </div>
+
+      <ul class="tree">
+        <li>
+          <div class="panel-row">
+            <svg class="z-icon z-icon-sm"><use href="#i-chevron-right"></use></svg>
+            <svg class="z-icon"><use href="#i-folder"></use></svg>
+            <span class="panel-row-name">data</span>
+          </div>
+        </li>
+        <li>
+          <div class="panel-row">
+            <svg class="z-icon"><use href="#i-file"></use></svg>
+            <span class="panel-row-name">README.md</span>
+          </div>
+        </li>
+        <li>
+          <div class="panel-row is-selected">
+            <span class="file-mark file-mark-notebook">ipy</span>
+            <input class="z-field z-field-inline panel-row-name" type="text" value="Untitled.ipynb" readonly />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <ul class="tut-legend">
+    <li><span class="tut-mark is-inline">1</span><span>New notebook, the third of the three buttons on the project strip.</span></li>
+    <li><span class="tut-mark is-inline">2</span><span>The new file, waiting for a name. <code>Escape</code> keeps the one it has.</span></li>
+  </ul>
+</figure>

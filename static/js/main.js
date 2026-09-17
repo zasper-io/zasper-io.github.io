@@ -95,6 +95,9 @@ container is never the element that scrolls, which would carry the button off th
 Only trailing whitespace is trimmed: leading indentation is part of what someone is copying.
 */
 for (const pre of document.querySelectorAll('.mk-docs-body pre')) {
+  // A tutorial figure is a picture of the IDE: the <pre> in it is a cell's source, not a sample to
+  // copy, and a copy chip floating over the code is the page's furniture inside the product's.
+  if (pre.closest('.tut-shot')) continue;
   const host = document.createElement('div');
   host.className = 'mk-code';
   pre.replaceWith(host);
@@ -119,6 +122,9 @@ showing it instead of scrolling in place. Wrapping at runtime rather than asking
 remember a div is the same call the TOC below makes.
 */
 for (const table of document.querySelectorAll('.mk-docs-body table')) {
+  // Same exclusion as the copy buttons: a DataFrame drawn inside a figure already scrolls with the
+  // figure, and a scroll container around it would scroll the picture's insides on their own.
+  if (table.closest('.tut-shot')) continue;
   const wrap = document.createElement('div');
   wrap.className = 'mk-docs-table-scroll';
   table.replaceWith(wrap);

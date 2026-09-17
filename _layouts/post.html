@@ -13,10 +13,11 @@
     {{ content }}
   </div>
 
-  <!-- Related posts share this post's own first category — a tutorial gets other tutorials, a blog
-       post gets other blog posts — and this post is excluded from its own "related" list. Before this,
-       every post in the site's one `categories: blog` collection related to itself, since the old
-       `site.posts limit:2` never checked which post it was building the page for. -->
+  <!-- Related posts share this post's own first category, and this post is excluded from its own
+       "related" list. Before this, every post in the site's one `categories: blog` collection related
+       to itself, since the old `site.posts limit:2` never checked which post it was building the page
+       for. The category is `blog` for every post that uses this layout today — docs pages are their own
+       layout, and the `tutorials` category went when tutorials became a group in the docs sidebar. -->
   {% assign this_category = page.categories | first %}
   {% assign related = site.posts | where: "categories", this_category | where_exp: "p", "p.url != page.url" | limit: 2 %}
   {% if related.size > 0 %}
