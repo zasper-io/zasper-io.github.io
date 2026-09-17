@@ -315,14 +315,25 @@ a {
   height: 36px;
 }
 
-/* One card per license, the same frame as the kernel tiles. */
-.mk-licenses {
+/*
+The card: a small label, a heading, a paragraph and a link, in the same frame as the kernel tiles. It
+was `.mk-license` until the licences stopped being the only band using it — the press mentions, the
+three steps and the three ways into the project all draw the same box — so it is named for the shape.
+`.mk-cards-2` and `.mk-cards-3` are the two arrangements it appears in.
+*/
+.mk-cards-2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
 }
 
-.mk-license {
+.mk-cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.mk-card {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -332,7 +343,7 @@ a {
   background: var(--z-bg-panel);
 }
 
-.mk-license-kind {
+.mk-card-kind {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -340,21 +351,21 @@ a {
   color: var(--z-fg-subtle);
 }
 
-.mk-license h3 {
+.mk-card h3 {
   margin: 0;
   font-size: 19px;
   font-weight: 600;
 }
 
-.mk-license p {
+.mk-card p {
   margin: 0;
   font-size: 15px;
   line-height: 1.6;
   color: var(--z-fg-muted);
 }
 
-/* `margin-top: auto` keeps the two links level when one card's paragraph is longer. */
-.mk-license a {
+/* `margin-top: auto` keeps the links level across a row when one card's paragraph is longer. */
+.mk-card a {
   align-self: flex-start;
   margin-top: auto;
   padding-top: 8px;
@@ -364,12 +375,19 @@ a {
   text-decoration: none;
 }
 
-.mk-license a:hover {
+.mk-card a:hover {
   text-decoration: underline;
 }
 
+@media (max-width: 900px) {
+  /* Three across is 250px a card at this width, which is two words to a line in a quote. */
+  .mk-cards-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 760px) {
-  .mk-licenses {
+  .mk-cards-2 {
     grid-template-columns: 1fr;
   }
 }
@@ -1521,6 +1539,251 @@ a {
     display: block;
     overflow-x: auto;
   }
+}
+
+/* --- The landing page's later bands ----------------------------------------- */
+/*
+Ported from `landing.html` in zasper-io/zasper-prototype, where these were drawn and judged first.
+Four shapes: a labelled row, a tick-or-cross list, a grid of short features, and the FAQ's
+disclosures. Icons are inline `<svg>` here rather than the prototype's `data-icon` shorthand, so each
+one is sized by the rule for the thing it sits in — the same way the nav and the buttons do it.
+*/
+
+/*
+A list of labelled rows — the talks under the press cards, the project's facts near the foot of the
+page. A card would be the wrong shape for either: a talk is a date, a place and a title, and there is
+no quote to hold a card open.
+*/
+.mk-rows {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  border-top: 1px solid var(--z-border);
+}
+
+.mk-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--z-border);
+  font-size: 15px;
+}
+
+/* The part a reader recognises — the event, the fact being stated — so it leads and holds a column. */
+.mk-row-label {
+  flex: 0 0 200px;
+  font-weight: 500;
+}
+
+.mk-row-meta {
+  margin-left: auto;
+  color: var(--z-fg-subtle);
+  font-size: 13px;
+  text-align: right;
+  /* A date is read as one thing; "since 1.0.0" over two lines is read as two. */
+  white-space: nowrap;
+}
+
+/* The rows state the facts and the cards are the three ways in — one band, but not one block. */
+.mk-rows + .mk-cards-3 {
+  margin-top: 32px;
+}
+
+/*
+What carries over and what does not, as one list rather than two: a page that only prints the ticks is
+a page nobody believes, and the crosses are what make the ticks worth reading.
+*/
+.mk-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Down the first column, then down the second, so each column is one kind: what carries over on
+     the left, what does not on the right. Filling by row interleaves them and the ticks and crosses
+     read as a checklist somebody shuffled. */
+  grid-auto-flow: column;
+  grid-template-rows: repeat(4, auto);
+  gap: 10px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mk-check {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--z-fg-muted);
+}
+
+.mk-check strong {
+  color: var(--z-fg-default);
+  font-weight: 500;
+}
+
+/* The tick is the git-added green, which is the one place in the system a colour already means "this
+   is here". The cross takes no colour at all: a red list of seven things reads as a bug report. */
+.mk-check svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: #1a7f37;
+}
+
+.mk-check.is-no svg {
+  color: var(--z-fg-subtle);
+}
+
+/*
+The smaller half of the feature story: nine things that each need a line, not a screenshot. Three
+columns of heading-and-sentence, which is what a `.mk-card` carries with the frame taken off — a
+bordered box around one sentence makes nine boxes and a busy band.
+*/
+.mk-minis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 32px;
+}
+
+.mk-mini h4 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.mk-mini p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--z-fg-muted);
+}
+
+/*
+The FAQ as `<details>`: the questions are the point of the band and the answers are for whoever has
+that question, so they are closed until asked for. No JavaScript — the element does this itself, and
+it is the one interactive thing on the page that works with the script blocked.
+*/
+.mk-faq {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--z-border);
+}
+
+.mk-faq-item {
+  border-bottom: 1px solid var(--z-border);
+}
+
+.mk-faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  /* Both spellings: the marker is a pseudo-element in WebKit and a list marker everywhere else. */
+  list-style: none;
+}
+
+.mk-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.mk-faq-item summary svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--z-fg-subtle);
+}
+
+.mk-faq-item[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.mk-faq-item p {
+  margin: 0 0 18px;
+  max-width: 720px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--z-fg-muted);
+}
+
+/* An answer's link takes the paragraph's own colour, the same as the note under a band: a second
+   colour inside a grey sentence reads as a button. */
+.mk-faq-item p a {
+  color: inherit;
+}
+
+/* The closing band: the one place where the heading, the line under it and the buttons are centred,
+   because there is nothing beside them to line up with. */
+.mk-closing {
+  text-align: center;
+}
+
+.mk-closing .mk-section-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* The responsive half of this section, and it lives here rather than with the other media queries
+   further up the file: these shapes are declared above, and a query that comes before a base rule of
+   the same specificity loses to it — which is exactly what left the tick list in two columns on a
+   phone the first time this was ported. */
+@media (max-width: 900px) {
+  .mk-minis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .mk-checks,
+  .mk-minis {
+    grid-template-columns: 1fr;
+  }
+
+  /* One column, in reading order, rather than two columns' worth of rows stacked out of sequence. */
+  .mk-checks {
+    grid-auto-flow: row;
+    grid-template-rows: none;
+  }
+
+  /* The label stops being a column and becomes the first line of the row. */
+  .mk-row {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+
+  .mk-row-label {
+    flex: 0 0 100%;
+  }
+
+  .mk-row-meta {
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+/* On the gradient, the filled accent button is teal on teal: the band is the accent's own dark end,
+   so the primary action inverts — white plate, accent ink, the strongest thing on the page. */
+.mk-band-dark .mk-button {
+  background: #ffffff;
+  color: var(--z-accent);
+}
+
+.mk-band-dark .mk-button:hover {
+  background: #ffffffe6;
+}
+
+.mk-band-dark .mk-button-quiet {
+  background: transparent;
+  border-color: #ffffff59;
+  color: #ffffff;
+}
+
+.mk-band-dark .mk-button-quiet:hover {
+  background: #ffffff1a;
 }
 
 /* --- Tutorial figures ------------------------------------------------------- */

@@ -17,7 +17,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
           Download Zasper today!
         </a>
-        <a class="mk-button mk-button-quiet" href="/try-zasper/">Try it now</a>
+        <a class="mk-button mk-button-quiet" href="/try-zasper/">Try it in the browser</a>
       </div>
       <div class="mk-install">
         <span id="install-cmd">brew install zasper-io/tap/zasper</span>
@@ -106,6 +106,145 @@
   </div>
 </div>
 
+    <div class="mk-band">
+      <div class="mk-wrap">
+        <h2 class="mk-section-title">Your notebooks, unchanged</h2>
+        <p class="mk-section-sub">
+          Zasper speaks Jupyter's wire protocol and reads and writes <code>.ipynb</code> directly,
+          so a notebook moves between Zasper and JupyterLab without being converted. Your files
+          stay where they are — no import step, no workspace to create — and the same kernels run
+          them, registered once.
+        </p>
+        <ul class="mk-checks">
+          <li class="mk-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+            <span
+              ><strong>Saved as Jupyter would save it</strong>, byte for byte, so opening a file
+              here does not turn into a diff or a merge conflict.</span
+            >
+          </li>
+          <li class="mk-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+            <span
+              ><strong>A notebook keeps its own nbformat version.</strong> A 4.2 notebook is saved
+              as 4.2 rather than silently upgraded.</span
+            >
+          </li>
+          <li class="mk-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+            <span
+              ><strong>Every kind of output renders</strong> — HTML, PNG, JPEG, SVG, LaTeX through
+              KaTeX, Plotly figures, ipywidgets and JSON.</span
+            >
+          </li>
+          <li class="mk-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+            <span
+              ><strong>Saves are atomic.</strong> Zasper writes beside the file and renames over
+              it, so a crash cannot leave half a notebook.</span
+            >
+          </li>
+          <li class="mk-check is-no">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+            <span
+              ><strong>JupyterLab extensions do not carry over.</strong> Zasper has its own
+              extension model; a lab extension will not load.</span
+            >
+          </li>
+          <li class="mk-check is-no">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+            <span
+              ><strong>Widget state is not written into the file yet.</strong> It lives in the
+              kernel, so a widget redraws while the kernel is up and shows a placeholder once it
+              is gone.</span
+            >
+          </li>
+          <li class="mk-check is-no">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+            <span
+              ><strong>Notebooks are not signed or trusted.</strong> Jupyter's trust system is not
+              implemented, so treat a notebook you did not write like any other download.</span
+            >
+          </li>
+        </ul>
+        <p class="mk-charts-note">
+          The whole of it, including what each output type needs, is on
+          <a href="/docs/notebook-support">Notebook Support</a>.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="mk-band mk-band-alt">
+      <div class="mk-wrap">
+        <h2 class="mk-section-title">Written about, and talked about</h2>
+        <p class="mk-section-sub">
+          Zasper reached the front page of Hacker News the week it was released, and has been
+          written up and presented since.
+        </p>
+
+        <div class="mk-cards-3">
+          <div class="mk-card">
+            <span class="mk-card-kind">Hacker News</span>
+            <h3>425 points</h3>
+            <p>
+              “Zasper: A Modern and Efficient Alternative to JupyterLab, Built in Go” — and a
+              hundred comments arguing about notebooks, which is how you know people read it.
+            </p>
+            <span class="mk-card-meta">2 January 2025</span>
+            <a href="https://news.ycombinator.com/item?id=42572057">Read the thread</a>
+          </div>
+
+          <div class="mk-card">
+            <span class="mk-card-kind">I Programmer</span>
+            <h3>The JupyterLab alternative</h3>
+            <p>
+              “Zasper started out as a front-end interface to JupyterLab like many others, but
+              ended up as a ground up implementation of the Jupyter project.”
+            </p>
+            <span class="mk-card-meta">Nikos Vaggalis · 23 January 2025</span>
+            <a
+              href="https://www.i-programmer.info/news/90-tools/17778-zasper-the-jupyterlab-alternative-.html"
+              >Read the article</a
+            >
+          </div>
+
+          <div class="mk-card">
+            <span class="mk-card-kind">Techzine</span>
+            <h3>A Go rewrite of Jupyter</h3>
+            <p>
+              An early write-up of the first release on Techzine's DevOps desk: what a Go
+              implementation of the wire protocol is, and why its footprint is smaller.
+            </p>
+            <span class="mk-card-meta">Erik van Klinken · 2 January 2025</span>
+            <a
+              href="https://www.techzine.eu/news/devops/127496/developer-builds-zasper-a-4x-better-ide-than-jupyterlab/"
+              >Read the article</a
+            >
+          </div>
+        </div>
+
+        <div class="mk-rows">
+          <div class="mk-row">
+            <span class="mk-row-label">FOSDEM 2026</span>
+            <span>High Performance Jupyter Notebooks with Zasper</span>
+            <span class="mk-row-meta">1 February · Brussels</span>
+          </div>
+          <div class="mk-row">
+            <span class="mk-row-label">The Fifth Elephant 2025</span>
+            <span>Building high performance PyData tools by adding Go to the mix</span>
+            <span class="mk-row-meta">Bangalore</span>
+          </div>
+          <div class="mk-row">
+            <span class="mk-row-label">IndiaFOSS 2025</span>
+            <span>Zasper: High Performance IDE for Jupyter Notebooks</span>
+            <span class="mk-row-meta">FOSS United</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 <div class="mk-band">
   <div class="mk-wrap">
     <h2 class="mk-section-title">And it is a real IDE</h2>
@@ -192,7 +331,66 @@
   </div>
 </div>
 
-<div class="mk-band mk-band-alt">
+    <div class="mk-band mk-band-alt">
+      <div class="mk-wrap">
+        <h2 class="mk-section-title">And the rest of it</h2>
+        <p class="mk-section-sub">The things you stop noticing until they are missing.</p>
+        <div class="mk-minis">
+          <div class="mk-mini">
+            <h4>A language server</h4>
+            <p>
+              Completions, go to definition, find references, rename, and quick fixes — in
+              notebook cells as well as in files.
+            </p>
+          </div>
+          <div class="mk-mini">
+            <h4>Search the project</h4>
+            <p>
+              A word in any file, notebooks read as cells rather than as JSON, and a replace you
+              see before it happens.
+            </p>
+          </div>
+          <div class="mk-mini">
+            <h4>Find across a notebook</h4>
+            <p>
+              Fifty cells at once, including the ones that are not open, and the read-only ones.
+            </p>
+          </div>
+          <div class="mk-mini">
+            <h4>Markdown and PDF</h4>
+            <p>Rendered in a tab, side by side with their source where that helps.</p>
+          </div>
+          <div class="mk-mini">
+            <h4>Export</h4>
+            <p>
+              A notebook as an HTML page, as Markdown, or as a plain script in the kernel's
+              language.
+            </p>
+          </div>
+          <div class="mk-mini">
+            <h4>A table of contents</h4>
+            <p>Your headings, in a column beside the cells, for the notebook that got long.</p>
+          </div>
+          <div class="mk-mini">
+            <h4>Tabs that come back</h4>
+            <p>
+              Per project, across a restart, reading each file only when you first switch to it.
+            </p>
+          </div>
+          <div class="mk-mini">
+            <h4>A command palette</h4>
+            <p>Every command with its key binding beside it, and files in the same box.</p>
+          </div>
+          <div class="mk-mini">
+            <h4>Eight themes</h4>
+            <p>Four hues, light and dark, and the editor's syntax colours follow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="mk-band">
   <div class="mk-wrap">
     <h2 class="mk-section-title">Every kernel you already run</h2>
     <p class="mk-section-sub">
@@ -209,16 +407,94 @@
   </div>
 </div>
 
-<div class="mk-band">
+    <div class="mk-band mk-band-alt">
+      <div class="mk-wrap">
+        <h2 class="mk-section-title">Your laptop, or your server</h2>
+        <p class="mk-section-sub">
+          The same binary either way. Run it on the machine in front of you, or put it on a box
+          and open it from anywhere — a footprint this small is what makes a shared server cheap.
+        </p>
+        <div class="mk-minis">
+          <div class="mk-mini">
+            <h4>Signed in from the first run</h4>
+            <p>
+              Every server starts with an access token. Sign in with the link it prints, or paste
+              the token; set it yourself to keep it across restarts.
+            </p>
+          </div>
+          <div class="mk-mini">
+            <h4>Behind your own HTTPS</h4>
+            <p>
+              A reverse proxy in front, WebSockets passed through, and the certificate you already
+              have.
+            </p>
+          </div>
+          <div class="mk-mini">
+            <h4>Docker, or a service</h4>
+            <p>
+              An image to run it in a container, and a systemd unit for when it should come back
+              up with the machine.
+            </p>
+          </div>
+        </div>
+        <p class="mk-charts-note">
+          <a href="/docs/deploying-on-cloud">Deploying on Cloud</a> walks through all four, including the two
+          ways to sign in.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="mk-band">
+      <div class="mk-wrap">
+        <h2 class="mk-section-title">Start here</h2>
+        <p class="mk-section-sub">
+          Ten minutes from nothing to a notebook you have run, saved and put under version
+          control.
+        </p>
+        <div class="mk-cards-3">
+          <div class="mk-card">
+            <span class="mk-card-kind">Step one</span>
+            <h3>Install it</h3>
+            <p>
+              Homebrew, snap, conda, or the binary for your platform. No runtime to install first,
+              nothing to configure after.
+            </p>
+            <a href="/docs/installation">Installation</a>
+          </div>
+          <div class="mk-card">
+            <span class="mk-card-kind">Step two</span>
+            <h3>Your first notebook</h3>
+            <p>
+              Make one, put it on a kernel, run a cell, write down what it was for, and save it —
+              step by step, with a picture of each.
+            </p>
+            <a href="/docs/your-first-notebook">Your first notebook</a>
+          </div>
+          <div class="mk-card">
+            <span class="mk-card-kind">Step three</span>
+            <h3>Bring your environment</h3>
+            <p>
+              Point Zasper at the conda or uv environment you already work in, and it appears in
+              the kernel list.
+            </p>
+            <a href="/docs/working-with-conda">Working with Conda</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="mk-band mk-band-alt">
   <div class="mk-wrap">
     <h2 class="mk-section-title">Open source, with a commercial license too</h2>
     <p class="mk-section-sub">
       Zasper is dual-licensed. Use it under the GNU Affero General Public License, or under a
       commercial license when the AGPL's terms do not fit what you are building.
     </p>
-    <div class="mk-licenses">
-      <div class="mk-license">
-        <span class="mk-license-kind">Open source</span>
+    <div class="mk-cards-2">
+      <div class="mk-card">
+        <span class="mk-card-kind">Open source</span>
         <h3>AGPL-3.0-only</h3>
         <p>
           Running Zasper, on your own machine or on a server, needs nothing more. If you distribute
@@ -227,8 +503,8 @@
         </p>
         <a href="https://github.com/zasper-io/zasper/blob/main/LICENSE">Read the license</a>
       </div>
-      <div class="mk-license">
-        <span class="mk-license-kind">Commercial</span>
+      <div class="mk-card">
+        <span class="mk-card-kind">Commercial</span>
         <h3>Commercial license</h3>
         <p>
           For organizations that want to build Zasper into a proprietary product, keep their
@@ -245,7 +521,141 @@
   </div>
 </div>
 
-<div class="mk-band mk-band-alt">
+    <div class="mk-band">
+      <div class="mk-wrap">
+        <h2 class="mk-section-title">Questions people actually ask</h2>
+        <div class="mk-faq">
+          <details class="mk-faq-item" open>
+            <summary>
+              Is Zasper a drop-in replacement for JupyterLab?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <p>
+              For your notebooks and your kernels, yes: the same files, the same kernelspecs, the
+              same wire protocol. For JupyterLab itself, no — this is a separate implementation
+              with its own interface, not a re-creation of Lab's UI or its extension API.
+            </p>
+          </details>
+          <details class="mk-faq-item">
+            <summary>
+              Do my JupyterLab extensions work?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <p>
+              No. Zasper has its own extension model rather than Lab's, so a lab extension will
+              not load. If an extension is the reason you are staying, that is a fair reason to
+              stay.
+            </p>
+          </details>
+          <details class="mk-faq-item">
+            <summary>
+              Does it work on Windows? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <p>
+              Yes, and there is a Windows build. The one part that needs WSL is the built-in
+              terminal, which is built on a Unix pseudo-terminal; running the server under WSL
+              gives you that too and is the setup we recommend.
+            </p>
+          </details>
+          <details class="mk-faq-item">
+            <summary>Is it really free? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+            <p>
+              Yes, under the AGPL-3.0 — install it, run it, put it on your own server, change it.
+              The commercial license is for building Zasper into a proprietary product, which the
+              AGPL does not allow.
+            </p>
+          </details>
+          <details class="mk-faq-item">
+            <summary>
+              What happens to my conda and uv environments?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <p>
+              They are found the way Jupyter finds them, through kernelspecs, and appear in the
+              launcher without being registered again. An environment that runs a notebook today
+              runs it here.
+            </p>
+          </details>
+          <details class="mk-faq-item">
+            <summary>
+              Does my code leave my machine? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <p>
+              No. Zasper runs a server on your own machine and your files stay on it. The only
+              thing sent anywhere is anonymous usage data — no file names, no paths, no contents,
+              no IP address —
+              <a href="https://github.com/zasper-io/zasper/blob/main/PRIVACY.md">PRIVACY.md</a> is
+              the complete list, and <code>ZASPER_TELEMETRY=0</code> switches it off.
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mk-band mk-band-alt">
+      <div class="mk-wrap">
+        <h2 class="mk-section-title">The project, and how to join it</h2>
+        <p class="mk-section-sub">
+          Zasper is developed in the open, by people who use it. The parts of that worth knowing
+          before you depend on it:
+        </p>
+        <div class="mk-rows">
+          <div class="mk-row">
+            <span class="mk-row-label">Latest release</span>
+            <span
+              >1.1.0 — sign-in on every server, a Python kernel set up for you, more outputs</span
+            >
+            <span class="mk-row-meta">14 September 2026</span>
+          </div>
+          <div class="mk-row">
+            <span class="mk-row-label">Stability</span>
+            <span
+              >The HTTP and WebSocket API, the configuration file and the command-line flags
+              follow semantic versioning — they will not break within 1.x</span
+            >
+            <span class="mk-row-meta">since 1.0.0</span>
+          </div>
+          <div class="mk-row">
+            <span class="mk-row-label">Written in</span>
+            <span>Go on the server, TypeScript and React in the browser — one repository</span>
+            <span class="mk-row-meta">AGPL-3.0</span>
+          </div>
+        </div>
+        <div class="mk-cards-3">
+          <div class="mk-card">
+            <span class="mk-card-kind">Contribute</span>
+            <h3>Good first issues</h3>
+            <p>
+              Issues kept labelled for people arriving, and a developer guide that gets you
+              building from source in two commands.
+            </p>
+            <a href="https://github.com/zasper-io/zasper/issues">Open issues</a>
+          </div>
+          <div class="mk-card">
+            <span class="mk-card-kind">Ask</span>
+            <h3>Discussions</h3>
+            <p>
+              Questions, ideas and "is this supposed to happen" — in the open, where the answer is
+              findable afterwards.
+            </p>
+            <a href="https://github.com/zasper-io/zasper/discussions">GitHub Discussions</a>
+          </div>
+          <div class="mk-card">
+            <span class="mk-card-kind">Talk</span>
+            <h3>Slack</h3>
+            <p>
+              The project's own workspace, for the conversations that are quicker as a
+              conversation.
+            </p>
+            <a href="/community/">Join the Slack</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="mk-band">
   <div class="mk-wrap">
     <h2 class="mk-section-title">Proud to be supported by</h2>
     <div class="mk-supporters-row">
@@ -254,5 +664,22 @@
     </div>
   </div>
 </div>
+
+    <div class="mk-band mk-band-dark">
+      <div class="mk-wrap mk-closing">
+        <h2 class="mk-section-title">One binary, and your notebooks open in it</h2>
+        <p class="mk-section-sub">
+          Nothing to sign up for, nothing to upload, nothing to uninstall first.
+        </p>
+        <div class="mk-cta">
+          <a class="mk-button" href="/downloads/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" /></svg>
+            Download Zasper
+          </a>
+          <a class="mk-button mk-button-quiet" href="/try-zasper/">Try it in the browser</a>
+        </div>
+      </div>
+    </div>
+
 
 {% include footer.html %}
