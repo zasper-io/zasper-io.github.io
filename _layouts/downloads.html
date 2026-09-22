@@ -41,6 +41,54 @@
   </div>
 
   <h2 style="font-size: 22px; font-weight: 500; margin: 0 0 16px">
+    Upgrading
+  </h2>
+  <p>
+    Upgrade the same way you installed. A snap also updates itself: snapd checks for a new version
+    several times a day.
+  </p>
+  <div class="mk-install-methods">
+    <div class="mk-install-method">
+      <h3>Homebrew</h3>
+      <div class="mk-install">
+        <span id="cmd-upgrade-brew">brew upgrade zasper</span>
+        <button type="button" aria-label="Copy" data-copy="cmd-upgrade-brew">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mk-install-method">
+      <h3>Snap</h3>
+      <div class="mk-install">
+        <span id="cmd-upgrade-snap">sudo snap refresh zasper</span>
+        <button type="button" aria-label="Copy" data-copy="cmd-upgrade-snap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mk-install-method">
+      <h3>Conda</h3>
+      <div class="mk-install">
+        <span id="cmd-upgrade-conda">conda update zasper -c conda-forge</span>
+        <button type="button" aria-label="Copy" data-copy="cmd-upgrade-conda">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <p>
+    If you downloaded a binary, download the new one below and replace the <code>zasper</code> you
+    have with it. Either way, <code>zasper --version</code> tells you which version you have, and a
+    Zasper that is already running keeps the old version until you restart it.
+  </p>
+  <p>
+    Before moving to a new major version, read its upgrading notes in
+    <a href="/docs/installation">Installation</a>, which say what needs your attention. The
+    <a href="https://github.com/zasper-io/zasper/blob/main/CHANGELOG.md">changelog</a> has every
+    release.
+  </p>
+
+  <h2 style="font-size: 22px; font-weight: 500; margin: 48px 0 16px">
     Binaries — v{{ version }}
   </h2>
   <div style="overflow-x: auto">
