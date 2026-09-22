@@ -3012,6 +3012,13 @@ drawing, unported, with the candidates they belong to.
   color: var(--z-fg-subtle);
 }
 
+/* The paragraph under the binaries: what upgrading one means, which no command in a card says. */
+.mk-dl-upgrading {
+  margin: 24px 0 0;
+  font-size: 15px;
+  color: var(--z-fg-muted);
+}
+
 .mk-dl .mk-docs-note {
   margin-top: 32px;
 }
