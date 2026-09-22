@@ -1020,7 +1020,8 @@ three steps and the three ways into the project all draw the same box — so it 
   margin-top: 4px;
 }
 
-.mk-docs-body a {
+.mk-docs-body a,
+.mk-dl a:not(.mk-button) {
   color: var(--z-fg-accent);
 }
 
@@ -1030,7 +1031,8 @@ three steps and the three ways into the project all draw the same box — so it 
   margin: 8px 0 20px;
 }
 
-.mk-docs-body code {
+.mk-docs-body code,
+.mk-dl code {
   padding: 1px 5px;
   border-radius: 3px;
   background: var(--z-bg-code);
@@ -2809,4 +2811,214 @@ from the page's.
 
 .tut-shot .diff-line.is-blank {
   background: var(--z-bg-panel-alt);
+}
+
+
+/*
+Ported from the prototype with the downloads page, which is the first thing here to want either: a
+note beside a paragraph (`.mk-docs-note`, marketing.css) and a pill (`.z-badge`, components.css —
+whose own comment called it "the shape to copy on the day something wants a pill"). The icons are
+sized here rather than in those rules because an icon is an inline <svg> on this site and a sprited
+<i> in the drawing, which is the same difference `.mk-button svg` already carries.
+*/
+.mk-docs-note {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 24px;
+  padding: 12px 14px;
+  border-left: 2px solid var(--z-fg-accent);
+  background: var(--z-bg-panel);
+  border-radius: 0 4px 4px 0;
+  font-size: 15px;
+}
+
+.mk-docs-note p {
+  margin: 0;
+}
+
+.mk-docs-note .z-icon {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--z-fg-accent);
+}
+
+.z-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 16px;
+  padding: 0 6px;
+  border-radius: 8px;
+  font-size: var(--z-ui-font-size-sm);
+  font-weight: 500;
+  background: var(--z-bg-panel-alt);
+  color: var(--z-fg-muted);
+}
+
+.z-badge-accent {
+  background: var(--z-accent);
+  color: var(--z-fg-on-accent);
+}
+
+.mk-docs-note svg,
+.mk-dl-file a svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/*
+The downloads page. Ported from the prototype's `download-page.html`, candidate A — the one chosen of
+the three drawn there — with its rules unchanged. Every surface is an existing shape (.mk-card,
+.mk-button, .mk-install, .mk-docs-note) with only the layout around it added, which is what replaced
+this page's own `.mk-install-methods` and `.mk-downloads-table`. B's tabs and C's table stay in the
+drawing, unported, with the candidates they belong to.
+*/
+.mk-dl {
+  max-width: var(--mk-wrap);
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.mk-dl h1 {
+  margin: 0 0 12px;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.mk-dl-heading {
+  margin: 56px 0 16px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* The release the page is for, and where to read what changed: a date is how a reader knows it is current. */
+.mk-dl-release {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--z-fg-muted);
+}
+
+.mk-dl-cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mk-dl-cta-meta {
+  font-size: 14px;
+  color: var(--z-fg-subtle);
+}
+
+/* One card per package manager, carrying both the install and the upgrade line. */
+.mk-dl-channels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mk-dl-channel h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.mk-dl-cmd {
+  display: grid;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.mk-dl-cmd-label {
+  font-size: 12px;
+  color: var(--z-fg-subtle);
+}
+
+/* .mk-install without the hero's top margin, filling its card. A long command wraps inside the box rather
+   than scrolling it, which would carry the copy button out of sight. */
+.mk-dl-cmd .mk-install {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+  font-size: 13px;
+}
+
+.mk-dl-cmd .mk-install span {
+  min-width: 0;
+}
+
+/* A command breaks between its words, never inside one: `zasper-io/tap/zasper` split at its hyphen reads
+   as two arguments. */
+.mk-dl-word {
+  white-space: nowrap;
+}
+
+.mk-dl-cmd .mk-install button {
+  flex-shrink: 0;
+}
+
+.mk-dl-note {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--z-fg-subtle);
+}
+
+/* The binaries by operating system: the OS is said once, not once per architecture. */
+.mk-dl-os-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mk-dl-files {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mk-dl-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--z-border);
+  font-size: 15px;
+}
+
+.mk-dl-file-size {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--z-fg-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-dl-file a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--z-fg-accent);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.mk-dl-foot {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--z-fg-subtle);
+}
+
+.mk-dl .mk-docs-note {
+  margin-top: 32px;
+}
+
+@media (max-width: 860px) {
+  .mk-dl-channels,
+  .mk-dl-os-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

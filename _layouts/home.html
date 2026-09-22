@@ -19,8 +19,17 @@
         </a>
         <a class="mk-button mk-button-quiet" href="/try-zasper/">Try it in the browser</a>
       </div>
+      {% comment %}
+        The command rendered is Homebrew's, which is what a visitor with no JavaScript is shown;
+        main.js swaps in the one for their platform, from the attributes below. All four come from
+        _data/release.yml, so this hero and the downloads page say the same thing.
+      {% endcomment %}
+      {% assign channels = site.data.release.channels %}
       <div class="mk-install">
-        <span id="install-cmd">brew install zasper-io/tap/zasper</span>
+        <span
+          id="install-cmd"
+          {% for channel in channels %}data-{{ channel.for }}="{{ channel.install }}" {% endfor %}
+        >{% for channel in channels %}{% if channel.for == "mac" %}{{ channel.install }}{% endif %}{% endfor %}</span>
         <button type="button" aria-label="Copy" data-copy="install-cmd">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
         </button>

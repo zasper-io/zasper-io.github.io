@@ -158,3 +158,53 @@ if (toc) {
     });
   }
 }
+
+/*
+Which platform the visitor is on, and the two places that answer differently because of it: the
+downloads page's button, and the landing page's install command.
+
+Both pages render a working answer first — the macOS archive, and `brew install` — so a visitor with
+no JavaScript, and the crawler that indexes the page, still get a real command and a real file. This
+only swaps them for something likelier.
+
+`navigator.userAgentData` is the current way to ask and exists only in Chromium, so the user agent
+string is read where it is missing, which is every Safari and Firefox. Neither tells the truth about
+an Apple Silicon Mac: both report Intel, deliberately. So macOS is offered the Apple Silicon build,
+which is every Mac sold since 2020, and the Intel one stays a row away in the table.
+*/
+function visitorPlatform() {
+  const hinted = navigator.userAgentData?.platform ?? '';
+  const agent = `${hinted} ${navigator.userAgent ?? ''}`.toLowerCase();
+  if (agent.includes('mac')) return { os: 'mac', slug: 'darwin-arm64' };
+  if (agent.includes('win')) return { os: 'windows', slug: 'windows-amd64' };
+  // Android reports Linux too, and has nothing to install: it is left on the default.
+  if (agent.includes('linux') && !agent.includes('android')) return { os: 'linux', slug: 'linux-amd64' };
+  return null;
+}
+
+const platform = visitorPlatform();
+
+// The downloads page: the button follows the row in the table for this platform, so the two agree.
+const primary = document.getElementById('dl-primary');
+if (primary && platform) {
+  const match = document.querySelector(`.mk-dl-files a[data-slug="${platform.slug}"]`);
+  if (match) {
+    primary.href = match.href;
+    document.getElementById('dl-primary-label').textContent = match.dataset.label;
+    document.getElementById('dl-primary-size').textContent = match.dataset.size;
+  }
+}
+
+/*
+The landing page: the hero shows the package manager that platform installs from — Homebrew on macOS,
+snap on Linux, conda on Windows, which is the one of the three that has a Windows build. The commands
+are the downloads page's own, carried here in data attributes so both pages read _data/release.yml
+and cannot drift.
+*/
+const heroCommand = document.getElementById('install-cmd');
+if (heroCommand && platform) {
+  const command = heroCommand.dataset[platform.os];
+  if (command) {
+    heroCommand.textContent = command;
+  }
+}

@@ -1,0 +1,64 @@
+# The current release, in the one place the site states it. The downloads page reads every number
+# below, so a release changes this file and nothing else — sizes typed into a page are sizes that are
+# right on the day they were written and wrong after that.
+#
+# Measured on the published archives: `ls -l` over what the release uploaded.
+version: "2.0.0"
+date: 2026-09-22
+
+# Each entry is one operating system's card, and `slug` is the archive's name in the release, which is
+# also what the OS detection matches to point its button at the right file.
+platforms:
+  - os: macOS
+    note: Signed and notarized.
+    files:
+      - arch: Apple Silicon
+        slug: darwin-arm64
+        size: 8.9 MB
+      - arch: Intel
+        slug: darwin-amd64
+        size: 9.4 MB
+  - os: Linux
+    note: "Static: runs on any distribution."
+    files:
+      - arch: x86-64
+        slug: linux-amd64
+        size: 9.2 MB
+      - arch: ARM64
+        slug: linux-arm64
+        size: 8.7 MB
+      - arch: i386
+        slug: linux-386
+        size: 9.0 MB
+  - os: Windows
+    note: The built-in terminal needs WSL.
+    files:
+      - arch: x86-64
+        slug: windows-amd64
+        size: 9.3 MB
+      - arch: ARM64
+        slug: windows-arm64
+        size: 8.7 MB
+      - arch: i386
+        slug: windows-386
+        size: 9.2 MB
+
+# What each package manager installs and upgrades with, and where it runs. The landing page's hero
+# reads the same commands, so the two pages cannot drift.
+channels:
+  - name: Homebrew
+    where: macOS · Linux
+    for: mac
+    install: brew install zasper-io/tap/zasper
+    upgrade: brew upgrade zasper
+  - name: Snap
+    where: Linux
+    for: linux
+    install: sudo snap install zasper
+    upgrade: sudo snap refresh zasper
+    note: Snaps also update themselves, several times a day.
+  - name: conda
+    where: Linux · Windows · Intel Mac
+    for: windows
+    install: conda install zasper -c conda-forge
+    upgrade: conda update zasper -c conda-forge

@@ -1,157 +1,105 @@
 {% include head.html %}
 {% include nav.html %}
 
-{% assign version = "2.0.0" %}
-{% assign base = "https://github.com/zasper-io/zasper/releases/download/v" | append: version | append: "/zasper-webapp-" | append: version %}
-{% capture icon %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>{% endcapture %}
+{% assign release = site.data.release %}
+{% assign base = "https://github.com/zasper-io/zasper/releases/download/v" | append: release.version | append: "/zasper-webapp-" | append: release.version %}
+{% capture download_icon %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>{% endcapture %}
+{% capture copy_icon %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>{% endcapture %}
 
-<div class="mk-docs-body" style="max-width: var(--mk-wrap); margin: 0 auto; padding: 40px 24px 0">
-  <h1>Download Zasper today!</h1>
-</div>
+{% comment %}
+Drawn in the prototype as download-page.html, candidate A: the release first, then one card per
+package manager carrying both its install and its upgrade line, then one card per operating system.
+Every version, size and command comes from _data/release.yml, so a release changes that file alone.
 
-<div class="mk-docs-body" style="max-width: var(--mk-wrap); margin: 0 auto; padding: 24px 24px 80px">
-  <div class="mk-install-methods">
-    <div class="mk-install-method">
-      <h3>Homebrew</h3>
-      <div class="mk-install">
-        <span id="cmd-brew">brew install zasper-io/tap/zasper</span>
-        <button type="button" aria-label="Copy" data-copy="cmd-brew">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-        </button>
-      </div>
-    </div>
-    <div class="mk-install-method">
-      <h3>Snap</h3>
-      <div class="mk-install">
-        <span id="cmd-snap">sudo snap install zasper</span>
-        <button type="button" aria-label="Copy" data-copy="cmd-snap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-        </button>
-      </div>
-    </div>
-    <div class="mk-install-method">
-      <h3>Conda</h3>
-      <div class="mk-install">
-        <span id="cmd-conda">conda install zasper -c conda-forge</span>
-        <button type="button" aria-label="Copy" data-copy="cmd-conda">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-        </button>
-      </div>
-    </div>
+The primary button is the one thing here that needs a script: with none it offers the macOS Apple
+Silicon archive, and main.js swaps it for the visitor's own platform.
+{% endcomment %}
+
+<div class="mk-dl">
+  <p class="mk-dl-release">
+    <span class="z-badge z-badge-accent">Latest</span>
+    Version {{ release.version }} · {{ release.date | date: "%-d %B %Y" }} ·
+    <a href="/blog/zasper-{{ release.version | replace: '.', '-' }}">What's new</a>
+  </p>
+  <h1>Download Zasper</h1>
+  <p class="mk-docs-lede">
+    One static binary for macOS, Linux and Windows. Install it with the package manager you already
+    use, or download it directly.
+  </p>
+
+  {% assign first = release.platforms[0].files[0] %}
+  <div class="mk-dl-cta">
+    <a class="mk-button" id="dl-primary" href="{{ base }}-{{ first.slug }}.tar.gz">
+      {{ download_icon }}<span id="dl-primary-label">Download for macOS · Apple Silicon</span>
+    </a>
+    <span class="mk-dl-cta-meta">
+      <span id="dl-primary-size">{{ first.size }}</span> ·
+      <a href="#binaries">Other platforms</a>
+    </span>
   </div>
 
-  <h2 style="font-size: 22px; font-weight: 500; margin: 0 0 16px">
-    Upgrading
-  </h2>
-  <p>
-    Upgrade the same way you installed. A snap also updates itself: snapd checks for a new version
-    several times a day.
-  </p>
-  <div class="mk-install-methods">
-    <div class="mk-install-method">
-      <h3>Homebrew</h3>
-      <div class="mk-install">
-        <span id="cmd-upgrade-brew">brew upgrade zasper</span>
-        <button type="button" aria-label="Copy" data-copy="cmd-upgrade-brew">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-        </button>
+  <h2 class="mk-dl-heading">With a package manager</h2>
+  <div class="mk-dl-channels">
+    {% for channel in release.channels %}
+      <div class="mk-card mk-dl-channel">
+        <span class="mk-card-kind">{{ channel.where }}</span>
+        <h3>{{ channel.name }}</h3>
+        {% assign id = channel.name | downcase %}
+        <div class="mk-dl-cmd">
+          <span class="mk-dl-cmd-label">Install</span>
+          <div class="mk-install">
+            <span id="cmd-install-{{ id }}">{{ channel.install | split: " " | join: '</span> <span class="mk-dl-word">' | prepend: '<span class="mk-dl-word">' | append: '</span>' }}</span>
+            <button type="button" aria-label="Copy" data-copy="cmd-install-{{ id }}">{{ copy_icon }}</button>
+          </div>
+        </div>
+        <div class="mk-dl-cmd">
+          <span class="mk-dl-cmd-label">Upgrade</span>
+          <div class="mk-install">
+            <span id="cmd-upgrade-{{ id }}">{{ channel.upgrade | split: " " | join: '</span> <span class="mk-dl-word">' | prepend: '<span class="mk-dl-word">' | append: '</span>' }}</span>
+            <button type="button" aria-label="Copy" data-copy="cmd-upgrade-{{ id }}">{{ copy_icon }}</button>
+          </div>
+        </div>
+        {% if channel.note %}<p class="mk-dl-note">{{ channel.note }}</p>{% endif %}
       </div>
-    </div>
-    <div class="mk-install-method">
-      <h3>Snap</h3>
-      <div class="mk-install">
-        <span id="cmd-upgrade-snap">sudo snap refresh zasper</span>
-        <button type="button" aria-label="Copy" data-copy="cmd-upgrade-snap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-        </button>
-      </div>
-    </div>
-    <div class="mk-install-method">
-      <h3>Conda</h3>
-      <div class="mk-install">
-        <span id="cmd-upgrade-conda">conda update zasper -c conda-forge</span>
-        <button type="button" aria-label="Copy" data-copy="cmd-upgrade-conda">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-  <p>
-    If you downloaded a binary, download the new one below and replace the <code>zasper</code> you
-    have with it. Either way, <code>zasper --version</code> tells you which version you have, and a
-    Zasper that is already running keeps the old version until you restart it.
-  </p>
-  <p>
-    Before moving to a new major version, read its upgrading notes in
-    <a href="/docs/installation">Installation</a>, which say what needs your attention. The
-    <a href="https://github.com/zasper-io/zasper/blob/main/CHANGELOG.md">changelog</a> has every
-    release.
-  </p>
-
-  <h2 style="font-size: 22px; font-weight: 500; margin: 48px 0 16px">
-    Binaries — v{{ version }}
-  </h2>
-  <div style="overflow-x: auto">
-    <table class="mk-downloads-table">
-      <thead>
-        <tr>
-          <th>Platform</th>
-          <th>Architecture</th>
-          <th>Download</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>macOS</td>
-          <td>Apple Silicon</td>
-          <td><a class="mk-download-link" href="{{ base }}-darwin-arm64.tar.gz">{{ icon }}Download</a></td>
-        </tr>
-        <tr>
-          <td>macOS</td>
-          <td>Intel</td>
-          <td><a class="mk-download-link" href="{{ base }}-darwin-amd64.tar.gz">{{ icon }}Download</a></td>
-        </tr>
-        <tr>
-          <td>Linux</td>
-          <td>x86-64</td>
-          <td><a class="mk-download-link" href="{{ base }}-linux-amd64.tar.gz">{{ icon }}Download</a></td>
-        </tr>
-        <tr>
-          <td>Linux</td>
-          <td>ARM64</td>
-          <td><a class="mk-download-link" href="{{ base }}-linux-arm64.tar.gz">{{ icon }}Download</a></td>
-        </tr>
-        <tr>
-          <td>Linux</td>
-          <td>i386</td>
-          <td><a class="mk-download-link" href="{{ base }}-linux-386.tar.gz">{{ icon }}Download</a></td>
-        </tr>
-        <tr>
-          <td>Windows</td>
-          <td>x86-64</td>
-          <td><a class="mk-download-link" href="{{ base }}-windows-amd64.zip">{{ icon }}Download</a></td>
-        </tr>
-        <tr>
-          <td>Windows</td>
-          <td>ARM64</td>
-          <td><a class="mk-download-link" href="{{ base }}-windows-arm64.zip">{{ icon }}Download</a></td>
-        </tr>
-        <tr>
-          <td>Windows</td>
-          <td>i386</td>
-          <td><a class="mk-download-link" href="{{ base }}-windows-386.zip">{{ icon }}Download</a></td>
-        </tr>
-      </tbody>
-    </table>
+    {% endfor %}
   </div>
 
-  <p>
-    The macOS builds are signed and notarized. The Linux builds are static binaries that run on any
-    distribution. To verify a download, fetch
-    <a href="https://github.com/zasper-io/zasper/releases/download/v{{ version }}/zasper_{{ version }}_checksums.txt">zasper_{{ version }}_checksums.txt</a>
-    and run <code>sha256sum -c zasper_{{ version }}_checksums.txt --ignore-missing</code> beside it.
-    Older versions are on <a href="https://github.com/zasper-io/zasper/releases">GitHub Releases</a>.
-  </p>
+  <h2 class="mk-dl-heading" id="binaries">Download a binary</h2>
+  <div class="mk-dl-os-grid">
+    {% for platform in release.platforms %}
+      <div class="mk-card">
+        <h3>{{ platform.os }}</h3>
+        <ul class="mk-dl-files">
+          {% for file in platform.files %}
+            {% assign archive = ".tar.gz" %}
+            {% if platform.os == "Windows" %}{% assign archive = ".zip" %}{% endif %}
+            <li class="mk-dl-file">
+              {{ file.arch }}
+              <span class="mk-dl-file-size">{{ file.size }}</span>
+              <a
+                href="{{ base }}-{{ file.slug }}{{ archive }}"
+                data-slug="{{ file.slug }}"
+                data-label="Download for {{ platform.os }} · {{ file.arch }}"
+                data-size="{{ file.size }}"
+              >{{ download_icon }}Download</a>
+            </li>
+          {% endfor %}
+        </ul>
+        <p class="mk-dl-foot">{{ platform.note }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="mk-docs-note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="z-icon"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>
+    <p>
+      To check a download, fetch
+      <a href="https://github.com/zasper-io/zasper/releases/download/v{{ release.version }}/zasper_{{ release.version }}_checksums.txt">zasper_{{ release.version }}_checksums.txt</a>
+      and run <code>sha256sum -c zasper_{{ release.version }}_checksums.txt --ignore-missing</code>
+      beside it. Older versions are on
+      <a href="https://github.com/zasper-io/zasper/releases">GitHub Releases</a>.
+    </p>
+  </div>
 </div>
 
 {% include footer.html %}
