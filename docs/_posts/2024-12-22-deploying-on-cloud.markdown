@@ -112,12 +112,22 @@ line's `access_token` field, and the line's message is `zasper server started`. 
 
 For anything beyond your own network, put Zasper behind a reverse proxy that handles HTTPS. If the
 proxy runs on the same machine, leave Zasper on the default `127.0.0.1`, because only the proxy
-needs to reach it. The sign-in link then goes through the proxy:
-`https://zasper.example.com/?token=…`.
+needs to reach it, and give it the name the proxy serves it under:
+
+```bash
+zasper --allow-host=zasper.example.com
+```
+
+A server on `127.0.0.1` otherwise answers only to `localhost`. That stops a web page that points its
+own domain at your machine from reaching Zasper, but it also refuses the proxy, which passes on the
+name the browser used, and every page would be `403 Forbidden`. `ZASPER_ALLOWED_HOSTS` does the same
+as the flag, which suits Docker and systemd; both take a comma-separated list. The sign-in link then
+goes through the proxy: `https://zasper.example.com/?token=…`.
 
 Terminals, kernels and file watching use WebSockets, so the proxy has to pass WebSocket upgrades
-through. It also has to forward the original `Host` header: Zasper refuses a WebSocket connection
-when the browser's `Origin` doesn't match the `Host` it receives.
+through. It also has to forward the original `Host` header: Zasper refuses a WebSocket connection,
+and any change made through the browser, when the browser's `Origin` doesn't match the `Host` it
+receives. So rewriting `Host` to `localhost` in the proxy is not a way around `--allow-host`.
 
 With [Caddy](https://caddyserver.com), which does both by default and gets the certificate for
 you:
@@ -212,7 +222,8 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
-Put `ZASPER_ACCESS_TOKEN=...` in `/etc/zasper.env` and make that file readable only by root. Then:
+Put `ZASPER_ACCESS_TOKEN=...` in `/etc/zasper.env`, and `ZASPER_ALLOWED_HOSTS=zasper.example.com`
+too if a reverse proxy serves it, and make that file readable only by root. Then:
 
 ```bash
 sudo systemctl enable --now zasper
@@ -227,5 +238,6 @@ explains how to change the format.
 
 * Treat the access token, and any `?token=` link, like a password.
 * Update Zasper regularly to get security fixes.
-* Only open notebooks you trust. Zasper does not yet sign or trust notebooks, so saved HTML output
-  can run scripts when a notebook is opened; see [Notebook Support](/docs/notebook-support#known-limitations).
+* Saved HTML output in a notebook is sanitised when it opens, so a notebook someone sends you cannot
+  run scripts as you; re-run a cell to redraw an interactive plot. See
+  [Notebook Support](/docs/notebook-support#known-limitations).

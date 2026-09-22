@@ -1,0 +1,104 @@
+---
+layout: post
+title:  "Zasper 2.0.0"
+description: "Zasper 2.0.0 brings language servers to files and notebooks, search and replace across the project, notebook export and a table of contents, and closes two ways a session could leak."
+date:   2026-09-22 09:00:00 +0530
+categories: blog
+permalink: blog/:title
+author: Prasun Anand
+banner: /static/images/logo.svg
+---
+
+Zasper 2.0.0 gives files and notebooks language servers, searches and replaces across the whole
+project, exports notebooks, and tightens how a session is kept and checked.
+
+```bash
+brew upgrade zasper                   # Homebrew
+sudo snap refresh zasper              # Snap
+conda update zasper -c conda-forge    # conda
+```
+
+Prebuilt binaries are on the [Downloads page](/downloads/).
+
+## Why 2.0
+
+Zasper's HTTP and WebSocket API follows semantic versioning, and 2.0.0 changes two details of it, so
+it is a major release. Both came from moving the browser's session into a cookie that no script in
+the page can read. WebSocket routes no longer accept a session token in the URL, where it would end
+up in logs and browser history, and the always-true `protected` field is gone from `/api/config` and
+`/api/info`. The app itself needs nothing from you but signing in once. Scripts that talk to Zasper
+should read [Upgrading](#upgrading-from-110) below.
+
+## Language Servers
+
+Diagnostics, completion, hover, go to definition, find references, rename, document symbols, inlay
+hints and format on save, for Python, Go, JavaScript and TypeScript, Rust, C and C++, R and Julia.
+Zasper starts a language server you already have installed, and Settings tells you which one it
+found or how to install one.
+
+Notebooks get them too. IPython magics are masked out so they don't show up as errors, and imports
+are resolved against the kernel's own interpreter, so what the checker knows is what the notebook
+can import.
+[LANGUAGE-SERVERS.md](https://github.com/zasper-io/zasper/blob/main/docs/LANGUAGE-SERVERS.md) has
+the details.
+
+## Search and Replace
+
+**Search in Files** looks across the whole project, with replace and a preview of each file's
+changes, and it includes what is in editors you haven't saved yet. It uses ripgrep when it is
+installed and gives the same answers without it. Inside a notebook, **Find and Replace** searches
+the cells and their outputs, and replaces in the cells.
+
+## Notebooks
+
+- **Export** a notebook as an HTML page, Markdown or a script.
+- **A table of contents** beside the cells, built from the notebook's headings.
+- **Command and edit modes**, with Jupyter's keys.
+- A notebook's kernel **starts in the notebook's folder**, so a relative path means what it means
+  beside the file.
+
+## Python, and the Terminal
+
+Choose a Python interpreter in the top bar, the status bar or Settings, and **Run Python File in
+Terminal** with it. The terminal is now a panel below the editor, with **Toggle Terminal**.
+
+## The Editor
+
+The status bar shows and changes a file's language, indentation and line endings, and `.editorconfig`
+files are honoured. Settings add autosave, format on save, rulers, word wrap, whitespace, line
+numbers, font size, trimming trailing whitespace, a final newline, and Vim or Emacs keys. **Go to
+Line** and recent files are in the command palette, and open tabs and recent files are remembered
+for each project. When a file changes on disk, its editor updates, keeps your unsaved edits, and can
+compare them with the version on disk.
+
+## Safer by Default
+
+- **Your session is an `HttpOnly` cookie**, so a script running in the page cannot read it, and the
+  server never reads a session from a URL.
+- **HTML output saved in a notebook is sanitised** when the notebook opens, so a notebook someone
+  sends you cannot run scripts as you. Output from cells you run is not affected.
+- **A server on `127.0.0.1` answers only to `localhost`**, which stops a web page that points its own
+  domain at your machine from reaching it. Behind a reverse proxy, name the proxy's host with
+  `--allow-host`; [Deploying on Cloud](/docs/deploying-on-cloud#behind-a-reverse-proxy-with-https)
+  shows how.
+- **Widget libraries** that Zasper does not bundle can be kept off the network with a switch in
+  Settings.
+
+## Fixes
+
+- A kernel that failed to start no longer leaves its connection file, with the kernel's signing key
+  in it, behind.
+- Saving a file keeps its permissions and keeps a symbolic link a link.
+- Stopping a kernel asks it to shut down, so its `atexit` handlers run, before it is killed.
+- On Windows, language servers in a project's `.venv` are found, and changes inside ignored folders
+  such as `node_modules` no longer reload the page.
+
+## Upgrading from 1.1.0
+
+- **Behind a reverse proxy, name its host** with `--allow-host` or `ZASPER_ALLOWED_HOSTS`.
+- **Scripts send `Authorization: Bearer <jwt>`** on WebSocket upgrades instead of `?token=`.
+- **Re-run a cell** to redraw an interactive plot that was saved in a notebook.
+- **Relative paths in a notebook** now start from the notebook's folder.
+
+[Installation](/docs/installation#upgrading-from-110) explains each one, and the
+[changelog](https://github.com/zasper-io/zasper/blob/main/CHANGELOG.md) has the full list.

@@ -13,11 +13,11 @@ description: "Zasper is a high-performance IDE for Jupyter notebooks: up to 5× 
 
 # The two sizes, in the one place that states them. Everything that quotes a size reads these, because
 # a number written into five pages is a number that will be right in three of them after the next
-# release. Measured on the v1.1.0 darwin-arm64 release: the archive is 8.2 MB, the binary inside it is
-# 20.8 MB. They are different numbers and the copy has to say which one it means — `download_size` is
+# release. Measured on the v2.0.0 darwin-arm64 release: the archive is 8.9 MB, the binary inside it is
+# 22.8 MB. They are different numbers and the copy has to say which one it means — `download_size` is
 # what you fetch, `binary_size` is what ends up on disk.
-download_size: "8 MB"
-binary_size: "about 20 MB"
+download_size: "9 MB"
+binary_size: "about 23 MB"
 url: "https://zasper.io"
 baseurl: ""
 lang: en_US

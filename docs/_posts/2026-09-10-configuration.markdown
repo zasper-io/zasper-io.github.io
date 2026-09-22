@@ -20,6 +20,7 @@ in the app are stored in `~/.zasper/config.json`.
 | `--cwd` | `.` | The folder to open as the project |
 | `--host` | `127.0.0.1` | The network interface to listen on. `0.0.0.0` makes the server reachable from other machines; see [Deploying on Cloud](/docs/deploying-on-cloud) |
 | `--port` | `:8048` | The port to listen on. `8888` and `:8888` both work |
+| `--allow-host` | | Other host names the server answers to while it listens on `127.0.0.1`, comma-separated, such as a reverse proxy's `zasper.example.com`; see [Deploying on Cloud](/docs/deploying-on-cloud#behind-a-reverse-proxy-with-https) |
 | `--no-browser` | `false` | Don't open Zasper in a browser on startup. Zasper only opens one when it is running in a terminal, and on Linux only when there is a display |
 | `--tracking` | `true` | Send [anonymous usage data](#anonymous-usage-data) |
 | `--debug` | `false` | Log at debug level |
@@ -39,6 +40,7 @@ address. This keeps scripts written before 1.0 working unchanged.
 | `ZASPER_TELEMETRY` | `0`, `false`, `off` or `no` turns usage data off for this run; `1`, `true`, `on` or `yes` turns it on |
 | `ZASPER_LOG_FORMAT` | `console` or `json`. By default Zasper uses console format in a terminal and JSON otherwise |
 | `ZASPER_ACCESS_LOG` | `1`, `true`, `on` or `yes` logs every HTTP request |
+| `ZASPER_ALLOWED_HOSTS` | Host names added to `--allow-host`'s, comma-separated |
 
 `ZASPER_JWT_SECRET` was removed in 1.1.0 and is ignored; use `ZASPER_ACCESS_TOKEN` instead.
 
@@ -46,7 +48,7 @@ address. This keeps scripts written before 1.0 working unchanged.
 
 | Path | Contents |
 | --- | --- |
-| `~/.zasper/config.json` | Your theme, recent projects, usage-data setting and anonymous ID |
+| `~/.zasper/config.json` | Your theme, editor and language server settings, chosen Python interpreter, usage-data setting and anonymous ID |
 | `~/.zasper/runtime/` | Connection files for running kernels. They are readable only by you and are deleted when the kernel stops |
 
 ## Logging
@@ -64,7 +66,7 @@ To log every HTTP request without turning on all debug logging, set `ZASPER_ACCE
 Zasper sends a small amount of anonymous usage data: counts of things like notebooks opened, cells
 run and terminals started, along with the Zasper version, OS and CPU architecture. It never sends
 file names, paths, code, project names, your username or your IP address. There is no session
-recording and no cookie.
+recording and no tracking cookie.
 [PRIVACY.md](https://github.com/zasper-io/zasper/blob/main/PRIVACY.md) lists every event and every
 value it can carry.
 

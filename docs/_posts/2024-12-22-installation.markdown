@@ -85,10 +85,35 @@ no browser opens, for example because you passed `--no-browser` or are connected
 | ------------------------ | -------------------------- | ------------------------------------------------------------ |
 | macOS 12 or later        | Apple Silicon, Intel       | Fully supported                                              |
 | Linux, any distribution  | x86-64, ARM64, i386        | Fully supported                                              |
-| Windows 10 or later      | x86-64, ARM64, i386        | Runs, but the terminal and some kernel paths are less tested; use WSL for the best experience |
+| Windows 10 or later      | x86-64, ARM64, i386        | Runs without the terminal, which needs WSL; some kernel paths are less tested               |
 
 The Linux archives are static binaries, so one build works on every distribution, Debian and Red
 Hat alike.
+
+## Upgrading from 1.1.0
+
+2.0.0 is a major release because two details of Zasper's API changed, for security. The app itself
+needs nothing from you beyond signing in once; these are the changes to know about:
+
+- **Behind a reverse proxy, name its host.** A server on `127.0.0.1` now answers only to
+  `localhost`, which stops a web page that points its own domain at your machine from reaching it.
+  If Caddy or nginx serves Zasper as `zasper.example.com`, start Zasper with
+  `--allow-host=zasper.example.com` or set `ZASPER_ALLOWED_HOSTS`, as
+  [Deploying on Cloud](/docs/deploying-on-cloud#behind-a-reverse-proxy-with-https) shows. Without
+  it, every page is `403 Forbidden`.
+- **Scripts that open a kernel or terminal WebSocket send a header.** `?token=<jwt>` in the URL is
+  no longer accepted, because a token in a URL ends up in logs and browser history. Send
+  `Authorization: Bearer <jwt>` instead; see
+  [docs/API.md](https://github.com/zasper-io/zasper/blob/main/docs/API.md#removed-in-200). The
+  `protected` field is also gone from `/api/config` and `/api/info`, where it was always `true`.
+- **A notebook's kernel starts in the notebook's folder**, as in Jupyter, not the folder Zasper was
+  started in. A notebook in a subfolder that opened files by paths relative to the project root
+  needs those paths adjusted.
+- **Saved interactive output needs its cell run again.** HTML output saved in a notebook no longer
+  runs scripts when the notebook opens, so a saved Plotly or Bokeh plot draws itself after you
+  re-run its cell.
+- **You sign in once more** after upgrading: the browser's session is now a cookie that no script in
+  the page can read.
 
 ## Upgrading from 1.0.0
 

@@ -50,7 +50,8 @@ can. SVG, JPEG and LaTeX output render from 1.1.0.
   kernel is gone, for example after the server restarts or when the file is opened somewhere else,
   such as on GitHub, a widget shows a placeholder until you run its cell again. JupyterLab can save
   widget state into the file so it renders without a kernel; Zasper does not do this yet.
-- **Notebooks are not signed or trusted.** Zasper does not yet implement Jupyter's notebook trust
-  system. Saved `text/html` output can contain scripts that run when the notebook is opened; that
-  is how Plotly and Bokeh outputs draw themselves. Treat a notebook you did not write like any other
-  downloaded file.
+- **Saved interactive output needs its cell run again.** HTML output saved in a notebook is
+  sanitised when the notebook opens, so its scripts do not run: they would run as you, and Zasper
+  does not implement Jupyter's notebook signing to tell a trusted file from any other. Output from
+  cells you run in this session is not affected. A Plotly or Bokeh plot saved in the file draws
+  itself again once you re-run its cell.

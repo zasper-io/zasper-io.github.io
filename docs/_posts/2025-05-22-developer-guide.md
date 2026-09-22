@@ -43,6 +43,8 @@ Check that it worked:
 ```
 % zasper -h
 Usage of zasper:
+  -allow-host string
+    	other host names a server on loopback answers to, comma-separated, such as a reverse proxy's
   -cwd string
     	base directory of project (default ".")
   -debug
