@@ -38,16 +38,15 @@ found or how to install one.
 
 Notebooks get them too. IPython magics are masked out so they don't show up as errors, and imports
 are resolved against the kernel's own interpreter, so what the checker knows is what the notebook
-can import.
-[LANGUAGE-SERVERS.md](https://github.com/zasper-io/zasper/blob/main/docs/LANGUAGE-SERVERS.md) has
-the details.
+can import. [Language Servers](/docs/language-servers) has the details.
 
 ## Search and Replace
 
 **Search in Files** looks across the whole project, with replace and a preview of each file's
 changes, and it includes what is in editors you haven't saved yet. It uses ripgrep when it is
 installed and gives the same answers without it. Inside a notebook, **Find and Replace** searches
-the cells and their outputs, and replaces in the cells.
+the cells and their outputs, and replaces in the cells. [Search and
+Replace](/docs/search-and-replace) covers both.
 
 ## Notebooks
 

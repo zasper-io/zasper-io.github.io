@@ -26,9 +26,11 @@ choose **Open Terminal Here**. The shell starts in that folder.
 
 {% include tut/terminal.html %}
 
-A terminal opens as a tab, beside your notebooks and files — see [Files and
-Tabs](/docs/files-and-tabs) for what that means for closing and reopening them. Open as many as you
-want; each one is its own shell.
+A terminal opens in the **Terminals** panel under the editor, beside Problems and References, so the
+notebook you are working on stays in view above it. **Toggle Terminal** in the command palette shows
+and hides the panel. Open as many as you want, with the **+** in the panel's header; each one is its
+own shell, and the list beside it says where each was started and switches between them. Close one
+from its row in that list.
 
 ## Which Shell It Runs
 

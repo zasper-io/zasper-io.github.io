@@ -1,7 +1,7 @@
 ---
 layout: docs
 title:  "Files and Tabs"
-description: "How notebooks, Markdown, PDFs, terminals and diffs open in Zasper, how tabs behave, and which of them come back when you return."
+description: "How notebooks, Markdown, PDFs and diffs open in Zasper, how tabs behave, and which of them come back when you return."
 date:   2026-09-14 09:00:00 +0530
 index: 9
 group: Guides
@@ -10,9 +10,10 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-Everything you open in Zasper, whether a notebook, a file, a terminal, a diff or the Help page, opens
-in a tab. This page covers how each kind of file opens, how tabs behave, and what Zasper remembers
-between visits.
+Everything you open in Zasper, whether a notebook, a file, a diff or the Help page, opens in a tab.
+Terminals are the exception: they open in the panel under the editor, as
+[Work in a Terminal](/docs/work-in-a-terminal) describes. This page covers how each kind of file
+opens, how tabs behave, and what Zasper remembers between visits.
 
 ## How Files Open
 
