@@ -1743,6 +1743,31 @@ it is the one interactive thing on the page that works with the script blocked.
     grid-template-columns: 1fr;
   }
 
+  /* Nine one-line cards stacked are a screen and a half of scroll; swiped, they are one row. */
+  .mk-minis-carousel {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: -24px;
+    padding-inline: 24px;
+    scroll-padding-inline: 24px;
+  }
+
+  .mk-minis-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mk-minis-carousel .mk-mini {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+    padding: 16px;
+    border: 1px solid var(--z-border);
+    border-radius: 8px;
+    background: var(--z-bg-panel);
+  }
+
   /* One column, in reading order, rather than two columns' worth of rows stacked out of sequence. */
   .mk-checks {
     grid-auto-flow: row;

@@ -9,7 +9,7 @@
 # `documentation-todos.md`.
 
 title: "Zasper: High Performance IDE for Jupyter Notebooks"
-description: "Zasper is a high-performance IDE for Jupyter notebooks: up to 5× less CPU and 40× less RAM than Jupyter Server, in one static binary with no runtime."
+description: "Zasper is a high-performance IDE for Jupyter notebooks: up to 5× less CPU and 40× less RAM than Jupyter Server, in one static binary."
 
 # The two sizes, in the one place that states them. Everything that quotes a size reads these, because
 # a number written into five pages is a number that will be right in three of them after the next
