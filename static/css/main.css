@@ -859,8 +859,11 @@ three steps and the three ways into the project all draw the same box — so it 
   color: var(--z-fg-subtle);
 }
 
+/* Rows from the top: the groups are stretched to the tallest one, and a grid spreads a short group's
+   links down that height otherwise. */
 .mk-footer-group {
   display: grid;
+  align-content: start;
   gap: 8px;
 }
 
