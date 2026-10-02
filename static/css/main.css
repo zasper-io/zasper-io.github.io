@@ -1020,12 +1020,12 @@ three steps and the three ways into the project all draw the same box — so it 
   margin-top: 4px;
 }
 
-.mk-docs-body a,
+.mk-docs-body a:not(.mk-button),
 .mk-dl a:not(.mk-button) {
   color: var(--z-fg-accent);
 }
 
-.mk-docs-body img {
+.mk-docs-body img:not(.mk-shot img) {
   border-radius: 6px;
   border: 1px solid var(--z-border);
   margin: 8px 0 20px;
@@ -3028,4 +3028,200 @@ drawing, unported, with the candidates they belong to.
   .mk-dl-os-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/*
+The changelog, /changelog/. Ported from the prototype's `changelog.html` with its rules unchanged. The docs page's grid with other things in
+its rails: the versions down the left, and the ways to follow releases down the right. The prose is
+`.mk-docs-body`, the upgrade notes are `.mk-docs-note` and a highlight's picture is `.mk-shot`, so what is
+new here is the version heading, the folded list of every change, and the email form.
+*/
+
+/* A version and its date on one row, the date quieter: the rail is read for the version. */
+.mk-changelog-versions a {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mk-changelog-versions em {
+  color: var(--z-fg-subtle);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.mk-changelog-entry {
+  padding: 32px 0 8px;
+  border-top: 1px solid var(--z-border-subtle);
+  scroll-margin-top: 24px;
+}
+
+.mk-changelog-entry:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.mk-changelog-entry h2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 0 0 4px;
+}
+
+.mk-changelog-date {
+  margin: 0 0 16px;
+  color: var(--z-fg-subtle);
+  font-size: 14px;
+}
+
+.mk-changelog-entry h3 {
+  margin: 24px 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* The note box holds a list here, which the docs' one-paragraph notes never did. */
+.mk-changelog-entry .mk-docs-note ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.mk-changelog-entry .mk-docs-note li + li {
+  margin-top: 4px;
+}
+
+.mk-changelog-figure {
+  margin: 0 0 16px;
+}
+
+.mk-changelog-figure figcaption {
+  margin-top: 10px;
+  color: var(--z-fg-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Every change, folded: the count says how much is behind it before anyone opens it. */
+.mk-changelog-all {
+  margin: 8px 0 16px;
+  border: 1px solid var(--z-border-subtle);
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.mk-changelog-all summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.mk-changelog-all summary span {
+  color: var(--z-fg-subtle);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.mk-changelog-all[open] summary {
+  border-bottom: 1px solid var(--z-border-subtle);
+}
+
+.mk-changelog-all h4 {
+  margin: 14px 14px 4px;
+  color: var(--z-fg-subtle);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mk-changelog-all ul {
+  margin: 0 14px 12px;
+}
+
+.mk-changelog-more {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* A pre-release with nothing to say is a line, not a section. */
+.mk-changelog-minor {
+  padding: 16px 0 0;
+}
+
+.mk-changelog-minor h2 {
+  font-size: 18px;
+}
+
+.mk-changelog-follow a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mk-changelog-follow svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.mk-changelog-follow p {
+  margin: 12px 0 0;
+  color: var(--z-fg-subtle);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* How to get release emails: GitHub sends them, so this is three steps and a link rather than a form. */
+.mk-changelog-emails {
+  margin: 40px 0 0;
+  padding: 20px;
+  border: 1px solid var(--z-border);
+  border-radius: 8px;
+  background: var(--z-bg-panel);
+}
+
+.mk-changelog-emails h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.mk-changelog-emails p {
+  margin: 0 0 12px;
+  color: var(--z-fg-muted);
+  font-size: 14px;
+}
+
+.mk-changelog-emails ol {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  font-size: 15px;
+}
+
+.mk-changelog-emails-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+}
+
+/* On a phone the versions would stand between the reader and the newest release, which is the one they
+   came for; each heading carries its anchor, so the rail is a convenience the narrow page can lose. */
+@media (max-width: 760px) {
+  .mk-changelog-versions {
+    display: none;
+  }
+}
+
+/* The one sentence under the title that says what the page is for. */
+.mk-docs-lede {
+  margin: 0 0 32px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--z-fg-muted);
 }

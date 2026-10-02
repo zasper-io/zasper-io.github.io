@@ -1,0 +1,131 @@
+{% include head.html %}
+{% include nav.html %}
+
+{% assign releases = site.data.releases %}
+{% capture alert_icon %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>{% endcapture %}
+{% capture feed_icon %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12h-5" /><path d="M15 8h-5" /><path d="M19 17V5a2 2 0 0 0-2-2H4" /><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" /></svg>{% endcapture %}
+{% capture eye_icon %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /><circle cx="12" cy="12" r="3" /></svg>{% endcapture %}
+
+{% comment %}
+Drawn in the prototype as changelog.html. Every release comes from _data/releases.yml, so a release
+adds an entry there and nothing else. Each heading's id is the bare version, `#2.0.0`, which is the
+link latest.json gives the app as its release notes.
+{% endcomment %}
+
+<div class="mk-docs">
+  <nav class="mk-docs-side mk-changelog-versions" aria-label="Releases">
+    {% assign group = "" %}
+    {% for release in releases %}
+      {% if release.prerelease %}
+        {% assign this_group = "Pre-releases" %}
+      {% else %}
+        {% assign this_group = release.version | split: "." | first | append: ".x" %}
+      {% endif %}
+      {% if this_group != group %}
+        {% unless forloop.first %}</div>{% endunless %}
+        <div class="mk-docs-group">
+          <span class="mk-docs-group-name">{{ this_group }}</span>
+        {% assign group = this_group %}
+      {% endif %}
+      <a {% if forloop.first %}class="is-current"{% endif %} href="#{{ release.version }}">{{ release.version }} <em>{{ release.date | date: "%-d %b %Y" }}</em></a>
+      {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+  </nav>
+
+  <article class="mk-docs-body">
+    <h1>{{ page.title }}</h1>
+    <p class="mk-docs-lede">Every release of Zasper, newest first. Zasper tells you itself when there is a newer one.</p>
+
+    {% for release in releases %}
+      <section class="mk-changelog-entry{% if release.prerelease %} mk-changelog-minor{% endif %}" id="{{ release.version }}">
+        <h2>
+          {{ release.version }}
+          {% if forloop.first %}<span class="z-badge z-badge-accent">Latest</span>{% endif %}
+          {% if release.major %}<span class="z-badge">Major</span>{% endif %}
+        </h2>
+        {% if release.prerelease %}
+          <p class="mk-changelog-date">{{ release.date | date: "%-d %B %Y" }} · {{ release.summary }}</p>
+        {% else %}
+          <p class="mk-changelog-date">{{ release.date | date: "%-d %B %Y" }}</p>
+          {{ release.summary | markdownify }}
+
+          {% if release.upgrading %}
+            <div class="mk-docs-note">
+              {{ alert_icon }}
+              <div>
+                <p><strong>Upgrading from {{ release.upgrading_from }}</strong></p>
+                <ul>
+                  {% for item in release.upgrading %}<li>{{ item | markdownify | remove: "<p>" | remove: "</p>" }}</li>{% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if release.shot %}
+            <h3>Highlights</h3>
+            <figure class="mk-changelog-figure">
+              <div class="mk-shot">
+                <div class="mk-shot-bar">
+                  <span class="mk-shot-dot"></span>
+                  <span class="mk-shot-label">{{ release.shot.label }}</span>
+                </div>
+                <img src="{{ release.shot.image }}" alt="{{ release.shot.alt }}" width="2105" height="1362" loading="lazy" />
+              </div>
+              <figcaption>{{ release.shot.caption | markdownify | remove: "<p>" | remove: "</p>" }}</figcaption>
+            </figure>
+          {% endif %}
+
+          {% if release.highlights %}
+            <ul>
+              {% for item in release.highlights %}<li>{{ item | markdownify | remove: "<p>" | remove: "</p>" }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+
+          {% if release.changes %}
+            <details class="mk-changelog-all">
+              <summary>
+                Every change in {{ release.version }}
+                <span>{{ release.changes.added.size }} added · {{ release.changes.changed.size }} changed · {{ release.changes.fixed.size }} fixed</span>
+              </summary>
+              {% assign kinds = "added,changed,fixed" | split: "," %}
+              {% for kind in kinds %}
+                {% assign items = release.changes[kind] %}
+                {% if items %}
+                  <h4>{{ kind | capitalize }}</h4>
+                  <ul>
+                    {% for item in items %}<li>{{ item | markdownify | remove: "<p>" | remove: "</p>" }}</li>{% endfor %}
+                  </ul>
+                {% endif %}
+              {% endfor %}
+            </details>
+          {% else %}
+            <a class="mk-changelog-more" href="https://github.com/zasper-io/zasper/releases/tag/v{{ release.version }}">Every change in {{ release.version }}, on GitHub</a>
+          {% endif %}
+        {% endif %}
+      </section>
+    {% endfor %}
+
+    <div class="mk-changelog-emails" id="emails">
+      <h2>Release emails, from GitHub</h2>
+      <p>GitHub emails you each release's notes, and nothing else, once you watch the repository for releases. It needs a GitHub account; the Atom feed does not.</p>
+      <ol>
+        <li>Open <strong>Watch</strong> on the repository.</li>
+        <li>Choose <strong>Custom</strong>.</li>
+        <li>Tick <strong>Releases</strong>, then <strong>Apply</strong>.</li>
+      </ol>
+      <div class="mk-changelog-emails-actions">
+        <a class="mk-button" href="https://github.com/zasper-io/zasper" target="_blank">Watch on GitHub</a>
+        <a href="https://github.com/zasper-io/zasper/releases.atom">Atom feed</a>
+      </div>
+    </div>
+  </article>
+
+  <aside class="mk-docs-toc mk-changelog-follow" aria-label="Follow releases">
+    <span class="mk-docs-group-name">Follow releases</span>
+    <a href="https://github.com/zasper-io/zasper/releases.atom">{{ feed_icon }} Atom feed</a>
+    <a href="#emails">{{ eye_icon }} Release emails</a>
+    <p>Emails come from GitHub: Watch, then Custom, then Releases.</p>
+  </aside>
+</div>
+
+{% include footer.html %}

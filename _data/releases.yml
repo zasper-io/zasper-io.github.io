@@ -1,0 +1,97 @@
+# Every release, newest first, for /changelog/. A release adds an entry at the top, written from that
+# version's section of CHANGELOG.md in zasper-io/zasper. The first entry is the one marked Latest.
+#
+# `upgrading`, `highlights` and `changes` are lists of Markdown. `shot` is for a release worth showing
+# and is left out otherwise.
+
+- version: "2.0.0"
+  date: 2026-09-22
+  major: true
+  summary: >-
+    Language servers, search across the project, and a terminal panel under the editor. It is a major
+    release because two parts of the documented API changed incompatibly, both as part of moving the
+    browser's session into an `HttpOnly` cookie. The app upgrades without any action.
+  upgrading_from: "1.1.0"
+  upgrading:
+    - "WebSocket routes no longer accept `?token=<jwt>`. Send `Authorization: Bearer <jwt>` on the upgrade instead."
+    - "`protected` is no longer in `/api/config` or `/api/info`. Treat a missing field as `true`."
+    - You will be asked to sign in once.
+    - A notebook's kernel starts in the notebook's folder, as in Jupyter.
+  shot:
+    image: /static/images/changelog/terminal-panel.png
+    label: Terminal panel
+    alt: A notebook open in Zasper, with a terminal panel beneath it running a Python script
+    caption: "**A terminal panel below the editor**, so a shell and the code it runs against are on screen together."
+  highlights:
+    - "**Language servers** for Python, Go, JavaScript and TypeScript, Rust, C and C++, R and Julia, in files and in notebooks."
+    - "**Search across the project**, with replace and a preview."
+    - "**Find and replace in a notebook**, across cells and outputs."
+    - "**Export a notebook** as an HTML page, Markdown or a script."
+  changes:
+    added:
+      - "`--allow-host` and `ZASPER_ALLOWED_HOSTS`, for serving Zasper behind a reverse proxy."
+      - "Language servers: diagnostics, completion, hover, go to definition, references, rename, symbols, inlay hints and format on save."
+      - Search across the project, with replace and the matches in unsaved editors included.
+      - Find and replace in a notebook, across cells and outputs.
+      - Export a notebook as an HTML page, Markdown or a script.
+      - A table of contents beside a notebook's cells.
+      - Command and edit modes in notebooks, with Jupyter's keys.
+      - Choose a Python interpreter, and run a Python file in the terminal with it.
+      - A terminal panel below the editor.
+      - "Editor settings, and `.editorconfig` files are honoured."
+      - The status bar shows and changes a file's language, indentation and line endings.
+      - Go to line and recent files in the command palette.
+      - A file changed on disk updates its editor, and your unsaved edits are kept.
+      - A Settings switch for loading widget libraries from the CDN.
+      - A notice when your session ends or the server stops.
+      - The startup banner is in colour.
+    changed:
+      - Stopping a kernel asks it to shut down instead of killing it.
+      - A kernel accepts more than one connection at a time.
+      - Switching themes no longer animates every colour on the page.
+      - Terminals are no longer offered on Windows, where they have never worked.
+    fixed:
+      - A kernel that failed to start left its connection file behind.
+      - Saving a file reset its permissions.
+      - Saving a file that is a link replaced the link with a plain file.
+      - A delete request naming the project folder itself was not refused.
+      - "On Windows, language servers in a project's `.venv` were not found."
+      - "Notebooks with Plotly, Vega or other `application/*+json` outputs did not open."
+
+- version: "1.1.0"
+  date: 2026-09-14
+  summary: "Sign-in, tightened: every server requires the access token, and opens signed in."
+  upgrading_from: "1.0.0"
+  upgrading:
+    - Every server now requires the access token.
+    - "`ZASPER_JWT_SECRET` has been removed. Set `ZASPER_ACCESS_TOKEN` to a fixed token instead."
+    - Zasper opens your browser on startup, already signed in. Pass `--no-browser` to turn it off.
+  highlights:
+    - "`ZASPER_ACCESS_TOKEN`, to fix the access token."
+    - A sign-in link in the startup banner.
+    - Setting up a Python kernel from the Launcher.
+
+- version: "1.0.0"
+  date: 2026-09-10
+  summary: >-
+    The first stable release. Zasper's HTTP and WebSocket API, its configuration file and its
+    command-line flags are covered by semantic versioning from here on: they will not break within 1.x.
+  shot:
+    image: /static/images/changelog/source-control.png
+    label: Source control
+    alt: The source control panel listing two changed files, beside a side-by-side diff of one of them
+    caption: "**Source control.** Staging, commits, branches, history and side-by-side diffs, without leaving the notebook."
+  highlights:
+    - "**Notebook outputs:** ipywidgets, Plotly, tables and LaTeX."
+    - "**A command palette** for files and commands."
+    - "**Nine themes** from one set of design tokens."
+
+- version: "0.2.0-beta"
+  date: 2025-06-10
+  prerelease: true
+  summary: Pre-release.
+
+- version: "0.1.0-alpha"
+  date: 2025-05-23
+  prerelease: true
+  summary: First public pre-release.
