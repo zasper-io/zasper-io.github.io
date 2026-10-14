@@ -35,7 +35,7 @@ It implements [Jupyter's wire protocol](https://jupyter-client.readthedocs.io/en
 * **Resilience**: Zasper only failed under extremely high loads (64 kernels at 100 RPS per kernel)
 * **Recovery**: Zasper recovers more gracefully from overload conditions
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/assets/summary_resources.png)
+![Average CPU and memory use of Zasper and Jupyter Server from 2 to 100 kernels at 10 RPS per kernel](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/assets/summary_resources.png)
 
 Note: Jupyter Server powers Jupyterlab. Hence, I use the terms interchangeably.
 
@@ -70,7 +70,7 @@ For this benchmarking exercise, we focus only on:
 
 A WebSocket is established between the user's browser and the server, allowing real-time, bi-directional communication. The client send the messages over the websocket. When the jupyter_server receives this message it puts this message on a `shell channel` over ZeroMQ. This message when received by the kernel  triggers a computation in the kernel. The kernel emits the output on `iopub channel` over ZeroMQ. This message is received by Jupyter server and the output is put on websocket.
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/assets/kernel_communication.svg)
+![Diagram: the client talks to Jupyter Server or Zasper, which reaches the Jupyter kernel over five ZeroMQ channels: control, shell, IOPub, stdin and heartbeat](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/assets/kernel_communication.svg)
 
 
 ## Methodology
@@ -186,7 +186,7 @@ python3 visualize_resources_summary.py --delay=10
 
 Note: A typical IPython kernel consumes around 80 MB of RAM on average.
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/assets/idle_ram.png)
+![macOS Activity Monitor memory panel on the M4 Mac mini with 16 GB of physical memory](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/assets/idle_ram.png)
 
 (RAM usage on M4 Mac mini)
 
@@ -206,7 +206,7 @@ Message Sent Throughput = num_of_kernels * RPS per kernel
 
 For every `execute_request` sent to the kernel, the kernel replies with 5 messages.
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/assets/request_reply.png)
+![One execute_request on the shell channel followed by the five messages the kernel sends back: status, execute_input, execute_result, status and execute_reply](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/assets/request_reply.png)
 
 ```
 Message Received Throughput = 5 * Message Sent Throughput
@@ -244,27 +244,27 @@ The graph shows a clear performance difference between Zasper and Jupyter Server
 
 ### 2 kernels | 10 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_2kernels.png)
+![Zasper and Jupyter Server at 2 kernels and 10 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_2kernels.png)
 
 ### 4 kernels | 10 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_4kernels.png)
+![Zasper and Jupyter Server at 4 kernels and 10 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_4kernels.png)
 
 ### 8 kernels | 10 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_8kernels.png)
+![Zasper and Jupyter Server at 8 kernels and 10 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_8kernels.png)
 
 ### 16 kernels | 10 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_16kernels.png)
+![Zasper and Jupyter Server at 16 kernels and 10 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_16kernels.png)
 
 ### 32 kernels | 10 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_32kernels.png)
+![Zasper and Jupyter Server at 32 kernels and 10 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_32kernels.png)
 
 ### 64 kernels | 10 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_64kernels.png)
+![Zasper and Jupyter Server at 64 kernels and 10 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_64kernels.png)
 
 **The messages received throughput for Jupyter Server starts to drop here.**
 
@@ -272,31 +272,31 @@ The graph shows a clear performance difference between Zasper and Jupyter Server
 
 ### 100 kernels | 10 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_100kernels.png)
+![Zasper and Jupyter Server at 100 kernels and 10 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/benchmark_result_100kernels.png)
 
 **The messages received throughput  for Jupyter Server drops to 0.**
 
 **All Jupyter kernels connections crash at this point.**
 
 ### Resource Usage summary | 10 RPS per kernel
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/summary_resources.png)
+![Average and maximum CPU and memory use of Zasper and Jupyter Server by number of kernels at 10 RPS per kernel](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/100ms/summary_resources.png)
 
 
 ### 2 kernels | 100 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_2kernels.png)
+![Zasper and Jupyter Server at 2 kernels and 100 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_2kernels.png)
 
 ### 4 kernels | 100 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_4kernels.png)
+![Zasper and Jupyter Server at 4 kernels and 100 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_4kernels.png)
 
 ### 8 kernels | 100 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_8kernels.png)
+![Zasper and Jupyter Server at 8 kernels and 100 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_8kernels.png)
 
 ### 16 kernels | 100 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_16kernels.png)
+![Zasper and Jupyter Server at 16 kernels and 100 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_16kernels.png)
 
 **The messages received throughput for Jupyter Server starts to drop here.**
 
@@ -304,7 +304,7 @@ The graph shows a clear performance difference between Zasper and Jupyter Server
 
 ### 32 kernels | 100 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_32kernels.png)
+![Zasper and Jupyter Server at 32 kernels and 100 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_32kernels.png)
 
 **The messages received throughput for Jupyter Server starts to drop even more.**
 
@@ -312,14 +312,14 @@ The graph shows a clear performance difference between Zasper and Jupyter Server
 
 ### 64 kernels | 100 RPS per kernel
 
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_64kernels.png)
+![Zasper and Jupyter Server at 64 kernels and 100 RPS per kernel: CPU, memory, messages sent and received, and throughput over time](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/benchmark_result_64kernels.png)
 
 **The messages received throughput for  both Zasper and Jupyter Server falls to 0.**
 
 **At this point IPython kernels get overwhelmed and ZeroMQ queues are completely full**
 
 ### Resource Usage summary | 100 RPS per kernel
-![](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/summary_resources.png)
+![Average and maximum CPU and memory use of Zasper and Jupyter Server by number of kernels at 100 RPS per kernel](https://raw.githubusercontent.com/zasper-io/zasper-benchmark/refs/heads/main/plots/10ms/summary_resources.png)
 
 
 ### Observations
@@ -354,7 +354,7 @@ as the **Jupyter kernel** doesn't consume the messages fast and the queue fills 
   1. Message queues filling up faster because execute_reply messages are not consumed quickly enough from the ZeroMQ queues.
   2. Tornado coroutines running on a single core, combined with Python's limited scalability, result in websocket connection failures between the client and the server.
   3. Resource contention between Tornado, ZeroMQ, and the Jupyter kernels, competing for CPU and RAM.
-  3. Garbage collection (GC) further degrading performance under load.
+  4. Garbage collection (GC) further degrading performance under load.
 
 
 * At 64 kernels, 10RPS per kernel, JupyterLab stops to loose kernel connection and at 100 kernels, 10 RPS per kernel it looses all kernel connections.
