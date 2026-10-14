@@ -39,6 +39,10 @@ JupyterLab's Record timing writes it, so a notebook opened later still says how 
 Shift-Enter runs a cell and moves to the next, and the next cell stays in view while the output above
 it grows.
 
+In a cell, Tab completes from the kernel; **Settings → Notebook → Insert a tab in a cell** makes it
+indent instead. **Settings → Notebook → Show the table of contents** puts every notebook's headings
+in a column beside its cells; the toolbar's button turns it on for one notebook.
+
 ## Runs That Outlive the Tab
 
 A cell's run belongs to the server, not to the browser tab that started it. Start a long cell, close
@@ -113,3 +117,6 @@ can. SVG, JPEG and LaTeX output render from 1.1.0.
   does not implement Jupyter's notebook signing to tell a trusted file from any other. Output from
   cells you run in this session is not affected. A Plotly or Bokeh plot saved in the file draws
   itself again once you re-run its cell.
+- **Widgets from outside ipywidgets load their code from the internet.** A widget library such as
+  bqplot or ipyleaflet gets its code from cdn.jsdelivr.net. With **Settings → Privacy → Load widget
+  libraries from the internet** turned off, those widgets are not shown.
