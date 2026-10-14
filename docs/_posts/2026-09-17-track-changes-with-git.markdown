@@ -25,8 +25,8 @@ status bar, which is the one place the branch is visible whatever tab is in fron
 The panel is the branch and its three sync buttons, then a message box, then the file lists.
 **Staged** is what your next commit will contain, **Changes** is what git knows about but has not been
 told to include, **Untracked** is what it has never seen, and **History** is what is already in. Each
-heading counts what is under it, and a list with nothing in it is not drawn at all — so a clean
-repository is a panel with a message box and a history.
+heading but **History** counts what is under it, and a list with nothing in it is not drawn at all —
+so a clean repository is a panel with a message box and a history.
 
 {% include tut/git-panel.html %}
 
@@ -60,8 +60,8 @@ same actions for everything in that list at once, and **Stage All Changes** is i
 A merge conflict gets a list of its own at the top, and the action offered there is **Stage** —
 staging a conflicted file is how git is told it has been resolved.
 
-Discard is the one that cannot be undone, so it asks first — and asks twice for a file git has never
-seen, since discarding one of those deletes it.
+Discard is the one that cannot be undone, so it asks first, once. For a file git has never seen, that
+question also says the file will be deleted, since git has no version of it to put back.
 
 Write a message in the box above the lists and press **Commit**. With a remote configured there is a
 second button, **Commit & Push**, which does both in one go. While a commit, a stage or a pull is
