@@ -18,7 +18,7 @@ Python environments — a good fit for use with Zasper.
 This guide shows how to create and configure a Python project using UV and register it as a
 Jupyter kernel for use in Zasper.
 
-### Step 1: Create a New Project
+## Create a New Project
 
 Start by initializing a new Python project with UV:
 
@@ -31,7 +31,7 @@ uv run main.py   # creates a .venv directory automatically
 The `.venv` directory is your virtual environment — an isolated space where you can install
 dependencies without affecting your global Python installation.
 
-### Step 2: Install Packages
+## Install Packages
 
 Install the `ipykernel` package, which allows the environment to be used as a kernel in
 Jupyter-based tools like Zasper:
@@ -50,7 +50,7 @@ registration needed (see [Trusted Folders](/docs/trusted-folders)). Zasper's **S
 kernel** button does steps 1 and 2 for you when a project has no kernel yet — see [Installing
 Jupyter Kernels](/docs/installing-jupyter-kernels).
 
-### Step 3: Register the Kernel (Optional)
+## Register the Kernel (Optional)
 
 Register the environment only if you want to use it from other projects too, or from Jupyter itself:
 

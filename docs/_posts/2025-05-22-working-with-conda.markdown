@@ -17,7 +17,7 @@ NumPy need to be installed efficiently.
 
 Follow the steps below to create a new environment and register it as a Jupyter kernel.
 
-### Step 1: Create a New Environment
+## Create a New Environment
 
 ```bash
 conda create --name torchEnv
@@ -30,7 +30,7 @@ needed:
 conda create --name torchEnv python=3.11
 ```
 
-### Step 2: Activate the Environment
+## Activate the Environment
 
 ```bash
 conda activate torchEnv
@@ -38,7 +38,7 @@ conda activate torchEnv
 
 After activation, any packages you install or code you run will use this environment.
 
-### Step 3: Install Required Packages
+## Install Required Packages
 
 Install the `ipykernel` package, which is needed to register the environment as a Jupyter kernel:
 
@@ -48,7 +48,7 @@ conda install -c conda-forge ipykernel
 
 You can also install any additional dependencies here, such as `numpy`, `torch`, or `pandas`.
 
-### Step 4: Register the Kernel
+## Register the Kernel
 
 Once `ipykernel` is installed, run the following to make the environment available in Jupyter and
 Zasper:
