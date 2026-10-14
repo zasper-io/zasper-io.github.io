@@ -94,9 +94,19 @@ ZASPER_ACCESS_LOG=1 zasper        # log every HTTP request
 make test
 ```
 
-This runs the frontend tests and the Go tests, with the race detector on. The end-to-end suite runs
-the frontend against a real server; see
+This runs the frontend tests and the Go tests, with the race detector on. `make test-go` and
+`make test-frontend` run one half each, and `make e2e` runs the end-to-end suite, which drives the
+frontend against a real server; see
 [e2e/README.md](https://github.com/zasper-io/zasper/blob/main/e2e/README.md).
+
+## Repository Layout
+
+- `internal/`: the Go server, one package per area, such as `kernel`, `content`, `lsp` and `trust`
+- `ui/`: the React frontend, built with Vite and embedded in the binary
+- `e2e/`: the Playwright browser tests
+- `docs/`: developer notes on the API and on individual features
+- `docker/`: the Dockerfile and a Compose example
+- `scripts/`: release helpers that sync the version and extract changelog sections
 
 ## Further Reading
 
