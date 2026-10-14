@@ -67,7 +67,7 @@ tab's footer says how many of them are shown.
 | Hide a column | **Hide column** in its menu; **Show N hidden** brings them back |
 | Move a column | **Move left** or **Move right** in its menu, or drag its header onto another |
 | Resize a column | Drag the right edge of its header |
-| Copy a value | Click the cell and press Mod-C; the arrow keys move the selection |
+| Copy a value | Click the cell and press `⌘C` / `Ctrl+C`; the arrow keys move the selection |
 
 A copied value is the one the kernel sent, not the rounded one on screen.
 
