@@ -103,7 +103,8 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
       To check a download, fetch
       <a href="https://github.com/zasper-io/zasper/releases/download/v{{ release.version }}/zasper_{{ release.version }}_checksums.txt">zasper_{{ release.version }}_checksums.txt</a>
       and run <code>sha256sum -c zasper_{{ release.version }}_checksums.txt --ignore-missing</code>
-      beside it. Older versions are on
+      beside it. On Windows, run <code>Get-FileHash</code> on the download in PowerShell and compare
+      the hash with its line in that file. Older versions are on
       <a href="https://github.com/zasper-io/zasper/releases">GitHub Releases</a>.
     </p>
   </div>
