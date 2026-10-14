@@ -17,6 +17,9 @@
     - "`protected` is no longer in `/api/config` or `/api/info`. Treat a missing field as `true`."
     - You will be asked to sign in once.
     - A notebook's kernel starts in the notebook's folder, as in Jupyter.
+    - HTML outputs saved in a notebook no longer run their scripts when it opens. Re-run the cell to bring back an interactive plot.
+    - "A server bound to `127.0.0.1` or `localhost` answers only to a localhost address. Name a reverse proxy's host with `--allow-host` or `ZASPER_ALLOWED_HOSTS`."
+    - Request bodies are capped, at 512 MiB for the API (uploads excepted) and 16 KiB for sign-in.
   shot:
     image: /static/images/changelog/terminal-panel.png
     label: Terminal panel
@@ -56,7 +59,7 @@
       - Saving a file that is a link replaced the link with a plain file.
       - A delete request naming the project folder itself was not refused.
       - "On Windows, language servers in a project's `.venv` were not found."
-      - "Notebooks with Plotly, Vega or other `application/*+json` outputs did not open."
+      - "Notebooks with Plotly, Vega or other `application/*+json` outputs were reported as not matching nbformat's schema."
 
 - version: "1.1.0"
   date: 2026-09-14
@@ -76,6 +79,11 @@
   summary: >-
     The first stable release. Zasper's HTTP and WebSocket API, its configuration file and its
     command-line flags are covered by semantic versioning from here on: they will not break within 1.x.
+  upgrading_from: "0.2.0-beta"
+  upgrading:
+    - "The server binds `127.0.0.1` by default. To reach it from another machine, start it with `--host=0.0.0.0` and `--protected=true`."
+    - "`DELETE /ws/kernels/{kernel_id}` has been removed. Call `DELETE /api/kernels/{kernelId}` instead."
+    - "Kernel connection files moved from the system temp directory to `~/.zasper/runtime`."
   shot:
     image: /static/images/changelog/source-control.png
     label: Source control
