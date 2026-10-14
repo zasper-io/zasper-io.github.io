@@ -10,16 +10,14 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-A `.ipynb` file is for someone who has Jupyter. For everyone else — a colleague who wants to read the
-result, a reviewer who wants the code, a repository that wants a plain script — Zasper writes the
-notebook out in three other shapes.
+A `.ipynb` file is for someone who has Jupyter. For anyone else, Zasper can export the notebook as an
+HTML page, as Markdown or as a script.
 
 {% include tut/sprite.html %}
 
 ## The Export Menu
 
-The button is at the end of the notebook's toolbar, past the kernel and separated from it: everything
-to its left does something to the notebook, and this one takes a copy of it away.
+The button is at the end of the notebook's toolbar, past the kernel and set apart from it.
 
 {% include tut/export-menu.html %}
 
@@ -66,7 +64,7 @@ read the logic without the JSON around it.
 Every export is a copy: the notebook itself is untouched. The HTML page and the Markdown cannot be
 opened back up as a notebook. The script is in jupytext's percent format, `# %%` before each cell,
 which VS Code and jupytext reopen as cells, though without the outputs. To keep working on it, keep
-the `.ipynb` — the exports are for the people who are not going to run it.
+the `.ipynb`.
 
 [Notebook Support](/docs/notebook-support) lists what renders in a notebook and therefore what can
 appear in an export, and [Track Changes with Git](/docs/track-changes-with-git) covers keeping the
