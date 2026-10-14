@@ -46,8 +46,10 @@ project's own `.venv` with `ipykernel` in it appears first in the Launcher as **
 (.venv)**, with no registration needed (see [Trusted Folders](/docs/trusted-folders)). Choose it to
 run code in the new environment.
 
-When Zasper finds no kernel at all, the Launcher offers **Set up a Python kernel**, which creates the
-`.venv` and installs `ipykernel` for you. See [Installing Jupyter
+When Zasper finds no kernel at all, the Launcher offers **Set up a Python kernel**, which creates
+the `.venv` and installs `ipykernel` for you, with `uv venv` and `uv pip install` when uv is
+installed. It does not run `uv init` or record `ipykernel` in `pyproject.toml`, so in a uv project
+run `uv add --dev ipykernel` afterwards, or the next `uv sync` removes it. See [Installing Jupyter
 Kernels](/docs/installing-jupyter-kernels).
 
 ## Register the Kernel (Optional)
