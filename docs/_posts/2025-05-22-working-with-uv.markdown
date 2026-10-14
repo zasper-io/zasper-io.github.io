@@ -31,33 +31,26 @@ uv run main.py   # creates a .venv directory automatically
 The `.venv` directory is your virtual environment — an isolated space where you can install
 dependencies without affecting your global Python installation.
 
-### Step 2: Activate the Virtual Environment
-
-To use the environment in your terminal session:
-
-```bash
-source .venv/bin/activate
-```
-
-This activates the environment so that any Python or pip commands you run use the local `.venv`.
-
-### Step 3: Install Packages
+### Step 2: Install Packages
 
 Install the `ipykernel` package, which allows the environment to be used as a kernel in
 Jupyter-based tools like Zasper:
 
 ```bash
-uv pip install ipykernel
+uv add --dev ipykernel
 ```
 
-You can also install any additional libraries your project needs at this stage.
+This records `ipykernel` as a development dependency in `pyproject.toml` and installs it into
+`.venv`, so the next `uv sync` keeps it. uv commands find the project's `.venv` on their own, so
+there is no environment to activate. Add any other libraries your project needs with `uv add`.
 
-If you open this folder in Zasper now, it already lists the environment: a project's own `.venv` with
-`ipykernel` in it appears first in the Launcher as **Python 3.x (.venv)**, with no registration
-needed. Zasper's **Set up a Python kernel** button does steps 1 to 3 for you when a project has no
-kernel yet — see [Installing Jupyter Kernels](/docs/installing-jupyter-kernels).
+If you open this folder in Zasper now and trust it, it already lists the environment: a project's
+own `.venv` with `ipykernel` in it appears first in the Launcher as **Python 3.x (.venv)**, with no
+registration needed (see [Trusted Folders](/docs/trusted-folders)). Zasper's **Set up a Python
+kernel** button does steps 1 and 2 for you when a project has no kernel yet — see [Installing
+Jupyter Kernels](/docs/installing-jupyter-kernels).
 
-### Step 4: Register the Kernel (Optional)
+### Step 3: Register the Kernel (Optional)
 
 Register the environment only if you want to use it from other projects too, or from Jupyter itself:
 
