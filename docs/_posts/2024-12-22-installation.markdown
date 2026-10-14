@@ -20,14 +20,19 @@ machine, and you use it in your browser: Chrome, Firefox, Safari or Edge.
   `pip install ipykernel` is enough to get started; [Installing Jupyter
   Kernels](/docs/installing-jupyter-kernels) covers other languages. Without a kernel Zasper still
   starts, and the Launcher offers **Set up a Python kernel**, which makes a `.venv` with ipykernel in
-  your project when you click it.
+  your project when you click it, once the folder is trusted.
 - **A modern browser.**
 
-## Homebrew (macOS)
+## Homebrew (macOS, Linux)
 
 ```bash
+brew tap zasper-io/tap
+brew trust zasper-io/tap
 brew install zasper-io/tap/zasper
 ```
+
+Homebrew 6 loads nothing from a third-party tap until you trust it, which is what `brew trust`
+records.
 
 ## Snap (Linux)
 
@@ -35,7 +40,7 @@ brew install zasper-io/tap/zasper
 sudo snap install zasper
 ```
 
-## Conda
+## Conda (Linux x86-64, Windows, Intel Mac)
 
 ```bash
 conda install zasper -c conda-forge
@@ -48,7 +53,7 @@ Download the archive for your platform from the [Downloads page](/downloads/) or
 somewhere on your `PATH`:
 
 ```bash
-tar -xzf zasper-webapp-1.1.0-linux-amd64.tar.gz
+tar -xzf zasper-webapp-{{ site.data.release.version }}-linux-amd64.tar.gz
 sudo mv zasper /usr/local/bin/
 ```
 
@@ -56,8 +61,8 @@ Every release carries a checksum file. To verify what you downloaded, run this i
 has both:
 
 ```bash
-sha256sum -c zasper_1.1.0_checksums.txt --ignore-missing      # Linux
-shasum -a 256 -c zasper_1.1.0_checksums.txt --ignore-missing  # macOS
+sha256sum -c zasper_{{ site.data.release.version }}_checksums.txt --ignore-missing      # Linux
+shasum -a 256 -c zasper_{{ site.data.release.version }}_checksums.txt --ignore-missing  # macOS
 ```
 
 The macOS binaries are signed and notarized by Apple, so Gatekeeper opens them without a warning.
@@ -68,7 +73,7 @@ The macOS binaries are signed and notarized by Apple, so Gatekeeper opens them w
 zasper --version
 ```
 
-This prints `1.1.0`. Then start Zasper in the folder you want to work in:
+This prints `{{ site.data.release.version }}`. Then start Zasper in the folder you want to work in:
 
 ```bash
 cd ~/notebooks
