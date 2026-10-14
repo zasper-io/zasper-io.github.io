@@ -28,6 +28,9 @@ produced a moment ago are in the file you get, which is usually what you want an
 it is not. Nothing is sent anywhere: the conversion happens in the browser and the file lands in your
 downloads.
 
+**Download notebook**, at the bottom of the menu, is the exception. It hands over the `.ipynb` itself
+as it is on disk, so save first if the tab shows unsaved changes.
+
 ## HTML Page
 
 A page anyone can open, with the code highlighted and the output under it, styled in Zasper's own
