@@ -56,6 +56,9 @@ The same grid is used in a cell's output and in a tab. A tab scrolls through the
 of paging, and reads rows as they come into view. It is read again after each run of its notebook.
 **Open in a tab** on a cell's grid opens it as `Out[n]`, with the filters, sort and columns it had.
 
+A frame wider than 200 columns shows its first 200. The grid's bar still counts every column, and a
+tab's footer says how many of them are shown.
+
 | To | Do |
 | --- | --- |
 | Sort | **Sort ascending** or **Sort descending** in the column's menu |
