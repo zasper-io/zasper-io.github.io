@@ -52,22 +52,22 @@ environment from. If uv finds no Python, it downloads one into its own folder.
 
 Zasper lists three kinds of kernel, and the Launcher shows all of them.
 
-**Registered kernels.** Anything with a kernelspec — a folder holding a `kernel.json`, which is what
-`python -m ipykernel install`, `IRkernel::installspec()` and the others create. Zasper looks in the
-same places Jupyter does, in the same order:
+**Registered kernels.** These are the kernels with a kernelspec, the folder holding a `kernel.json`
+that `python -m ipykernel install`, `IRkernel::installspec()` and the others create. Zasper looks in
+the same places Jupyter does, in the same order:
 
 - if `jupyter` is on your `PATH`, the folders `jupyter --paths` lists, first;
 - the folders in `JUPYTER_PATH`;
 - your own Jupyter folder: `~/Library/Jupyter` on macOS, `~/.local/share/jupyter` on Linux,
   `%APPDATA%\jupyter` on Windows (or `JUPYTER_DATA_DIR` if you set it);
 - the active conda environment or virtualenv, when Zasper is started from a shell with one
-  activated — before your own folder inside a virtualenv or a non-base conda environment, as Jupyter
-  does, and `JUPYTER_PREFER_ENV_PATH` decides either way;
+  activated. Inside a virtualenv or a non-base conda environment it comes before your own folder,
+  as Jupyter does, and `JUPYTER_PREFER_ENV_PATH` decides either way;
 - the system: `/usr/local/share/jupyter` and `/usr/share/jupyter`, or `%PROGRAMDATA%\jupyter`;
 - on Windows, the Microsoft Store's Python, whose own folder is read-only, so `pip install ipykernel`
   puts the kernel under that Python's `LocalCache` folder instead (from 1.1.0);
 - Anaconda, Miniconda and Miniforge in your home folder, and on macOS, Homebrew and every Python's
-  own folder — each version under `~/Library/Python`, the Command Line Tools' Python and the
+  own folder: each version under `~/Library/Python`, the Command Line Tools' Python and the
   python.org installers;
 - every conda environment, active or not, last: the ones listed in `~/.conda/environments.txt`, and
   the `envs` folders of Anaconda, Miniconda, Miniforge, Mambaforge and micromamba (or
@@ -79,7 +79,7 @@ matched without regard to case.
 
 **Pythons with `ipykernel` that were never registered.** If a Python on your `PATH`, your active
 environment, a conda install or (on macOS) a Homebrew, Command Line Tools or python.org Python has
-`ipykernel` installed but no kernelspec, Zasper offers it anyway — the way Jupyter offers its own
+`ipykernel` installed but no kernelspec, Zasper offers it anyway, the way Jupyter offers its own
 Python. The first is named `python3` when no kernel of that name is installed; the rest are named for
 their version and origin, such as `python3.12-homebrew`, and shown as **Python 3.12 (Homebrew)**.
 Nothing is written to disk for these, so there is nothing to go stale when an environment is deleted.
@@ -93,10 +93,9 @@ installs into it. Zasper finds it by reading the folder and does not run anythin
 choose it. Until you trust the folder, the Launcher shows it locked and does not run it; see
 [Trusted Folders](/docs/trusted-folders).
 
-A kernelspec that names a bare `python` — which is what ipykernel's own spec does — runs with the
-Python that installed it, not whichever `python` comes first on your `PATH`. Installing another
-Python, such as Homebrew's, does not take your existing kernels away or run them with the wrong
-interpreter.
+A kernelspec that names a bare `python`, as ipykernel's own spec does, runs with the Python that
+installed it, not whichever `python` comes first on your `PATH`. Installing another Python, such as
+Homebrew's, does not take your existing kernels away or run them with the wrong interpreter.
 
 The same holds for other languages. A kernelspec inside a conda environment that names a bare
 command, as conda's IRkernel does with `R`, runs that environment's `R`, with the environment first on
