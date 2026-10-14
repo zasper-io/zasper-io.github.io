@@ -10,16 +10,15 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-Not everything is a notebook. Installing a package, running the tests, checking what `git log` says —
-those are a shell, and Zasper has one built in so you do not have to leave the window to use it.
+Zasper has a terminal built in, so you can install a package, run the tests or check `git log`
+without leaving the window.
 
 {% include tut/sprite.html %}
 
 ## Open One
 
 The terminal button is in the status bar, at the bottom of the window, after the branch name and the
-problem counts. It is there whatever tab is in front, because starting a shell is not something that
-belongs to the notebook you happen to have open.
+problem counts. It is there whatever tab is in front.
 
 To start one somewhere other than the project root, right-click a folder in the file explorer and
 choose **Open Terminal Here**. The shell starts in that folder.
@@ -35,7 +34,7 @@ between them. Close one from its row in that list.
 
 ## Which Shell It Runs
 
-Your own: Zasper starts whatever `$SHELL` names, as a login shell, so your prompt, aliases and `PATH`
+Zasper starts whatever `$SHELL` names, as a login shell, so your prompt, aliases and `PATH`
 are the ones you already have. If `$SHELL` is empty or names something that is not installed, it falls
 back to the shell your account lists, and then to `/bin/sh`.
 
@@ -48,8 +47,8 @@ The text scales with the rest of the window: **Zoom In** and **Zoom Out** (`⌘+
 
 ## What A Terminal Is Not
 
-**It does not come back.** Zasper reopens the tabs you had, but not terminals: a new connection is a
-new shell, so a restored terminal would be an empty prompt wearing the name of the one you had.
+**It does not come back.** Zasper reopens the tabs you had, but not terminals, because a new
+connection starts a new shell with nothing of the old one in it.
 Anything you want to keep, keep in a script.
 
 **It is not available on Windows.** When the Zasper server runs on Windows there is no terminal
