@@ -85,7 +85,7 @@ no browser opens, for example because you passed `--no-browser` or are connected
 | ------------------------ | -------------------------- | ------------------------------------------------------------ |
 | macOS 12 or later        | Apple Silicon, Intel       | Fully supported                                              |
 | Linux, any distribution  | x86-64, ARM64, i386        | Fully supported                                              |
-| Windows 10 or later      | x86-64, ARM64, i386        | Runs without the terminal, which needs WSL; some kernel paths are less tested               |
+| Windows 10 or later      | x86-64, ARM64, i386        | Supported, except the built-in terminal, which needs Zasper running under WSL               |
 
 The Linux archives are static binaries, so one build works on every distribution, Debian and Red
 Hat alike.

@@ -24,7 +24,15 @@ scratch to be:
 It is cross-platform:
 
 * Fully supported: macOS and Linux
-* Limited support: Windows — for the best experience, use via WSL
+* Windows: supported, except the built-in terminal, which needs Zasper running under WSL
+
+## What's In It
+
+Beyond running notebooks, Zasper has [SQL cells](/docs/sql-cells), [DataFrame grids and
+charts](/docs/exploring-data), [notebook diffs](/docs/comparing-notebooks), [language
+servers](/docs/language-servers), [project search](/docs/search-and-replace), a built-in
+[terminal](/docs/work-in-a-terminal) and [git](/docs/track-changes-with-git), and a panel for
+[coding agents](/docs/coding-agents) that can read, edit and run your notebooks.
 
 ## Benchmarks
 

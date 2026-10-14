@@ -82,10 +82,14 @@ selection and the arrows move the cell. Focus moves with the cell, so you can ho
 move one cell several places.
 
 These actions have no key binding; run them from the palette: **Run All Cells**, **Cut / Copy /
-Paste Cell**, **Select Next / Previous Cell**, **Change Cell to Raw**, **Expand or Collapse
-Output**, **Clear Cell Output**, **Clear All Outputs**, **Interrupt Kernel**, **Restart Kernel**,
-**Restart Kernel and Run All Cells**, **Reconnect to Kernel** and **Change Kernel**. The notebook
-toolbar and a cell's hover toolbar reach most of them in one click.
+Paste Cell**, **Select Next / Previous Cell**, **Change Cell to Raw**, **Change Cell to SQL**,
+**Expand or Collapse Output**, **Clear Cell Output**, **Clear All Outputs**, **Interrupt Kernel**,
+**Restart Kernel**, **Restart Kernel and Run All Cells**, **Reconnect to Kernel**, **Change Kernel**,
+and **Add Cell to Chat** and **Add Output to Chat** for the [agent panel](/docs/coding-agents). The
+notebook toolbar and a cell's hover toolbar reach most of them in one click.
+
+**Variables** opens the [variables panel](/docs/exploring-data#the-variables-panel), and **What's
+New** the release notes; neither has a binding.
 
 ### Inside a Cell
 

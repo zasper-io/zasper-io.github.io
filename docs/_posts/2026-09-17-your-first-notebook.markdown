@@ -15,6 +15,13 @@ assumes only that Zasper is [installed](/docs/installation) and open on a folder
 
 {% include tut/sprite.html %}
 
+## Trust The Folder
+
+The first time Zasper opens a folder, it asks **Do you trust the authors of the files in this
+folder?** For a folder of your own, press **Trust folder**. Until a folder is trusted nothing in it
+runs, kernels included, so a project you downloaded cannot run code just by being opened. [Trusted
+Folders](/docs/trusted-folders) covers what else it governs.
+
 ## Make The Notebook
 
 The file explorer is the first icon in the rail on the left, and the strip under its title names the
@@ -42,6 +49,10 @@ Once the kernel has started, its name and a status dot sit at the right-hand end
 toolbar: the dot is grey while the kernel is idle and lit while it is working. Click the name to move
 the notebook to a different kernel later.
 
+The status bar at the bottom shows how much memory the kernel holds, and on a machine with an NVIDIA
+GPU, how much GPU memory. Press either for more; [Exploring Data](/docs/exploring-data#kernel-memory)
+explains the figures.
+
 {% include tut/toolbar.html %}
 
 ## Run A Cell
@@ -58,6 +69,10 @@ On the last cell of the notebook, `⇧⏎` adds a new one to carry on in.
 The number in the left margin is the cell's turn with the kernel. `[ ]` has never run, `[*]` is
 queued or running now, and `[7]` was the seventh thing this kernel was asked to do — not the seventh
 cell in the file. Restart the kernel and the count starts again from one.
+
+The run button sits beside the count and becomes a stop button while the cell runs. On the cell's
+border, its run time counts up while it runs and stays there after, so you can tell a slow cell from
+a stuck one.
 
 {% include tut/run.html %}
 
