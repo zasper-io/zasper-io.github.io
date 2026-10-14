@@ -15,8 +15,8 @@ notebooks in your project, read their cells and outputs, change cells, and run t
 notebook's live kernel. A notebook you have open in Zasper shows each change and each run as it
 happens, in the cell it is for, under the agent's name.
 
-Files, search and git are left to the agent's own tools. What Zasper adds is the kernel, and outputs
-the agent can see: plots come back as images.
+Files, search and git are left to the agent's own tools. Zasper adds the live kernel, and outputs the
+agent can read, with plots returned as images.
 
 The agent is your own, signed in with your own account. Zasper sends nothing anywhere; the agent
 talks to the server on your machine.
