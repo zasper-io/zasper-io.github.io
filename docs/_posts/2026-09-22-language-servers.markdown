@@ -24,7 +24,7 @@ Zasper ships no language servers. It starts one you already have, and tells you 
 | Go | gopls | `go install golang.org/x/tools/gopls@latest` |
 | TypeScript, JavaScript | typescript-language-server | `npm install -g typescript-language-server typescript` |
 | Rust | rust-analyzer | `rustup component add rust-analyzer` |
-| C, C++ | clangd | `brew install llvm`, or your package manager |
+| C, C++ | clangd | `xcode-select --install` on macOS, `sudo apt install clangd` on Linux |
 | R | languageserver | `R -e 'install.packages("languageserver")'` |
 | Julia | LanguageServer.jl | `julia -e 'using Pkg; Pkg.add("LanguageServer")'` |
 
@@ -33,9 +33,10 @@ type checkers; pylsp is jedi with a set of plugins, so the type-checking setting
 to it.
 
 Zasper looks on your `PATH` first, then in the project's `.venv/bin`, `venv/bin` and
-`node_modules/.bin`, then in `$GOPATH/bin`, `~/go/bin`, `~/.cargo/bin`, `~/.local/bin`,
-`~/.juliaup/bin` and Homebrew. An app started from the Dock has a thinner `PATH` than your shell,
-and without that list `gopls` in `~/go/bin` would look uninstalled.
+`node_modules/.bin` (`.venv\Scripts` and `venv\Scripts` on Windows), then in `$GOPATH/bin`,
+`~/go/bin`, `~/.cargo/bin`, `~/.local/bin`, `~/.juliaup/bin` and Homebrew. An app started from the
+Dock has a thinner `PATH` than your shell, and without that list `gopls` in `~/go/bin` would look
+uninstalled.
 
 ## The Status Bar
 
