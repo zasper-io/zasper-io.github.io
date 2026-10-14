@@ -10,9 +10,7 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-You can host your own instance of Zasper on a server and use it from anywhere. This guide covers
-signing in, making the server reachable, keeping the access token across restarts, putting it behind
-HTTPS, Docker, and running it as a service.
+You can host your own instance of Zasper on a server and use it from anywhere.
 
 Zasper gives whoever signs in your project files and a terminal. Every Zasper server requires an
 access token to sign in, so treat that token, and any link that carries it, like a password.
