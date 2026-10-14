@@ -133,9 +133,8 @@ for (const table of document.querySelectorAll('.mk-docs-body table')) {
 
 /*
 Built from whatever headings a doc actually has, rather than hand-maintained — a doc with three
-sections and a doc with none both work with no extra front matter. `h2, h3` because the docs
-themselves are inconsistent about which level starts a section — Key Bindings goes straight to `###`,
-Developer Guide uses `##` — and a "page title" `h1` inside a doc's own body (Introduction's "Benchmarks"
+sections and a doc with none both work with no extra front matter. `h2, h3` because every doc
+starts its sections at `##` and some have `###` subsections under them, and a "page title" `h1` inside a doc's own body (Introduction's "Benchmarks"
 section) is content, not a section of itself, so it's deliberately left out of this list. kramdown
 already gives every heading an `id` (its own auto-id extension, on by default), so this only falls back
 to slugifying the text when one is somehow missing.

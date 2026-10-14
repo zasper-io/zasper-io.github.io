@@ -17,7 +17,7 @@ filter. If you forget a shortcut, either one is the place to look.
 Where a row gives two macOS bindings, both work. `⌘` is the usual editor convention; `⌃` is what
 Zasper used first, and it still works.
 
-### Global
+## Global
 
 | Action | macOS | Windows / Linux |
 | --- | --- | --- |
@@ -48,7 +48,7 @@ On Windows and Linux, **Problems** and **Change Cell to Markdown** share `Ctrl+S
 notebook is the active tab, the chord changes the cell to Markdown and does not open Problems; use
 the palette there.
 
-### Tabs
+## Tabs
 
 | Action | macOS | Windows / Linux |
 | --- | --- | --- |
@@ -63,7 +63,7 @@ the palette there.
 Right-click a tab for the same actions, plus **Copy Path** and **Reveal in File Explorer**. When the
 tabs you close have unsaved changes, Zasper asks about all of them in one dialog.
 
-### Notebook
+## Notebook
 
 | Action | macOS | Windows / Linux |
 | --- | --- | --- |
@@ -103,7 +103,7 @@ toolbar reach most of them in one click.
 **Variables** opens the [variables panel](/docs/exploring-data#the-variables-panel), and **What's
 New** the release notes; neither has a binding.
 
-### Command Mode
+## Command Mode
 
 When a cell is selected and its editor does not have focus, the notebook is in command mode. These
 keys work only then:
@@ -117,7 +117,7 @@ keys work only then:
 **Edit Cell** opens the selected cell for editing. **Run Cell** and **Run Cell and Select Next** work
 in command mode as well.
 
-### Inside a Cell
+## Inside a Cell
 
 These keys belong to the editor rather than to a command, because what they do depends on where
 the cursor is.
@@ -131,7 +131,7 @@ the cursor is.
 
 A single click on a rendered markdown cell only selects it; it stays rendered.
 
-### File Editor
+## File Editor
 
 These work in a file's editor. Go to Definition, Find All References, Rename Symbol, Quick Fix and
 Format Document need a [language server](/docs/language-servers) for the file's language.
