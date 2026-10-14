@@ -36,12 +36,12 @@ have to install anything.
 
 It is the one format that asks a question first. **Export as HTML** offers two checkboxes:
 
-- **Include code** — off gives a report: prose and results, no source.
-- **Include outputs** — off gives the notebook as a blank worksheet, code and no results.
+- **Include the code** — off gives a report: prose and results, no source.
+- **Include the outputs** — off gives the notebook as a blank worksheet, code and no results.
 
 Both off writes nothing worth having, so the dialog will not let you. One thing to know before you
-send the page: a figure in it is a picture. Interactive plots stop being interactive and widgets stop
-existing altogether, because both need a kernel and a page has none.
+send the page: a figure in it is a picture. Interactive plots stop being interactive and widgets
+become their plain text, because a page runs nothing.
 
 ## Markdown
 
@@ -60,9 +60,10 @@ read the logic without the JSON around it.
 
 ## What Stays Behind
 
-Every export is a copy: the notebook itself is untouched, and none of the three can be opened back up
-as a notebook. To keep working on it, keep the `.ipynb` — the exports are for the people who are not
-going to run it.
+Every export is a copy: the notebook itself is untouched. The HTML page and the Markdown cannot be
+opened back up as a notebook. The script is in jupytext's percent format, `# %%` before each cell,
+which VS Code and jupytext reopen as cells, though without the outputs. To keep working on it, keep
+the `.ipynb` — the exports are for the people who are not going to run it.
 
 [Notebook Support](/docs/notebook-support) lists what renders in a notebook and therefore what can
 appear in an export, and [Track Changes with Git](/docs/track-changes-with-git) covers keeping the
