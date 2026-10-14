@@ -14,12 +14,9 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper is an open-source, high-performance IDE for working with Jupyter notebooks. It's built from
-scratch to be:
-
-* Fast to start and fast to run
-* Highly concurrent, with a small resource footprint
-* Resilient under heavy load
+Zasper is an open-source IDE for Jupyter notebooks. Its server is written in Go and handles each
+kernel's messages concurrently, so it uses little CPU and memory of its own and stays responsive with
+many kernels open.
 
 It is cross-platform:
 
@@ -39,15 +36,16 @@ until you say so.
 
 ## Benchmarks
 
-How is Zasper better than JupyterLab?
+The benchmark measured Zasper's server against Jupyter Server, the server behind JupyterLab, with 2
+to 100 kernels open and ten execute requests a second sent to each kernel. It counted the server
+process alone. The kernels are the same programs under both and use the same memory.
 
 <img src="https://raw.githubusercontent.com/zasper-io/zasper-benchmark/main/assets/summary_resources.png" alt="Benchmark summary" style="max-width:600px; width:100%; height:auto;" />
 
-* Up to 5X less CPU usage
-* Up to 40X less RAM usage
-* Higher throughput
-* Lower latency
-* Highly resilient under very high loads
+The widest gap in CPU came at 4 kernels, where Zasper's server used 4.5 times less on average. The
+widest in memory came at 100 kernels: Zasper's server peaked at 49 MB and Jupyter Server at 1.9 GB,
+38 times as much. Jupyter Server began losing kernel connections at 64 kernels and had lost them all
+by 100. Zasper's server kept every connection open.
 
 The full benchmark report, methodology and raw results are in the
 [zasper-benchmark repository](https://github.com/zasper-io/zasper-benchmark?tab=readme-ov-file#benchmarking-zasper-vs-jupyterlab).
