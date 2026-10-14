@@ -19,7 +19,7 @@
   <details class="mk-docs-side" open>
     <summary class="mk-docs-mobile-toggle">
       Contents
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
     </summary>
     {% include docs-links.html %}
   </details>
@@ -34,14 +34,14 @@
     <nav class="mk-docs-pager" aria-label="Pagination">
       {% if prev_post %}
       <a class="mk-docs-prev" href="{{ prev_post.url }}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
         <span><em>Previous</em>{{ prev_post.title }}</span>
       </a>
       {% endif %}
       {% if next_post %}
       <a class="mk-docs-next" href="{{ next_post.url }}">
         <span><em>Next</em>{{ next_post.title }}</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
       </a>
       {% endif %}
     </nav>
