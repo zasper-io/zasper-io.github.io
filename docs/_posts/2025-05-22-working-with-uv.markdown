@@ -11,16 +11,14 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-UV is a fast Python package manager and virtual environment tool built in Rust. It's a drop-in
-replacement for `pip`, `venv`, and `virtualenv`, and it's well suited to lightweight, reproducible
-Python environments — a good fit for use with Zasper.
-
-This guide shows how to create and configure a Python project using UV and register it as a
-Jupyter kernel for use in Zasper.
+uv is a Python package manager written in Rust. It does the work of `pip`, `venv` and `virtualenv`,
+and it records a project's exact dependencies in a lockfile, so the project's `.venv` can be built
+again the same way on another machine. To run notebooks in that environment, you add `ipykernel` to
+the project.
 
 ## Create a New Project
 
-Start by initializing a new Python project with UV:
+Start a new Python project with uv:
 
 ```bash
 uv init exampleUV
@@ -28,13 +26,12 @@ cd exampleUV
 uv run main.py   # creates a .venv directory automatically
 ```
 
-The `.venv` directory is your virtual environment — an isolated space where you can install
-dependencies without affecting your global Python installation.
+The `.venv` directory is the project's virtual environment. Packages you install there stay out of
+your global Python installation.
 
 ## Install Packages
 
-Install the `ipykernel` package, which allows the environment to be used as a kernel in
-Jupyter-based tools like Zasper:
+Add `ipykernel`, the package that lets the environment run as a Jupyter kernel:
 
 ```bash
 uv add --dev ipykernel
@@ -44,11 +41,14 @@ This records `ipykernel` as a development dependency in `pyproject.toml` and ins
 `.venv`, so the next `uv sync` keeps it. uv commands find the project's `.venv` on their own, so
 there is no environment to activate. Add any other libraries your project needs with `uv add`.
 
-If you open this folder in Zasper now and trust it, it already lists the environment: a project's
-own `.venv` with `ipykernel` in it appears first in the Launcher as **Python 3.x (.venv)**, with no
-registration needed (see [Trusted Folders](/docs/trusted-folders)). Zasper's **Set up a Python
-kernel** button does steps 1 and 2 for you when a project has no kernel yet — see [Installing
-Jupyter Kernels](/docs/installing-jupyter-kernels).
+If you open the `exampleUV` folder in Zasper and trust it, the environment is already listed. A
+project's own `.venv` with `ipykernel` in it appears first in the Launcher as **Python 3.x
+(.venv)**, with no registration needed (see [Trusted Folders](/docs/trusted-folders)). Choose it to
+run code in the new environment.
+
+When Zasper finds no kernel at all, the Launcher offers **Set up a Python kernel**, which creates the
+`.venv` and installs `ipykernel` for you. See [Installing Jupyter
+Kernels](/docs/installing-jupyter-kernels).
 
 ## Register the Kernel (Optional)
 
@@ -58,10 +58,5 @@ Register the environment only if you want to use it from other projects too, or 
 uv run python -m ipykernel install --user --name=exampleUV
 ```
 
-This creates a new kernel spec named `exampleUV`. It will now appear as an option in the Zasper
-kernel selector wherever Zasper is opened.
-
-## You're All Set
-
-Launch Zasper in the `exampleUV` folder, choose **Python 3.x (.venv)** — or the `exampleUV` kernel if
-you registered it — and run code in your new environment.
+This creates a kernelspec named `exampleUV`, which Zasper's kernel picker offers wherever you open
+Zasper.
