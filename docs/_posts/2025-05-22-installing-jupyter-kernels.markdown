@@ -47,7 +47,7 @@ environment from. If uv finds no Python, it downloads one into its own folder.
 | Conda          | `ipykernel` in env                                                  | Works with `conda create` + `ipykernel`                          |
 | R              | [IRkernel](https://github.com/IRkernel/IRkernel)                    | Add with `IRkernel::installspec()` in the R console               |
 | Julia          | [IJulia](https://julialang.github.io/IJulia.jl/stable/)             | Add via the Julia REPL: `using Pkg; Pkg.add("IJulia")`            |
-| Ruby           | [IRuby](https://github.com/SciRuby/iruby)                           | Requires Ruby setup and manual install                           |
+| Ruby           | [IRuby](https://github.com/SciRuby/iruby)                           | Run `gem install iruby`, then `iruby register --force`           |
 | JavaScript     | [Deno Kernel](https://docs.deno.com/runtime/reference/cli/jupyter/) | Install via `deno jupyter --install`                             |
 | Go             | [GoNb](https://github.com/janpfeifer/gonb)                          | Run `gonb --install` after installing Go, GoNb, goimports and gopls |
 | UV             | Compatible via `uv` + `ipykernel`                                   | See [Working with UV](/docs/working-with-uv) for the full guide  |
