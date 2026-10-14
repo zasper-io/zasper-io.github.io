@@ -19,8 +19,9 @@ access token to sign in, so treat that token, and any link that carries it, like
 
 ## Signing In
 
-Zasper always runs in protected mode: every route except the health check needs a session, and a
-session comes from the access token that Zasper prints when it starts:
+Zasper always runs in protected mode: every route except `/api/health`, `/api/config` and
+`/auth/login` needs a session, and a session comes from the access token that Zasper prints when
+it starts:
 
 ```
 ==========================================================
@@ -32,15 +33,13 @@ session comes from the access token that Zasper prints when it starts:
      ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
 
                     Zasper Server
-                Version: 1.1.0
+                   Version: {{ site.data.release.version }}
 ----------------------------------------------------------
  ✅ Server started successfully!
  📡 Bound to:            127.0.0.1:8048
  🖥️  Webapp available at: http://127.0.0.1:8048
- 🔐 Server Access Token: 14be1b674a3b9196a82c01129028d0dd
- 🔗 Sign in with:        http://127.0.0.1:8048/?token=14be1b674a3b9196a82c01129028d0dd
- 📊 Anonymous usage data: on  (--tracking=false to turn off)
-                          see PRIVACY.md for what is sent
+ 🔐 Server Access Token: 0123456789abcdef0123456789abcdef
+ 🔗 Sign in with:        http://127.0.0.1:8048/?token=0123456789abcdef0123456789abcdef
 ==========================================================
 ```
 
@@ -75,8 +74,8 @@ wider binding:
 ```
  📡 Bound to:            0.0.0.0:8048
  🖥️  Webapp available at: http://localhost:8048
- 🔐 Server Access Token: 14be1b674a3b9196a82c01129028d0dd
- 🔗 Sign in with:        http://localhost:8048/?token=14be1b674a3b9196a82c01129028d0dd
+ 🔐 Server Access Token: 0123456789abcdef0123456789abcdef
+ 🔗 Sign in with:        http://localhost:8048/?token=0123456789abcdef0123456789abcdef
 ```
 
 The banner's links say `localhost` because they are written for a browser on the server. From
@@ -163,7 +162,7 @@ default 60 seconds.
 ## Running It in Docker
 
 The [`docker/`](https://github.com/zasper-io/zasper/tree/main/docker) directory in the main
-repository builds an image from that checkout. The image installs Jupyter and runs Zasper as a
+repository builds an image from that checkout. The image installs ipykernel and runs Zasper as a
 non-root `zasper` user:
 
 ```bash
