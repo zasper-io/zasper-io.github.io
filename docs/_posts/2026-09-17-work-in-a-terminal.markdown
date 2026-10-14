@@ -39,7 +39,7 @@ are the ones you already have. If `$SHELL` is empty or names something that is n
 back to the shell your account lists, and then to `/bin/sh`.
 
 That is also why a conda or uv environment you activate in a terminal behaves exactly as it does
-outside Zasper — [Working with Conda](/docs/working-with-conda) and [Working with
+outside Zasper. [Working with Conda](/docs/working-with-conda) and [Working with
 UV](/docs/working-with-uv) cover making those environments into kernels.
 
 The text scales with the rest of the window: **Zoom In** and **Zoom Out** (`⌘+` / `⌘-` on macOS,
@@ -53,5 +53,5 @@ Anything you want to keep, keep in a script.
 
 **It is not available on Windows.** When the Zasper server runs on Windows there is no terminal
 button and no **Open Terminal Here**, because the terminal backend is built on a Unix pseudo-terminal.
-Running the server under WSL gives you both, and is the recommended way to use Zasper on Windows —
+Running the server under WSL gives you both, and is the recommended way to use Zasper on Windows.
 [Installation](/docs/installation) has the details.
