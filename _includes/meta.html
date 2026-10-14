@@ -34,7 +34,9 @@ feed and the sitemap read the same values.
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{{ meta_desc | escape }}">
 <meta name="theme-color" content="#0c6862">
+{%- unless page.noindex %}
 <link rel="canonical" href="{{ meta_url }}">
+{%- endunless %}
 {%- if page.noindex %}
 {% comment %} For the pages that exist to be arrived at rather than found: the 404 and the redirect
      stubs. `follow` so the links on them still pass through. {% endcomment %}
