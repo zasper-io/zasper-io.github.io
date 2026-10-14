@@ -95,6 +95,23 @@ no browser opens, for example because you passed `--no-browser` or are connected
 The Linux archives are static binaries, so one build works on every distribution, Debian and Red
 Hat alike.
 
+## Upgrading from 2.0.0
+
+Zasper now asks whether you trust each folder before it runs anything the folder controls. After
+the upgrade every folder is asked about once, including the one you start `zasper` in, because no
+folder is trusted yet.
+
+- **Until you trust a folder, nothing in it runs on its own.** A notebook's kernel waits for the
+  folder to be trusted, the project's `.venv` is not offered as a kernel, and **Set up a Python
+  kernel** and git commands that change the repository, such as commit, pull and push, ask first.
+  You can still read every file, notebook and saved output.
+- **Scripts and servers can skip the question.** `zasper --trust` trusts the folder for that run
+  only, and `ZASPER_TRUST_ALL=1` in the environment trusts every folder. A server started by
+  systemd or a script starts no kernels until its folder is trusted this way, or until someone
+  trusts it from a browser or **Settings → Trust**.
+
+[Trusted Folders](/docs/trusted-folders) has the details.
+
 ## Upgrading from 1.1.0
 
 2.0.0 is a major release because two details of Zasper's API changed, for security. The app itself
@@ -119,6 +136,8 @@ needs nothing from you beyond signing in once; these are the changes to know abo
   re-run its cell.
 - **You sign in once more** after upgrading: the browser's session is now a cookie that no script in
   the page can read.
+- **Request bodies have a size limit**: 512 MiB for the API, with uploads excepted, and 16 KiB for
+  sign-in.
 
 ## Upgrading from 1.0.0
 
@@ -146,6 +165,8 @@ things changed on the way there:
   another machine, start it with `--host=0.0.0.0`; see [Deploying on Cloud](/docs/deploying-on-cloud).
 - **The desktop app is gone.** Zasper is now only the local server you open in a browser. Install
   it with any of the methods above.
+- **Homebrew installs a cask.** If you installed 0.x through Homebrew, run `brew uninstall zasper`
+  first: from 1.0, Zasper is published as a cask rather than a formula.
 - **`DELETE /ws/kernels/{kernel_id}` has been removed.** Use `DELETE /api/kernels/{kernelId}`,
   which is unchanged.
 - **Kernel connection files have moved** from the system temp directory to `~/.zasper/runtime`.
