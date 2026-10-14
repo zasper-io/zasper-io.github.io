@@ -11,11 +11,9 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper is built on the [Jupyter wire protocol](https://jupyter-client.readthedocs.io/en/latest/messaging.html)
-and is compatible with any language that provides a Jupyter kernel.
-
-Whether you're working in Python, R, Julia, Go, or JavaScript — if the kernel supports kernelspec,
-Zasper detects and supports it out of the box.
+Zasper implements the [Jupyter wire protocol](https://jupyter-client.readthedocs.io/en/latest/messaging.html),
+so it runs any language that has a Jupyter kernel. A kernel installed with a kernelspec, for Python,
+R, Julia, Go, JavaScript or anything else, shows up in the Launcher with nothing to configure.
 
 ## No Kernel Yet? Let Zasper Set One Up
 
@@ -31,7 +29,7 @@ The setup's output appears in the Launcher as it runs, and the new kernel shows 
 The setup runs only in a folder you trust; see [Trusted Folders](/docs/trusted-folders).
 
 Nothing else is touched. Zasper never installs anything on its own when it starts, never installs
-into your system or Homebrew Python, and never writes a kernelspec — a virtual environment is the one
+into your system or Homebrew Python, and never writes a kernelspec. A virtual environment is the one
 place `pip` is always allowed. If your project already has a `.venv` with `ipykernel` in it, the
 setup just checks it; if it has a `.venv` folder with no Python inside, the setup stops and asks you
 to remove it rather than replace it.
@@ -128,8 +126,8 @@ and your project's `.venv`, which this command does not know about.
 
 ## Installing a Python Kernel
 
-If you're just getting started and want a basic Python kernel, use **Set up a Python kernel** in
-the Launcher, or install `ipykernel` yourself:
+For a plain Python kernel, use **Set up a Python kernel** in the Launcher, or install `ipykernel`
+yourself:
 
 ```bash
 pip install ipykernel
@@ -143,7 +141,7 @@ pip install jupyter
 
 ## Setting Up Other Language Kernels
 
-Here's how to get started with a few popular non-Python kernels.
+Each of these installs a kernel and registers it with a kernelspec.
 
 ### R (IRkernel)
 
