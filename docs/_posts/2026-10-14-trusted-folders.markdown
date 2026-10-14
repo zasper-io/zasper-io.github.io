@@ -56,6 +56,7 @@ While a folder is restricted, these places say so, and each one asks again:
 - The Launcher, when the folder has its own `.venv`, shown locked with **Trust folder…**.
 - The language-server item in the status bar, for a server that runs the project's code. Its menu
   has **Trust folder…**.
+- **Settings → Trust**, with a **Trust folder…** button.
 
 Pressing Run or Run all in a restricted notebook asks **Trust this folder to run its code?** Its
 **Trust and run** button trusts the folder, starts the kernel and runs the cell in one step.
