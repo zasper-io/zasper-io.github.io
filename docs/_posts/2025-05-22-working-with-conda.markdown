@@ -43,7 +43,7 @@ After activation, any packages you install or code you run will use this environ
 Install the `ipykernel` package, which is needed to register the environment as a Jupyter kernel:
 
 ```bash
-conda install -c anaconda ipykernel
+conda install -c conda-forge ipykernel
 ```
 
 You can also install any additional dependencies here, such as `numpy`, `torch`, or `pandas`.
