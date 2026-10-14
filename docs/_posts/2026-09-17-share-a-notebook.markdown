@@ -37,8 +37,8 @@ have to install anything.
 
 It is the one format that asks a question first. **Export as HTML** offers two checkboxes:
 
-- **Include the code** — off gives a report: prose and results, no source.
-- **Include the outputs** — off gives the notebook as a blank worksheet, code and no results.
+- **Include the code**: turned off, it gives a report of prose and results with no source.
+- **Include the outputs**: turned off, it gives a blank worksheet, the code with no results.
 
 Both off writes nothing worth having, so the dialog will not let you. One thing to know before you
 send the page: a figure in it is a picture. Interactive plots stop being interactive and widgets
@@ -53,7 +53,7 @@ request, and the one to pick when the text matters more than the run.
 ## Script
 
 The code alone, in the kernel's language, with the markdown cells kept as comments so the reasoning
-survives. The extension comes from the kernel the notebook ran on rather than from a guess — a Python
+survives. The extension comes from the kernel the notebook ran on rather than from a guess. A Python
 notebook gives you `.py`, a Deno one `.ts`.
 
 Use it when a notebook has turned into something that should be a module, or when a reviewer wants to
