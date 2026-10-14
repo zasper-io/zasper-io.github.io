@@ -38,9 +38,10 @@ Everything except SQLite and DuckDB goes through SQLAlchemy, which the kernel al
 that is not absolute is read from the project's root. **Test** connects with what the form holds,
 saved or not, and says which server answered and how quickly.
 
-**Kept for** decides where the connection is saved: **this project**, in
-`<project>/.zasper/connections.json`, or **all your projects**, in `~/.zasper/connections.json`. A
-project connection with the same name as one of yours wins.
+**Kept for** decides where the connection is saved: **This project**, in
+`<project>/.zasper/connections.json`, or **All my projects**, in `~/.zasper/connections.json`. It
+cannot be changed once the connection is saved. A project connection with the same name as one of
+yours wins.
 
 ### Passwords
 
@@ -109,8 +110,9 @@ the cell again afterwards.
 ## The Data Panel
 
 **Data** in the sidebar lists every connection. Opening one reads its schemas and tables, and opening
-a table reads its columns and their types. **Query** on a table adds a SQL cell below the current one,
-reading the first hundred rows. Under **Dataframes** are the frames the front notebook's kernel holds.
+a table reads its columns and their types. The code icon on a table, labelled **Query *table* in a
+new SQL cell**, adds a SQL cell below the current one, reading the first hundred rows. Under
+**Dataframes** are the frames the front notebook's kernel holds.
 
 The panel works without a notebook open, so it starts a kernel of its own on the Python chosen under
 **Settings → Python interpreter**, or the project's `.venv`. A driver the panel lacks is one the
