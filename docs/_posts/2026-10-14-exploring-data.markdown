@@ -20,11 +20,11 @@ from a Python kernel.
 
 ## The Variables Panel
 
-The **Variables** command in the command palette opens the panel in the dock under the editor,
-beside **Problems** and the terminals. It lists the names in the kernel of the notebook in front,
-each with its type, its shape or length, and a short summary: a DataFrame's first column names, an
-array's dtype, or the value itself, cut short. Names starting with `_`, modules, functions and
-classes are left out.
+The panel is the **Variables** tab of the dock under the editor, beside **Problems** and the
+terminals. The **Variables** command in the command palette opens it too. It lists the names in the
+kernel of the notebook in front, each with its type, its shape or length, and a short summary: a
+DataFrame's first column names, an array's dtype, or the value itself, cut short. Names starting
+with `_`, modules, functions and classes are left out.
 
 The list is read again after every run, and the refresh button reads it on demand. While a cell is
 running the kernel cannot answer, and the panel says it is busy until the cell finishes.
