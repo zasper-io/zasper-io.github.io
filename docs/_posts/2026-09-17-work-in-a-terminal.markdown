@@ -17,20 +17,20 @@ those are a shell, and Zasper has one built in so you do not have to leave the w
 
 ## Open One
 
-The terminal button is in the status bar, at the bottom of the window, next to the branch name. It is
-there whatever tab is in front, because starting a shell is not something that belongs to the notebook
-you happen to have open.
+The terminal button is in the status bar, at the bottom of the window, after the branch name and the
+problem counts. It is there whatever tab is in front, because starting a shell is not something that
+belongs to the notebook you happen to have open.
 
 To start one somewhere other than the project root, right-click a folder in the file explorer and
 choose **Open Terminal Here**. The shell starts in that folder.
 
 {% include tut/terminal.html %}
 
-A terminal opens in the **Terminals** panel under the editor, beside Problems and References, so the
-notebook you are working on stays in view above it. **Toggle Terminal** in the command palette shows
-and hides the panel. Open as many as you want, with the **+** in the panel's header; each one is its
-own shell, and the list beside it says where each was started and switches between them. Close one
-from its row in that list.
+A terminal opens in the **Terminals** panel under the editor, beside Problems, References and
+Variables, so the notebook you are working on stays in view above it. **Toggle Terminal** in the
+command palette shows and hides the panel. Open as many as you want, with the **+** in the panel's
+header; each one is its own shell, and the list beside it says where each was started and switches
+between them. Close one from its row in that list.
 
 ## Which Shell It Runs
 
@@ -42,8 +42,8 @@ That is also why a conda or uv environment you activate in a terminal behaves ex
 outside Zasper — [Working with Conda](/docs/working-with-conda) and [Working with
 UV](/docs/working-with-uv) cover making those environments into kernels.
 
-The text scales with the rest of the window: **Increase / Decrease Font Size** from the command
-palette changes code, output and terminal text together.
+The text scales with the rest of the window: **Zoom In** and **Zoom Out** (`⌘+` / `⌘-` on macOS,
+`Ctrl` with the same keys elsewhere) scale code, output and terminal text together.
 
 ## What A Terminal Is Not
 
