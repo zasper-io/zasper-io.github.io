@@ -81,12 +81,15 @@ Cell**, which only moves the selection. A cell's hover toolbar has both: the che
 selection and the arrows move the cell. Focus moves with the cell, so you can hold the binding to
 move one cell several places.
 
+When a cell is selected and its editor does not have focus, `↑` and `↓` select the previous and
+next cell, and `Enter` opens the selected cell for editing.
+
 These actions have no key binding; run them from the palette: **Run All Cells**, **Cut / Copy /
-Paste Cell**, **Select Next / Previous Cell**, **Change Cell to Raw**, **Change Cell to SQL**,
-**Expand or Collapse Output**, **Clear Cell Output**, **Clear All Outputs**, **Interrupt Kernel**,
-**Restart Kernel**, **Restart Kernel and Run All Cells**, **Reconnect to Kernel**, **Change Kernel**,
-and **Add Cell to Chat** and **Add Output to Chat** for the [agent panel](/docs/coding-agents). The
-notebook toolbar and a cell's hover toolbar reach most of them in one click.
+Paste Cell**, **Change Cell to Raw**, **Change Cell to SQL**, **Expand or Collapse Output**, **Clear
+Cell Output**, **Clear All Outputs**, **Interrupt Kernel**, **Restart Kernel**, **Restart Kernel and
+Run All Cells**, **Reconnect to Kernel**, **Change Kernel**, and **Add Cell to Chat** and **Add
+Output to Chat** for the [agent panel](/docs/coding-agents). The notebook toolbar and a cell's hover
+toolbar reach most of them in one click.
 
 **Variables** opens the [variables panel](/docs/exploring-data#the-variables-panel), and **What's
 New** the release notes; neither has a binding.
@@ -101,6 +104,6 @@ the cursor is.
 | `Tab` | Accepts the highlighted completion; with a word to the left of the cursor, asks the kernel for completions; otherwise indents |
 | `↑` on the first line, `↓` on the last | Moves to the cell above or below |
 | Double-click, or `Enter` on a selected markdown cell | Opens its source for editing |
-| `Escape`, or running the cell, in a markdown cell | Renders it again |
+| `Escape` | Leaves the editor and keeps the cell selected; a markdown cell renders again, as it does when you run it |
 
 A single click on a rendered markdown cell only selects it; it stays rendered.
