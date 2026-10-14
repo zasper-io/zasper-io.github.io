@@ -15,8 +15,8 @@ with it. Zasper speaks the [Agent Client Protocol](https://agentclientprotocol.c
 agent, so the agent does its own thinking and Zasper shows the conversation and does what the agent
 asks of the editor.
 
-The agent is yours, signed in with your own account and subscription. Zasper stores nothing of it and
-sends nothing anywhere.
+The agent is yours, signed in with your own account and subscription. The conversation stays between
+the agent and the Zasper on your machine, which sends none of it anywhere.
 
 ## What You Need
 
