@@ -72,6 +72,10 @@ same places Jupyter does, in the same order:
 - Anaconda, Miniconda and Miniforge in your home folder, and on macOS, Homebrew and every Python's
   own folder — each version under `~/Library/Python`, the Command Line Tools' Python and the
   python.org installers.
+- every conda environment, active or not, last: the ones listed in `~/.conda/environments.txt`, and
+  the `envs` folders of Anaconda, Miniconda, Miniforge, Mambaforge and micromamba (or
+  `MAMBA_ROOT_PREFIX`). IRkernel and xeus kernels are usually installed into an environment of their
+  own, and this is where their kernelspecs stay.
 
 When two folders hold a kernel of the same name, the first one wins, as it does in Jupyter. Names are
 matched without regard to case.
@@ -95,6 +99,13 @@ A kernelspec that names a bare `python` — which is what ipykernel's own spec d
 Python that installed it, not whichever `python` comes first on your `PATH`. Installing another
 Python, such as Homebrew's, does not take your existing kernels away or run them with the wrong
 interpreter.
+
+The same holds for other languages. A kernelspec inside a conda environment that names a bare
+command, as conda's IRkernel does with `R`, runs that environment's `R`, with the environment first on
+the kernel's `PATH`, as if it were activated.
+
+`{connection_file}`, `{resource_dir}` and `{prefix}` are filled in anywhere in a kernelspec's
+`argv`, as Jupyter does, not only as a whole argument.
 
 ### Viewing Installed Kernels
 
@@ -188,6 +199,14 @@ are no kernels. Restart Zasper if you have installed a new version of Python sin
 
 A kernelspec whose `kernel.json` cannot be read, or names no program to run, is left out of the list,
 and Zasper logs a `skipping kernelspec` warning saying why.
+
+If a kernel exits on its own, while starting or later, the notebook says so and why, such as *The
+kernel stopped before it was ready: it exited with code 1*, with the last lines the kernel printed.
+Those lines are usually the traceback or error that explains it. Start the kernel again from there or
+pick another.
+
+A kernel that is slow to start, such as one importing a large environment on a cold disk, is waited
+for however long it takes.
 
 If **Set up a Python kernel** fails, its output stays in the Launcher. The usual causes are no network
 connection, no Python 3 to build the environment from, or a `.venv` folder that is already there with

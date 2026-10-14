@@ -23,8 +23,13 @@ in the app are stored in `~/.zasper/config.json`.
 | `--allow-host` | | Other host names the server answers to while it listens on `127.0.0.1`, comma-separated, such as a reverse proxy's `zasper.example.com`; see [Deploying on Cloud](/docs/deploying-on-cloud#behind-a-reverse-proxy-with-https) |
 | `--no-browser` | `false` | Don't open Zasper in a browser on startup. Zasper only opens one when it is running in a terminal, and on Linux only when there is a display |
 | `--tracking` | `true` | Send [anonymous usage data](#anonymous-usage-data) |
+| `--trust` | `false` | Trust the project folder for this run, so its kernels, `.venv` and language servers start without asking; see [Trusted Folders](/docs/trusted-folders) |
 | `--debug` | `false` | Log at debug level |
 | `--version` | | Print the version and exit |
+| `--check-update` | | Ask zasper.io for the newest version and exit: `0` when up to date, `1` when there is a newer one, `2` when the check failed |
+
+`zasper mcp` is a command of its own rather than a flag. It connects a coding agent to a running
+Zasper server over MCP; see [MCP Server](/docs/mcp-server).
 
 Every Zasper server requires the access token it prints at startup. `--protected` is still
 accepted so that older scripts keep starting, but it is ignored.
@@ -41,6 +46,7 @@ address. This keeps scripts written before 1.0 working unchanged.
 | `ZASPER_LOG_FORMAT` | `console` or `json`. By default Zasper uses console format in a terminal and JSON otherwise |
 | `ZASPER_ACCESS_LOG` | `1`, `true`, `on` or `yes` logs every HTTP request |
 | `ZASPER_ALLOWED_HOSTS` | Host names added to `--allow-host`'s, comma-separated |
+| `ZASPER_TRUST_ALL` | `1` trusts every folder for this run; see [Trusted Folders](/docs/trusted-folders). The Docker image sets it |
 
 `ZASPER_JWT_SECRET` was removed in 1.1.0 and is ignored; use `ZASPER_ACCESS_TOKEN` instead.
 
@@ -48,8 +54,12 @@ address. This keeps scripts written before 1.0 working unchanged.
 
 | Path | Contents |
 | --- | --- |
-| `~/.zasper/config.json` | Your theme, editor and language server settings, chosen Python interpreter, usage-data setting and anonymous ID |
-| `~/.zasper/runtime/` | Connection files for running kernels. They are readable only by you and are deleted when the kernel stops |
+| `~/.zasper/config.json` | Your theme, editor and language server settings, chosen Python interpreter, trusted folders, usage-data setting and anonymous ID |
+| `~/.zasper/connections.json` | Your database connections for SQL cells, without their passwords. A project's own are in `<project>/.zasper/connections.json` |
+| `~/.zasper/secrets.json` | Passwords for those connections, readable only by you, when the system keychain cannot hold them |
+| `~/.zasper/checkpoints/` | Snapshots of the files a coding agent changed, so a turn can be undone. A project's are removed after 30 days without a new one |
+| `~/.zasper/update-check.json` | The answer to the last check for a newer version, made at most once a day |
+| `~/.zasper/runtime/` | Connection files for running kernels, and a record of each running server for `zasper mcp` to find. They are readable only by you and are deleted when they stop |
 
 ## Logging
 

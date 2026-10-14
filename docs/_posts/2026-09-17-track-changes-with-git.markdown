@@ -37,14 +37,18 @@ a glitch, it is the difference between what is about to be committed and what is
 
 ## Read What Changed
 
-Press a row. The file opens as a diff tab: the committed version on the left, what is on disk now on
-the right, with added and removed lines tinted rather than inked, because a diff is read as code.
+Press a row. The file opens as a diff tab: what git has for it on the left, which is the last commit
+unless you have staged part of it, and what is on disk now on the right, with added and removed lines
+tinted rather than inked, because a diff is read as code.
 
 {% include tut/diff.html %}
 
 A row under **Staged** opens the same view against the index, so you can check what a commit is about
 to contain rather than what the file currently says. Diffs are tabs like any other — leave one open
 while you keep editing, and press the refresh in its header to catch up.
+
+A notebook is compared cell by cell rather than as JSON; see [Comparing
+Notebooks](/docs/comparing-notebooks).
 
 ## Stage And Commit
 

@@ -66,6 +66,10 @@ environment activated, and your base Anaconda, Miniconda or Miniforge install wh
 (miniconda3)** without a kernelspec. See [Installing Jupyter
 Kernels](/docs/installing-jupyter-kernels#how-zasper-finds-kernels).
 
+A kernel installed inside an environment, such as `conda install -c conda-forge r-irkernel`, is
+found without registering it with `--user` and without activating the environment: Zasper reads
+every environment conda knows about. It runs with that environment's own `R` or other command.
+
 ## You're All Set
 
 Your `torchEnv` Conda environment is now ready to use as a kernel in Zasper. Launch the app, select
