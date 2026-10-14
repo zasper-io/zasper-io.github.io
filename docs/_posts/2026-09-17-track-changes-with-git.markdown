@@ -10,9 +10,8 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-Notebooks change in ways a file listing cannot show you: a number moves, a cell is reordered, an
-output is cleared. This walks through the source control panel — seeing what changed, reading it,
-committing it, and sending it on. It assumes the folder Zasper opened is a git repository; if it is
+This page walks through the source control panel, from seeing what changed in a notebook to
+committing it and pushing it. It assumes the folder Zasper opened is a git repository; if it is
 not, the panel offers to make one.
 
 {% include tut/sprite.html %}
@@ -32,14 +31,14 @@ so a clean repository is a panel with a message box and a history.
 
 The letter at the end of a row is git's own, spelt out in the row's tooltip: `M` modified, `A` added,
 `D` deleted, `R` renamed, `C` copied, `U` conflicted, and `?` for a file git has never seen. A file
-you staged and then edited again appears in both lists, with a different letter in each — that is not
-a glitch, it is the difference between what is about to be committed and what is not.
+you staged and then edited again appears in both lists, with a different letter in each. The staged row is
+what the commit will record, and the other is the edit it will leave behind.
 
 ## Read What Changed
 
 Press a row. The file opens as a diff tab: what git has for it on the left, which is the last commit
 unless you have staged part of it, and what is on disk now on the right, with added and removed lines
-tinted rather than inked, because a diff is read as code.
+marked by a tinted background.
 
 {% include tut/diff.html %}
 
@@ -65,8 +64,8 @@ question also says the file will be deleted, since git has no version of it to p
 
 Write a message in the box above the lists and press **Commit**. With a remote configured there is a
 second button, **Commit & Push**, which does both in one go. While a commit, a stage or a pull is
-running, the panel's buttons and the *Git* commands in the palette are disabled: git takes a lock on
-the index, and one write at a time is the rule that keeps two of them from colliding.
+running, the panel's buttons and the *Git* commands in the palette are disabled, because git allows
+one write to the index at a time.
 
 ## Fetch, Pull, Push
 
