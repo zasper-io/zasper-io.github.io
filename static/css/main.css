@@ -107,7 +107,8 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
 
   --mk-wrap: 1080px;
   /* The docs grid: 720px of text, a 216px sidebar, a 176px contents column, two 40px gaps and 24px
-     of padding each side. Inside --mk-wrap the text column came out at 560px. */
+     of padding each side. Inside --mk-wrap the text column came out at 560px. The header and footer
+     use it on every page, so they stay put from page to page and line up with the docs sidebar. */
   --mk-wrap-docs: 1240px;
   /* The reading measure for docs and blog text, about 80 characters of Inter at 16px. */
   --mk-measure: 720px;
@@ -416,7 +417,7 @@ three steps and the three ways into the project all draw the same box — so it 
   display: flex;
   align-items: center;
   gap: 24px;
-  max-width: var(--mk-wrap);
+  max-width: var(--mk-wrap-docs);
   margin: 0 auto;
   padding: 16px 24px;
 }
@@ -467,8 +468,16 @@ three steps and the three ways into the project all draw the same box — so it 
 }
 
 .mk-nav-stars {
+  /* Room for "2.4k" before the count arrives, so the nav links do not shift when it does. */
+  display: inline-block;
+  min-width: 4ch;
   font-size: 14px;
   font-variant-numeric: tabular-nums;
+}
+
+.mk-nav-stars[hidden] {
+  display: inline-block;
+  visibility: hidden;
 }
 
 .mk-nav-github:hover {
@@ -799,6 +808,8 @@ three steps and the three ways into the project all draw the same box — so it 
 
 /* --- Footer ------------------------------------------------------------ */
 .mk-footer-band {
+  /* The band's padding sits outside this wrapper, so it is the header's width less that padding. */
+  --mk-wrap: calc(var(--mk-wrap-docs) - 48px);
   padding: 56px 24px 0;
 }
 
@@ -905,11 +916,6 @@ three steps and the three ways into the project all draw the same box — so it 
 }
 
 /* --- Docs ------------------------------------------------------------------ */
-/* The header and footer share the docs grid's width, so the sidebar lines up with the logo. */
-.mk-docs-page {
-  --mk-wrap: var(--mk-wrap-docs);
-}
-
 /* 720px, the same reading measure the prototype's `.proto-main` uses — about 80 characters of Inter
    at 16px, and a three-column grid rather than Bootstrap's `col-sm-12` single column. */
 .mk-docs {
@@ -917,7 +923,7 @@ three steps and the three ways into the project all draw the same box — so it 
   grid-template-columns: 216px minmax(0, 1fr) 176px;
   gap: 40px;
   align-items: start;
-  max-width: var(--mk-wrap);
+  max-width: var(--mk-wrap-docs);
   margin: 0 auto;
   padding: 40px 24px 96px;
 }
