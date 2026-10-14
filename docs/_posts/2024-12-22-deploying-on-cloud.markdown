@@ -107,6 +107,18 @@ single JSON line instead of the banner, and doesn't try to open a browser. The a
 line's `access_token` field, and the line's message is `zasper server started`. Set
 `ZASPER_LOG_FORMAT=console` to get the banner back.
 
+## Trusting the Folder
+
+Zasper starts no kernel, runs no file and changes no git repository in a folder until that folder is
+trusted. It asks the first time a browser opens the folder, and until someone answers, a server
+started by systemd or a script runs no kernels. Trust the folder in one of these ways:
+
+- `zasper --trust` trusts the folder this run serves, for this run only.
+- `ZASPER_TRUST_ALL=1` in the environment trusts every folder.
+- **Settings → Trust** in the browser trusts a folder and keeps it in `~/.zasper/config.json`.
+
+[Trusted Folders](/docs/trusted-folders) explains what a restricted folder can and cannot do.
+
 ## Behind a Reverse Proxy with HTTPS
 
 For anything beyond your own network, put Zasper behind a reverse proxy that handles HTTPS. If the
@@ -200,6 +212,9 @@ docker run -d -p 127.0.0.1:8048:8048 -v "$PWD/workspace:/home/zasper" zasper
 
 Add `-e ZASPER_ACCESS_TOKEN=...` to `docker run` to fix the token.
 
+The image sets `ZASPER_TRUST_ALL=1`, because the folder a container serves belongs to its user, so
+kernels start without asking.
+
 ## Running It as a Service
 
 On Linux, systemd can start Zasper at boot and restart it if it stops. Save this as
@@ -214,7 +229,7 @@ After=network.target
 User=zasper
 WorkingDirectory=/home/zasper/notebooks
 EnvironmentFile=/etc/zasper.env
-ExecStart=/usr/local/bin/zasper
+ExecStart=/usr/local/bin/zasper --trust
 Restart=on-failure
 
 [Install]
@@ -229,6 +244,8 @@ sudo systemctl enable --now zasper
 journalctl -u zasper
 ```
 
+`--trust` trusts the working directory for this run, so kernels start before anyone answers the
+prompt.
 Zasper finds the kernels that the service's user has installed. Under systemd, logs are written as
 JSON, so the token is in the startup line's `access_token` field; [Configuration](/docs/configuration#logging)
 explains how to change the format.
