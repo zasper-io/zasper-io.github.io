@@ -11,7 +11,8 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper is one static binary with no runtime dependencies — {{ site.download_size }} to download, {{ site.binary_size }} on disk once it is unpacked. It runs a server on your own
+Zasper is one static binary with no runtime dependencies. The download is {{ site.download_size }},
+and it takes {{ site.binary_size }} on disk once it is unpacked. It runs a server on your own
 machine, and you use it in your browser: Chrome, Firefox, Safari or Edge.
 
 ## Requirements
