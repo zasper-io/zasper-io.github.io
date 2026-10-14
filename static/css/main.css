@@ -106,6 +106,9 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
   --z-mark-json: #957116;
 
   --mk-wrap: 1080px;
+  /* The docs grid: 720px of text, a 216px sidebar, a 176px contents column, two 40px gaps and 24px
+     of padding each side. Inside --mk-wrap the text column came out at 560px. */
+  --mk-wrap-docs: 1240px;
 }
 
 /* --- Reset ------------------------------------------------------------------ */
@@ -900,6 +903,11 @@ three steps and the three ways into the project all draw the same box — so it 
 }
 
 /* --- Docs ------------------------------------------------------------------ */
+/* The header and footer share the docs grid's width, so the sidebar lines up with the logo. */
+.mk-docs-page {
+  --mk-wrap: var(--mk-wrap-docs);
+}
+
 /* 720px, the same reading measure the prototype's `.proto-main` uses — about 80 characters of Inter
    at 16px, and a three-column grid rather than Bootstrap's `col-sm-12` single column. */
 .mk-docs {
@@ -1241,7 +1249,10 @@ three steps and the three ways into the project all draw the same box — so it 
   display: none;
 }
 
-@media (max-width: 1080px) {
+/* --mk-wrap-docs plus room for a scrollbar, since a media query measures the window with it and
+   cannot read a custom property. Below it the contents column goes, so the text keeps its 720px
+   instead of shrinking to fit three columns. */
+@media (max-width: 1260px) {
   .mk-docs {
     grid-template-columns: 200px minmax(0, 1fr);
   }
