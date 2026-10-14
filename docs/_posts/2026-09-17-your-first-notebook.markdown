@@ -71,7 +71,7 @@ On the last cell of the notebook, `⇧⏎` adds a new one to carry on in.
 
 The number in the left margin is the cell's turn with the kernel. `[ ]:` has never run, `[*]:` is
 queued behind another cell, a spinner takes its place while the cell runs, and `[7]:` was the seventh
-thing this kernel was asked to do — not the seventh cell in the file. Restart the kernel and the
+thing this kernel was asked to do, not the seventh cell in the file. Restart the kernel and the
 count starts again from one.
 
 The run button sits beside the count and becomes a stop button while the cell runs. On the cell's
@@ -87,9 +87,9 @@ text, a table, a figure. A cell that ends in an expression shows that expression
 why `readings.head()` on a line of its own is enough. [Notebook Support](/docs/notebook-support)
 lists what Zasper renders and what it does not.
 
-An error arrives in the same place rather than in a dialog. The kernel keeps everything it had — the
-variables from the cells that worked are still there — so the usual fix is to correct the line and
-run it again.
+An error arrives in the same place rather than in a dialog. The kernel keeps everything it had,
+including the variables from the cells that worked, so the usual fix is to correct the line and run
+it again.
 
 {% include tut/output.html %}
 
@@ -132,7 +132,7 @@ What gets written is the cells, the output they produced, and the name of the ke
 That last part is why opening the notebook tomorrow does not ask which kernel to use again: it
 already knows the answer, and only asks when the kernel it names is not installed here.
 
-Tabs, including this one, are remembered between sessions — [Files and Tabs](/docs/files-and-tabs)
+Tabs, including this one, are remembered between sessions. [Files and Tabs](/docs/files-and-tabs)
 covers what reopens and what does not. Every chord Zasper listens for, including the ones this page
 skipped, is on [Key Bindings](/docs/key-bindings), and the **Help** tab (`F1`) lists them inside the
 app with a filter.
