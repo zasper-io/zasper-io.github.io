@@ -73,6 +73,10 @@ Under **Settings → Language servers**:
 A project's own configuration wins over the Type checking setting: a `pyrightconfig.json`, or
 `[tool.pyright]` or `[tool.basedpyright]` in `pyproject.toml`, is read by the server itself.
 
+**Settings → Editor → Inlay hints** draws the server's parameter names and inferred types into the
+line, without writing them to the file. It is off by default, because the hints move the text of
+every line they appear on.
+
 ### Which Type-Checking Mode
 
 `off` still reports the mistakes worth stopping for: undefined names, imports that cannot be found,
@@ -112,9 +116,9 @@ behind a running cell.
 ## Formatting
 
 **Format Document** formats a file, and **Format Cell** and **Format Notebook** format a notebook;
-all three are in the command palette. Settings can also format a file whenever it is saved. A
-notebook is formatted a cell at a time, so an edit never reaches across cells, and IPython's lines
-are put back untouched.
+all three are in the command palette. **Settings → Editor → Format on save** formats a file whenever
+it is saved; a file with no server is saved as it is. A notebook is formatted a cell at a time, so
+an edit never reaches across cells, and IPython's lines are put back untouched.
 
 basedpyright and pyright do not format, and Zasper says so when you ask. To format Python, set a
 server that does under Settings → Language servers, such as `ruff server`.
