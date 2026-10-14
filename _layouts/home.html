@@ -6,8 +6,8 @@
     <div class="mk-hero-copy">
       <h1 class="mk-hero-title">High performance IDE for <strong>Jupyter Notebooks</strong></h1>
       <p class="mk-hero-sub">
-        Zasper is built from the ground up for massive concurrency: a minimal memory footprint,
-        exceptional speed, and thousands of connections at once.
+        Zasper is built for many kernels at once. At 100 concurrent kernels its server used 49 MB
+        of RAM, where Jupyter Server used 1.9 GB.
       </p>
       <p class="mk-hero-sub">
         It speaks Jupyter's wire protocol, so it runs the notebooks you already have.
@@ -15,7 +15,7 @@
       <div class="mk-cta">
         <a class="mk-button" href="/downloads/">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
-          Download Zasper today!
+          Download Zasper
         </a>
         <a class="mk-button mk-button-quiet" href="/try-zasper/">Try it in the browser</a>
       </div>
@@ -34,6 +34,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
         </button>
       </div>
+      <p class="mk-dl-note"><a href="/downloads/">Other ways to install</a></p>
     </div>
     <div class="mk-hero-art">
       <div class="mk-shot">
@@ -57,11 +58,11 @@
     <div class="mk-numbers">
       <div class="mk-number">
         <strong>5&times;</strong>
-        <span>less CPU than JupyterLab</span>
+        <span>less CPU than Jupyter Server</span>
       </div>
       <div class="mk-number">
         <strong>40&times;</strong>
-        <span>less RAM than JupyterLab</span>
+        <span>less RAM than Jupyter Server</span>
       </div>
       <div class="mk-number">
         <strong>{{ site.download_size }}</strong>
@@ -75,17 +76,17 @@
   <div class="mk-wrap">
     <h2 class="mk-section-title">The gap widens as the load does</h2>
     <p class="mk-section-sub">
-      Both servers were run against the same workload — 10 requests per second per kernel, on an
-      Apple M4 — from 2 concurrent kernels up to 100. Zasper starts ahead and stays ahead, and the
-      distance grows with concurrency rather than shrinking. Past 64 kernels the comparison stops
-      being about cost: Jupyter Server begins losing kernel connections, and by 100 it has lost all
-      of them, while Zasper answers every request at both loads.
+      Both servers were run against the same workload, 10 requests per second per kernel on an
+      Apple M4, from 2 concurrent kernels up to 100. Zasper uses less of both at every load, and the
+      RAM gap grows with concurrency, from about 4&times; at 2 kernels to 38&times; at 100. At 64
+      kernels Jupyter Server begins losing kernel connections, and by 100 it has lost all of them,
+      while Zasper answers every request at both loads.
     </p>
     <div class="mk-charts">
       <figure class="mk-chart">
         <img
           src="/static/images/benchmark/avg-cpu-usage-zasper-vs-jupyter-10rps.svg"
-          alt="Average CPU use against concurrent kernels, 2 to 100. Jupyter Server rises from 2.7% to a peak of 15.5% at 64 kernels; Zasper rises from 0.8% to 12%. The widest gap is 5 times less, at 4 kernels. Crosses mark Jupyter Server losing kernel connections from 64 kernels, and all of them at 100."
+          alt="Average CPU use against concurrent kernels, 2 to 100. Jupyter Server rises from 2.7% to a peak of 15.5% at 64 kernels; Zasper rises from 0.8% to 12%. The widest gap is 4.5 times less, at 4 kernels. Crosses mark Jupyter Server losing kernel connections from 64 kernels, and all of them at 100."
           width="960"
           height="600"
           loading="lazy"
@@ -94,7 +95,7 @@
       <figure class="mk-chart">
         <img
           src="/static/images/benchmark/peak-ram-usage-zasper-vs-jupyter-10rps.svg"
-          alt="Peak RAM use against concurrent kernels, 2 to 100. Jupyter Server holds near 90 MB to 32 kernels, then climbs to 1.9 GB at 100; Zasper stays under 50 MB throughout. The widest gap is 38 times less, at 100 kernels. Crosses mark Jupyter Server losing kernel connections from 64 kernels, and all of them at 100."
+          alt="Peak RAM use against concurrent kernels, 2 to 100. Jupyter Server rises from 90 MB to 133 MB at 32 kernels, then climbs to 1.9 GB at 100; Zasper stays under 50 MB throughout. The widest gap is 38 times less, at 100 kernels. Crosses mark Jupyter Server losing kernel connections from 64 kernels, and all of them at 100."
           width="960"
           height="600"
           loading="lazy"
@@ -102,12 +103,13 @@
       </figure>
     </div>
     <p class="mk-charts-note">
-      CPU is averaged across each run; RAM is the highest figure observed, which is what &ldquo;up to
-      40&times;&rdquo; reports. At light load the difference is closer to 3&ndash;4&times; on both —
-      the advantage is a function of concurrency, not a constant. The crosses are measured the same
-      way as the lines: replies received against requests sent, which is flat at five replies per
-      request until a server stops answering — so Jupyter's 14% CPU at 100 kernels is 14% while
-      returning nothing. Every point is recomputed from the
+      CPU is averaged across each run; RAM is the highest figure observed. The figures above round the
+      widest gaps: 4.5&times; less CPU at 4 kernels and 38&times; less RAM at 100. At 2 kernels the
+      difference is about 3&times; for CPU and 4&times; for RAM. The CPU gap does not grow with load,
+      while the RAM gap does. The crosses are measured the same way as the lines, as replies received
+      against requests sent, which is flat at five replies per request until a server stops
+      answering. Jupyter's 14% CPU at 100 kernels is 14% while returning nothing. Every point is
+      recomputed from the
       raw runs in
       <a href="https://github.com/zasper-io/zasper-benchmark">zasper-benchmark</a>, where the harness
       and the methodology are public.
@@ -119,7 +121,7 @@
       <div class="mk-wrap">
         <h2 class="mk-section-title">Your notebooks, unchanged</h2>
         <p class="mk-section-sub">
-          Zasper speaks Jupyter's wire protocol and reads and writes <code>.ipynb</code> directly,
+          Zasper reads and writes <code>.ipynb</code> directly,
           so a notebook moves between Zasper and JupyterLab without being converted. Your files
           stay where they are — no import step, no workspace to create — and the same kernels run
           them, registered once.
@@ -142,7 +144,7 @@
           <li class="mk-check">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
             <span
-              ><strong>Every kind of output renders</strong> — HTML, PNG, JPEG, SVG, LaTeX through
+              ><strong>The outputs you use render:</strong> HTML, PNG, JPEG, SVG, LaTeX through
               KaTeX, Plotly figures, ipywidgets and JSON.</span
             >
           </li>
@@ -171,8 +173,10 @@
           <li class="mk-check is-no">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
             <span
-              ><strong>Notebooks are not signed or trusted.</strong> Jupyter's trust system is not
-              implemented, so treat a notebook you did not write like any other download.</span
+              ><strong>Notebooks are not signed, as Jupyter signs them.</strong> Trust is given per
+              folder instead, and nothing a folder controls runs until you trust it. HTML saved in a
+              notebook's outputs is sanitised when the notebook opens, so its scripts do not run
+              until you run the cell again.</span
             >
           </li>
         </ul>
@@ -258,16 +262,16 @@
   <div class="mk-wrap">
     <h2 class="mk-section-title">And it is a real IDE</h2>
     <p class="mk-section-sub">
-      The numbers above are only half the question. Every screen below is a running session, not a
-      mock-up.
+      Every screen below is from a running session.
     </p>
 
     <div class="mk-feature">
       <div class="mk-feature-copy">
         <h3>Your environments, already found</h3>
         <p>
-          Conda, uv, venv and every Jupyter kernel you have installed — detected on open and one
-          click from a blank notebook or a shell. Nothing to register by hand.
+          Every Jupyter kernel you have registered, and any Python with <code>ipykernel</code> on
+          your PATH, in your active conda or virtual environment, or in the project's
+          <code>.venv</code>, one click from a blank notebook.
         </p>
       </div>
       <div class="mk-shot">
@@ -289,8 +293,8 @@
       <div class="mk-feature-copy">
         <h3>A real shell, in the same window</h3>
         <p>
-          Not an emulation. A full terminal that restores its session on reopen, in a tab beside the
-          notebook it belongs to.
+          Your own shell in a tab beside the notebook it belongs to. It restores its session when
+          you reopen it.
         </p>
       </div>
       <div class="mk-shot">
@@ -310,11 +314,11 @@
 
     <div class="mk-feature">
       <div class="mk-feature-copy">
-        <h3>Version control, not an extension</h3>
+        <h3>Version control, built in</h3>
         <p>
           Branch, stage, commit and read a side-by-side diff in the window you are already working
-          in. JupyterLab ships no source control at all; git there is a third-party extension you
-          install and maintain yourself.
+          in. JupyterLab ships no source control; git there is a separate extension you install
+          and keep up to date yourself.
         </p>
       </div>
       <div class="mk-shot">
@@ -333,9 +337,9 @@
     </div>
 
     <p class="mk-charts-note">
-      Underneath all three: Zasper speaks Jupyter's wire protocol, reads and writes <code>.ipynb</code> at
-      its own nbformat version, and runs the kernels you already have — so the notebooks in the
-      screenshots above are the notebooks you have now.
+      Zasper reads and writes <code>.ipynb</code> at each file's own nbformat version and runs the
+      kernels you already have, so the notebooks in the screenshots above are ordinary Jupyter
+      notebooks.
     </p>
   </div>
 </div>
@@ -343,7 +347,7 @@
     <div class="mk-band mk-band-alt">
       <div class="mk-wrap">
         <h2 class="mk-section-title">And the rest of it</h2>
-        <p class="mk-section-sub">The things you stop noticing until they are missing.</p>
+        <p class="mk-section-sub">Smaller features, in the same download.</p>
         <div class="mk-minis mk-minis-carousel">
           <div class="mk-mini">
             <h4>SQL cells</h4>
@@ -361,7 +365,8 @@
           <div class="mk-mini">
             <h4>Runs that outlive the tab</h4>
             <p>
-              Close the laptop mid-run; every line the cell printed is there when you come back.
+              Close the tab or lose the connection mid-run; every line the cell printed is there
+              when you come back.
             </p>
           </div>
           <div class="mk-mini">
@@ -385,7 +390,7 @@
           <div class="mk-mini">
             <h4>Find across a notebook</h4>
             <p>
-              Fifty cells at once, including the ones that are not open, and the read-only ones.
+              Every cell and what it printed. Matches in outputs are shown but not replaced.
             </p>
           </div>
           <div class="mk-mini">
@@ -431,9 +436,9 @@
     </p>
     {% include kernel-row.html %}
     <p class="mk-charts-note">
-      Python covers both implementations: <code>ipykernel</code> and Xeus (<code>xeus-python</code>).
-      Conda, uv and venv environments are detected on open — the launcher above is showing nine of
-      them, two of which are Xeus kernels.
+      Python covers two implementations, <code>ipykernel</code> and Xeus (<code>xeus-python</code>).
+      Every registered kernel is listed, and so is any Python environment Zasper finds with
+      <code>ipykernel</code> in it. The launcher above shows nine, two of them Xeus kernels.
       <a href="/docs/installing-jupyter-kernels">Installing kernels</a> walks through adding your own.
     </p>
   </div>
@@ -464,13 +469,13 @@
           <div class="mk-mini">
             <h4>Docker, or a service</h4>
             <p>
-              An image to run it in a container, and a systemd unit for when it should come back
-              up with the machine.
+              A Dockerfile and a Compose file to build and run it in a container, and a systemd
+              unit for when it should come back up with the machine.
             </p>
           </div>
         </div>
         <p class="mk-charts-note">
-          <a href="/docs/deploying-on-cloud">Deploying on Cloud</a> walks through all four, including the two
+          <a href="/docs/deploying-on-cloud">Deploying on Cloud</a> walks through all three, and both
           ways to sign in.
         </p>
       </div>
@@ -481,16 +486,16 @@
       <div class="mk-wrap">
         <h2 class="mk-section-title">Start here</h2>
         <p class="mk-section-sub">
-          Ten minutes from nothing to a notebook you have run, saved and put under version
-          control.
+          Ten minutes from nothing to a notebook you have run and saved.
         </p>
         <div class="mk-cards-3">
           <div class="mk-card">
             <span class="mk-card-kind">Step one</span>
             <h3>Install it</h3>
             <p>
-              Homebrew, snap, conda, or the binary for your platform. No runtime to install first,
-              nothing to configure after.
+              Homebrew, snap, conda, or the binary for your platform. No runtime for Zasper
+              itself; notebooks need a Jupyter kernel, and <code>pip install ipykernel</code> is
+              enough to start.
             </p>
             <a href="/docs/installation">Installation</a>
           </div>
@@ -507,8 +512,8 @@
             <span class="mk-card-kind">Step three</span>
             <h3>Bring your environment</h3>
             <p>
-              Point Zasper at the conda or uv environment you already work in, and it appears in
-              the kernel list.
+              Register the conda or uv environment you already work in as a Jupyter kernel, and
+              it appears in the kernel list.
             </p>
             <a href="/docs/working-with-conda">Working with Conda</a>
           </div>
@@ -603,9 +608,10 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
             </summary>
             <p>
-              They are found the way Jupyter finds them, through kernelspecs, and appear in the
-              launcher without being registered again. An environment that runs a notebook today
-              runs it here.
+              One registered as a Jupyter kernel appears in the launcher as it does in Jupyter,
+              without being registered again. Without a kernelspec, Zasper still lists one with
+              <code>ipykernel</code> in it if it is active when Zasper starts, is your base conda
+              install, or is the project's <code>.venv</code> in a trusted folder.
             </p>
           </details>
           <details class="mk-faq-item">
@@ -613,11 +619,13 @@
               Does my code leave my machine? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
             </summary>
             <p>
-              No. Zasper runs a server on your own machine and your files stay on it. The only
-              thing sent anywhere is anonymous usage data — no file names, no paths, no contents,
-              no IP address —
+              No. Zasper runs a server on your own machine and your files stay on it. It sends
+              anonymous usage data, with no file names, paths, contents or IP address, and
+              <code>ZASPER_TELEMETRY=0</code> switches it off;
               <a href="https://github.com/zasper-io/zasper/blob/main/PRIVACY.md">PRIVACY.md</a> is
-              the complete list, and <code>ZASPER_TELEMETRY=0</code> switches it off.
+              the complete list. It also asks zasper.io once a day whether there is a newer
+              version, and loads widget libraries it does not bundle from jsDelivr unless
+              <strong>Load widget libraries from the internet</strong> is off in Settings.
             </p>
           </details>
         </div>
@@ -629,16 +637,16 @@
       <div class="mk-wrap">
         <h2 class="mk-section-title">The project, and how to join it</h2>
         <p class="mk-section-sub">
-          Zasper is developed in the open, by people who use it. The parts of that worth knowing
-          before you depend on it:
+          Zasper is developed in the open, by people who use it. What to know before you depend
+          on it.
         </p>
         <div class="mk-rows">
           <div class="mk-row">
             <span class="mk-row-label">Latest release</span>
             <span
-              >2.0.0 — language servers, search across the project, notebook export</span
+              >{{ site.data.release.version }}, with {{ site.data.release.headline }}</span
             >
-            <span class="mk-row-meta">22 September 2026</span>
+            <span class="mk-row-meta">{{ site.data.release.date | date: "%-d %B %Y" }}</span>
           </div>
           <div class="mk-row">
             <span class="mk-row-label">Stability</span>
@@ -660,8 +668,8 @@
             <span class="mk-card-kind">Contribute</span>
             <h3>Good first issues</h3>
             <p>
-              Issues kept labelled for people arriving, and a developer guide that gets you
-              building from source in two commands.
+              The open issues on GitHub, and a developer guide that gets you building from source
+              in two commands.
             </p>
             <a href="https://github.com/zasper-io/zasper/issues">Open issues</a>
           </div>
@@ -678,8 +686,7 @@
             <span class="mk-card-kind">Talk</span>
             <h3>Slack</h3>
             <p>
-              The project's own workspace, for the conversations that are quicker as a
-              conversation.
+              The project's own workspace, for quick questions and day-to-day talk.
             </p>
             <a href="/community/">Join the Slack</a>
           </div>
@@ -702,7 +709,7 @@
       <div class="mk-wrap mk-closing">
         <h2 class="mk-section-title">One binary, and your notebooks open in it</h2>
         <p class="mk-section-sub">
-          Nothing to sign up for, nothing to upload, nothing to uninstall first.
+          No account to make, and your files stay on your machine.
         </p>
         <div class="mk-cta">
           <a class="mk-button" href="/downloads/">
