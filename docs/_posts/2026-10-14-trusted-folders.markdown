@@ -30,7 +30,7 @@ controls runs.
 | SQL cells' connections | asks | ✓ |
 | Starting a coding agent | asks | ✓ |
 | Language servers | only basedpyright, pyright and clangd, found outside the folder | every server |
-| Git stage, commit, discard, checkout, branch delete, fetch, pull, push | asks | ✓ |
+| Git stage, unstage, commit, discard, checkout, branch delete, fetch, pull, push | asks | ✓ |
 | Terminals | ✓ | ✓ |
 
 basedpyright, pyright and clangd read code without running it, so they keep working in a restricted
@@ -48,11 +48,14 @@ folder** and **Stay restricted**. The **Trust everything in** checkbox trusts th
 this one instead, for when you clone repositories into one place you trust. **Stay restricted**,
 Escape and the close button never trust, and the question is not asked again in that browser tab.
 
-While a folder is restricted, three places say so, and each one asks again:
+While a folder is restricted, these places say so, and each one asks again:
 
 - **Restricted** with a shield, as the first item in the status bar.
 - A band over every notebook, with **Trust folder…**.
 - The notebook's kernel pill.
+- The Launcher, when the folder has its own `.venv`, shown locked with **Trust folder…**.
+- The language-server item in the status bar, for a server that runs the project's code. Its menu
+  has **Trust folder…**.
 
 Pressing Run or Run all in a restricted notebook asks **Trust this folder to run its code?** Its
 **Trust and run** button trusts the folder, starts the kernel and runs the cell in one step.
