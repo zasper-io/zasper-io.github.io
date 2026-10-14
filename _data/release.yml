@@ -5,6 +5,8 @@
 # Measured on the published archives: `ls -l` over what the release uploaded.
 version: "2.0.0"
 date: 2026-09-22
+# The landing page's "Latest release" row: "<version>, with <headline>".
+headline: language servers, search across the project and notebook export
 
 # Each entry is one operating system's card, and `slug` is the archive's name in the release, which is
 # also what the OS detection matches to point its button at the right file.
@@ -49,8 +51,13 @@ channels:
   - name: Homebrew
     where: macOS · Linux
     for: mac
+    # Run once before the first install. The hero shows only `install`, and links here for these.
+    setup:
+      - brew tap zasper-io/tap
+      - brew trust zasper-io/tap
     install: brew install zasper-io/tap/zasper
     upgrade: brew upgrade zasper
+    note: Homebrew 6 loads nothing from a third-party tap until you trust it.
   - name: Snap
     where: Linux
     for: linux

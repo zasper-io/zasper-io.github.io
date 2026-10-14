@@ -24,7 +24,9 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
   <h1>Download Zasper</h1>
   <p class="mk-docs-lede">
     One static binary for macOS, Linux and Windows. Install it with the package manager you already
-    use, or download it directly.
+    use, or download it directly. To run notebooks you also need a Jupyter kernel, which Zasper does
+    not install; <code>pip install ipykernel</code> is enough to start, and
+    <a href="/docs/installing-jupyter-kernels">Installing Jupyter Kernels</a> covers other languages.
   </p>
 
   {% assign first = release.platforms[0].files[0] %}
@@ -45,6 +47,17 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
         <span class="mk-card-kind">{{ channel.where }}</span>
         <h3>{{ channel.name }}</h3>
         {% assign id = channel.name | downcase %}
+        {% if channel.setup %}
+          <div class="mk-dl-cmd">
+            <span class="mk-dl-cmd-label">Once, before installing</span>
+            {% for step in channel.setup %}
+              <div class="mk-install">
+                <span id="cmd-setup-{{ id }}-{{ forloop.index }}">{{ step | split: " " | join: '</span> <span class="mk-dl-word">' | prepend: '<span class="mk-dl-word">' | append: '</span>' }}</span>
+                <button type="button" aria-label="Copy" data-copy="cmd-setup-{{ id }}-{{ forloop.index }}">{{ copy_icon }}</button>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
         <div class="mk-dl-cmd">
           <span class="mk-dl-cmd-label">Install</span>
           <div class="mk-install">
