@@ -87,5 +87,7 @@ the setting:
 2. `ZASPER_TELEMETRY=0 zasper`
 3. **Settings → Privacy → Send anonymous usage data**, which is remembered
 
-With tracking off, Zasper collects nothing and makes no requests. **Settings → Privacy → Reset
-anonymous ID** replaces your ID, so what is sent next can't be linked to what was sent before.
+With tracking off, Zasper sends no usage data. Unless it was installed as a snap, it still checks
+zasper.io for a newer version once a day, and it loads some widget libraries from jsDelivr unless
+**Settings → Privacy → Load widget libraries from the internet** is off. **Settings → Privacy →
+Anonymous ID → Reset** replaces your ID, so what is sent next can't be linked to what was sent before.
