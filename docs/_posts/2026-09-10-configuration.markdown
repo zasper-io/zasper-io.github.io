@@ -71,6 +71,37 @@ file, systemd or a container's log collector, each line is JSON, and the startup
 single line whose `access_token` field carries the token. Set `ZASPER_LOG_FORMAT` to override this.
 To log every HTTP request without turning on all debug logging, set `ZASPER_ACCESS_LOG=1`.
 
+## Update Notices
+
+Zasper asks zasper.io for the newest version at most once a day, and keeps the answer in
+`~/.zasper/update-check.json`, so the next start reads it without asking again. The request fetches
+one file, `https://zasper.io/latest.json`. A failed check is logged only with `--debug` and changes
+nothing you see.
+
+When the last answer names a newer version, you see it in three places:
+
+- **The startup banner** ends with a line naming the newer version and the one you have, then
+  `Update with: brew upgrade zasper` if you installed with Homebrew, and a link to the release
+  notes. In JSON logs this is a separate line whose message is `a newer version is available`.
+- **The status bar** shows the new version at its right end. Its menu has the release date,
+  **Release notes**, **Copy "brew upgrade zasper"** for a Homebrew install, and **Hide until the
+  next version**. A release whose major number differs from yours is marked **Major**.
+- **Settings → Updates** says what the last check found and when. **Check now** asks again
+  straight away.
+
+If the version you run is older than the oldest one without a known security problem, the notice
+says **Security update** instead, with a warning icon in the status bar. Hiding it then lasts only
+until the next day.
+
+After an upgrade, the first time you open Zasper it shows the release notes for every version since
+the one you last ran, in a **What's New** tab. This happens once; **Help: What's New** in the command
+palette opens it again. A new install does not open it.
+
+The snap never checks, because snaps update themselves. Settings says so in place of **Check now**.
+
+To check from a script, run `zasper --check-update`. It prints the result and exits with `0` when
+you have the newest version, `1` when there is a newer one and `2` when the check failed.
+
 ## Anonymous Usage Data
 
 Zasper sends a small amount of anonymous usage data: counts of things like notebooks opened, cells
