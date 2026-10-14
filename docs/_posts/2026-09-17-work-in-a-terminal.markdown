@@ -27,8 +27,9 @@ choose **Open Terminal Here**. The shell starts in that folder.
 {% include tut/terminal.html %}
 
 A terminal opens in the **Terminals** panel under the editor, beside Problems, References and
-Variables, so the notebook you are working on stays in view above it. **Toggle Terminal** in the
-command palette shows and hides the panel. Open as many as you want, with the **+** in the panel's
+Variables, so the notebook you are working on stays in view above it. **Toggle Terminal** shows and
+hides the panel. Its chord is `` ⌃` `` on macOS (Control, not Command) and `` Ctrl+` `` elsewhere,
+and it is in the command palette too. Open as many as you want, with the **+** in the panel's
 header; each one is its own shell, and the list beside it says where each was started and switches
 between them. Close one from its row in that list.
 
