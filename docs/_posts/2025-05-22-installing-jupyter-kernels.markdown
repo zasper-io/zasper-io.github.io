@@ -17,7 +17,7 @@ and is compatible with any language that provides a Jupyter kernel.
 Whether you're working in Python, R, Julia, Go, or JavaScript — if the kernel supports kernelspec,
 Zasper detects and supports it out of the box.
 
-### No Kernel Yet? Let Zasper Set One Up
+## No Kernel Yet? Let Zasper Set One Up
 
 If Zasper finds no kernel at all, the Launcher says so and offers **Set up a Python kernel**. Click
 it and Zasper:
@@ -39,20 +39,18 @@ to remove it rather than replace it.
 The setup needs a network connection to download `ipykernel`, and a Python 3 to build the
 environment from. If uv finds no Python, it downloads one into its own folder.
 
-### Supported Kernels
+## Supported Kernels
 
 | Language       | Kernel Name / Package                                               | Notes / Install Links                                            |
 | -------------- | --------------------------------------------------------------------| ------------------------------------------------------------------ |
-| Python         | `ipykernel`                                                         | Install via `pip install ipykernel`, or use **Set up a Python kernel** |
-| Conda          | `ipykernel` in env                                                  | Works with `conda create` + `ipykernel`                          |
+| Python         | `ipykernel`                                                         | Install via `pip install ipykernel`, or use **Set up a Python kernel**. In a conda or uv environment, install `ipykernel` into it: see [Working with Conda](/docs/working-with-conda) and [Working with UV](/docs/working-with-uv) |
 | R              | [IRkernel](https://github.com/IRkernel/IRkernel)                    | Add with `IRkernel::installspec()` in the R console               |
 | Julia          | [IJulia](https://julialang.github.io/IJulia.jl/stable/)             | Add via the Julia REPL: `using Pkg; Pkg.add("IJulia")`            |
 | Ruby           | [IRuby](https://github.com/SciRuby/iruby)                           | Run `gem install iruby`, then `iruby register --force`           |
 | JavaScript     | [Deno Kernel](https://docs.deno.com/runtime/reference/cli/jupyter/) | Install via `deno jupyter --install`                             |
 | Go             | [GoNb](https://github.com/janpfeifer/gonb)                          | Run `gonb --install` after installing Go, GoNb, goimports and gopls |
-| UV             | Compatible via `uv` + `ipykernel`                                   | See [Working with UV](/docs/working-with-uv) for the full guide  |
 
-### How Zasper Finds Kernels
+## How Zasper Finds Kernels
 
 Zasper lists three kinds of kernel, and the Launcher shows all of them.
 
@@ -72,7 +70,7 @@ same places Jupyter does, in the same order:
   puts the kernel under that Python's `LocalCache` folder instead (from 1.1.0);
 - Anaconda, Miniconda and Miniforge in your home folder, and on macOS, Homebrew and every Python's
   own folder — each version under `~/Library/Python`, the Command Line Tools' Python and the
-  python.org installers.
+  python.org installers;
 - every conda environment, active or not, last: the ones listed in `~/.conda/environments.txt`, and
   the `envs` folders of Anaconda, Miniconda, Miniforge, Mambaforge and micromamba (or
   `MAMBA_ROOT_PREFIX`). IRkernel and xeus kernels are usually installed into an environment of their
@@ -109,7 +107,7 @@ the kernel's `PATH`, as if it were activated.
 `{connection_file}`, `{resource_dir}` and `{prefix}` are filled in anywhere in a kernelspec's
 `argv`, as Jupyter does, not only as a whole argument.
 
-### Viewing Installed Kernels
+## Viewing Installed Kernels
 
 To check which kernels are registered on your system, run:
 
@@ -128,7 +126,7 @@ Available kernels:
 This shows registered kernels only. The Launcher also lists unregistered Pythons with `ipykernel`
 and your project's `.venv`, which this command does not know about.
 
-### Installing a Python Kernel
+## Installing a Python Kernel
 
 If you're just getting started and want a basic Python kernel, use **Set up a Python kernel** in
 the Launcher, or install `ipykernel` yourself:
@@ -143,11 +141,11 @@ or
 pip install jupyter
 ```
 
-### Setting Up Other Language Kernels
+## Setting Up Other Language Kernels
 
 Here's how to get started with a few popular non-Python kernels.
 
-#### R (IRkernel)
+### R (IRkernel)
 
 Open R and run:
 
@@ -158,7 +156,7 @@ IRkernel::installspec(user = TRUE)
 
 You'll see an `ir` kernel appear in Zasper.
 
-#### Julia (IJulia)
+### Julia (IJulia)
 
 Open the Julia REPL and run:
 
@@ -169,7 +167,7 @@ Pkg.add("IJulia")
 
 The IJulia package automatically registers the kernel.
 
-#### Go (GoNb)
+### Go (GoNb)
 
 Install Go, then GoNb and the `goimports` and `gopls` tools it uses:
 
@@ -182,7 +180,7 @@ gonb --install
 
 The Go kernel will be available in `jupyter kernelspec list`.
 
-#### JavaScript (Deno)
+### JavaScript (Deno)
 
 Follow the [official instructions](https://docs.deno.com/runtime/reference/cli/jupyter/):
 
@@ -192,7 +190,7 @@ deno jupyter --install
 
 After installing, the Deno kernel will be available for use in Zasper.
 
-### Troubleshooting
+## Troubleshooting
 
 If a kernel doesn't appear in Zasper, check `jupyter kernelspec list` to confirm it's registered,
 and make sure you've installed `ipykernel` or the required language-specific runtime.
