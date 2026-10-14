@@ -30,9 +30,10 @@ folder Zasper was started in. The three buttons at the right-hand end of that st
 folder and a notebook. Press the notebook one.
 
 The notebook arrives with an empty name box in the tree, `Untitled.ipynb` greyed in it as a
-placeholder. Type a name and press `Enter`; `.ipynb` is added if you leave it off, and `Escape` keeps
-`Untitled.ipynb`. To put it somewhere other than the top of the project, right-click a folder in the
-tree and choose **Add Notebook** instead.
+placeholder. Type a name and press `Enter`; `.ipynb` is added if you leave it off, and `Escape`
+keeps `Untitled.ipynb`. Making the notebook does not open it: click its row in the tree to open it
+in a tab. To put it somewhere other than the top of the project, right-click a folder in the tree
+and choose **Add Notebook** instead.
 
 {% include tut/file-explorer.html %}
 
@@ -108,6 +109,12 @@ A notebook that is only code is a script with gaps in it. Change a cell to **Mar
 in the toolbar, or `⌃⇧M` / `Ctrl+Shift+M` — write in it, and run it with `⇧⏎` to render it. `⌃⇧Y` /
 `Ctrl+Shift+Y` turns a cell back into code, and double-clicking rendered prose opens its source
 again.
+
+To add a new cell instead, point at the gap between two cells. A rail appears with **Code**, **SQL**,
+**Markdown** and **Raw**, and each one adds that kind of cell there. The same rail stays visible under
+the last cell. The label in the top border of a cell says which kind it is: the kernel's language,
+such as `python`, for a code cell, `sql` or `raw` for those, and `markdown` while a Markdown cell is
+open for editing.
 
 {% include tut/markdown.html %}
 
