@@ -1,7 +1,7 @@
 ---
 layout: docs
 title:  "Notebook Support"
-description: "How Zasper reads, runs and writes .ipynb files: cells, runs that keep going with no tab open, changes made on disk, which outputs render, and the limitations worth knowing."
+description: "How Zasper reads, runs and writes .ipynb files: cells, runs that outlive the tab, changes made on disk, which outputs render, and its limitations."
 date:   2026-09-10 09:00:00 +0530
 index: 8
 group: Guides
@@ -42,7 +42,8 @@ it grows.
 ## Runs That Outlive the Tab
 
 A cell's run belongs to the server, not to the browser tab that started it. Start a long cell, close
-the tab or the laptop, and come back: every line it printed is there.
+the tab, and come back: every line it printed is there. (On a laptop running Zasper itself, sleep
+pauses the run too.)
 
 - A tab that loses its connection mid-run reconnects by itself, is given what it missed, and follows
   the rest of the run live.
