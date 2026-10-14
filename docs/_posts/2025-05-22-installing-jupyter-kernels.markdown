@@ -28,6 +28,7 @@ it and Zasper:
 3. lists it in the Launcher as **Python 3.x (.venv)**.
 
 The setup's output appears in the Launcher as it runs, and the new kernel shows up when it finishes.
+The setup runs only in a folder you trust; see [Trusted Folders](/docs/trusted-folders).
 
 Nothing else is touched. Zasper never installs anything on its own when it starts, never installs
 into your system or Homebrew Python, and never writes a kernelspec — a virtual environment is the one
@@ -47,8 +48,8 @@ environment from. If uv finds no Python, it downloads one into its own folder.
 | R              | [IRkernel](https://github.com/IRkernel/IRkernel)                    | Add with `IRkernel::installspec()` in the R console               |
 | Julia          | [IJulia](https://julialang.github.io/IJulia.jl/stable/)             | Add via the Julia REPL: `using Pkg; Pkg.add("IJulia")`            |
 | Ruby           | [IRuby](https://github.com/SciRuby/iruby)                           | Requires Ruby setup and manual install                           |
-| JavaScript     | [Deno Kernel](https://docs.deno.com/runtime/reference/cli/jupyter/) | Install via `deno install --unstable -A -n jupyter_deno ...`     |
-| Go             | [GoNb](https://github.com/janpfeifer/gonb)                          | Run `gonb install` after installing Go and GoNb                  |
+| JavaScript     | [Deno Kernel](https://docs.deno.com/runtime/reference/cli/jupyter/) | Install via `deno jupyter --install`                             |
+| Go             | [GoNb](https://github.com/janpfeifer/gonb)                          | Run `gonb --install` after installing Go, GoNb, goimports and gopls |
 | UV             | Compatible via `uv` + `ipykernel`                                   | See [Working with UV](/docs/working-with-uv) for the full guide  |
 
 ### How Zasper Finds Kernels
@@ -93,7 +94,8 @@ Installing `ipykernel` into one of them later is noticed without restarting Zasp
 every project, so a notebook saved on it opens on a collaborator's own `.venv` when they clone the
 same repository. It runs as if the environment were activated, so `!pip install` in a notebook
 installs into it. Zasper finds it by reading the folder and does not run anything inside it until you
-choose it.
+choose it. Until you trust the folder, the Launcher shows it locked and does not run it; see
+[Trusted Folders](/docs/trusted-folders).
 
 A kernelspec that names a bare `python` — which is what ipykernel's own spec does — runs with the
 Python that installed it, not whichever `python` comes first on your `PATH`. Installing another
@@ -112,15 +114,15 @@ the kernel's `PATH`, as if it were activated.
 To check which kernels are registered on your system, run:
 
 ```
-prasunanand@Prasuns-Laptop examples % jupyter kernelspec list
+$ jupyter kernelspec list
 Available kernels:
-  deno          /Users/prasunanand/Library/Jupyter/kernels/deno
-  firstenv      /Users/prasunanand/Library/Jupyter/kernels/firstenv
-  gonb          /Users/prasunanand/Library/Jupyter/kernels/gonb
-  ir            /Users/prasunanand/Library/Jupyter/kernels/ir
-  julia-1.11    /Users/prasunanand/Library/Jupyter/kernels/julia-1.11
-  ruby3         /Users/prasunanand/Library/Jupyter/kernels/ruby3
-  python3       /Users/prasunanand/Library/Python/3.9/share/jupyter/kernels/python3
+  deno          /Users/you/Library/Jupyter/kernels/deno
+  firstenv      /Users/you/Library/Jupyter/kernels/firstenv
+  gonb          /Users/you/Library/Jupyter/kernels/gonb
+  ir            /Users/you/Library/Jupyter/kernels/ir
+  julia-1.11    /Users/you/Library/Jupyter/kernels/julia-1.11
+  ruby3         /Users/you/Library/Jupyter/kernels/ruby3
+  python3       /Users/you/Library/Python/3.9/share/jupyter/kernels/python3
 ```
 
 This shows registered kernels only. The Launcher also lists unregistered Pythons with `ipykernel`
@@ -169,11 +171,13 @@ The IJulia package automatically registers the kernel.
 
 #### Go (GoNb)
 
-Install Go and GoNb:
+Install Go, then GoNb and the `goimports` and `gopls` tools it uses:
 
 ```bash
 go install github.com/janpfeifer/gonb@latest
-gonb install
+go install golang.org/x/tools/cmd/goimports@latest
+go install golang.org/x/tools/gopls@latest
+gonb --install
 ```
 
 The Go kernel will be available in `jupyter kernelspec list`.
@@ -183,7 +187,7 @@ The Go kernel will be available in `jupyter kernelspec list`.
 Follow the [official instructions](https://docs.deno.com/runtime/reference/cli/jupyter/):
 
 ```bash
-deno install --unstable -A -n jupyter_deno https://deno.land/x/jupyter/cli.ts
+deno jupyter --install
 ```
 
 After installing, the Deno kernel will be available for use in Zasper.
