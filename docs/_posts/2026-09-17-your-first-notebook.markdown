@@ -10,8 +10,8 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-Make a notebook, put it on a kernel, run something, write down what it was for, and save it. It
-assumes only that Zasper is [installed](/docs/installation) and open on a folder you can write to.
+Make a notebook, put it on a kernel, run something, write down what it was for, and save it. This
+page assumes only that Zasper is [installed](/docs/installation) and open on a folder you can write to.
 
 {% include tut/sprite.html %}
 
@@ -98,15 +98,15 @@ Collapse Output**, **Clear Cell Output** and **Clear All Outputs** have no key b
 the command palette (`⇧⌘P` / `Ctrl+Shift+P`). The first two are also in the menu over a cell, as
 **Expand Output** and **Clear Output**.
 
-A cell that will not finish is stopped with **Interrupt**, the square in the notebook toolbar. There
-is no binding for that either: interrupting is not something you do in the middle of typing.
+A cell that will not finish is stopped with **Interrupt**, the square in the notebook toolbar. It has
+no key binding.
 **Restart** beside it throws away the variables and starts the kernel again, which is the answer when
 interrupting does not take.
 
 ## Say What It Was For
 
-A notebook that is only code is a script with gaps in it. Change a cell to **Markdown** — the picker
-in the toolbar, or `⌃⇧M` / `Ctrl+Shift+M` — write in it, and run it with `⇧⏎` to render it. `⌃⇧Y` /
+Change a cell to **Markdown** (the picker in the toolbar, or `⌃⇧M` / `Ctrl+Shift+M`), write in it,
+and run it with `⇧⏎` to render it. `⌃⇧Y` /
 `Ctrl+Shift+Y` turns a cell back into code, and double-clicking rendered prose opens its source
 again.
 
