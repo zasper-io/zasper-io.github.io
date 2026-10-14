@@ -109,6 +109,8 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
   /* The docs grid: 720px of text, a 216px sidebar, a 176px contents column, two 40px gaps and 24px
      of padding each side. Inside --mk-wrap the text column came out at 560px. */
   --mk-wrap-docs: 1240px;
+  /* The reading measure for docs and blog text, about 80 characters of Inter at 16px. */
+  --mk-measure: 720px;
 }
 
 /* --- Reset ------------------------------------------------------------------ */
@@ -982,7 +984,7 @@ three steps and the three ways into the project all draw the same box — so it 
      table with an unbreakable cell like "Cmd+Option+Right-Arrow/Left-Arrow" was forcing the whole
      grid track wider than the viewport instead of scrolling internally. */
   min-width: 0;
-  max-width: 720px;
+  max-width: var(--mk-measure);
   font-size: 16px;
   line-height: 1.65;
   color: var(--z-fg-default);
@@ -1317,7 +1319,8 @@ three steps and the three ways into the project all draw the same box — so it 
 
 /* --- Blog / tutorials ---------------------------------------------------- */
 .mk-blog {
-  max-width: 720px;
+  /* The measure plus the side padding, so the text itself gets the full 720px. */
+  max-width: calc(var(--mk-measure) + 48px);
   margin: 0 auto;
   padding: 40px 24px 0;
 }
