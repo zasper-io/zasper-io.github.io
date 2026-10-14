@@ -34,9 +34,9 @@ to it.
 
 Zasper looks on your `PATH` first, then in the project's `.venv/bin`, `venv/bin` and
 `node_modules/.bin` (`.venv\Scripts` and `venv\Scripts` on Windows), then in `$GOPATH/bin`,
-`~/go/bin`, `~/.cargo/bin`, `~/.local/bin`, `~/.juliaup/bin` and Homebrew. An app started from the
-Dock has a thinner `PATH` than your shell, and without that list `gopls` in `~/go/bin` would look
-uninstalled.
+`~/go/bin`, `~/.cargo/bin`, `~/.local/bin`, `~/.juliaup/bin` and Homebrew. Zasper started from a
+desktop launcher or as a service has a thinner `PATH` than your shell, and without that list `gopls`
+in `~/go/bin` would look uninstalled.
 
 ## The Status Bar
 
