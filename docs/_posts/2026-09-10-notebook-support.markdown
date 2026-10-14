@@ -11,13 +11,12 @@ author: Prasun Anand
 ---
 
 Zasper implements Jupyter's wire protocol and reads and writes the `.ipynb` format directly, so
-notebooks move between Zasper and JupyterLab unchanged. It makes two guarantees:
+notebooks move between Zasper and JupyterLab unchanged.
 
-- **Saving creates no unwanted diff.** When Zasper opens and saves a notebook, the file comes out
-  byte-for-byte as Jupyter would have written it, so saving does not create merge conflicts.
-- **A notebook keeps its own nbformat version.** A 4.2 notebook is saved as 4.2 rather than
-  silently upgraded to the newest version, which is what JupyterLab does. Notebooks in formats 2
-  and 3 are converted to 4.5 when opened.
+When Zasper opens and saves a notebook, the file comes out byte-for-byte as Jupyter would have
+written it, so saving creates no unwanted diff and no merge conflicts. A notebook also keeps its own
+nbformat version. A 4.2 notebook is saved as 4.2, where JupyterLab would silently upgrade it to the
+newest version. Notebooks in formats 2 and 3 are converted to 4.5 when opened.
 
 Saves are atomic: Zasper writes beside the file and then renames over it, so a crash or a full disk
 cannot leave a half-written notebook.
