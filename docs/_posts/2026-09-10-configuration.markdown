@@ -105,8 +105,9 @@ you have the newest version, `1` when there is a newer one and `2` when the chec
 ## Anonymous Usage Data
 
 Zasper sends a small amount of anonymous usage data: counts of things like notebooks opened, cells
-run and terminals started, along with the Zasper version, OS and CPU architecture. It never sends
-file names, paths, code, project names, your username or your IP address. There is no session
+run, terminals started and which kind of coding agent was used, along with the Zasper version, OS and
+CPU architecture. It never sends file names, paths, code, project names, anything said to or by a
+coding agent, your username or your IP address. There is no session
 recording and no tracking cookie.
 [PRIVACY.md](https://github.com/zasper-io/zasper/blob/main/PRIVACY.md) lists every event and every
 value it can carry.

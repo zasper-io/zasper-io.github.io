@@ -81,8 +81,9 @@ every tab showing the chat sees it change.
 
 ## Mentioning a File, a Cell or an Output
 
-`@` in the message field finds a file by name. Files that `.gitignore` leaves out are listed too,
-dimmed and after the rest, since a dataset often is one of them. The agent is sent a link to the file
+`@` in the message field finds a file by name, or by its folder: `@data/` lists what is in `data`.
+Files that `.gitignore` leaves out are listed too, dimmed and after the rest, since a dataset often is
+one of them. The agent is sent a link to the file
 and reads it itself.
 
 In a notebook, a cell's menu has **Add Cell to Chat** and **Add Output to Chat**; both are also in the
@@ -109,11 +110,23 @@ what you see rather than what is on disk.
 ## Reviewing and Undoing a Turn
 
 When a turn ends, the files it changed are listed under it, each marked A, M or D for added, modified
-or deleted. Pressing a file opens a diff of it before the turn against what the turn left.
+or deleted. Pressing a file opens a diff of it, **Before the turn** against **Now**: the file as it is
+on disk, so it holds anything changed since the turn too, and the tab says so when it does.
 
-**Undo this turn** puts those files back as they were before it: a file the turn added is removed, and
-one it deleted comes back. If a file has changed since the turn, Zasper names it first and asks; **Undo
-anyway** loses the later change, **Keep them** leaves everything as it is.
+You can put back as much or as little as you want:
+
+- **A change inside a file.** In the diff, each changed block of a text file has an undo between the
+  two sides, and each changed cell of a notebook has one at the end of its head. It is written to the
+  file straight away, checked against the version shown, so undoing one change and then another builds
+  on the last. A cell the turn only moved stays where it went.
+- **A file.** The undo at the end of a file's row puts that file back. A file the turn made or removed
+  is put back this way, whole, rather than a block at a time.
+- **The whole turn.** **Undo this turn** puts back every file not put back yet: a file the turn added
+  is removed, and one it deleted comes back.
+
+A file put back is struck through in the list and still opens, to show what the turn had done to it.
+If a file has changed since the turn, Zasper names it first and asks; **Undo anyway** loses the later
+change, **Keep them** leaves everything as it is.
 
 The changes are found by snapshotting the project at the start and end of each turn, so every change
 counts, however it was made: the agent's own edits, a command it ran, a notebook tool, and any edit you

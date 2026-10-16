@@ -91,6 +91,9 @@ execution count. See [Installing Jupyter Kernels](/docs/installing-jupyter-kerne
 | `text/html` | ✅ |
 | `image/png` | ✅ |
 | `image/jpeg` | ✅ |
+| `text/markdown` | ✅ |
+| `image/gif`, `image/webp` | ✅ |
+| `application/pdf` | ✅ |
 | `image/svg+xml` | ✅ |
 | `text/latex` | ✅ |
 | Plotly figures (`application/vnd.plotly.v1+json`) | ✅ |

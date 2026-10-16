@@ -27,6 +27,13 @@ Zasper ships no language servers. It starts one you already have, and tells you 
 | C, C++ | clangd | `xcode-select --install` on macOS, `sudo apt install clangd` on Linux |
 | R | languageserver | `R -e 'install.packages("languageserver")'` |
 | Julia | LanguageServer.jl | `julia -e 'using Pkg; Pkg.add("LanguageServer")'` |
+| Java | jdtls | `brew install jdtls` |
+| Scala | metals | `cs install metals` |
+| Kotlin | kotlin-language-server | `brew install kotlin-language-server` |
+| C# | csharp-ls | `dotnet tool install --global csharp-ls` |
+| Shell | bash-language-server | `npm install -g bash-language-server` |
+| SQL | sqls | `go install github.com/sqls-server/sqls@latest` |
+| Haskell | haskell-language-server | `ghcup install hls` |
 
 For Python, the first of the three that is found is used, in that order. basedpyright and pyright are
 type checkers; pylsp is jedi with a set of plugins, so the type-checking setting below does not apply
@@ -92,6 +99,11 @@ you maintain and have types for, and silence a single line with `# type: ignore[
 
 A notebook's cells are given to the server as one document, so a name defined in one cell is known
 in the next.
+
+**Not every language's notebook gets one.** Python, R, Julia, Go, TypeScript and JavaScript, Rust,
+shell and SQL notebooks do. C, C++, Java, Scala, Kotlin, C# and Haskell notebooks do not: their kernels
+take cells that are snippets rather than a source file, which those servers mark as wrong throughout.
+Their files still get the server.
 
 **IPython's own syntax is hidden from the server.** Line magics, `!` shell escapes and `obj?` are
 replaced before the server sees them, line for line, so the server never reports them as errors and
