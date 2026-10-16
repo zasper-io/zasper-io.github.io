@@ -17,6 +17,11 @@
     - "A folder runs nothing until you trust it. Zasper asks once per folder; `zasper --trust` trusts it for one run."
     - "The watch socket sends `{\"changed\": [...]}` where it sent `reload`. A script should treat any message as a change."
     - "`PUT /api/contents` answers `409` when it is given a `hash` and the file has changed since. A save without a `hash` writes as before."
+  shot:
+    image: /static/images/changelog/agent-panel.png
+    label: Coding agents
+    alt: A notebook open in Zasper with a chart of three sensors' temperatures, and Claude Code's panel beside it listing the tools it called, its answer, and the file its turn changed
+    caption: "**Claude Code in the agent panel**, after adding and running a chart cell: its answer beside the chart, and the file its turn changed, ready to review or undo."
   highlights:
     - "**Coding agents** in a panel on the right: Claude Code, Gemini CLI, Codex or any ACP agent, with Zasper's tools for notebooks and kernels."
     - "**Review and undo** what each turn changed: a block, a cell, a file or the whole turn."
