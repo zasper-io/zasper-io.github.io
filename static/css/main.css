@@ -1916,6 +1916,12 @@ words, this is one global stylesheet, and a figure is the only place on the site
   background: var(--z-bg-editor);
 }
 
+/* A screenshot, for a screen no fragment draws yet: it fills the frame and scales with it. */
+.tut-shot.is-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 /* The notebook pane's bottom padding is runway for a scrolling pane: nothing scrolls in a figure, and
    40px of it under the last cell reads as the picture having been cropped badly. */
 .tut-shot .notebook {

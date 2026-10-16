@@ -293,6 +293,32 @@
 
     <div class="mk-feature">
       <div class="mk-feature-copy">
+        <h3>SQL beside your Python</h3>
+        <p>
+          A SQL cell queries your database, or the DataFrames the kernel already holds, and leaves
+          the answer as a DataFrame for the cells after it. PostgreSQL, MySQL, SQLite, DuckDB,
+          Snowflake, BigQuery and more, browsed table by table in the Data panel, with each password
+          kept in your system keychain.
+        </p>
+        <p><a href="/docs/sql-cells">SQL cells</a> · <a href="/docs/query-data-with-sql">Tutorial: query data with SQL</a></p>
+      </div>
+      <div class="mk-shot">
+        <div class="mk-shot-bar">
+          <span class="mk-shot-dot"></span>
+          <span class="mk-shot-label">nyc_taxi.ipynb</span>
+        </div>
+        <img
+          src="/static/images/screens/sql-cells.png"
+          alt="A notebook of New York taxi trips in Zasper. The Data panel lists a SQLite connection named taxi with its three tables, and the DataFrames the kernel holds. Beside it, a SQL cell on taxi joins trips to zones and writes df_boroughs, and its output shows 8 rows: trips and average fare by borough, Manhattan first with 2,615,336 trips."
+          width="1400"
+          height="800"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <div class="mk-feature">
+      <div class="mk-feature-copy">
         <h3>Your environments, already found</h3>
         <p>
           Every Jupyter kernel you have registered, and any Python with <code>ipykernel</code> on
@@ -375,13 +401,6 @@
         <h2 class="mk-section-title">And the rest of it</h2>
         <p class="mk-section-sub">Smaller features, in the same download.</p>
         <div class="mk-minis mk-minis-carousel">
-          <div class="mk-mini">
-            <h4>SQL cells</h4>
-            <p>
-              A query on your database or the kernel's own dataframes, and the answer as a
-              DataFrame for the cells after it.
-            </p>
-          </div>
           <div class="mk-mini">
             <h4>DataFrames you can work with</h4>
             <p>

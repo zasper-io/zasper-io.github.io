@@ -14,7 +14,15 @@ A SQL cell runs a query and leaves the answer in the kernel as a pandas DataFram
 cells after it can use. It runs on a **connection**, a database you describe once in Settings, or on
 **Dataframes**, the pandas and polars frames the kernel already holds.
 
-SQL cells need a Python kernel with pandas installed.
+SQL cells need a Python kernel with pandas installed. [Query Data with SQL](/docs/query-data-with-sql)
+walks through one from start to finish.
+
+<figure class="tut-figure">
+  <div class="tut-shot is-image">
+    <img src="/static/images/screens/sql-cells.png" alt="A SQL cell on a SQLite connection named taxi writing df_boroughs, with its query above and its 8 rows below. The Data panel beside it lists the connection's tables and the DataFrames the kernel holds." width="1400" height="800" loading="lazy" />
+  </div>
+  <figcaption class="tut-caption">A SQL cell's head holds its connection and the DataFrame it writes. The Data panel lists both.</figcaption>
+</figure>
 
 ## Add a Connection
 
@@ -83,7 +91,7 @@ how long the query took. The DataFrame follows in the table view.
 
 **Rows are limited to 1,000 by default.** When the limit left rows behind, **Load all** appears. The
 first press counts the rows and estimates the memory reading them would take, such as
-`first 1,000 of 2,964,606 rows · Load all · about 237 MB`. The second press runs the cell once with
+`first 1,000 of 2,964,606 rows` and **Load all · about 885 MB**. The second press runs the cell once with
 no limit; the cell itself does not change. Counting runs the query again on the database, wrapped in
 `count(*)`, which is why it waits for a press, and it is cancelled after 10 seconds. A count that fails
 says why, and the button becomes **Load all anyway**.
