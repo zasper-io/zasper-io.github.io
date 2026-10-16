@@ -110,6 +110,10 @@ folder is trusted yet.
   only, and `ZASPER_TRUST_ALL=1` in the environment trusts every folder. A server started by
   systemd or a script starts no kernels until its folder is trusted this way, or until someone
   trusts it from a browser or **Settings → Trust**.
+- **Scripts that use Zasper's API** should know two things. The watch socket,
+  `/api/contents/watch`, now names the files that changed instead of sending `reload`, so treat any
+  message as a change. And a save given the `hash` a read returned is refused with `409` when the
+  file has changed since; a save without one writes as before.
 
 [Trusted Folders](/docs/trusted-folders) has the details.
 
