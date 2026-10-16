@@ -20,7 +20,7 @@
   shot:
     image: /static/images/changelog/agent-panel.png
     label: Coding agents
-    alt: A notebook open in Zasper with a chart of three sensors' temperatures, and Claude Code's panel beside it listing the tools it called, its answer, and the file its turn changed
+    alt: A penguins notebook open in Zasper with the scatter plot Claude Code added, and its panel beside it listing the tools it called, its answer, and the file its turn changed
     caption: "**Claude Code in the agent panel**, after adding and running a chart cell: its answer beside the chart, and the file its turn changed, ready to review or undo."
   highlights:
     - "**Coding agents** in a panel on the right: Claude Code, Gemini CLI, Codex or any ACP agent, with Zasper's tools for notebooks and kernels."
@@ -74,7 +74,7 @@
   shot:
     image: /static/images/changelog/terminal-panel.png
     label: Terminal panel
-    alt: A notebook open in Zasper, with a terminal panel beneath it running a Python script
+    alt: A notebook open in Zasper, with a terminal panel beneath it running a Python session
     caption: "**A terminal panel below the editor**, so a shell and the code it runs against are on screen together."
   highlights:
     - "**Language servers** for Python, Go, JavaScript and TypeScript, Rust, C and C++, R and Julia, in files and in notebooks."
@@ -138,7 +138,7 @@
   shot:
     image: /static/images/changelog/source-control.png
     label: Source control
-    alt: The source control panel listing two changed files, beside a side-by-side diff of one of them
+    alt: The source control panel listing three changed files, beside a side-by-side diff of one of them
     caption: "**Source control.** Staging, commits, branches, history and side-by-side diffs, without leaving the notebook."
   highlights:
     - "**Notebook outputs:** ipywidgets, Plotly, tables and LaTeX."
