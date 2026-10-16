@@ -4,6 +4,52 @@
 # `upgrading`, `highlights` and `changes` are lists of Markdown. `shot` is for a release worth showing
 # and is left out otherwise.
 
+- version: "2.1.0"
+  date: 2026-10-16
+  summary: >-
+    Coding agents in Zasper. The agent you already use, Claude Code, Gemini CLI or Codex, works in a
+    panel beside your notebooks, reads, edits and runs them through Zasper's own tools, and every change
+    it makes can be reviewed and undone. A notebook now takes changes made to its file while it is open,
+    cell by cell, and there is a variables panel, SQL cells, a notebook diff, and folders that run
+    nothing until you trust them.
+  upgrading_from: "2.0.0"
+  upgrading:
+    - "A folder runs nothing until you trust it. Zasper asks once per folder; `zasper --trust` trusts it for one run."
+    - "The watch socket sends `{\"changed\": [...]}` where it sent `reload`. A script should treat any message as a change."
+    - "`PUT /api/contents` answers `409` when it is given a `hash` and the file has changed since. A save without a `hash` writes as before."
+  highlights:
+    - "**Coding agents** in a panel on the right: Claude Code, Gemini CLI, Codex or any ACP agent, with Zasper's tools for notebooks and kernels."
+    - "**Review and undo** what each turn changed: a block, a cell, a file or the whole turn."
+    - "**A notebook that keeps up** with changes made to its file, cell by cell, and with runs started anywhere."
+    - "**A variables panel**, DataFrames as a grid that becomes a chart, and **SQL cells**."
+  changes:
+    added:
+      - "The agent panel: start an agent, mention files, cells and outputs, choose what it may do without asking, and open past conversations again."
+      - "Zasper's MCP server, for agents in the panel and, through `zasper mcp`, for any agent in a terminal."
+      - A command an agent runs shows its output and exit code in its row.
+      - A notebook takes a change made to its file while it is open, cell by cell, and asks only about a cell both sides changed.
+      - A run started from another tab, an agent, or with no tab open reaches its cell, and its output is kept for a tab that opens later.
+      - A notebook diff, cell by cell, with outputs and metadata.
+      - A variables panel, a data grid for DataFrames, and charts made from it, kept as the code that draws them.
+      - SQL cells on connections Zasper manages.
+      - Each kernel's memory and GPU memory.
+      - Run time beside each cell.
+      - "`text/markdown`, GIF, WebP and PDF outputs."
+      - Kernels in any conda environment, and language servers for Java, Scala, Kotlin, C#, shell, SQL and Haskell.
+      - A notebook naming no kernel starts one for the language it is written in.
+      - What's new, as a tab after an upgrade.
+    changed:
+      - Usage data counts the new features, by kind and in buckets, never by name or content.
+      - The status bar takes the theme's hue in dark themes.
+      - More room between cells, and Shift-Enter keeps the next cell in view.
+    fixed:
+      - A notebook's kernel no longer imports modules that sit beside the notebook as it starts.
+      - Run All no longer sends a cell before the SQL cell above it has finished.
+      - A kernel slow to start is waited for however long it takes.
+      - A dead kernel says why, with the last lines it printed.
+      - "On Windows, interrupting a kernel works, and stopping one stops everything it started."
+      - C and C++ notebooks no longer get errors from clangd.
+
 - version: "2.0.0"
   date: 2026-09-22
   major: true
