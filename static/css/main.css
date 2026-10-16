@@ -2926,6 +2926,12 @@ drawing, unported, with the candidates they belong to.
   color: var(--z-fg-muted);
 }
 
+/* The version in the page's heading, in the accent: the first thing the page answers is which one. */
+.mk-dl-version {
+  color: var(--z-fg-accent);
+  font-variant-numeric: tabular-nums;
+}
+
 .mk-dl-cta {
   display: flex;
   align-items: center;

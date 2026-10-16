@@ -18,10 +18,10 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
 <div class="mk-dl">
   <p class="mk-dl-release">
     <span class="z-badge z-badge-accent">Latest</span>
-    Version {{ release.version }} · {{ release.date | date: "%-d %B %Y" }} ·
-    <a href="/blog/zasper-{{ release.version | replace: '.', '-' }}">What's new</a>
+    Released {{ release.date | date: "%-d %B %Y" }} ·
+    <a href="/changelog/#{{ release.version }}">What's new in {{ release.version }}</a>
   </p>
-  <h1>Download Zasper</h1>
+  <h1>Download Zasper <span class="mk-dl-version">{{ release.version }}</span></h1>
   <p class="mk-docs-lede">
     One static binary for macOS, Linux and Windows. Install it with the package manager you already
     use, or download it directly. To run notebooks you also need a Jupyter kernel, which Zasper does
