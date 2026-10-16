@@ -4,6 +4,57 @@
 # `upgrading`, `highlights` and `changes` are lists of Markdown. `shot` is for a release worth showing
 # and is left out otherwise.
 
+- version: "2.1.0"
+  date: 2026-10-16
+  summary: >-
+    Coding agents in Zasper. The agent you already use, Claude Code, Gemini CLI or Codex, works in a
+    panel beside your notebooks, reads, edits and runs them through Zasper's own tools, and every change
+    it makes can be reviewed and undone. A notebook now takes changes made to its file while it is open,
+    cell by cell, and there is a variables panel, SQL cells, a notebook diff, and folders that run
+    nothing until you trust them.
+  upgrading_from: "2.0.0"
+  upgrading:
+    - "A folder runs nothing until you trust it. Zasper asks once per folder; `zasper --trust` trusts it for one run."
+    - "The watch socket sends `{\"changed\": [...]}` where it sent `reload`. A script should treat any message as a change."
+    - "`PUT /api/contents` answers `409` when it is given a `hash` and the file has changed since. A save without a `hash` writes as before."
+  shot:
+    image: /static/images/changelog/agent-panel.png
+    label: Coding agents
+    alt: A penguins notebook open in Zasper with the scatter plot Claude Code added, and its panel beside it listing the tools it called, its answer, and the file its turn changed
+    caption: "**Claude Code in the agent panel**, after adding and running a chart cell: its answer beside the chart, and the file its turn changed, ready to review or undo."
+  highlights:
+    - "**Coding agents** in a panel on the right: Claude Code, Gemini CLI, Codex or any ACP agent, with Zasper's tools for notebooks and kernels."
+    - "**Review and undo** what each turn changed: a block, a cell, a file or the whole turn."
+    - "**A notebook that keeps up** with changes made to its file, cell by cell, and with runs started anywhere."
+    - "**A variables panel**, DataFrames as a grid that becomes a chart, and **SQL cells**."
+  changes:
+    added:
+      - "The agent panel: start an agent, mention files, cells and outputs, choose what it may do without asking, and open past conversations again."
+      - "Zasper's MCP server, for agents in the panel and, through `zasper mcp`, for any agent in a terminal."
+      - A command an agent runs shows its output and exit code in its row.
+      - A notebook takes a change made to its file while it is open, cell by cell, and asks only about a cell both sides changed.
+      - A run started from another tab, an agent, or with no tab open reaches its cell, and its output is kept for a tab that opens later.
+      - A notebook diff, cell by cell, with outputs and metadata.
+      - A variables panel, a data grid for DataFrames, and charts made from it, kept as the code that draws them.
+      - SQL cells on connections Zasper manages.
+      - Each kernel's memory and GPU memory.
+      - Run time beside each cell.
+      - "`text/markdown`, GIF, WebP and PDF outputs."
+      - Kernels in any conda environment, and language servers for Java, Scala, Kotlin, C#, shell, SQL and Haskell.
+      - A notebook naming no kernel starts one for the language it is written in.
+      - What's new, as a tab after an upgrade.
+    changed:
+      - Usage data counts the new features, by kind and in buckets, never by name or content.
+      - The status bar takes the theme's hue in dark themes.
+      - More room between cells, and Shift-Enter keeps the next cell in view.
+    fixed:
+      - A notebook's kernel no longer imports modules that sit beside the notebook as it starts.
+      - Run All no longer sends a cell before the SQL cell above it has finished.
+      - A kernel slow to start is waited for however long it takes.
+      - A dead kernel says why, with the last lines it printed.
+      - "On Windows, interrupting a kernel works, and stopping one stops everything it started."
+      - C and C++ notebooks no longer get errors from clangd.
+
 - version: "2.0.0"
   date: 2026-09-22
   major: true
@@ -17,10 +68,13 @@
     - "`protected` is no longer in `/api/config` or `/api/info`. Treat a missing field as `true`."
     - You will be asked to sign in once.
     - A notebook's kernel starts in the notebook's folder, as in Jupyter.
+    - HTML outputs saved in a notebook no longer run their scripts when it opens. Re-run the cell to bring back an interactive plot.
+    - "A server bound to `127.0.0.1` or `localhost` answers only to a localhost address. Name a reverse proxy's host with `--allow-host` or `ZASPER_ALLOWED_HOSTS`."
+    - Request bodies are capped, at 512 MiB for the API (uploads excepted) and 16 KiB for sign-in.
   shot:
     image: /static/images/changelog/terminal-panel.png
     label: Terminal panel
-    alt: A notebook open in Zasper, with a terminal panel beneath it running a Python script
+    alt: A notebook open in Zasper, with a terminal panel beneath it running a Python session
     caption: "**A terminal panel below the editor**, so a shell and the code it runs against are on screen together."
   highlights:
     - "**Language servers** for Python, Go, JavaScript and TypeScript, Rust, C and C++, R and Julia, in files and in notebooks."
@@ -56,7 +110,7 @@
       - Saving a file that is a link replaced the link with a plain file.
       - A delete request naming the project folder itself was not refused.
       - "On Windows, language servers in a project's `.venv` were not found."
-      - "Notebooks with Plotly, Vega or other `application/*+json` outputs did not open."
+      - "Notebooks with Plotly, Vega or other `application/*+json` outputs were reported as not matching nbformat's schema."
 
 - version: "1.1.0"
   date: 2026-09-14
@@ -76,10 +130,15 @@
   summary: >-
     The first stable release. Zasper's HTTP and WebSocket API, its configuration file and its
     command-line flags are covered by semantic versioning from here on: they will not break within 1.x.
+  upgrading_from: "0.2.0-beta"
+  upgrading:
+    - "The server binds `127.0.0.1` by default. To reach it from another machine, start it with `--host=0.0.0.0` and `--protected=true`."
+    - "`DELETE /ws/kernels/{kernel_id}` has been removed. Call `DELETE /api/kernels/{kernelId}` instead."
+    - "Kernel connection files moved from the system temp directory to `~/.zasper/runtime`."
   shot:
     image: /static/images/changelog/source-control.png
     label: Source control
-    alt: The source control panel listing two changed files, beside a side-by-side diff of one of them
+    alt: The source control panel listing three changed files, beside a side-by-side diff of one of them
     caption: "**Source control.** Staging, commits, branches, history and side-by-side diffs, without leaving the notebook."
   highlights:
     - "**Notebook outputs:** ipywidgets, Plotly, tables and LaTeX."

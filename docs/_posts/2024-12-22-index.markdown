@@ -14,61 +14,72 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper is an open-source, high-performance IDE for working with Jupyter notebooks. It's built from
-scratch to be:
-
-* Fast to start and fast to run
-* Highly concurrent, with a small resource footprint
-* Resilient under heavy load
+Zasper is an open-source IDE for Jupyter notebooks. Its server is written in Go and handles each
+kernel's messages concurrently, so it uses little CPU and memory of its own and stays responsive with
+many kernels open.
 
 It is cross-platform:
 
 * Fully supported: macOS and Linux
-* Limited support: Windows — for the best experience, use via WSL
+* Windows: supported, except the built-in terminal, which needs Zasper running under WSL
+
+## What's In It
+
+Beyond running notebooks, Zasper has [SQL cells](/docs/sql-cells), [DataFrame grids and
+charts](/docs/exploring-data), [notebook diffs](/docs/comparing-notebooks), [language
+servers](/docs/language-servers), [project search](/docs/search-and-replace), a built-in
+[terminal](/docs/work-in-a-terminal) and [git](/docs/track-changes-with-git), and a panel for
+[coding agents](/docs/coding-agents) that can read, edit and run your notebooks. An agent you run
+elsewhere, such as Claude Code, can do the same through Zasper's [MCP server](/docs/mcp-server).
+[Trusted folders](/docs/trusted-folders) keep a project you downloaded from running its own code
+until you say so.
 
 ## Benchmarks
 
-How is Zasper better than JupyterLab?
+The benchmark measured Zasper's server against Jupyter Server, the server behind JupyterLab, with 2
+to 100 kernels open and ten execute requests a second sent to each kernel. It counted the server
+process alone. The kernels are the same programs under both and use the same memory.
 
-<img src="https://raw.githubusercontent.com/zasper-io/zasper-benchmark/main/assets/summary_resources.png" alt="Benchmark summary" width="600" />
+<img src="https://raw.githubusercontent.com/zasper-io/zasper-benchmark/main/assets/summary_resources.png" alt="Benchmark summary" style="max-width:600px; width:100%; height:auto;" />
 
-* Up to 5X less CPU usage
-* Up to 40X less RAM usage
-* Higher throughput
-* Lower latency
-* Highly resilient under very high loads
+The widest gap in CPU came at 4 kernels, where Zasper's server used 4.5 times less on average. The
+widest in memory came at 100 kernels: Zasper's server peaked at 49 MB and Jupyter Server at 1.9 GB,
+38 times as much. Jupyter Server began losing kernel connections at 64 kernels and had lost them all
+by 100. Zasper's server kept every connection open.
 
 The full benchmark report, methodology and raw results are in the
 [zasper-benchmark repository](https://github.com/zasper-io/zasper-benchmark?tab=readme-ov-file#benchmarking-zasper-vs-jupyterlab).
 
 ## Screenshots
 
-**Editor**
+### Editor
 
-<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/editor.png" alt="Editor" style="max-width:600px; width:100%; height:auto;"  />
+<img src="/static/images/docs/editor.png" alt="Editor" style="max-width:600px; width:100%; height:auto;"  />
 
-**Terminal**
+### Terminal
 
-<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/terminal.png" alt="Terminal" style="max-width:600px; width:100%; height:auto;"  />
+<img src="/static/images/screens/terminal.png" alt="Terminal" style="max-width:600px; width:100%; height:auto;"  />
 
-**Launcher**
+### Launcher
 
-<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/launcher.png" alt="Launcher" style="max-width:600px; width:100%; height:auto;"  />
+<img src="/static/images/screens/launcher.png" alt="Launcher" style="max-width:600px; width:100%; height:auto;"  />
 
-**Jupyter Notebook**
+### Jupyter Notebook
 
-<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/notebook.png" alt="Notebook" style="max-width:600px; width:100%; height:auto;"  />
+<img src="/static/images/screens/notebook-hero.png" alt="Notebook" style="max-width:600px; width:100%; height:auto;"  />
 
-**Version Control**
+### Version Control
 
-<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/git.png" alt="Version Control" style="max-width:600px; width:100%; height:auto;"  />
+<img src="/static/images/screens/git.png" alt="Version Control" style="max-width:600px; width:100%; height:auto;"  />
 
-**Command Palette**
+### Command Palette
 
-<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/commandPalette.png" alt="Command Palette" style="max-width:600px; width:100%; height:auto;"  />
+<img src="/static/images/docs/command-palette.png" alt="Command Palette" style="max-width:600px; width:100%; height:auto;"  />
 
-**Dark Mode**
+### Dark Mode
 
-<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/dark.png" alt="Dark Mode" style="max-width:600px; width:100%; height:auto;"  />
+<img src="/static/images/docs/dark.png" alt="Dark Mode" style="max-width:600px; width:100%; height:auto;"  />
 
-<img src="https://raw.githubusercontent.com/zasper-io/assets/refs/heads/main/darkNotebook.png" alt="Dark Notebook Mode" style="max-width:600px; width:100%; height:auto;"  />
+### Dark Notebook
+
+<img src="/static/images/docs/dark-notebook.png" alt="Dark Notebook Mode" style="max-width:600px; width:100%; height:auto;"  />

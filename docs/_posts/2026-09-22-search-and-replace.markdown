@@ -58,10 +58,12 @@ Before anything is written:
   leave it. A match in a notebook opens the notebook itself.
 - **Leave this out** on a match, or **Leave this file out** on a file, drops it from the replacement.
 
-**Replace in this file** replaces one file's matches, and **Replace** replaces everything that is
-left. A file you have open is changed in its editor, where you can undo the change like any other
-edit, and is saved as you normally save. Every other file is written straight to disk. If a file
-cannot be written, it is listed and the rest are still replaced.
+**Replace in this file** replaces one file's matches, and **Replace all** replaces everything that
+is left. **Replace all** asks first, giving the number of matches and files, and says how many of
+those files are not open, since a change to a file that is not open cannot be undone from an editor.
+A file you have open is changed in its editor, where you can undo the change like any other edit,
+and is saved as you normally save. Every other file is written straight to disk. If a file cannot be
+written, it is listed and the rest are still replaced.
 
 What a notebook's cells printed is searched but never replaced: an output is what the code produced,
 and running the cell again is how it changes.

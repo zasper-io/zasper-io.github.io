@@ -10,16 +10,14 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-A `.ipynb` file is for someone who has Jupyter. For everyone else — a colleague who wants to read the
-result, a reviewer who wants the code, a repository that wants a plain script — Zasper writes the
-notebook out in three other shapes.
+A `.ipynb` file is for someone who has Jupyter. For anyone else, Zasper can export the notebook as an
+HTML page, as Markdown or as a script.
 
 {% include tut/sprite.html %}
 
 ## The Export Menu
 
-The button is at the end of the notebook's toolbar, past the kernel and separated from it: everything
-to its left does something to the notebook, and this one takes a copy of it away.
+The button is at the end of the notebook's toolbar, past the kernel and set apart from it.
 
 {% include tut/export-menu.html %}
 
@@ -27,6 +25,9 @@ It exports **what is on the screen**, not what is on disk. Unsaved edits and the
 produced a moment ago are in the file you get, which is usually what you want and worth knowing when
 it is not. Nothing is sent anywhere: the conversion happens in the browser and the file lands in your
 downloads.
+
+**Download notebook**, at the bottom of the menu, is the exception. It hands over the `.ipynb` itself
+as it is on disk, so save first if the tab shows unsaved changes.
 
 ## HTML Page
 
@@ -36,12 +37,12 @@ have to install anything.
 
 It is the one format that asks a question first. **Export as HTML** offers two checkboxes:
 
-- **Include code** — off gives a report: prose and results, no source.
-- **Include outputs** — off gives the notebook as a blank worksheet, code and no results.
+- **Include the code**: turned off, it gives a report of prose and results with no source.
+- **Include the outputs**: turned off, it gives a blank worksheet, the code with no results.
 
 Both off writes nothing worth having, so the dialog will not let you. One thing to know before you
-send the page: a figure in it is a picture. Interactive plots stop being interactive and widgets stop
-existing altogether, because both need a kernel and a page has none.
+send the page: a figure in it is a picture. Interactive plots stop being interactive and widgets
+become their plain text, because a page runs nothing.
 
 ## Markdown
 
@@ -52,7 +53,7 @@ request, and the one to pick when the text matters more than the run.
 ## Script
 
 The code alone, in the kernel's language, with the markdown cells kept as comments so the reasoning
-survives. The extension comes from the kernel the notebook ran on rather than from a guess — a Python
+survives. The extension comes from the kernel the notebook ran on rather than from a guess. A Python
 notebook gives you `.py`, a Deno one `.ts`.
 
 Use it when a notebook has turned into something that should be a module, or when a reviewer wants to
@@ -60,9 +61,10 @@ read the logic without the JSON around it.
 
 ## What Stays Behind
 
-Every export is a copy: the notebook itself is untouched, and none of the three can be opened back up
-as a notebook. To keep working on it, keep the `.ipynb` — the exports are for the people who are not
-going to run it.
+Every export is a copy: the notebook itself is untouched. The HTML page and the Markdown cannot be
+opened back up as a notebook. The script is in jupytext's percent format, `# %%` before each cell,
+which VS Code and jupytext reopen as cells, though without the outputs. To keep working on it, keep
+the `.ipynb`.
 
 [Notebook Support](/docs/notebook-support) lists what renders in a notebook and therefore what can
 appear in an export, and [Track Changes with Git](/docs/track-changes-with-git) covers keeping the

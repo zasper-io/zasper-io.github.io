@@ -10,17 +10,16 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-You can host your own instance of Zasper on a server and use it from anywhere. This guide covers
-signing in, making the server reachable, keeping the access token across restarts, putting it behind
-HTTPS, Docker, and running it as a service.
+You can host your own instance of Zasper on a server and use it from anywhere.
 
 Zasper gives whoever signs in your project files and a terminal. Every Zasper server requires an
 access token to sign in, so treat that token, and any link that carries it, like a password.
 
 ## Signing In
 
-Zasper always runs in protected mode: every route except the health check needs a session, and a
-session comes from the access token that Zasper prints when it starts:
+Zasper always runs in protected mode: every route except `/api/health`, `/api/config` and
+`/auth/login` needs a session, and a session comes from the access token that Zasper prints when
+it starts:
 
 ```
 ==========================================================
@@ -32,15 +31,13 @@ session comes from the access token that Zasper prints when it starts:
      ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
 
                     Zasper Server
-                Version: 1.1.0
+                   Version: {{ site.data.release.version }}
 ----------------------------------------------------------
  ✅ Server started successfully!
  📡 Bound to:            127.0.0.1:8048
  🖥️  Webapp available at: http://127.0.0.1:8048
- 🔐 Server Access Token: 14be1b674a3b9196a82c01129028d0dd
- 🔗 Sign in with:        http://127.0.0.1:8048/?token=14be1b674a3b9196a82c01129028d0dd
- 📊 Anonymous usage data: on  (--tracking=false to turn off)
-                          see PRIVACY.md for what is sent
+ 🔐 Server Access Token: 0123456789abcdef0123456789abcdef
+ 🔗 Sign in with:        http://127.0.0.1:8048/?token=0123456789abcdef0123456789abcdef
 ==========================================================
 ```
 
@@ -75,8 +72,8 @@ wider binding:
 ```
  📡 Bound to:            0.0.0.0:8048
  🖥️  Webapp available at: http://localhost:8048
- 🔐 Server Access Token: 14be1b674a3b9196a82c01129028d0dd
- 🔗 Sign in with:        http://localhost:8048/?token=14be1b674a3b9196a82c01129028d0dd
+ 🔐 Server Access Token: 0123456789abcdef0123456789abcdef
+ 🔗 Sign in with:        http://localhost:8048/?token=0123456789abcdef0123456789abcdef
 ```
 
 The banner's links say `localhost` because they are written for a browser on the server. From
@@ -107,6 +104,18 @@ When Zasper's output isn't a terminal, such as under Docker or systemd, or piped
 single JSON line instead of the banner, and doesn't try to open a browser. The access token is that
 line's `access_token` field, and the line's message is `zasper server started`. Set
 `ZASPER_LOG_FORMAT=console` to get the banner back.
+
+## Trusting the Folder
+
+Zasper starts no kernel, runs no file and changes no git repository in a folder until that folder is
+trusted. It asks the first time a browser opens the folder, and until someone answers, a server
+started by systemd or a script runs no kernels. Trust the folder in one of these ways:
+
+- `zasper --trust` trusts the folder this run serves, for this run only.
+- `ZASPER_TRUST_ALL=1` in the environment trusts every folder.
+- **Settings → Trust** in the browser trusts a folder and keeps it in `~/.zasper/config.json`.
+
+[Trusted Folders](/docs/trusted-folders) explains what a restricted folder can and cannot do.
 
 ## Behind a Reverse Proxy with HTTPS
 
@@ -163,7 +172,7 @@ default 60 seconds.
 ## Running It in Docker
 
 The [`docker/`](https://github.com/zasper-io/zasper/tree/main/docker) directory in the main
-repository builds an image from that checkout. The image installs Jupyter and runs Zasper as a
+repository builds an image from that checkout. The image installs ipykernel and runs Zasper as a
 non-root `zasper` user:
 
 ```bash
@@ -201,6 +210,9 @@ docker run -d -p 127.0.0.1:8048:8048 -v "$PWD/workspace:/home/zasper" zasper
 
 Add `-e ZASPER_ACCESS_TOKEN=...` to `docker run` to fix the token.
 
+The image sets `ZASPER_TRUST_ALL=1`, because the folder a container serves belongs to its user, so
+kernels start without asking.
+
 ## Running It as a Service
 
 On Linux, systemd can start Zasper at boot and restart it if it stops. Save this as
@@ -215,7 +227,7 @@ After=network.target
 User=zasper
 WorkingDirectory=/home/zasper/notebooks
 EnvironmentFile=/etc/zasper.env
-ExecStart=/usr/local/bin/zasper
+ExecStart=/usr/local/bin/zasper --trust
 Restart=on-failure
 
 [Install]
@@ -230,6 +242,8 @@ sudo systemctl enable --now zasper
 journalctl -u zasper
 ```
 
+`--trust` trusts the working directory for this run, so kernels start before anyone answers the
+prompt.
 Zasper finds the kernels that the service's user has installed. Under systemd, logs are written as
 JSON, so the token is in the startup line's `access_token` field; [Configuration](/docs/configuration#logging)
 explains how to change the format.

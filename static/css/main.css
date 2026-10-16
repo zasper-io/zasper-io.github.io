@@ -106,6 +106,12 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
   --z-mark-json: #957116;
 
   --mk-wrap: 1080px;
+  /* The docs grid: 720px of text, a 216px sidebar, a 176px contents column, two 40px gaps and 24px
+     of padding each side. Inside --mk-wrap the text column came out at 560px. The header and footer
+     use it on every page, so they stay put from page to page and line up with the docs sidebar. */
+  --mk-wrap-docs: 1240px;
+  /* The reading measure for docs and blog text, about 80 characters of Inter at 16px. */
+  --mk-measure: 720px;
 }
 
 /* --- Reset ------------------------------------------------------------------ */
@@ -248,7 +254,7 @@ a {
    is what makes the row scannable — you look for your language, not at the layout. */
 .mk-kernel-row {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
   margin-top: 28px;
 }
@@ -290,12 +296,6 @@ a {
   font-family: var(--z-mono-font-family);
 }
 
-/* Seven across needs about 90px a tile before the sub-labels start wrapping mid-word. */
-@media (max-width: 860px) {
-  .mk-kernel-row {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
 
 @media (max-width: 520px) {
   .mk-kernel-row {
@@ -411,7 +411,7 @@ three steps and the three ways into the project all draw the same box — so it 
   display: flex;
   align-items: center;
   gap: 24px;
-  max-width: var(--mk-wrap);
+  max-width: var(--mk-wrap-docs);
   margin: 0 auto;
   padding: 16px 24px;
 }
@@ -462,8 +462,16 @@ three steps and the three ways into the project all draw the same box — so it 
 }
 
 .mk-nav-stars {
+  /* Room for "2.4k" before the count arrives, so the nav links do not shift when it does. */
+  display: inline-block;
+  min-width: 4ch;
   font-size: 14px;
   font-variant-numeric: tabular-nums;
+}
+
+.mk-nav-stars[hidden] {
+  display: inline-block;
+  visibility: hidden;
 }
 
 .mk-nav-github:hover {
@@ -794,6 +802,8 @@ three steps and the three ways into the project all draw the same box — so it 
 
 /* --- Footer ------------------------------------------------------------ */
 .mk-footer-band {
+  /* The band's padding sits outside this wrapper, so it is the header's width less that padding. */
+  --mk-wrap: calc(var(--mk-wrap-docs) - 48px);
   padding: 56px 24px 0;
 }
 
@@ -907,7 +917,7 @@ three steps and the three ways into the project all draw the same box — so it 
   grid-template-columns: 216px minmax(0, 1fr) 176px;
   gap: 40px;
   align-items: start;
-  max-width: var(--mk-wrap);
+  max-width: var(--mk-wrap-docs);
   margin: 0 auto;
   padding: 40px 24px 96px;
 }
@@ -974,7 +984,7 @@ three steps and the three ways into the project all draw the same box — so it 
      table with an unbreakable cell like "Cmd+Option+Right-Arrow/Left-Arrow" was forcing the whole
      grid track wider than the viewport instead of scrolling internally. */
   min-width: 0;
-  max-width: 720px;
+  max-width: var(--mk-measure);
   font-size: 16px;
   line-height: 1.65;
   color: var(--z-fg-default);
@@ -1241,7 +1251,10 @@ three steps and the three ways into the project all draw the same box — so it 
   display: none;
 }
 
-@media (max-width: 1080px) {
+/* --mk-wrap-docs plus room for a scrollbar, since a media query measures the window with it and
+   cannot read a custom property. Below it the contents column goes, so the text keeps its 720px
+   instead of shrinking to fit three columns. */
+@media (max-width: 1260px) {
   .mk-docs {
     grid-template-columns: 200px minmax(0, 1fr);
   }
@@ -1306,7 +1319,8 @@ three steps and the three ways into the project all draw the same box — so it 
 
 /* --- Blog / tutorials ---------------------------------------------------- */
 .mk-blog {
-  max-width: 720px;
+  /* The measure plus the side padding, so the text itself gets the full 720px. */
+  max-width: calc(var(--mk-measure) + 48px);
   margin: 0 auto;
   padding: 40px 24px 0;
 }
@@ -1902,6 +1916,12 @@ words, this is one global stylesheet, and a figure is the only place on the site
   background: var(--z-bg-editor);
 }
 
+/* A screenshot, for a screen no fragment draws yet: it fills the frame and scales with it. */
+.tut-shot.is-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 /* The notebook pane's bottom padding is runway for a scrolling pane: nothing scrolls in a figure, and
    40px of it under the last cell reads as the picture having been cropped badly. */
 .tut-shot .notebook {
@@ -2904,6 +2924,12 @@ drawing, unported, with the candidates they belong to.
   margin: 0 0 16px;
   font-size: 14px;
   color: var(--z-fg-muted);
+}
+
+/* The version in the page's heading, in the accent: the first thing the page answers is which one. */
+.mk-dl-version {
+  color: var(--z-fg-accent);
+  font-variant-numeric: tabular-nums;
 }
 
 .mk-dl-cta {

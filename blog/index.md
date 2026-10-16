@@ -4,5 +4,5 @@
 
 layout: blog
 title: "Blog"
-description: "Notes from building Zasper — benchmarks against Jupyter Server, design decisions, and release write-ups."
+description: "Notes from building Zasper: benchmarks against Jupyter Server, design decisions, and release write-ups."
 ---

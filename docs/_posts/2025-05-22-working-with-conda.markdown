@@ -11,62 +11,59 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-If you're using Conda, setting up an environment for Zasper is simple and robust. Conda is
-especially useful for data science projects, where binary packages like PyTorch, TensorFlow, or
-NumPy need to be installed efficiently.
+Conda installs binary packages such as PyTorch, TensorFlow and NumPy with their compiled libraries,
+which is why many data science projects use it. To run notebooks in a conda environment, you create
+the environment, install `ipykernel` into it and register it as a Jupyter kernel.
 
-Follow the steps below to create a new environment and register it as a Jupyter kernel.
-
-### Step 1: Create a New Environment
+## Create a New Environment
 
 ```bash
 conda create --name torchEnv
 ```
 
-This creates an isolated environment named `torchEnv`. You can also specify a Python version if
-needed:
+This creates an isolated environment named `torchEnv`. To pin a Python version, name it when you
+create the environment:
 
 ```bash
 conda create --name torchEnv python=3.11
 ```
 
-### Step 2: Activate the Environment
+## Activate the Environment
 
 ```bash
 conda activate torchEnv
 ```
 
-After activation, any packages you install or code you run will use this environment.
+From now on, packages you install and code you run in this shell use `torchEnv`.
 
-### Step 3: Install Required Packages
+## Install Required Packages
 
-Install the `ipykernel` package, which is needed to register the environment as a Jupyter kernel:
+The `ipykernel` package is what lets the environment run as a Jupyter kernel:
 
 ```bash
-conda install -c anaconda ipykernel
+conda install -c conda-forge ipykernel
 ```
 
-You can also install any additional dependencies here, such as `numpy`, `torch`, or `pandas`.
+You can install the other libraries your project needs here too, such as `numpy`, `torch` or
+`pandas`.
 
-### Step 4: Register the Kernel
+## Register the Kernel
 
-Once `ipykernel` is installed, run the following to make the environment available in Jupyter and
-Zasper:
+With `ipykernel` installed, register the environment so Jupyter and Zasper can offer it:
 
 ```bash
 python -m ipykernel install --user --name=torchEnv
 ```
 
-This registers `torchEnv` as a selectable kernel for experimenting inside Zasper.
+`torchEnv` now appears in Zasper's kernel picker, and you can choose it for a notebook from there.
 
 Registering is what makes the environment available wherever you open Zasper. Without it, Zasper
 still finds a conda environment that has `ipykernel` when you start Zasper from a shell with that
 environment activated, and your base Anaconda, Miniconda or Miniforge install when its Python has
-`ipykernel` — those appear in the Launcher as **Python 3.x (torchEnv)** or **Python 3.x
+`ipykernel`. Those appear in the Launcher as **Python 3.x (torchEnv)** or **Python 3.x
 (miniconda3)** without a kernelspec. See [Installing Jupyter
 Kernels](/docs/installing-jupyter-kernels#how-zasper-finds-kernels).
 
-## You're All Set
-
-Your `torchEnv` Conda environment is now ready to use as a kernel in Zasper. Launch the app, select
-the environment from the kernel picker, and start working.
+A kernel installed inside an environment, such as `conda install -c conda-forge r-irkernel`, is
+found without registering it with `--user` and without activating the environment, because Zasper
+reads every environment conda knows about. It runs with that environment's own `R` or other command.

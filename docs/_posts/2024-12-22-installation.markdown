@@ -11,7 +11,8 @@ author: Prasun Anand
 banner: /static/images/logo.svg
 ---
 
-Zasper is one static binary with no runtime dependencies — {{ site.download_size }} to download, {{ site.binary_size }} on disk once it is unpacked. It runs a server on your own
+Zasper is one static binary with no runtime dependencies. The download is {{ site.download_size }},
+and it takes {{ site.binary_size }} on disk once it is unpacked. It runs a server on your own
 machine, and you use it in your browser: Chrome, Firefox, Safari or Edge.
 
 ## Requirements
@@ -20,14 +21,19 @@ machine, and you use it in your browser: Chrome, Firefox, Safari or Edge.
   `pip install ipykernel` is enough to get started; [Installing Jupyter
   Kernels](/docs/installing-jupyter-kernels) covers other languages. Without a kernel Zasper still
   starts, and the Launcher offers **Set up a Python kernel**, which makes a `.venv` with ipykernel in
-  your project when you click it.
+  your project when you click it, once the folder is trusted.
 - **A modern browser.**
 
-## Homebrew (macOS)
+## Homebrew (macOS, Linux)
 
 ```bash
+brew tap zasper-io/tap
+brew trust zasper-io/tap
 brew install zasper-io/tap/zasper
 ```
+
+Homebrew 6 loads nothing from a third-party tap until you trust it, which is what `brew trust`
+records.
 
 ## Snap (Linux)
 
@@ -35,7 +41,7 @@ brew install zasper-io/tap/zasper
 sudo snap install zasper
 ```
 
-## Conda
+## Conda (Linux x86-64, Windows, Intel Mac)
 
 ```bash
 conda install zasper -c conda-forge
@@ -48,7 +54,7 @@ Download the archive for your platform from the [Downloads page](/downloads/) or
 somewhere on your `PATH`:
 
 ```bash
-tar -xzf zasper-webapp-1.1.0-linux-amd64.tar.gz
+tar -xzf zasper-webapp-{{ site.data.release.version }}-linux-amd64.tar.gz
 sudo mv zasper /usr/local/bin/
 ```
 
@@ -56,8 +62,8 @@ Every release carries a checksum file. To verify what you downloaded, run this i
 has both:
 
 ```bash
-sha256sum -c zasper_1.1.0_checksums.txt --ignore-missing      # Linux
-shasum -a 256 -c zasper_1.1.0_checksums.txt --ignore-missing  # macOS
+sha256sum -c zasper_{{ site.data.release.version }}_checksums.txt --ignore-missing      # Linux
+shasum -a 256 -c zasper_{{ site.data.release.version }}_checksums.txt --ignore-missing  # macOS
 ```
 
 The macOS binaries are signed and notarized by Apple, so Gatekeeper opens them without a warning.
@@ -68,7 +74,7 @@ The macOS binaries are signed and notarized by Apple, so Gatekeeper opens them w
 zasper --version
 ```
 
-This prints `1.1.0`. Then start Zasper in the folder you want to work in:
+This prints `{{ site.data.release.version }}`. Then start Zasper in the folder you want to work in:
 
 ```bash
 cd ~/notebooks
@@ -85,10 +91,31 @@ no browser opens, for example because you passed `--no-browser` or are connected
 | ------------------------ | -------------------------- | ------------------------------------------------------------ |
 | macOS 12 or later        | Apple Silicon, Intel       | Fully supported                                              |
 | Linux, any distribution  | x86-64, ARM64, i386        | Fully supported                                              |
-| Windows 10 or later      | x86-64, ARM64, i386        | Runs without the terminal, which needs WSL; some kernel paths are less tested               |
+| Windows 10 or later      | x86-64, ARM64, i386        | Supported, except the built-in terminal, which needs Zasper running under WSL               |
 
 The Linux archives are static binaries, so one build works on every distribution, Debian and Red
 Hat alike.
+
+## Upgrading from 2.0.0
+
+Zasper now asks whether you trust each folder before it runs anything the folder controls. After
+the upgrade every folder is asked about once, including the one you start `zasper` in, because no
+folder is trusted yet.
+
+- **Until you trust a folder, nothing in it runs on its own.** A notebook's kernel waits for the
+  folder to be trusted, the project's `.venv` is not offered as a kernel, and **Set up a Python
+  kernel** and git commands that change the repository, such as commit, pull and push, ask first.
+  You can still read every file, notebook and saved output.
+- **Scripts and servers can skip the question.** `zasper --trust` trusts the folder for that run
+  only, and `ZASPER_TRUST_ALL=1` in the environment trusts every folder. A server started by
+  systemd or a script starts no kernels until its folder is trusted this way, or until someone
+  trusts it from a browser or **Settings → Trust**.
+- **Scripts that use Zasper's API** should know two things. The watch socket,
+  `/api/contents/watch`, now names the files that changed instead of sending `reload`, so treat any
+  message as a change. And a save given the `hash` a read returned is refused with `409` when the
+  file has changed since; a save without one writes as before.
+
+[Trusted Folders](/docs/trusted-folders) has the details.
 
 ## Upgrading from 1.1.0
 
@@ -114,6 +141,8 @@ needs nothing from you beyond signing in once; these are the changes to know abo
   re-run its cell.
 - **You sign in once more** after upgrading: the browser's session is now a cookie that no script in
   the page can read.
+- **Request bodies have a size limit**: 512 MiB for the API, with uploads excepted, and 16 KiB for
+  sign-in.
 
 ## Upgrading from 1.0.0
 
@@ -141,6 +170,8 @@ things changed on the way there:
   another machine, start it with `--host=0.0.0.0`; see [Deploying on Cloud](/docs/deploying-on-cloud).
 - **The desktop app is gone.** Zasper is now only the local server you open in a browser. Install
   it with any of the methods above.
+- **Homebrew installs a cask.** If you installed 0.x through Homebrew, run `brew uninstall zasper`
+  first: from 1.0, Zasper is published as a cask rather than a formula.
 - **`DELETE /ws/kernels/{kernel_id}` has been removed.** Use `DELETE /api/kernels/{kernelId}`,
   which is unchanged.
 - **Kernel connection files have moved** from the system temp directory to `~/.zasper/runtime`.

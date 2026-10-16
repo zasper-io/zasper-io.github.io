@@ -10,7 +10,8 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-Everything you open in Zasper, whether a notebook, a file, a diff or the Help page, opens in a tab.
+Everything you open in Zasper, whether a notebook, a file, a diff, the Help page, Settings or What's
+New, opens in a tab.
 Terminals are the exception: they open in the panel under the editor, as
 [Work in a Terminal](/docs/work-in-a-terminal) describes. This page covers how each kind of file
 opens, how tabs behave, and what Zasper remembers between visits.
@@ -47,12 +48,21 @@ still offers the download.
 The **Launcher** is always the first tab and has no close button. When you close the tab in front,
 the Launcher comes forward; closing a tab behind it leaves the one in front where it is.
 
+Beside its kernels, the Launcher lists **Recent** files, the last six you opened in this project
+that are not open now. **Running** lists the server's kernels and terminals, including a kernel whose
+notebook has no tab open, which is marked **no tab**. Click a kernel to open its notebook, or shut
+down a kernel or terminal from its row.
+
 A dot on a tab means it has unsaved changes. Closing it asks whether to save, discard or cancel, and
 closing several tabs at once asks about all their unsaved changes in one dialog.
 
 Right-click a tab to close it, the others, those to its left or right, the saved ones, or all of
 them, or to **Copy Path** and **Reveal in File Explorer**. The close actions have shortcuts too; see
 [Key Bindings](/docs/key-bindings#tabs).
+
+**Reopen Closed Tab** (`⌥⇧T` / `Alt+Shift+T`) brings back the last tab you closed, and pressing it
+again goes further back, up to ten tabs. It reopens files, notebooks, diffs, Help, Settings and
+What's New. A data tab, a terminal or a language server's log is not brought back.
 
 **Toggle Sidebar** (`⌘B` / `Ctrl+B`, or the button in the top bar) hides the file explorer and the
 other side panels to give the tabs the whole window. Dragging the sidebar narrower than its minimum
@@ -69,6 +79,8 @@ Some things are deliberately not brought back:
 
 - **Terminals.** Every terminal connection starts a new shell, so a restored terminal would be empty.
 - **Unsaved edits.** A restored tab shows the file as it is on disk.
+- **Data tabs.** A table opened from a kernel, and a language server's log, are left closed. Open
+  them again from where you found them.
 
 The list is stored in your browser, separately for each project folder, so opening a different
 project doesn't bring back tabs from this one. If two browser windows are open on the same project,
@@ -81,3 +93,9 @@ lists every command that has a shortcut, grouped by category, with a box to filt
 **About** section shows Zasper's version and platform, which is what a bug report needs, and **Copy
 details** copies them. It doesn't include your username or any folder names, so it's safe to paste
 into an issue.
+
+## The What's New Tab
+
+After you upgrade, Zasper opens the **What's New** tab once, with the release notes of the version
+you are running and of every version since the one you were on. **What's New** in the command
+palette opens it again, and **Every release** links to the full changelog.

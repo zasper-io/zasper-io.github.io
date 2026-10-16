@@ -10,10 +10,18 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-Make a notebook, put it on a kernel, run something, write down what it was for, and save it. It
-assumes only that Zasper is [installed](/docs/installation) and open on a folder you can write to.
+Make a notebook, put it on a kernel, run something, write down what it was for, and save it. This
+page assumes only that Zasper is [installed](/docs/installation) and open on a folder you can write to.
 
 {% include tut/sprite.html %}
+
+## Trust The Folder
+
+The first time Zasper opens a folder, it asks **Do you trust the authors of the files in this
+folder?** For a folder of your own, press **Trust folder**. Until a folder is trusted Zasper runs
+none of its code: no kernel, no project `.venv`, no language server that builds it. A project you
+downloaded cannot run code just by being opened. [Trusted Folders](/docs/trusted-folders) covers what
+else it governs.
 
 ## Make The Notebook
 
@@ -21,26 +29,32 @@ The file explorer is the first icon in the rail on the left, and the strip under
 folder Zasper was started in. The three buttons at the right-hand end of that strip make a file, a
 folder and a notebook. Press the notebook one.
 
-The notebook arrives as `Untitled.ipynb` with its name already selected in the tree. Type a name over
-it, keep the `.ipynb` on the end, and press `Enter`; `Escape` keeps the name it came with. To put it
-somewhere other than the top of the project, right-click a folder in the tree and choose **Add
-Notebook** instead.
+The notebook arrives with an empty name box in the tree, `Untitled.ipynb` greyed in it as a
+placeholder. Type a name and press `Enter`; `.ipynb` is added if you leave it off, and `Escape`
+keeps `Untitled.ipynb`. Making the notebook does not open it: click its row in the tree to open it
+in a tab. To put it somewhere other than the top of the project, right-click a folder in the tree
+and choose **Add Notebook** instead.
 
 {% include tut/file-explorer.html %}
 
 ## Pick A Kernel
 
 A notebook made this way does not name a kernel yet, so the first thing it asks is which one to run
-on. The list is every kernel installed on this machine — whatever `jupyter kernelspec list` prints.
-If the environment you meant is not in it, install `ipykernel` into that environment and open the
-notebook again. [Installing Jupyter Kernels](/docs/installing-jupyter-kernels) and [Working with
-Conda](/docs/working-with-conda) cover how they are found.
+on. The list is every kernel installed on this machine, whatever `jupyter kernelspec list` prints,
+plus the project's own `.venv` once the folder is trusted. If the environment you meant is not in
+it, install `ipykernel` into that environment and open the notebook again. [Installing Jupyter
+Kernels](/docs/installing-jupyter-kernels) and [Working with Conda](/docs/working-with-conda) cover
+how they are found.
 
 {% include tut/kernel-dialog.html %}
 
 Once the kernel has started, its name and a status dot sit at the right-hand end of the notebook's
-toolbar: the dot is grey while the kernel is idle and lit while it is working. Click the name to move
-the notebook to a different kernel later.
+toolbar: the dot is green while the kernel is idle, red while it is working, and grey while it is
+starting or disconnected. Click the name to move the notebook to a different kernel later.
+
+The status bar at the bottom shows how much memory the kernel holds, and on a machine with an NVIDIA
+GPU, how much GPU memory. Press it for more; [Exploring Data](/docs/exploring-data#kernel-memory)
+explains the figures.
 
 {% include tut/toolbar.html %}
 
@@ -55,9 +69,14 @@ Click into the empty cell and type. Two chords run it, and the difference is whe
 
 On the last cell of the notebook, `⇧⏎` adds a new one to carry on in.
 
-The number in the left margin is the cell's turn with the kernel. `[ ]` has never run, `[*]` is
-queued or running now, and `[7]` was the seventh thing this kernel was asked to do — not the seventh
-cell in the file. Restart the kernel and the count starts again from one.
+The number in the left margin is the cell's turn with the kernel. `[ ]:` has never run, `[*]:` is
+queued behind another cell, a spinner takes its place while the cell runs, and `[7]:` was the seventh
+thing this kernel was asked to do, not the seventh cell in the file. Restart the kernel and the
+count starts again from one.
+
+The run button sits beside the count and becomes a stop button while the cell runs. On the cell's
+border, its run time counts up while it runs and stays there after, so you can tell a slow cell from
+a stuck one.
 
 {% include tut/run.html %}
 
@@ -68,27 +87,34 @@ text, a table, a figure. A cell that ends in an expression shows that expression
 why `readings.head()` on a line of its own is enough. [Notebook Support](/docs/notebook-support)
 lists what Zasper renders and what it does not.
 
-An error arrives in the same place rather than in a dialog. The kernel keeps everything it had — the
-variables from the cells that worked are still there — so the usual fix is to correct the line and
-run it again.
+An error arrives in the same place rather than in a dialog. The kernel keeps everything it had,
+including the variables from the cells that worked, so the usual fix is to correct the line and run
+it again.
 
 {% include tut/output.html %}
 
 Output that runs to hundreds of lines is capped at a height you can scroll inside. **Expand or
 Collapse Output**, **Clear Cell Output** and **Clear All Outputs** have no key binding; run them from
-the command palette (`⇧⌘P` / `Ctrl+Shift+P`), or from the toolbar over a cell.
+the command palette (`⇧⌘P` / `Ctrl+Shift+P`). The first two are also in the menu over a cell, as
+**Expand Output** and **Clear Output**.
 
-A cell that will not finish is stopped with **Interrupt**, the square in the notebook toolbar. There
-is no binding for that either: interrupting is not something you do in the middle of typing.
+A cell that will not finish is stopped with **Interrupt**, the square in the notebook toolbar. It has
+no key binding.
 **Restart** beside it throws away the variables and starts the kernel again, which is the answer when
 interrupting does not take.
 
 ## Say What It Was For
 
-A notebook that is only code is a script with gaps in it. Change a cell to **Markdown** — the picker
-in the toolbar, or `⌃⇧M` / `Ctrl+Shift+M` — write in it, and run it with `⇧⏎` to render it. `⌃⇧Y` /
+Change a cell to **Markdown** (the picker in the toolbar, or `⌃⇧M` / `Ctrl+Shift+M`), write in it,
+and run it with `⇧⏎` to render it. `⌃⇧Y` /
 `Ctrl+Shift+Y` turns a cell back into code, and double-clicking rendered prose opens its source
 again.
+
+To add a new cell instead, point at the gap between two cells. A rail appears with **Code**, **SQL**,
+**Markdown** and **Raw**, and each one adds that kind of cell there. The same rail stays visible under
+the last cell. The label in the top border of a cell says which kind it is: the kernel's language,
+such as `python`, for a code cell, `sql` or `raw` for those, and `markdown` while a Markdown cell is
+open for editing.
 
 {% include tut/markdown.html %}
 
@@ -103,10 +129,10 @@ the tab.
 {% include tut/tabs.html %}
 
 What gets written is the cells, the output they produced, and the name of the kernel they ran on.
-That last part is why opening the notebook tomorrow does not ask the question in step two again: it
+That last part is why opening the notebook tomorrow does not ask which kernel to use again: it
 already knows the answer, and only asks when the kernel it names is not installed here.
 
-Tabs, including this one, are remembered between sessions — [Files and Tabs](/docs/files-and-tabs)
+Tabs, including this one, are remembered between sessions. [Files and Tabs](/docs/files-and-tabs)
 covers what reopens and what does not. Every chord Zasper listens for, including the ones this page
 skipped, is on [Key Bindings](/docs/key-bindings), and the **Help** tab (`F1`) lists them inside the
 app with a filter.

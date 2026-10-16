@@ -13,8 +13,9 @@ banner: /static/images/logo.svg
 
 ## Requirements
 
-- Go 1.25 or newer
-- Node.js 22.12 or newer. The repository's `.nvmrc` pins it, so `nvm use` picks it up.
+- Go 1.26 or newer
+- Node.js 22 (22.12 or later; Node 26 fails the frontend tests). The repository's `.nvmrc`
+  pins it, so `nvm use` picks it up.
 - `git` and `make`
 
 ## Build from Source
@@ -45,6 +46,8 @@ Check that it worked:
 Usage of zasper:
   -allow-host string
     	other host names a server on loopback answers to, comma-separated, such as a reverse proxy's
+  -check-update
+    	ask zasper.io for the newest version and exit: 0 when up to date, 1 when there is a newer one, 2 when the check failed
   -cwd string
     	base directory of project (default ".")
   -debug
@@ -59,6 +62,8 @@ Usage of zasper:
     	deprecated and ignored: Zasper always runs in protected mode (default true)
   -tracking
     	enable usage tracking (default true)
+  -trust
+    	trust the project folder for this run: its kernels, .venv and language servers start without asking
   -version
     	print the version and exit
 ```
@@ -89,9 +94,19 @@ ZASPER_ACCESS_LOG=1 zasper        # log every HTTP request
 make test
 ```
 
-This runs the frontend tests and the Go tests, with the race detector on. The end-to-end suite runs
-the frontend against a real server; see
+This runs the frontend tests and the Go tests, with the race detector on. `make test-go` and
+`make test-frontend` run one half each, and `make e2e` runs the end-to-end suite, which drives the
+frontend against a real server; see
 [e2e/README.md](https://github.com/zasper-io/zasper/blob/main/e2e/README.md).
+
+## Repository Layout
+
+- `internal/`: the Go server, one package per area, such as `kernel`, `content`, `lsp` and `trust`
+- `ui/`: the React frontend, built with Vite and embedded in the binary
+- `e2e/`: the Playwright browser tests
+- `docs/`: developer notes on the API and on individual features
+- `docker/`: the Dockerfile and a Compose example
+- `scripts/`: release helpers that sync the version and extract changelog sections
 
 ## Further Reading
 

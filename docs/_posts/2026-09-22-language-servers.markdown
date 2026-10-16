@@ -24,18 +24,26 @@ Zasper ships no language servers. It starts one you already have, and tells you 
 | Go | gopls | `go install golang.org/x/tools/gopls@latest` |
 | TypeScript, JavaScript | typescript-language-server | `npm install -g typescript-language-server typescript` |
 | Rust | rust-analyzer | `rustup component add rust-analyzer` |
-| C, C++ | clangd | `brew install llvm`, or your package manager |
+| C, C++ | clangd | `xcode-select --install` on macOS, `sudo apt install clangd` on Linux |
 | R | languageserver | `R -e 'install.packages("languageserver")'` |
 | Julia | LanguageServer.jl | `julia -e 'using Pkg; Pkg.add("LanguageServer")'` |
+| Java | jdtls | `brew install jdtls` |
+| Scala | metals | `cs install metals` |
+| Kotlin | kotlin-language-server | `brew install kotlin-language-server` |
+| C# | csharp-ls | `dotnet tool install --global csharp-ls` |
+| Shell | bash-language-server | `npm install -g bash-language-server` |
+| SQL | sqls | `go install github.com/sqls-server/sqls@latest` |
+| Haskell | haskell-language-server | `ghcup install hls` |
 
 For Python, the first of the three that is found is used, in that order. basedpyright and pyright are
 type checkers; pylsp is jedi with a set of plugins, so the type-checking setting below does not apply
 to it.
 
 Zasper looks on your `PATH` first, then in the project's `.venv/bin`, `venv/bin` and
-`node_modules/.bin`, then in `$GOPATH/bin`, `~/go/bin`, `~/.cargo/bin`, `~/.local/bin`,
-`~/.juliaup/bin` and Homebrew. An app started from the Dock has a thinner `PATH` than your shell,
-and without that list `gopls` in `~/go/bin` would look uninstalled.
+`node_modules/.bin` (`.venv\Scripts` and `venv\Scripts` on Windows), then in `$GOPATH/bin`,
+`~/go/bin`, `~/.cargo/bin`, `~/.local/bin`, `~/.juliaup/bin` and Homebrew. Zasper started from a
+desktop launcher or as a service has a thinner `PATH` than your shell, and without that list `gopls`
+in `~/go/bin` would look uninstalled.
 
 ## The Status Bar
 
@@ -72,6 +80,10 @@ Under **Settings → Language servers**:
 A project's own configuration wins over the Type checking setting: a `pyrightconfig.json`, or
 `[tool.pyright]` or `[tool.basedpyright]` in `pyproject.toml`, is read by the server itself.
 
+**Settings → Editor → Inlay hints** draws the server's parameter names and inferred types into the
+line, without writing them to the file. It is off by default, because the hints move the text of
+every line they appear on.
+
 ### Which Type-Checking Mode
 
 `off` still reports the mistakes worth stopping for: undefined names, imports that cannot be found,
@@ -87,6 +99,11 @@ you maintain and have types for, and silence a single line with `# type: ignore[
 
 A notebook's cells are given to the server as one document, so a name defined in one cell is known
 in the next.
+
+**Not every language's notebook gets one.** Python, R, Julia, Go, TypeScript and JavaScript, Rust,
+shell and SQL notebooks do. C, C++, Java, Scala, Kotlin, C# and Haskell notebooks do not: their kernels
+take cells that are snippets rather than a source file, which those servers mark as wrong throughout.
+Their files still get the server.
 
 **IPython's own syntax is hidden from the server.** Line magics, `!` shell escapes and `obj?` are
 replaced before the server sees them, line for line, so the server never reports them as errors and
@@ -111,9 +128,9 @@ behind a running cell.
 ## Formatting
 
 **Format Document** formats a file, and **Format Cell** and **Format Notebook** format a notebook;
-all three are in the command palette. Settings can also format a file whenever it is saved. A
-notebook is formatted a cell at a time, so an edit never reaches across cells, and IPython's lines
-are put back untouched.
+all three are in the command palette. **Settings → Editor → Format on save** formats a file whenever
+it is saved; a file with no server is saved as it is. A notebook is formatted a cell at a time, so
+an edit never reaches across cells, and IPython's lines are put back untouched.
 
 basedpyright and pyright do not format, and Zasper says so when you ask. To format Python, set a
 server that does under Settings → Language servers, such as `ruff server`.
