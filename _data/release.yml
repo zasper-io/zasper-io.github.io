@@ -3,10 +3,10 @@
 # right on the day they were written and wrong after that.
 #
 # Measured on the published archives: `ls -l` over what the release uploaded.
-version: "2.0.0"
-date: 2026-09-22
+version: "2.1.0"
+date: 2026-10-16
 # The landing page's "Latest release" row: "<version>, with <headline>".
-headline: language servers, search across the project and notebook export
+headline: coding agents, a variables panel and SQL cells
 
 # Each entry is one operating system's card, and `slug` is the archive's name in the release, which is
 # also what the OS detection matches to point its button at the right file.
@@ -16,34 +16,34 @@ platforms:
     files:
       - arch: Apple Silicon
         slug: darwin-arm64
-        size: 8.9 MB
+        size: 10.0 MB
       - arch: Intel
         slug: darwin-amd64
-        size: 9.4 MB
+        size: 10.6 MB
   - os: Linux
     note: "Static: runs on any distribution."
     files:
       - arch: x86-64
         slug: linux-amd64
-        size: 9.2 MB
+        size: 10.4 MB
       - arch: ARM64
         slug: linux-arm64
-        size: 8.7 MB
+        size: 9.8 MB
       - arch: i386
         slug: linux-386
-        size: 9.0 MB
+        size: 10.1 MB
   - os: Windows
     note: The built-in terminal needs WSL.
     files:
       - arch: x86-64
         slug: windows-amd64
-        size: 9.3 MB
+        size: 10.4 MB
       - arch: ARM64
         slug: windows-arm64
-        size: 8.7 MB
+        size: 9.7 MB
       - arch: i386
         slug: windows-386
-        size: 9.2 MB
+        size: 10.2 MB
 
 # What each package manager installs and upgrades with, and where it runs. The landing page's hero
 # reads the same commands, so the two pages cannot drift.
