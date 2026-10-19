@@ -2131,6 +2131,99 @@ agent, machine and license.
   }
 }
 
+/*
+The blog restyled after the landing page. Both screens open on a short dark band — the mono label, the
+title at display size, and the date or a line under it — with the grid and glow every dark band
+carries; the list and the article below it stay plain, because they are read rather than scanned. The
+hero is held to the reading measure, so the title starts where the text under it does. The article
+keeps its 720px column and its body size; only the boxes in it go square and its headings a step
+heavier. A post ends on the landing page's closing band, the one place a reader is offered the download.
+*/
+.mk-band-blog-hero {
+  padding-top: 64px;
+  padding-bottom: 56px;
+}
+
+.mk-wrap.mk-blog-hero {
+  max-width: var(--mk-measure);
+}
+
+.mk-band-blog-hero h1.mk-section-title {
+  margin: 0 0 12px;
+  font-size: 52px;
+}
+
+.mk-band-blog-hero .mk-section-sub {
+  margin-bottom: 0;
+}
+
+.mk-band-dark .mk-blog-back,
+.mk-band-dark .mk-blog-post-meta {
+  color: #ffffffa6;
+}
+
+/* The way back sits on a line of its own above the label, not beside it. */
+.mk-band-blog-hero .mk-blog-back {
+  display: flex;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.mk-band-dark .mk-blog-back:hover {
+  color: #ffffff;
+}
+
+.mk-blog-banded .mk-band > .mk-blog {
+  max-width: var(--mk-measure);
+  padding: 0;
+}
+
+.mk-blog-banded .mk-blog-post {
+  padding-top: 48px;
+}
+
+/* What kind of post it is — a release, a benchmark, an announcement — in the card labels' mono voice,
+   so the list can be skimmed by kind before it is read by title. */
+.mk-blog-card-kind {
+  font-family: var(--z-mono-font-family);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--z-fg-accent);
+}
+
+/* A post's first paragraph, held to three lines so a long opening does not make one card three times
+   the height of the next. */
+.mk-blog-banded .mk-blog-card p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mk-blog-banded .mk-blog-card-mark,
+.mk-blog-banded .mk-blog-card-badge,
+.mk-blog-banded .mk-code-copy,
+.mk-blog-banded .mk-docs-body pre,
+.mk-blog-banded .mk-docs-body code,
+.mk-blog-banded .mk-docs-body img:not(.mk-shot img) {
+  border-radius: 0;
+}
+
+.mk-blog-banded .mk-docs-body h2 {
+  margin-top: 48px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+@media (max-width: 760px) {
+  .mk-band-blog-hero h1.mk-section-title {
+    font-size: 34px;
+  }
+}
+
 /* --- Downloads ------------------------------------------------------------ */
 .mk-install-methods {
   display: grid;

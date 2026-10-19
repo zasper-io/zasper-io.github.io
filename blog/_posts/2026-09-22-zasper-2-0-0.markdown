@@ -4,6 +4,7 @@ title:  "Zasper 2.0.0"
 description: "Zasper 2.0.0 brings language servers to files and notebooks, search and replace across the project, notebook export and a table of contents, and closes two ways a session could leak."
 date:   2026-09-22 09:00:00 +0530
 categories: blog
+kind: Release
 permalink: blog/:title
 author: Prasun Anand
 banner: /static/images/logo.svg

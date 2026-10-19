@@ -4,6 +4,7 @@ title:  "Benchmarking Zasper v/s JupyterLab (Jupyter Server)"
 description: "Zasper against Jupyter Server on CPU, RAM, throughput and latency, measured from 2 to 100 concurrent kernels, with the method in full."
 date:   2025-04-28 07:39:59 +0530
 categories: blog
+kind: Benchmark
 permalink: blog/:title
 author: Prasun Anand
 banner: /static/images/logo.svg

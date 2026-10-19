@@ -1,15 +1,27 @@
 {% include head.html %}
 {% include nav.html %}
 
-<div class="mk-blog mk-blog-post">
-  <a class="mk-blog-back" href="/{{ page.categories | first }}">
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-    {{ page.categories | first | capitalize }}
-  </a>
+{% comment %}
+Drawn in the prototype as blog.html: the title in a short dark band, the post in the same 720px
+reading column as before, and the landing page's closing band at the foot, so a reader who finishes
+is offered the download.
+{% endcomment %}
 
-  <div class="mk-docs-body">
-    <h1>{{ page.title }}</h1>
+<div class="mk-blog-banded">
+<div class="mk-band mk-band-dark mk-band-blog-hero">
+  <div class="mk-wrap mk-blog-hero">
+    <a class="mk-blog-back" href="/{{ page.categories | first }}">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+      {{ page.categories | first | capitalize }}
+    </a>
+    {% if page.kind %}<p class="mk-eyebrow">{{ page.kind }}</p>{% endif %}
+    <h1 class="mk-section-title">{{ page.title }}</h1>
     <p class="mk-blog-post-meta">{{ page.date | date: "%-d %B %Y" }} · {{ page.author }}</p>
+  </div>
+</div>
+
+<div class="mk-blog mk-blog-post">
+  <div class="mk-docs-body">
     {{ content }}
   </div>
 
@@ -19,11 +31,11 @@
        for. The category is `blog` for every post that uses this layout today — docs pages are their own
        layout, and the `tutorials` category went when tutorials became a group in the docs sidebar. -->
   {% assign this_category = page.categories | first %}
-  {% assign related = site.posts | where: "categories", this_category | where_exp: "p", "p.url != page.url" | limit: 2 %}
+  {% assign related = site.posts | where: "categories", this_category | where_exp: "p", "p.url != page.url" %}
   {% if related.size > 0 %}
   <nav class="mk-blog-related" aria-label="Related">
     <span class="mk-docs-group-name">Related</span>
-    {% for post in related %}
+    {% for post in related limit: 2 %}
     <a class="mk-blog-related-item" href="{{ post.url }}">
       <span>{{ post.title }}</span>
       <em>{{ post.date | date: "%-d %B %Y" }}</em>
@@ -31,6 +43,21 @@
     {% endfor %}
   </nav>
   {% endif %}
+</div>
+
+<div class="mk-band mk-band-dark mk-band-closing">
+  <div class="mk-wrap mk-closing">
+    <h2 class="mk-section-title">One binary, <span class="mk-accent">and your notebooks open in it</span></h2>
+    <p class="mk-section-sub">No account to make, and your files stay on your machine.</p>
+    <div class="mk-cta">
+      <a class="mk-button" href="/downloads/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" /></svg>
+        Download Zasper
+      </a>
+      <a class="mk-button mk-button-quiet" href="/try-zasper/">Try it in the browser</a>
+    </div>
+  </div>
+</div>
 </div>
 
 {% include footer.html %}

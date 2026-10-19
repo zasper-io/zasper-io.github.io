@@ -4,6 +4,7 @@ title:  "Zasper: A Supercharged IDE for Data Science."
 description: "Why Zasper was built, how a Go implementation of the Jupyter protocol is put together, and what it does differently from JupyterLab."
 date:   2024-12-22 07:39:59 +0530
 categories: blog
+kind: Announcement
 permalink: blog/:title
 author: Prasun Anand
 banner: /static/images/logo.svg

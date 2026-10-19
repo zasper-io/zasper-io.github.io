@@ -1,36 +1,49 @@
 {% include head.html %}
 {% include nav.html %}
 
-<div class="mk-blog">
-  <div class="mk-docs-body mk-blog-head">
-    <h1>Blog</h1>
-    <p style="color: var(--z-fg-muted); font-size: 18px; margin: 0 0 8px">
-      Notes on building Zasper: releases and benchmarks against JupyterLab, as they happen.
-    </p>
+{% comment %}
+Drawn in the prototype as blog.html: a short dark band with the label, the title and a line under it,
+then the list on white. Each card carries the post's `kind` from its front matter, and its excerpt is
+the post's first paragraph (`post.excerpt`); cutting the content at 200 characters ran a release
+note's upgrade commands into its card.
+{% endcomment %}
+
+<div class="mk-blog-banded">
+  <div class="mk-band mk-band-dark mk-band-blog-hero">
+    <div class="mk-wrap mk-blog-hero">
+      <p class="mk-eyebrow">Blog</p>
+      <h1 class="mk-section-title">Notes on <span class="mk-accent">building Zasper</span></h1>
+      <p class="mk-section-sub">Releases, and benchmarks against JupyterLab, as they happen.</p>
+    </div>
   </div>
 
-  <div class="mk-blog-list">
-    {% assign posts = site.posts | where: "categories", "blog" %}
-    {% for post in posts %}
-    {% assign now = site.time | date: "%s" %}
-    {% assign post_date = post.date | date: "%s" %}
-    {% assign days_old = now | minus: post_date | divided_by: 86400 %}
-    <article class="mk-blog-card">
-      <a class="mk-blog-card-link" href="{{ post.url }}">
-        <span class="mk-blog-card-mark" aria-hidden="true">
-          <img src="/static/images/logo-icon.svg" alt="" />
-        </span>
-        <span>
-          <span class="mk-blog-card-meta">
-            {% if days_old < 30 %}<span class="mk-blog-card-badge">New</span>{% endif %}
-            {{ post.date | date: "%-d %B %Y" }} · {{ post.author }}
-          </span>
-          <h2>{{ post.title }}</h2>
-          <p>{{ post.content | strip_html | truncate: 200 }}</p>
-        </span>
-      </a>
-    </article>
-    {% endfor %}
+  <div class="mk-band">
+    <div class="mk-blog">
+      <div class="mk-blog-list">
+        {% assign posts = site.posts | where: "categories", "blog" %}
+        {% for post in posts %}
+        {% assign now = site.time | date: "%s" %}
+        {% assign post_date = post.date | date: "%s" %}
+        {% assign days_old = now | minus: post_date | divided_by: 86400 %}
+        <article class="mk-blog-card">
+          <a class="mk-blog-card-link" href="{{ post.url }}">
+            <span class="mk-blog-card-mark" aria-hidden="true">
+              <img src="/static/images/logo-icon.svg" alt="" />
+            </span>
+            <span>
+              <span class="mk-blog-card-meta">
+                {% if post.kind %}<span class="mk-blog-card-kind">{{ post.kind }}</span>{% endif %}
+                {% if days_old < 30 %}<span class="mk-blog-card-badge">New</span>{% endif %}
+                {{ post.date | date: "%-d %B %Y" }} · {{ post.author }}
+              </span>
+              <h2>{{ post.title }}</h2>
+              <p>{{ post.excerpt | strip_html | strip }}</p>
+            </span>
+          </a>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 </div>
 

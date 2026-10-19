@@ -4,6 +4,7 @@ title:  "Zasper 1.1.0"
 description: "Zasper 1.1.0 makes signing in part of every server, sets up a Python kernel when there isn't one, and fills in more outputs and file types."
 date:   2026-09-14 09:00:00 +0530
 categories: blog
+kind: Release
 permalink: blog/:title
 author: Prasun Anand
 banner: /static/images/logo.svg
