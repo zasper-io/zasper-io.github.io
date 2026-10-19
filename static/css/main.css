@@ -1611,7 +1611,11 @@ agent, machine and license.
   text-transform: uppercase;
 }
 
-.mk-docs-side a {
+/* The contents column draws the sidebar's rail too, so "where you are" reads the same on both sides
+   of the article: the rail on every row, so nothing moves when the current row changes, and the
+   accent as ink and as the rail on the current one. */
+.mk-docs-side a,
+.mk-docs-toc a {
   padding: 4px 0 4px 10px;
   border-left: 2px solid var(--z-border-subtle);
   color: var(--z-fg-muted);
@@ -1619,12 +1623,14 @@ agent, machine and license.
   line-height: 1.45;
 }
 
-.mk-docs-side a:hover {
+.mk-docs-side a:hover,
+.mk-docs-toc a:hover {
   border-left-color: var(--z-border);
   color: var(--z-fg-default);
 }
 
-.mk-docs-side a.is-current {
+.mk-docs-side a.is-current,
+.mk-docs-toc a.is-current {
   border-left-color: var(--z-fg-accent);
   color: var(--z-fg-accent);
   font-weight: 500;
@@ -1632,16 +1638,6 @@ agent, machine and license.
 
 .mk-docs-toc {
   color: var(--z-fg-subtle);
-}
-
-.mk-docs-toc a {
-  padding: 3px 0;
-  color: inherit;
-  text-decoration: none;
-}
-
-.mk-docs-toc a:hover {
-  color: var(--z-fg-default);
 }
 
 .mk-docs-body {
@@ -1664,17 +1660,23 @@ agent, machine and license.
   margin-bottom: 0;
 }
 
+/* The docs after the landing page: no dark band — a reader moving page to page through the sidebar
+   would scroll past one on every page — but the same weight as the rest of the site. The title is
+   semibold rather than light, section headings are 26px semibold like a blog post's, and every box in
+   a document (code, its copy button, notes, screenshots, the pager) is square. */
 .mk-docs-body h1 {
   margin: 0 0 12px;
   font-size: 34px;
-  font-weight: 300;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 .mk-docs-body h2 {
-  margin: 40px 0 12px;
-  font-size: 22px;
-  font-weight: 500;
+  margin: 48px 0 12px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
   line-height: 1.3;
 }
 
@@ -1704,7 +1706,6 @@ agent, machine and license.
 }
 
 .mk-docs-body img:not(.mk-shot img) {
-  border-radius: 6px;
   border: 1px solid var(--z-border);
   margin: 8px 0 20px;
 }
@@ -1712,7 +1713,6 @@ agent, machine and license.
 .mk-docs-body code,
 .mk-dl code {
   padding: 1px 5px;
-  border-radius: 3px;
   background: var(--z-bg-code);
   font-size: 0.88em;
 }
@@ -1729,7 +1729,6 @@ agent, machine and license.
   margin: 0 0 20px;
   padding: 14px 16px;
   border: 1px solid var(--z-border);
-  border-radius: 6px;
   background: var(--z-bg-code);
   overflow-x: auto;
   font-size: 13.5px;
@@ -1769,7 +1768,6 @@ agent, machine and license.
   height: 30px;
   padding: 0;
   border: 1px solid var(--z-border);
-  border-radius: 5px;
   /* Opaque, not transparent: a long line scrolls underneath this button. */
   background: var(--z-bg-panel);
   color: var(--z-fg-subtle);
@@ -1867,7 +1865,6 @@ agent, machine and license.
   gap: 8px;
   padding: 10px 14px;
   border: 1px solid var(--z-border);
-  border-radius: 6px;
   color: var(--z-fg-default);
   text-decoration: none;
   font-size: 15px;
@@ -1952,7 +1949,6 @@ agent, machine and license.
   .mk-docs-side {
     position: static;
     border: 1px solid var(--z-border);
-    border-radius: 6px;
     padding: 4px 12px;
   }
 
@@ -2136,8 +2132,8 @@ The blog restyled after the landing page. Both screens open on a short dark band
 title at display size, and the date or a line under it — with the grid and glow every dark band
 carries; the list and the article below it stay plain, because they are read rather than scanned. The
 hero is held to the reading measure, so the title starts where the text under it does. The article
-keeps its 720px column and its body size; only the boxes in it go square and its headings a step
-heavier. A post ends on the landing page's closing band, the one place a reader is offered the download.
+keeps its 720px column and its body size; its square boxes and 26px headings are the document's own,
+shared with the docs. A post ends on the landing page's closing band, the one place a reader is offered the download.
 */
 .mk-band-blog-hero {
   padding-top: 64px;
@@ -2203,19 +2199,8 @@ heavier. A post ends on the landing page's closing band, the one place a reader 
 }
 
 .mk-blog-banded .mk-blog-card-mark,
-.mk-blog-banded .mk-blog-card-badge,
-.mk-blog-banded .mk-code-copy,
-.mk-blog-banded .mk-docs-body pre,
-.mk-blog-banded .mk-docs-body code,
-.mk-blog-banded .mk-docs-body img:not(.mk-shot img) {
+.mk-blog-banded .mk-blog-card-badge {
   border-radius: 0;
-}
-
-.mk-blog-banded .mk-docs-body h2 {
-  margin-top: 48px;
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.015em;
 }
 
 @media (max-width: 760px) {
@@ -2570,10 +2555,11 @@ words, this is one global stylesheet, and a figure is the only place on the site
   overflow-x: auto;
 }
 
+/* Square, like the landing page's screenshot frames: the frame is the page's, and only what is drawn
+   inside it — the IDE's own dialogs and buttons — keeps the app's rounding. */
 .tut-shot {
   position: relative;
   border: 1px solid var(--z-border);
-  border-radius: 8px;
   overflow: hidden;
   background: var(--z-bg-app);
   box-shadow: var(--z-shadow-low, 0 1px 2px rgba(0, 0, 0, 0.08));
@@ -3572,7 +3558,6 @@ sized here rather than in those rules because an icon is an inline <svg> on this
   padding: 12px 14px;
   border-left: 2px solid var(--z-fg-accent);
   background: var(--z-bg-panel);
-  border-radius: 0 4px 4px 0;
   font-size: 15px;
 }
 
@@ -4031,6 +4016,33 @@ new here is the version heading, the folded list of every change, and the email 
   .mk-changelog-versions {
     display: none;
   }
+}
+
+/*
+The changelog restyled after the landing page. It opens on the same short dark band the blog does —
+the mono label, the title at display size, and the line under it — held to the docs grid's width, so
+the title starts where the release rail does. Below it the page keeps the docs page's three columns;
+each version heading is a step heavier so a release reads as a section, and every box on it goes
+square. It ends on the landing page's closing band.
+*/
+.mk-cl-banded .mk-band-blog-hero .mk-wrap {
+  max-width: calc(var(--mk-wrap-docs) - 48px);
+}
+
+.mk-cl-banded .mk-changelog-entry h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.mk-cl-banded .mk-changelog-minor h2 {
+  font-size: 18px;
+}
+
+.mk-cl-banded .z-badge,
+.mk-cl-banded .mk-changelog-all,
+.mk-cl-banded .mk-changelog-emails {
+  border-radius: 0;
 }
 
 /* The one sentence under the title that says what the page is for. */

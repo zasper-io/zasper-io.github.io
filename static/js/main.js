@@ -155,6 +155,36 @@ if (toc) {
       if (i === 0) a.classList.add('is-current');
       toc.append(a);
     });
+
+    /*
+    The current section follows the reader: the last heading that has scrolled past a line a little
+    below the top of the window, or the first when none has. At the very bottom of the page the last
+    heading wins, because a short final section can never reach that line. Measured on scroll, once
+    a frame, rather than with an IntersectionObserver, whose "which one is current" answer needs this
+    same arithmetic once a section is taller than the window.
+    */
+    const links = [...toc.querySelectorAll('a')];
+    let pending = false;
+    const markCurrent = () => {
+      pending = false;
+      const line = 96;
+      let current = 0;
+      headings.forEach((h, i) => {
+        if (h.getBoundingClientRect().top <= line) current = i;
+      });
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom) current = headings.length - 1;
+      links.forEach((link, i) => link.classList.toggle('is-current', i === current));
+    };
+    const onScroll = () => {
+      if (!pending) {
+        pending = true;
+        requestAnimationFrame(markCurrent);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    markCurrent();
   }
 }
 
