@@ -3554,12 +3554,6 @@ drawing, unported, with the candidates they belong to.
   color: var(--z-fg-muted);
 }
 
-/* The version in the page's heading, in the accent: the first thing the page answers is which one. */
-.mk-dl-version {
-  color: var(--z-fg-accent);
-  font-variant-numeric: tabular-nums;
-}
-
 .mk-dl-cta {
   display: flex;
   align-items: center;
@@ -3678,6 +3672,77 @@ drawing, unported, with the candidates they belong to.
 
 .mk-dl .mk-docs-note {
   margin-top: 32px;
+}
+
+/*
+The downloads page restyled after the landing page: the same content in the landing's bands. The release, its
+button and the kernel note sit in a short dark hero with the grid and glow every dark band carries; the
+package managers follow on white and the binaries on the tinted band, each under a mono label and a
+display heading. Short on purpose — a reader comes here to download, not to be pitched. The inner wraps
+keep `.mk-dl` for its link and code rules, without its own padding, which the bands now give.
+*/
+.mk-dl-banded .mk-dl {
+  padding: 0;
+}
+
+.mk-band-dl-hero {
+  padding-top: 64px;
+  padding-bottom: 72px;
+}
+
+/* `.mk-dl h1` sets candidate A's 40px regular title and outranks `.mk-section-title`, so the hero names
+   the heading by both to take the landing page's weight back. */
+.mk-band-dl-hero h1.mk-section-title {
+  margin: 0 0 16px;
+  font-size: 52px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.mk-band-dl-hero .mk-docs-lede {
+  max-width: 64ch;
+}
+
+.mk-dl-banded .mk-section-title + .mk-dl-channels,
+.mk-dl-banded .mk-section-title + .mk-dl-os-grid {
+  margin-top: 28px;
+}
+
+/* Square, like every other box on the landing page. */
+.mk-dl-banded .z-badge,
+.mk-dl-banded .mk-docs-note {
+  border-radius: 0;
+}
+
+/* On the dark hero: the release line, lede, inline code and links in white at the dark band's
+   strengths, and the Latest badge turned to white on accent ink so it does not sink into the band. */
+.mk-band-dark .mk-dl-release,
+.mk-band-dark .mk-docs-lede {
+  color: #ffffffbf;
+}
+
+.mk-band-dark .mk-dl a:not(.mk-button) {
+  color: #ffffff;
+}
+
+.mk-band-dark .mk-dl code {
+  background: #ffffff1a;
+  color: #ffffff;
+}
+
+.mk-band-dark .mk-dl-cta-meta {
+  color: #ffffffa6;
+}
+
+.mk-band-dark .z-badge-accent {
+  background: #ffffff;
+  color: var(--z-accent);
+}
+
+@media (max-width: 760px) {
+  .mk-band-dl-hero h1.mk-section-title {
+    font-size: 34px;
+  }
 }
 
 @media (max-width: 860px) {

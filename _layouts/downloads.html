@@ -7,21 +7,24 @@
 {% capture copy_icon %}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>{% endcapture %}
 
 {% comment %}
-Drawn in the prototype as download-page.html, candidate A: the release first, then one card per
-package manager carrying both its install and its upgrade line, then one card per operating system.
+Drawn in the prototype as download-page.html, in the landing page's shapes: a short dark hero with the
+release and the button, then the package managers on white and the binaries on the tinted band, each
+under a mono label and a display heading. The inner wraps keep `.mk-dl` for its link and code rules.
 Every version, size and command comes from _data/release.yml, so a release changes that file alone.
 
 The primary button is the one thing here that needs a script: with none it offers the macOS Apple
 Silicon archive, and main.js swaps it for the visitor's own platform.
 {% endcomment %}
 
-<div class="mk-dl">
+<div class="mk-dl-banded">
+<div class="mk-band mk-band-dark mk-band-dl-hero">
+<div class="mk-wrap mk-dl">
   <p class="mk-dl-release">
     <span class="z-badge z-badge-accent">Latest</span>
     Released {{ release.date | date: "%-d %B %Y" }} ·
     <a href="/changelog/#{{ release.version }}">What's new in {{ release.version }}</a>
   </p>
-  <h1>Download Zasper <span class="mk-dl-version">{{ release.version }}</span></h1>
+  <h1 class="mk-section-title">Download Zasper <span class="mk-accent">{{ release.version }}</span></h1>
   <p class="mk-docs-lede">
     One static binary for macOS, Linux and Windows. Install it with the package manager you already
     use, or download it directly. To run notebooks you also need a Jupyter kernel, which Zasper does
@@ -39,8 +42,13 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
       <a href="#binaries">Other platforms</a>
     </span>
   </div>
+</div>
+</div>
 
-  <h2 class="mk-dl-heading">With a package manager</h2>
+<div class="mk-band">
+<div class="mk-wrap mk-dl">
+  <p class="mk-eyebrow">Package managers</p>
+  <h2 class="mk-section-title">Install it with <span class="mk-accent">what you already use</span></h2>
   <div class="mk-dl-channels">
     {% for channel in release.channels %}
       <div class="mk-card mk-dl-channel">
@@ -76,8 +84,13 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
       </div>
     {% endfor %}
   </div>
+</div>
+</div>
 
-  <h2 class="mk-dl-heading" id="binaries">Download a binary</h2>
+<div class="mk-band mk-band-alt" id="binaries">
+<div class="mk-wrap mk-dl">
+  <p class="mk-eyebrow">Binaries</p>
+  <h2 class="mk-section-title">Or download <span class="mk-accent">the binary</span></h2>
   <div class="mk-dl-os-grid">
     {% for platform in release.platforms %}
       <div class="mk-card">
@@ -121,6 +134,8 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
       <a href="https://github.com/zasper-io/zasper/releases">GitHub Releases</a>.
     </p>
   </div>
+</div>
+</div>
 </div>
 
 {% include footer.html %}
