@@ -139,6 +139,23 @@ title, which the layout draws. kramdown already gives every heading an `id` (its
 extension, on by default), so this only falls back to slugifying the text when one is somehow
 missing.
 */
+/*
+The docs sidebar is a <details> that the layout writes open, because on a desktop its "Contents" toggle
+is hidden and a closed one would show nothing at all — and without this script, open is what every
+reader should get. On a phone the same list is twenty-odd links above the article, so it starts
+closed there, behind the toggle. Widening the window past the breakpoint opens it again, so a desktop
+can never be left with the toggle hidden and the list shut. The width matches the stylesheet's.
+*/
+const docsSide = document.querySelector('details.mk-docs-side');
+if (docsSide) {
+  const phone = window.matchMedia('(max-width: 760px)');
+  const fit = () => {
+    docsSide.open = !phone.matches;
+  };
+  fit();
+  phone.addEventListener('change', fit);
+}
+
 const toc = document.getElementById('docs-toc');
 if (toc) {
   const headings = document.querySelectorAll('.mk-docs-body h2, .mk-docs-body h3');
