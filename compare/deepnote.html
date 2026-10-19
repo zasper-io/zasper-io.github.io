@@ -1,0 +1,185 @@
+---
+layout: page
+permalink: /compare/deepnote/
+title: "Zasper vs Deepnote"
+description: "Zasper and Deepnote compared: where each runs, what happens to your notebooks, how the AI agent is paid for, and which one fits your work."
+---
+{% comment %}
+Every statement about Deepnote below is taken from Deepnote's own pages and repository, listed under
+Sources with the date they were read. Deepnote changes its plans and its open-source parts often;
+re-read those pages before editing a row, and move the `checked` date when you do. A row that cannot be
+sourced from Deepnote does not go in.
+{% endcomment %}
+{% assign checked = "20 October 2026" %}
+
+<div class="mk-band mk-band-dark mk-band-compare-hero">
+  <div class="mk-wrap">
+    <p class="mk-eyebrow">Compare</p>
+    <h1 class="mk-section-title">Zasper and Deepnote, <span class="mk-accent">side by side</span></h1>
+    <p class="mk-section-sub">
+      Deepnote is a hosted data notebook with its own open format, which also runs inside VS Code and
+      Cursor. Zasper is an open-source IDE for Jupyter that runs on your own machine. Both put an AI
+      agent beside your notebooks; where they differ is the file format, the kernels, and whose agent
+      it is.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band">
+  <div class="mk-wrap">
+    <div class="mk-compare-wrap">
+      <table class="mk-compare">
+        <thead>
+          <tr>
+            <th scope="col"><span class="mk-visually-hidden">Question</span></th>
+            <th scope="col">Zasper</th>
+            <th scope="col">Deepnote</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">What it is</th>
+            <td data-label="Zasper">An IDE for Jupyter notebooks</td>
+            <td data-label="Deepnote">
+              A hosted data notebook, and an open-source format, runtime and editor extensions
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Where it runs</th>
+            <td data-label="Zasper">Your laptop, or a server you run</td>
+            <td data-label="Deepnote">
+              Deepnote's cloud, or locally inside VS Code, Cursor, Windsurf or Antigravity; single-tenant
+              and private cloud on Enterprise
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Your notebooks</th>
+            <td data-label="Zasper">
+              <code>.ipynb</code>, read and written as Jupyter writes them, in your own folder
+            </td>
+            <td data-label="Deepnote">
+              <code>.deepnote</code> projects in YAML; <code>.ipynb</code> converts in, and converting
+              back rewrites SQL blocks and turns inputs into fixed values
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Languages</th>
+            <td data-label="Zasper">
+              Any Jupyter kernel: Python, R, Julia, C++, Scala, Go, Bash and more, with SQL cells
+              beside them
+            </td>
+            <td data-label="Deepnote">Python, R and SQL</td>
+          </tr>
+          <tr>
+            <th scope="row">The AI agent</th>
+            <td data-label="Zasper">
+              Claude Code, Gemini CLI, Codex or any ACP agent, on your own subscription; every change
+              it makes can be reviewed and undone
+            </td>
+            <td data-label="Deepnote">
+              The Deepnote Agent, on monthly AI credits: 5 agent calls a month free, $39 of credits a
+              month on Team; your own model on Enterprise
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Agents outside the app</th>
+            <td data-label="Zasper">An MCP server on every install, against the Zasper on your machine</td>
+            <td data-label="Deepnote">A hosted MCP server at deepnote.com, for workspace projects</td>
+          </tr>
+          <tr>
+            <th scope="row">Git</th>
+            <td data-label="Zasper">Built in: branch, stage, commit and diff, notebooks included</td>
+            <td data-label="Deepnote">Git integration in the editor extensions</td>
+          </tr>
+          <tr>
+            <th scope="row">Price</th>
+            <td data-label="Zasper">
+              Free under the AGPL-3.0, with a commercial license for products that need one
+            </td>
+            <td data-label="Deepnote">
+              A free plan for up to 3 editors and 5 projects; Team at $39 per editor a month, billed
+              yearly; Enterprise priced on request
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Source</th>
+            <td data-label="Zasper">Open source, AGPL-3.0</td>
+            <td data-label="Deepnote">
+              Format and converters open source under Apache-2.0, with an open-source local toolkit;
+              the cloud is a hosted service
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mk-charts-note">
+      Deepnote details and prices as of {{ checked }}. Sources are at the bottom of the page.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band mk-band-alt">
+  <div class="mk-wrap">
+    <p class="mk-eyebrow">Which one</p>
+    <h2 class="mk-section-title">Pick the one <span class="mk-accent">built for your work</span></h2>
+    <p class="mk-section-sub">
+      Both are open where it counts for a notebook. The question is which format your work lives in,
+      which kernels it needs, and whose machines it runs on.
+    </p>
+    <div class="mk-cards-2">
+      <div class="mk-card">
+        <span class="mk-card-kind">Choose Deepnote if</span>
+        <ul class="mk-compare-list">
+          <li>You want hosted machines, GPUs included, and scheduled runs.</li>
+          <li>You share notebooks and data apps with viewers in the browser.</li>
+          <li>You want to edit notebooks inside VS Code or Cursor, beside your code.</li>
+          <li>Your team works in Python, R and SQL.</li>
+        </ul>
+      </div>
+      <div class="mk-card">
+        <span class="mk-card-kind">Choose Zasper if</span>
+        <ul class="mk-compare-list">
+          <li>Your notebooks are <code>.ipynb</code> and should stay that way, in your git.</li>
+          <li>You run kernels beyond Python, R and SQL: Julia, C++, Scala, Go and others.</li>
+          <li>You already pay for Claude Code, Codex or Gemini and want it in your notebooks.</li>
+          <li>You want a standalone IDE on your machine or a server you control.</li>
+          <li>You want it free and open source, end to end.</li>
+        </ul>
+        <a href="/downloads/">Download Zasper</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mk-band">
+  <div class="mk-wrap">
+    <h2 class="mk-section-title">Sources</h2>
+    <p class="mk-section-sub">
+      Everything we say about Deepnote is from Deepnote's own website, docs and code, as of {{ checked }}.
+      If something has changed, <a href="https://github.com/zasper-io/zasper-io.github.io/issues">open
+      an issue</a> and we'll fix it.
+    </p>
+    <ul class="mk-sources">
+      <li><a href="https://deepnote.com/pricing">Pricing</a></li>
+      <li><a href="https://github.com/deepnote/deepnote">The open-source repository on GitHub</a></li>
+      <li><a href="https://deepnote.com/docs/vscode-extension">VS Code, Cursor, Windsurf and Antigravity extension</a></li>
+      <li><a href="https://deepnote.com/docs/importing-and-exporting-jupyter-notebooks">Working with Jupyter notebooks</a></li>
+      <li><a href="https://deepnote.com/docs/migrating-to-ipynb">Converting Deepnote files to .ipynb</a></li>
+      <li><a href="https://deepnote.com/docs/deepnote-mcp">MCP server</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="mk-band mk-band-dark mk-band-closing">
+  <div class="mk-wrap mk-closing">
+    <h2 class="mk-section-title">One binary, <span class="mk-accent">and your notebooks open in it</span></h2>
+    <p class="mk-section-sub">No account to make, and your files stay on your machine.</p>
+    <div class="mk-cta">
+      <a class="mk-button" href="/downloads/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" /></svg>
+        Download Zasper
+      </a>
+      <a class="mk-button mk-button-quiet" href="/try-zasper/">Try it in the browser</a>
+    </div>
+  </div>
+</div>

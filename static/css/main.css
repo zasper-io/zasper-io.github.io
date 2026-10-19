@@ -178,7 +178,7 @@ a {
 
 /* Dark bands are rare on purpose — the hero, the agents band, the closing call — and all of them carry
    the same grid and glow, which is what marks them as the page's moments. The light bands stay plain:
-   they hold the charts, screenshots and tables, and a grid behind those competes with their detail. */
+   a faint grid behind them was tried, in the accent and in neutral ink, and read as clutter. */
 .mk-band-dark {
   background: var(--mk-dark-texture), var(--z-bg-login-hero);
   color: #fff;
@@ -384,12 +384,6 @@ three steps and the three ways into the project all draw the same box — so it 
   font-size: 15px;
   line-height: 1.6;
   color: var(--z-fg-muted);
-}
-
-/* The byline and date under a press card's quote: smaller than the quote, so it reads as its source. */
-.mk-card-meta {
-  font-size: 13px;
-  color: var(--z-fg-subtle);
 }
 
 /* `margin-top: auto` keeps the links level across a row when one card's paragraph is longer. */
@@ -813,8 +807,9 @@ three steps and the three ways into the project all draw the same box — so it 
   color: #ffffff;
 }
 
-/* The proof strip: tiles sharing their borders, the way a logo wall is drawn, but with the outlet's
-   name and what it was where there is no logo to show — a masthead redrawn here would be a guess. */
+/* The proof strip: tiles sharing their borders, the way a logo wall is drawn, with the outlet's or
+   the talk's name and what it was where there is no logo to show — a masthead redrawn here would be
+   a guess. It is the page's only press: a separate band of the same mentions only repeated it. */
 .mk-proof-label {
   margin: 56px 0 18px;
   text-align: center;
@@ -828,7 +823,7 @@ three steps and the three ways into the project all draw the same box — so it 
 
 .mk-proof {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
   border: 1px solid var(--z-border);
   background: var(--z-border);
@@ -880,13 +875,8 @@ a.mk-proof-item:hover {
   opacity: 1;
 }
 
+/* Eight tiles: four across, then two, so no row is ever left with one tile hanging. */
 @media (max-width: 900px) {
-  .mk-proof {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 520px) {
   .mk-proof {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
