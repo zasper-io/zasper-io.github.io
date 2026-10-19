@@ -1,16 +1,13 @@
 {% include head.html %}
 {% include nav.html %}
-
-<div class="mk-band mk-band-hero">
+<div class="mk-band mk-band-dark mk-band-hero">
   <div class="mk-wrap mk-hero">
     <div class="mk-hero-copy">
-      <h1 class="mk-hero-title">High performance IDE for <strong>Jupyter Notebooks</strong></h1>
+      <p class="mk-eyebrow">Open source IDE for Jupyter · {{ site.data.release.version }}</p>
+      <h1 class="mk-hero-title">Agentic notebooks, <span class="mk-accent">on your own machine.</span></h1>
       <p class="mk-hero-sub">
-        Zasper is built from the ground up for massive concurrency: a minimal memory footprint,
-        exceptional speed, and thousands of connections at once.
-      </p>
-      <p class="mk-hero-sub">
-        It speaks Jupyter's wire protocol, so it runs the notebooks you already have.
+        Zasper is an IDE for Jupyter, built in Go. It runs the notebooks and kernels you already have
+        in a fraction of the memory, with your coding agent beside them to read, edit and run cells.
       </p>
       <div class="mk-cta">
         <a class="mk-button" href="/downloads/">
@@ -40,20 +37,20 @@
       <div class="mk-shot">
         <div class="mk-shot-bar">
           <span class="mk-shot-dot"></span>
-          <span class="mk-shot-label">04-data-analysis.ipynb</span>
+          <span class="mk-shot-label">04-data-analysis.ipynb · Claude Code</span>
         </div>
         <img
-          src="/static/images/screens/notebook-hero.png"
-          alt="A Zasper notebook analysing the Palmer Penguins dataset, with a scatter plot of bill length against bill depth for three species"
-          width="1500"
-          height="865"
+          src="/static/images/screens/agent-panel.png"
+          alt="A penguins notebook in Zasper with a scatter plot of bill length against bill depth, coloured by predicted species with the misclassified penguins circled, and Claude Code's panel beside it: the tool calls it made to read, edit and run the notebook, its two-sentence answer, and the notebook listed as the file the turn changed, with Undo this turn."
+          width="1400"
+          height="800"
         />
       </div>
     </div>
   </div>
 </div>
 
-<div class="mk-band mk-band-dark">
+<div class="mk-band mk-band-proof">
   <div class="mk-wrap">
     <div class="mk-numbers">
       <div class="mk-number">
@@ -69,12 +66,186 @@
         <span>to download: the whole app, one binary</span>
       </div>
     </div>
+    <p class="mk-proof-label">Written about, talked about, and supported by</p>
+    <div class="mk-proof">
+      <a class="mk-proof-item" href="https://news.ycombinator.com/item?id=42572057">
+        <strong>425 points</strong>
+        <span>Hacker News</span>
+      </a>
+      <div class="mk-proof-item">
+        <strong>FOSDEM 2026</strong>
+        <span>Talk, Brussels</span>
+      </div>
+      <a class="mk-proof-item" href="https://www.i-programmer.info/news/90-tools/17778-zasper-the-jupyterlab-alternative-.html">
+        <strong>I Programmer</strong>
+        <span>January 2025</span>
+      </a>
+      <a class="mk-proof-item" href="https://www.techzine.eu/news/devops/127496/developer-builds-zasper-a-4x-better-ide-than-jupyterlab/">
+        <strong>Techzine</strong>
+        <span>January 2025</span>
+      </a>
+      <div class="mk-proof-item">
+        <img src="/static/images/zerodha.png" alt="Zerodha" />
+        <span>Supporter</span>
+      </div>
+      <div class="mk-proof-item">
+        <img src="/static/images/foss-united.png" alt="FOSS United" />
+        <span>Supporter</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mk-band mk-band-dark mk-band-agents">
+  <div class="mk-wrap">
+    <p class="mk-eyebrow">Agents</p>
+    <h2 class="mk-section-title">Your agent works in your notebook. <span class="mk-accent">You keep the final say.</span></h2>
+    <p class="mk-section-sub">
+      Claude Code, Gemini CLI, Codex or any agent that speaks ACP, in a panel beside the notebook it
+      is working on. Zasper gives it the live kernel, and every change it makes is yours to review and
+      undo.
+    </p>
+    <ol class="mk-steps">
+      <li class="mk-step">
+        <span class="mk-step-kind">01 · Bring</span>
+        <h3>Your agent, your account</h3>
+        <p>
+          Signed in with your own subscription. Zasper holds no key and sends none of the
+          conversation anywhere.
+        </p>
+      </li>
+      <li class="mk-step">
+        <span class="mk-step-kind">02 · Work</span>
+        <h3>Cells in the live kernel</h3>
+        <p>
+          It reads cells and outputs, edits cells, runs them, and inspects variables and dataframes.
+          Plots come back to it as images.
+        </p>
+      </li>
+      <li class="mk-step">
+        <span class="mk-step-kind">03 · Ask</span>
+        <h3>Nothing behind your back</h3>
+        <p>
+          It asks before it edits a file or runs a command, unless you allow it. Each run shows in its
+          cell, under the agent's name.
+        </p>
+      </li>
+      <li class="mk-step">
+        <span class="mk-step-kind">04 · Review</span>
+        <h3>Undo a block, a cell or a turn</h3>
+        <p>
+          Every file a turn changed is listed with a diff. Put back one change, one file, or the whole
+          turn.
+        </p>
+      </li>
+    </ol>
+    <div class="mk-agents-shots">
+      <figure class="mk-agents-shot">
+        <div class="mk-shot">
+          <div class="mk-shot-bar">
+            <span class="mk-shot-dot"></span>
+            <span class="mk-shot-label">04-data-analysis.ipynb (turn 1)</span>
+          </div>
+          <img
+            src="/static/images/screens/agent-review.png"
+            alt="Zasper showing a turn by Claude Code: a notebook diff, Before the turn against Now, with one of 24 cells added, a classifier on three standardised measurements, and an undo beside it. The agent panel lists the tool calls, its answer of 97.0% accuracy up from 88.0%, and the changed notebook with Undo this turn."
+            width="1400"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+        <figcaption>In the panel: a turn's changes, diffed cell by cell, each with its own undo.</figcaption>
+      </figure>
+      <figure class="mk-agents-shot">
+        <div class="mk-shot">
+          <div class="mk-shot-bar">
+            <span class="mk-shot-dot"></span>
+            <span class="mk-shot-label">Terminal 1</span>
+          </div>
+          <img
+            src="/static/images/screens/agent-terminal.png"
+            alt="Zasper's terminal panel running claude -p connected to Zasper's MCP server. Above it, the notebook's last cell has re-run with the agent's mark beside it and prints 97.0% accuracy, and Claude's one-line answer is in the terminal."
+            width="1400"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+        <figcaption>From a terminal: Claude Code runs the same notebook through <code>zasper mcp</code>.</figcaption>
+      </figure>
+    </div>
+    <div class="mk-agents-mcp">
+      <div class="mk-agents-mcp-copy">
+        <h3>Already run an agent in a terminal?</h3>
+        <p>
+          Zasper is an MCP server too. Register it once, and Claude Code, Codex, Cursor or Gemini CLI
+          drives the notebooks you have open, each run landing in its cell as you watch.
+        </p>
+      </div>
+      <div class="mk-install">
+        <span id="mcp-cmd">claude mcp add zasper -- zasper mcp</span>
+        <button type="button" aria-label="Copy" data-copy="mcp-cmd">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+        </button>
+      </div>
+    </div>
+    <p class="mk-charts-note">
+      <a href="/docs/coding-agents">Coding agents</a> covers the panel, its permissions and undo;
+      <a href="/docs/mcp-server">MCP server</a> covers agents you run outside Zasper.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band mk-band-open">
+  <div class="mk-wrap">
+    <p class="mk-eyebrow">Open by design</p>
+    <h2 class="mk-section-title">Your notebooks stay yours. <span class="mk-accent">So does everything around them.</span></h2>
+    <p class="mk-section-sub">
+      A hosted notebook keeps your work in its cloud, in its format, and on its bill. Zasper is a
+      binary you run, on files you already have.
+    </p>
+    <ul class="mk-steps">
+      <li class="mk-step">
+        <span class="mk-step-kind">Your files</span>
+        <h3>Plain .ipynb, in your git</h3>
+        <p>
+          Notebooks stay in your own folder, saved as Jupyter saves them. Nothing to import, and
+          nothing lost on the way out.
+        </p>
+      </li>
+      <li class="mk-step">
+        <span class="mk-step-kind">Your agent</span>
+        <h3>On the plan you already pay for</h3>
+        <p>
+          Claude Code, Gemini CLI, Codex or any ACP agent, on your own subscription. No AI credits to
+          buy, and no key held.
+        </p>
+      </li>
+      <li class="mk-step">
+        <span class="mk-step-kind">Your machine</span>
+        <h3>Your laptop, or your server</h3>
+        <p>
+          Code, data and outputs stay where you put them. Run it for a team on a box you control.
+        </p>
+      </li>
+      <li class="mk-step">
+        <span class="mk-step-kind">Your license</span>
+        <h3>Free and open source</h3>
+        <p>
+          AGPL-3.0: install it, run it, change it. A commercial license is there for products that
+          need one.
+        </p>
+      </li>
+    </ul>
+    <p class="mk-charts-note">
+      Weighing it against a hosted platform? <a href="/compare/hex/">Zasper and Hex, side by side</a>.
+    </p>
   </div>
 </div>
 
 <div class="mk-band mk-band-alt">
   <div class="mk-wrap">
-    <h2 class="mk-section-title">The gap widens as the load does</h2>
+    <p class="mk-eyebrow">Benchmarks</p>
+    <h2 class="mk-section-title">The gap widens <span class="mk-accent">as the load does</span></h2>
     <p class="mk-section-sub">
       Both servers were run against the same workload, 10 requests per second per kernel on an
       Apple M4, from 2 concurrent kernels up to 100. Zasper uses less of both at every load, and the
@@ -82,6 +253,110 @@
       kernels Jupyter Server begins losing kernel connections, and by 100 it has lost all of them,
       while Zasper answers every request at both loads.
     </p>
+    <div class="mk-bench" data-bench>
+      <!-- Per load, from the raw 10 rps runs in zasper-benchmark (data/100ms): average cpu_usage, the
+           highest memory_usage_mb, and replies received over requests sent at the end of the run.
+           The same figures the charts below are drawn from; the page shows 100 kernels without script. -->
+      <script type="application/json" class="mk-bench-data">
+        [{"k":2,"zcpu":0.83,"zram":21.8,"zrep":5.0,"jcpu":2.67,"jram":90.5,"jrep":5.0},{"k":4,"zcpu":1.14,"zram":22.8,"zrep":5.0,"jcpu":5.16,"jram":94.6,"jrep":5.0},{"k":8,"zcpu":3.34,"zram":23.5,"zrep":5.0,"jcpu":6.97,"jram":99.9,"jrep":5.0},{"k":16,"zcpu":3.45,"zram":25.9,"zrep":5.0,"jcpu":9.77,"jram":110.3,"jrep":5.0},{"k":32,"zcpu":5.11,"zram":30.0,"zrep":5.0,"jcpu":11.96,"jram":133.4,"jrep":5.0},{"k":64,"zcpu":8.15,"zram":40.2,"zrep":5.0,"jcpu":15.48,"jram":909.1,"jrep":4.33},{"k":100,"zcpu":12.48,"zram":49.2,"zrep":4.98,"jcpu":14.29,"jram":1865.3,"jrep":1.46}]
+      </script>
+      <div class="mk-bench-head">
+        <p class="mk-bench-label">
+          <span class="mk-bench-k" data-v="k">100</span> concurrent kernels
+        </p>
+        <div class="mk-bench-control" hidden>
+          <label class="mk-visually-hidden" for="bench-k">Concurrent kernels</label>
+          <input type="range" id="bench-k" min="0" max="6" step="1" value="6" aria-valuetext="100 kernels" />
+          <div class="mk-bench-ticks" aria-hidden="true">
+            <span>2</span><span>4</span><span>8</span><span>16</span><span>32</span><span>64</span><span>100</span>
+          </div>
+        </div>
+      </div>
+      <div class="mk-bench-tiles">
+        <div class="mk-bench-tile">
+          <span class="mk-bench-kind">Peak RAM</span>
+          <div class="mk-bench-row">
+            <span class="mk-bench-who">Zasper</span>
+            <span class="mk-bench-bar"><i data-bar="zram" style="width: 2.6%"></i></span>
+            <strong data-v="zram">49 MB</strong>
+          </div>
+          <div class="mk-bench-row is-jupyter">
+            <span class="mk-bench-who">Jupyter Server</span>
+            <span class="mk-bench-bar"><i data-bar="jram" style="width: 100%"></i></span>
+            <strong data-v="jram">1.9 GB</strong>
+          </div>
+          <p class="mk-bench-ratio" data-v="ramx">38× less RAM</p>
+        </div>
+        <div class="mk-bench-tile">
+          <span class="mk-bench-kind">Average CPU</span>
+          <div class="mk-bench-row">
+            <span class="mk-bench-who">Zasper</span>
+            <span class="mk-bench-bar"><i data-bar="zcpu" style="width: 87.3%"></i></span>
+            <strong data-v="zcpu">12.5%</strong>
+          </div>
+          <div class="mk-bench-row is-jupyter">
+            <span class="mk-bench-who">Jupyter Server</span>
+            <span class="mk-bench-bar"><i data-bar="jcpu" style="width: 100%"></i></span>
+            <strong data-v="jcpu">14.3%</strong>
+          </div>
+          <p class="mk-bench-ratio" data-v="cpux">1.1× less CPU</p>
+        </div>
+        <div class="mk-bench-tile">
+          <span class="mk-bench-kind">Replies per request</span>
+          <div class="mk-bench-row">
+            <span class="mk-bench-who">Zasper</span>
+            <span class="mk-bench-bar"><i data-bar="zrep" style="width: 99.6%"></i></span>
+            <strong data-v="zrep">5.0 of 5</strong>
+          </div>
+          <div class="mk-bench-row is-jupyter">
+            <span class="mk-bench-who">Jupyter Server</span>
+            <span class="mk-bench-bar"><i data-bar="jrep" style="width: 29.2%"></i></span>
+            <strong data-v="jrep">1.5 of 5</strong>
+          </div>
+          <p class="mk-bench-ratio is-warning" data-v="repx">Jupyter Server is dropping replies</p>
+        </div>
+      </div>
+      <!-- Inline rather than in main.js so the prototype's copy of this band, made from this file, works
+           as drawn. It only rewrites the figures above; with it blocked the 100-kernel readout stands. -->
+      <script>
+        (() => {
+          const root = document.querySelector('[data-bench]');
+          if (!root) return;
+          const rows = JSON.parse(root.querySelector('.mk-bench-data').textContent);
+          const input = root.querySelector('input[type="range"]');
+          const set = (name, text) => (root.querySelector(`[data-v="${name}"]`).textContent = text);
+          const bar = (name, value, max) =>
+            (root.querySelector(`[data-bar="${name}"]`).style.width = `${(value / max) * 100}%`);
+          const ram = (mb) => (mb >= 1000 ? `${(mb / 1000).toFixed(1)} GB` : `${Math.round(mb)} MB`);
+          const times = (r) => `${r < 10 ? r.toFixed(1) : Math.round(r)}×`;
+          const show = (row) => {
+            set('k', row.k);
+            input.setAttribute('aria-valuetext', `${row.k} kernels`);
+            const peak = Math.max(row.zram, row.jram);
+            const busiest = Math.max(row.zcpu, row.jcpu);
+            set('zram', ram(row.zram));
+            set('jram', ram(row.jram));
+            bar('zram', row.zram, peak);
+            bar('jram', row.jram, peak);
+            set('ramx', `${times(row.jram / row.zram)} less RAM`);
+            set('zcpu', `${row.zcpu.toFixed(1)}%`);
+            set('jcpu', `${row.jcpu.toFixed(1)}%`);
+            bar('zcpu', row.zcpu, busiest);
+            bar('jcpu', row.jcpu, busiest);
+            set('cpux', `${times(row.jcpu / row.zcpu)} less CPU`);
+            set('zrep', `${row.zrep.toFixed(1)} of 5`);
+            set('jrep', `${row.jrep.toFixed(1)} of 5`);
+            bar('zrep', row.zrep, 5);
+            bar('jrep', row.jrep, 5);
+            const dropping = row.jrep < 4.95;
+            set('repx', dropping ? 'Jupyter Server is dropping replies' : 'Both answer every request');
+            root.querySelector('[data-v="repx"]').classList.toggle('is-warning', dropping);
+          };
+          input.addEventListener('input', () => show(rows[Number(input.value)]));
+          root.querySelector('.mk-bench-control').hidden = false;
+        })();
+      </script>
+    </div>
     <div class="mk-charts">
       <figure class="mk-chart">
         <img
@@ -117,274 +392,108 @@
   </div>
 </div>
 
-    <div class="mk-band">
-      <div class="mk-wrap">
-        <h2 class="mk-section-title">Your notebooks, unchanged</h2>
-        <p class="mk-section-sub">
-          Zasper reads and writes <code>.ipynb</code> directly,
-          so a notebook moves between Zasper and JupyterLab without being converted. Your files
-          stay where they are (no import step, no workspace to create), and the same kernels run
-          them, registered once.
-        </p>
-        <ul class="mk-checks">
-          <li class="mk-check">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
-            <span
-              ><strong>Saved as Jupyter would save it</strong>, byte for byte, so opening a file
-              here does not turn into a diff or a merge conflict.</span
-            >
-          </li>
-          <li class="mk-check">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
-            <span
-              ><strong>A notebook keeps its own nbformat version.</strong> A 4.2 notebook is saved
-              as 4.2 rather than silently upgraded.</span
-            >
-          </li>
-          <li class="mk-check">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
-            <span
-              ><strong>The outputs you use render:</strong> HTML, PNG, JPEG, SVG, LaTeX through
-              KaTeX, Plotly figures, ipywidgets and JSON.</span
-            >
-          </li>
-          <li class="mk-check">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
-            <span
-              ><strong>Saves are atomic.</strong> Zasper writes beside the file and renames over
-              it, so a crash cannot leave half a notebook.</span
-            >
-          </li>
-          <li class="mk-check is-no">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
-            <span
-              ><strong>JupyterLab extensions do not carry over.</strong> Zasper has its own
-              extension model; a lab extension will not load.</span
-            >
-          </li>
-          <li class="mk-check is-no">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
-            <span
-              ><strong>Widget state is not written into the file yet.</strong> It lives in the
-              kernel, so a widget redraws while the kernel is up and shows a placeholder once it
-              is gone.</span
-            >
-          </li>
-          <li class="mk-check is-no">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
-            <span
-              ><strong>Notebooks are not signed, as Jupyter signs them.</strong> Trust is given per
-              folder instead, and nothing a folder controls runs until you trust it. HTML saved in a
-              notebook's outputs is sanitised when the notebook opens, so its scripts do not run
-              until you run the cell again.</span
-            >
-          </li>
-        </ul>
-        <p class="mk-charts-note">
-          The whole of it, including what each output type needs, is on
-          <a href="/docs/notebook-support">Notebook Support</a>.
-        </p>
-      </div>
-    </div>
-
-
-    <div class="mk-band mk-band-alt">
-      <div class="mk-wrap">
-        <h2 class="mk-section-title">Written about, and talked about</h2>
-        <p class="mk-section-sub">
-          Zasper reached the front page of Hacker News the week it was released, and has been
-          written up and presented since.
-        </p>
-
-        <div class="mk-cards-3">
-          <div class="mk-card">
-            <span class="mk-card-kind">Hacker News</span>
-            <h3>425 points</h3>
-            <p>
-              “Zasper: A Modern and Efficient Alternative to JupyterLab, Built in Go”, and a
-              hundred comments arguing about notebooks, which is how you know people read it.
-            </p>
-            <span class="mk-card-meta">2 January 2025</span>
-            <a href="https://news.ycombinator.com/item?id=42572057">Read the thread</a>
-          </div>
-
-          <div class="mk-card">
-            <span class="mk-card-kind">I Programmer</span>
-            <h3>The JupyterLab alternative</h3>
-            <p>
-              “Zasper started out as a front-end interface to JupyterLab like many others, but
-              ended up as a ground up implementation of the Jupyter project.”
-            </p>
-            <span class="mk-card-meta">Nikos Vaggalis · 23 January 2025</span>
-            <a
-              href="https://www.i-programmer.info/news/90-tools/17778-zasper-the-jupyterlab-alternative-.html"
-              >Read the article</a
-            >
-          </div>
-
-          <div class="mk-card">
-            <span class="mk-card-kind">Techzine</span>
-            <h3>A Go rewrite of Jupyter</h3>
-            <p>
-              An early write-up of the first release on Techzine's DevOps desk: what a Go
-              implementation of the wire protocol is, and why its footprint is smaller.
-            </p>
-            <span class="mk-card-meta">Erik van Klinken · 2 January 2025</span>
-            <a
-              href="https://www.techzine.eu/news/devops/127496/developer-builds-zasper-a-4x-better-ide-than-jupyterlab/"
-              >Read the article</a
-            >
-          </div>
-        </div>
-
-        <div class="mk-rows">
-          <div class="mk-row">
-            <span class="mk-row-label">FOSDEM 2026</span>
-            <span>High Performance Jupyter Notebooks with Zasper</span>
-            <span class="mk-row-meta">1 February · Brussels</span>
-          </div>
-          <div class="mk-row">
-            <span class="mk-row-label">The Fifth Elephant 2025</span>
-            <span>Building high performance PyData tools by adding Go to the mix</span>
-            <span class="mk-row-meta">Bangalore</span>
-          </div>
-          <div class="mk-row">
-            <span class="mk-row-label">IndiaFOSS 2025</span>
-            <span>Zasper: High Performance IDE for Jupyter Notebooks</span>
-            <span class="mk-row-meta">FOSS United</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-<div class="mk-band">
+<div class="mk-band mk-band-features">
   <div class="mk-wrap">
-    <h2 class="mk-section-title">And it is a real IDE</h2>
+    <p class="mk-eyebrow">Features</p>
+    <h2 class="mk-section-title">And it is <span class="mk-accent">a real IDE</span></h2>
     <p class="mk-section-sub">
       Every screen below is from a running session.
     </p>
 
-    <div class="mk-feature">
-      <div class="mk-feature-copy">
-        <h3>Your coding agent, beside your notebooks</h3>
-        <p>
-          Claude Code, Gemini CLI, Codex or any agent that speaks ACP, in a panel next to the
-          notebook it is working on. It reads, edits and runs your cells through Zasper's own tools,
-          and every file a turn changed is listed under it, to review in a diff and undo a block, a
-          cell or the whole turn. It runs on your own subscription; Zasper holds no key.
-        </p>
-        <p><a href="/docs/coding-agents">Coding agents</a> · <a href="/docs/mcp-server">MCP server</a></p>
-      </div>
-      <div class="mk-shot">
-        <div class="mk-shot-bar">
-          <span class="mk-shot-dot"></span>
-          <span class="mk-shot-label">Claude Code</span>
+    <div class="mk-features">
+      <div class="mk-feature">
+        <div class="mk-feature-copy">
+          <span class="mk-card-kind">SQL cells</span>
+          <h3>SQL beside your Python</h3>
+          <p>
+            Query PostgreSQL, DuckDB, Snowflake and more, or your DataFrames, and get a DataFrame back
+            for the next cell.
+          </p>
+          <p><a href="/docs/sql-cells">SQL cells</a> · <a href="/docs/query-data-with-sql">Tutorial: query data with SQL</a></p>
         </div>
-        <img
-          src="/static/images/screens/agent-panel.png"
-          alt="A penguins notebook in Zasper with a scatter plot of bill length against bill depth, coloured by predicted species with the misclassified penguins circled, and Claude Code's panel beside it: the tool calls it made to read, edit and run the notebook, its two-sentence answer, and the notebook listed as the file the turn changed, with Undo this turn."
-          width="1400"
-          height="800"
-          loading="lazy"
-        />
+        <div class="mk-shot">
+          <div class="mk-shot-bar">
+            <span class="mk-shot-dot"></span>
+            <span class="mk-shot-label">nyc_taxi.ipynb</span>
+          </div>
+          <img
+            src="/static/images/screens/sql-cells.png"
+            alt="A notebook of New York taxi trips in Zasper. The Data panel lists a SQLite connection named taxi with its three tables, and the DataFrames the kernel holds. Beside it, a SQL cell on taxi joins trips to zones and writes df_boroughs, and its output shows 8 rows: trips and average fare by borough, Manhattan first with 2,615,336 trips."
+            width="1400"
+            height="800"
+            loading="lazy"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="mk-feature">
-      <div class="mk-feature-copy">
-        <h3>SQL beside your Python</h3>
-        <p>
-          A SQL cell queries your database, or the DataFrames the kernel already holds, and leaves
-          the answer as a DataFrame for the cells after it. PostgreSQL, MySQL, SQLite, DuckDB,
-          Snowflake, BigQuery and more, browsed table by table in the Data panel, with each password
-          kept in your system keychain.
-        </p>
-        <p><a href="/docs/sql-cells">SQL cells</a> · <a href="/docs/query-data-with-sql">Tutorial: query data with SQL</a></p>
-      </div>
-      <div class="mk-shot">
-        <div class="mk-shot-bar">
-          <span class="mk-shot-dot"></span>
-          <span class="mk-shot-label">nyc_taxi.ipynb</span>
+      <div class="mk-feature">
+        <div class="mk-feature-copy">
+          <span class="mk-card-kind">Environments</span>
+          <h3>Your environments, already found</h3>
+          <p>
+            Your registered kernels, conda environments and project <code>.venv</code>, one click
+            from a new notebook.
+          </p>
         </div>
-        <img
-          src="/static/images/screens/sql-cells.png"
-          alt="A notebook of New York taxi trips in Zasper. The Data panel lists a SQLite connection named taxi with its three tables, and the DataFrames the kernel holds. Beside it, a SQL cell on taxi joins trips to zones and writes df_boroughs, and its output shows 8 rows: trips and average fare by borough, Manhattan first with 2,615,336 trips."
-          width="1400"
-          height="800"
-          loading="lazy"
-        />
+        <div class="mk-shot">
+          <div class="mk-shot-bar">
+            <span class="mk-shot-dot"></span>
+            <span class="mk-shot-label">Launcher</span>
+          </div>
+          <img
+            src="/static/images/screens/launcher.png"
+            alt="Zasper's file explorer beside the launcher, showing Python kernels (ipykernel, Xeus and the project's own environment), each one click from a new notebook, and below them kernels for C, C++, R, Bash, Deno, Go, Julia, Ruby and Scala."
+            width="1400"
+            height="810"
+            loading="lazy"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="mk-feature">
-      <div class="mk-feature-copy">
-        <h3>Your environments, already found</h3>
-        <p>
-          Every Jupyter kernel you have registered, and any Python with <code>ipykernel</code> on
-          your PATH, in your active conda or virtual environment, or in the project's
-          <code>.venv</code>, one click from a blank notebook.
-        </p>
-      </div>
-      <div class="mk-shot">
-        <div class="mk-shot-bar">
-          <span class="mk-shot-dot"></span>
-          <span class="mk-shot-label">Launcher</span>
+      <div class="mk-feature">
+        <div class="mk-feature-copy">
+          <span class="mk-card-kind">Terminal</span>
+          <h3>A real shell, in the same window</h3>
+          <p>
+            Your own shell, in a panel below the notebook you are working in.
+          </p>
         </div>
-        <img
-          src="/static/images/screens/launcher.png"
-          alt="Zasper's file explorer beside the launcher, showing the Python environments it found (including conda, uv and xeus kernels), each one click from a new notebook, and a group of C kernels below them."
-          width="1400"
-          height="578"
-          loading="lazy"
-        />
+        <div class="mk-shot">
+          <div class="mk-shot-bar">
+            <span class="mk-shot-dot"></span>
+            <span class="mk-shot-label">Terminals</span>
+          </div>
+          <img
+            src="/static/images/screens/terminal.png"
+            alt="A penguins notebook open in Zasper with the terminal panel beneath it, where a Python session imports the tutorial's helpers and prints the count and mean body mass of each species."
+            width="1400"
+            height="640"
+            loading="lazy"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="mk-feature">
-      <div class="mk-feature-copy">
-        <h3>A real shell, in the same window</h3>
-        <p>
-          Your own shell in a panel below the notebook it belongs to, beside the problems, references
-          and variables of the file you are in.
-        </p>
-      </div>
-      <div class="mk-shot">
-        <div class="mk-shot-bar">
-          <span class="mk-shot-dot"></span>
-          <span class="mk-shot-label">Terminals</span>
+      <div class="mk-feature">
+        <div class="mk-feature-copy">
+          <span class="mk-card-kind">Source control</span>
+          <h3>Version control, built in</h3>
+          <p>
+            Branch, stage, commit and diff without leaving the window. No extension to install.
+          </p>
         </div>
-        <img
-          src="/static/images/screens/terminal.png"
-          alt="A penguins notebook open in Zasper with the terminal panel beneath it, where a Python session imports the tutorial's helpers and prints the count and mean body mass of each species."
-          width="1400"
-          height="640"
-          loading="lazy"
-        />
-      </div>
-    </div>
-
-    <div class="mk-feature">
-      <div class="mk-feature-copy">
-        <h3>Version control, built in</h3>
-        <p>
-          Branch, stage, commit and read a side-by-side diff in the window you are already working
-          in. JupyterLab ships no source control; git there is a separate extension you install
-          and keep up to date yourself.
-        </p>
-      </div>
-      <div class="mk-shot">
-        <div class="mk-shot-bar">
-          <span class="mk-shot-dot"></span>
-          <span class="mk-shot-label">Source control</span>
+        <div class="mk-shot">
+          <div class="mk-shot-bar">
+            <span class="mk-shot-dot"></span>
+            <span class="mk-shot-label">Source control</span>
+          </div>
+          <img
+            src="/static/images/screens/git.png"
+            alt="Zasper's source control panel on branch main, listing three changed and four untracked files above the last commit, with a notebook diff of 04-data-analysis.ipynb beside it: one of 23 cells edited, its removed and added lines marked, and the unchanged cells folded."
+            width="1400"
+            height="640"
+            loading="lazy"
+          />
         </div>
-        <img
-          src="/static/images/screens/git.png"
-          alt="Zasper's source control panel on branch main, listing three changed and four untracked files above the last commit, with a notebook diff of 04-data-analysis.ipynb beside it: one of 23 cells edited, its removed and added lines marked, and the unchanged cells folded."
-          width="1400"
-          height="640"
-          loading="lazy"
-        />
       </div>
     </div>
 
@@ -398,7 +507,8 @@
 
     <div class="mk-band mk-band-alt">
       <div class="mk-wrap">
-        <h2 class="mk-section-title">And the rest of it</h2>
+        <p class="mk-eyebrow">Also included</p>
+        <h2 class="mk-section-title">And <span class="mk-accent">the rest of it</span></h2>
         <p class="mk-section-sub">Smaller features, in the same download.</p>
         <div class="mk-minis mk-minis-carousel">
           <div class="mk-mini">
@@ -471,10 +581,80 @@
       </div>
     </div>
 
+    <div class="mk-band">
+      <div class="mk-wrap">
+        <p class="mk-eyebrow">Press</p>
+        <h2 class="mk-section-title">Written about, <span class="mk-accent">and talked about</span></h2>
+        <p class="mk-section-sub">
+          Zasper reached the front page of Hacker News the week it was released, and has been
+          written up and presented since.
+        </p>
 
-<div class="mk-band">
+        <div class="mk-cards-3">
+          <div class="mk-card">
+            <span class="mk-card-kind">Hacker News</span>
+            <h3>425 points</h3>
+            <p>
+              “Zasper: A Modern and Efficient Alternative to JupyterLab, Built in Go”, and a
+              hundred comments arguing about notebooks, which is how you know people read it.
+            </p>
+            <span class="mk-card-meta">2 January 2025</span>
+            <a href="https://news.ycombinator.com/item?id=42572057">Read the thread</a>
+          </div>
+
+          <div class="mk-card">
+            <span class="mk-card-kind">I Programmer</span>
+            <h3>The JupyterLab alternative</h3>
+            <p>
+              “Zasper started out as a front-end interface to JupyterLab like many others, but
+              ended up as a ground up implementation of the Jupyter project.”
+            </p>
+            <span class="mk-card-meta">Nikos Vaggalis · 23 January 2025</span>
+            <a
+              href="https://www.i-programmer.info/news/90-tools/17778-zasper-the-jupyterlab-alternative-.html"
+              >Read the article</a
+            >
+          </div>
+
+          <div class="mk-card">
+            <span class="mk-card-kind">Techzine</span>
+            <h3>A Go rewrite of Jupyter</h3>
+            <p>
+              An early write-up of the first release on Techzine's DevOps desk: what a Go
+              implementation of the wire protocol is, and why its footprint is smaller.
+            </p>
+            <span class="mk-card-meta">Erik van Klinken · 2 January 2025</span>
+            <a
+              href="https://www.techzine.eu/news/devops/127496/developer-builds-zasper-a-4x-better-ide-than-jupyterlab/"
+              >Read the article</a
+            >
+          </div>
+        </div>
+
+        <div class="mk-rows">
+          <div class="mk-row">
+            <span class="mk-row-label">FOSDEM 2026</span>
+            <span>High Performance Jupyter Notebooks with Zasper</span>
+            <span class="mk-row-meta">1 February · Brussels</span>
+          </div>
+          <div class="mk-row">
+            <span class="mk-row-label">The Fifth Elephant 2025</span>
+            <span>Building high performance PyData tools by adding Go to the mix</span>
+            <span class="mk-row-meta">Bangalore</span>
+          </div>
+          <div class="mk-row">
+            <span class="mk-row-label">IndiaFOSS 2025</span>
+            <span>Zasper: High Performance IDE for Jupyter Notebooks</span>
+            <span class="mk-row-meta">FOSS United</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="mk-band mk-band-alt">
   <div class="mk-wrap">
-    <h2 class="mk-section-title">Every kernel you already run</h2>
+    <p class="mk-eyebrow">Kernels</p>
+    <h2 class="mk-section-title">Every kernel <span class="mk-accent">you already run</span></h2>
     <p class="mk-section-sub">
       Zasper launches kernels through Jupyter's own kernelspec mechanism, so a kernel that runs under
       Jupyter runs here without being registered again.
@@ -483,15 +663,16 @@
     <p class="mk-charts-note">
       Python covers two implementations, <code>ipykernel</code> and Xeus (<code>xeus-python</code>).
       Every registered kernel is listed, and so is any Python environment Zasper finds with
-      <code>ipykernel</code> in it. The launcher above shows ten, two of them Xeus kernels.
+      <code>ipykernel</code> in it. The launcher above shows three Python kernels, one of them Xeus.
       <a href="/docs/installing-jupyter-kernels">Installing kernels</a> walks through adding your own.
     </p>
   </div>
 </div>
 
-    <div class="mk-band mk-band-alt">
+    <div class="mk-band">
       <div class="mk-wrap">
-        <h2 class="mk-section-title">Your laptop, or your server</h2>
+        <p class="mk-eyebrow">Deployment</p>
+        <h2 class="mk-section-title">Your laptop, <span class="mk-accent">or your server</span></h2>
         <p class="mk-section-sub">
           The same binary either way. Run it on the machine in front of you, or put it on a box
           and open it from anywhere. A footprint this small is what makes a shared server cheap.
@@ -526,10 +707,10 @@
       </div>
     </div>
 
-
-    <div class="mk-band">
+    <div class="mk-band mk-band-alt">
       <div class="mk-wrap">
-        <h2 class="mk-section-title">Start here</h2>
+        <p class="mk-eyebrow">Get started</p>
+        <h2 class="mk-section-title">Start <span class="mk-accent">here</span></h2>
         <p class="mk-section-sub">
           Ten minutes from nothing to a notebook you have run and saved.
         </p>
@@ -566,10 +747,10 @@
       </div>
     </div>
 
-
-<div class="mk-band mk-band-alt">
+<div class="mk-band">
   <div class="mk-wrap">
-    <h2 class="mk-section-title">Open source, with a commercial license too</h2>
+    <p class="mk-eyebrow">License</p>
+    <h2 class="mk-section-title">Open source, <span class="mk-accent">with a commercial license too</span></h2>
     <p class="mk-section-sub">
       Zasper is dual-licensed. Use it under the GNU Affero General Public License, or under a
       commercial license when the AGPL's terms do not fit what you are building.
@@ -603,9 +784,10 @@
   </div>
 </div>
 
-    <div class="mk-band">
+    <div class="mk-band mk-band-alt">
       <div class="mk-wrap">
-        <h2 class="mk-section-title">Questions people actually ask</h2>
+        <p class="mk-eyebrow">FAQ</p>
+        <h2 class="mk-section-title">Questions <span class="mk-accent">people actually ask</span></h2>
         <div class="mk-faq">
           <details class="mk-faq-item" open>
             <summary>
@@ -616,6 +798,19 @@
               For your notebooks and your kernels, yes: the same files, the same kernelspecs, the
               same wire protocol. For JupyterLab itself, no. This is a separate implementation
               with its own interface, not a re-creation of Lab's UI or its extension API.
+            </p>
+          </details>
+          <details class="mk-faq-item">
+            <summary>
+              How is Zasper different from a hosted notebook like Hex?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <p>
+              A hosted platform runs your code in its own cloud and keeps projects in its own format.
+              Zasper runs on your machine or your server, your notebooks stay <code>.ipynb</code> files
+              in your folder, and your agent runs on your own subscription. Hex does more for a team
+              publishing dashboards to people who do not code; Zasper is for the people writing the
+              notebooks. <a href="/compare/hex/">Zasper and Hex, side by side</a> has the details.
             </p>
           </details>
           <details class="mk-faq-item">
@@ -661,10 +856,22 @@
           </details>
           <details class="mk-faq-item">
             <summary>
+              Which coding agents work, and what do they cost?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <p>
+              Claude Code, Gemini CLI and Codex, and any other agent that speaks ACP; Claude Code is the
+              one tested most. Each runs on your own account and subscription, so Zasper adds no cost and
+              holds no key. Agents you run outside Zasper can use it through its MCP server.
+            </p>
+          </details>
+          <details class="mk-faq-item">
+            <summary>
               Does my code leave my machine? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
             </summary>
             <p>
-              No. Zasper runs a server on your own machine and your files stay on it. It sends
+              No. Zasper runs a server on your own machine and your files stay on it. A coding agent you
+              start talks to its own provider, as it does in a terminal. It sends
               anonymous usage data, with no file names, paths, contents or IP address, and
               <code>ZASPER_TELEMETRY=0</code> switches it off;
               <a href="https://github.com/zasper-io/zasper/blob/main/PRIVACY.md">PRIVACY.md</a> is
@@ -677,10 +884,10 @@
       </div>
     </div>
 
-
-    <div class="mk-band mk-band-alt">
+    <div class="mk-band">
       <div class="mk-wrap">
-        <h2 class="mk-section-title">The project, and how to join it</h2>
+        <p class="mk-eyebrow">Community</p>
+        <h2 class="mk-section-title">The project, <span class="mk-accent">and how to join it</span></h2>
         <p class="mk-section-sub">
           Zasper is developed in the open, by people who use it. What to know before you depend
           on it.
@@ -739,20 +946,9 @@
       </div>
     </div>
 
-
-<div class="mk-band">
-  <div class="mk-wrap">
-    <h2 class="mk-section-title">Proud to be supported by</h2>
-    <div class="mk-supporters-row">
-      <img src="/static/images/zerodha.png" alt="Zerodha" />
-      <img src="/static/images/foss-united.png" alt="FOSS United" />
-    </div>
-  </div>
-</div>
-
-    <div class="mk-band mk-band-dark">
+    <div class="mk-band mk-band-dark mk-band-closing">
       <div class="mk-wrap mk-closing">
-        <h2 class="mk-section-title">One binary, and your notebooks open in it</h2>
+        <h2 class="mk-section-title">One binary, <span class="mk-accent">and your notebooks open in it</span></h2>
         <p class="mk-section-sub">
           No account to make, and your files stay on your machine.
         </p>
@@ -765,6 +961,5 @@
         </div>
       </div>
     </div>
-
 
 {% include footer.html %}

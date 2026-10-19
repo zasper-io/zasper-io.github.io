@@ -35,6 +35,7 @@ exclude:
   - Gemfile.lock
   - .jekyll-cache
   - s3_website.yml
+  - todos
 
 # /feed.xml carries every post, docs pages included, which is not what anyone subscribes for: the
 # `categories` list makes jekyll-feed write /feed/blog.xml as well, and that is the one `<head>` points

@@ -112,6 +112,14 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
   --mk-wrap-docs: 1240px;
   /* The reading measure for docs and blog text, about 80 characters of Inter at 16px. */
   --mk-measure: 720px;
+  /* How far the hero's screenshot hangs into the band below it; both bands read it. */
+  --mk-hero-overlap: min(160px, 14vw);
+  /* The texture every dark band carries over its gradient: a glow from the top centre and a faint
+     56px grid. One value, so the hero, the agents band and the closing band cannot drift apart. */
+  --mk-dark-texture:
+    radial-gradient(ellipse 60% 55% at 50% 0%, #ffffff24, transparent 70%),
+    linear-gradient(#ffffff0d 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, #ffffff0d 1px, transparent 1px) 0 0 / 56px 56px;
 }
 
 /* --- Reset ------------------------------------------------------------------ */
@@ -162,20 +170,46 @@ a {
   margin: 0 auto;
 }
 
-.mk-band-hero {
-  background: var(--z-bg-login-page);
-  padding-top: 40px;
-}
-
 .mk-band-alt {
   background: var(--z-bg-panel-alt);
   border-top: 1px solid var(--z-border);
   border-bottom: 1px solid var(--z-border);
 }
 
+/* Dark bands are rare on purpose — the hero, the agents band, the closing call — and all of them carry
+   the same grid and glow, which is what marks them as the page's moments. The light bands stay plain:
+   they hold the charts, screenshots and tables, and a grid behind those competes with their detail. */
 .mk-band-dark {
-  background: var(--z-bg-login-hero);
+  background: var(--mk-dark-texture), var(--z-bg-login-hero);
   color: #fff;
+}
+
+/* A neutral off-white, a step down from the white feature cards on it, so each card reads as a card
+   without the band taking on the tint of `.mk-band-alt`. Mixed from the panel and the ink rather than
+   typed as #fafafa, the same as the prototype, where a dark theme needs one step off its own panel. */
+.mk-band-features {
+  background: color-mix(in srgb, var(--z-bg-panel) 97%, var(--z-fg-default));
+}
+
+/* The hero is a dark band, so it carries the grid and glow from `.mk-band-dark` and the first screen
+   has depth before anything on it is read. Its bottom padding is zero
+   because the screenshot hangs out of it, over the edge and into `.mk-band-proof` below; the overlap
+   is a share of the viewport so a phone's shorter shot overlaps by as much of itself as a desktop's. */
+.mk-band-hero {
+  padding-top: 64px;
+  padding-bottom: 0;
+}
+
+.mk-band-hero .mk-hero-art {
+  position: relative;
+  z-index: 1;
+  margin-bottom: calc(-1 * var(--mk-hero-overlap));
+}
+
+/* The band the screenshot lands in: the numbers, then the strip of who has written about, talked
+   about and backed the project, which is the proof a reader looks for straight after the claim. */
+.mk-band-proof {
+  padding-top: calc(var(--mk-hero-overlap) + 56px);
 }
 
 /* Copy above the screenshot rather than beside it. Side by side, the shot was held to 464px — a
@@ -192,9 +226,9 @@ a {
 
 /* Narrower than the shot beneath it: centred prose needs a short line to stay readable, and the
    contrast between the measured column of text and the full-width image is what gives the shot its
-   size. */
+   size. Wide enough for the 60px headline to sit on two lines; the paragraph keeps its own 56ch. */
 .mk-hero-copy {
-  max-width: 660px;
+  max-width: 860px;
 }
 
 .mk-hero-art {
@@ -206,7 +240,6 @@ a {
 .mk-shot {
   max-width: var(--mk-wrap);
   border: 1px solid var(--z-border);
-  border-radius: 10px;
   overflow: hidden;
   background: var(--z-bg-app);
   box-shadow: var(--z-shadow-panel);
@@ -267,7 +300,6 @@ a {
   gap: 4px;
   padding: 20px 8px 16px;
   border: 1px solid var(--z-border);
-  border-radius: 10px;
   background: var(--z-bg-panel);
 }
 
@@ -303,18 +335,6 @@ a {
   }
 }
 
-.mk-supporters-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: center;
-  margin-top: 16px;
-}
-
-.mk-supporters-row img {
-  height: 36px;
-}
-
 /*
 The card: a small label, a heading, a paragraph and a link, in the same frame as the kernel tiles. It
 was `.mk-license` until the licences stopped being the only band using it — the press mentions, the
@@ -339,16 +359,18 @@ three steps and the three ways into the project all draw the same box — so it 
   gap: 8px;
   padding: 24px;
   border: 1px solid var(--z-border);
-  border-radius: 10px;
   background: var(--z-bg-panel);
 }
 
+/* Mono and in the accent, the same voice as `.mk-eyebrow` over each section, so a card's label reads
+   as a smaller instance of the label above it rather than as a second, grey kind of caption. */
 .mk-card-kind {
+  font-family: var(--z-mono-font-family);
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--z-fg-subtle);
+  color: var(--z-fg-accent);
 }
 
 .mk-card h3 {
@@ -362,6 +384,12 @@ three steps and the three ways into the project all draw the same box — so it 
   font-size: 15px;
   line-height: 1.6;
   color: var(--z-fg-muted);
+}
+
+/* The byline and date under a press card's quote: smaller than the quote, so it reads as its source. */
+.mk-card-meta {
+  font-size: 13px;
+  color: var(--z-fg-subtle);
 }
 
 /* `margin-top: auto` keeps the links level across a row when one card's paragraph is longer. */
@@ -395,7 +423,6 @@ three steps and the three ways into the project all draw the same box — so it 
 .mk-video-frame {
   max-width: 900px;
   aspect-ratio: 16 / 9;
-  border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--z-shadow-panel);
 }
@@ -530,18 +557,15 @@ three steps and the three ways into the project all draw the same box — so it 
 }
 
 /* --- Hero ---------------------------------------------------------------- */
-/* Larger than it was in the two-column hero, and centred: `max-width: 18ch` was there to stop the
-   headline running into the screenshot beside it, which is no longer where the screenshot is. */
+/* A promise rather than a category, set heavy and tight with its second half in the light accent:
+   the weight and the two tones are what make the first line read as a headline from across a room. */
 .mk-hero-title {
   margin: 0 0 18px;
-  font-size: 52px;
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.022em;
-}
-
-.mk-hero-title strong {
+  font-size: 60px;
   font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .mk-hero-sub {
@@ -573,7 +597,6 @@ three steps and the three ways into the project all draw the same box — so it 
   height: 44px;
   padding: 0 22px;
   border: 1px solid transparent;
-  border-radius: 6px;
   background: var(--z-accent);
   color: var(--z-fg-on-accent);
   font-size: 15px;
@@ -610,7 +633,6 @@ three steps and the three ways into the project all draw the same box — so it 
   margin-top: 24px;
   padding: 10px 14px;
   border: 1px solid var(--z-border);
-  border-radius: 6px;
   background: var(--z-bg-code);
   font-family: var(--z-mono-font-family);
   font-size: 14px;
@@ -639,16 +661,52 @@ three steps and the three ways into the project all draw the same box — so it 
 }
 
 /* --- Claims / numbers ------------------------------------------------------ */
+/* Section headings at display size, with the phrase that carries the point in the accent
+   (`.mk-accent`). At 28px light they read as captions and every band weighed the same. */
 .mk-section-title {
-  margin: 0 0 8px;
-  font-size: 28px;
-  font-weight: 300;
-  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.mk-accent {
+  color: var(--z-fg-accent);
+}
+
+/* On a dark band the accent is a pale step of the ramp, which is dark-on-dark in no theme. */
+.mk-band-dark .mk-accent {
+  color: var(--a-200);
+}
+
+.mk-band-dark .mk-hero-sub {
+  color: #ffffffbf;
+}
+
+.mk-band-dark .mk-install {
+  border-color: #ffffff33;
+  background: #ffffff14;
+  color: #ffffff;
+}
+
+.mk-band-dark .mk-install button {
+  color: #ffffffa6;
+}
+
+.mk-band-dark .mk-install button:hover {
+  color: #ffffff;
+}
+
+.mk-band-dark .mk-dl-note,
+.mk-band-dark .mk-dl-note a {
+  color: #ffffffa6;
 }
 
 .mk-section-sub {
   margin: 0 0 32px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.6;
   color: var(--z-fg-muted);
   max-width: 62ch;
@@ -656,6 +714,33 @@ three steps and the three ways into the project all draw the same box — so it 
 
 .mk-band-dark .mk-section-sub {
   color: #ffffffb3;
+}
+
+/* A short mono label above a section title, naming what kind of section it is (benchmarks, press,
+   licence) so the page can be skimmed by label before it is read by heading. The headings are
+   sentences; this is the noun. Tinted on a white band, white on the tinted `.mk-band-alt`. */
+.mk-eyebrow {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 4px 10px;
+  border: 1px solid var(--z-border);
+  background: var(--z-bg-panel-alt);
+  color: var(--z-fg-accent);
+  font-family: var(--z-mono-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mk-band-alt .mk-eyebrow {
+  background: var(--z-bg-panel);
+}
+
+.mk-band-dark .mk-eyebrow {
+  border-color: #ffffff40;
+  background: #ffffff14;
+  color: #ffffffd9;
 }
 
 .mk-claims {
@@ -704,7 +789,6 @@ three steps and the three ways into the project all draw the same box — so it 
   gap: 8px;
   padding: 8px 14px;
   border: 1px solid var(--z-border);
-  border-radius: 20px;
   background: var(--z-bg-panel);
   font-size: 14px;
 }
@@ -718,10 +802,94 @@ three steps and the three ways into the project all draw the same box — so it 
 
 .mk-number strong {
   display: block;
-  font-size: 40px;
-  font-weight: 300;
+  font-size: 48px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  color: var(--z-fg-accent);
+}
+
+.mk-band-dark .mk-number strong {
+  color: #ffffff;
+}
+
+/* The proof strip: tiles sharing their borders, the way a logo wall is drawn, but with the outlet's
+   name and what it was where there is no logo to show — a masthead redrawn here would be a guess. */
+.mk-proof-label {
+  margin: 56px 0 18px;
+  text-align: center;
+  font-family: var(--z-mono-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--z-fg-subtle);
+}
+
+.mk-proof {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--z-border);
+  background: var(--z-border);
+}
+
+.mk-proof-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 96px;
+  padding: 16px 8px;
+  background: var(--z-bg-panel);
+  text-align: center;
+  text-decoration: none;
+}
+
+a.mk-proof-item:hover {
+  background: var(--z-bg-panel-alt);
+}
+
+.mk-proof-item strong {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--z-fg-default);
+}
+
+.mk-proof-item span {
+  font-family: var(--z-mono-font-family);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--z-fg-subtle);
+}
+
+/* Grey until hovered, so two supporters' brand colours do not outshout four outlets set in type. */
+.mk-proof-item img {
+  max-width: 100%;
+  height: 28px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.8;
+}
+
+.mk-proof-item:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .mk-proof {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .mk-proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .mk-number span {
@@ -738,13 +906,60 @@ three steps and the three ways into the project all draw the same box — so it 
    side column costs the image about a third of its width — at 786px a 1400px screenshot renders at
    0.56 and its labels stop being legible. Full width keeps them near 0.77. `.mk-shot` is the frame
    the hero already uses. */
+/* Each feature is a card: label, heading and copy at the top, and the screenshot running to the
+   card's edges beneath them. Two to a row, which trades the legibility the paragraph above argues
+   for, about 0.38 of each capture, for a section you can take in at a glance; the coding agent, the
+   one feature that needs the full measure, is the hero's shot instead. The shot is pushed to the
+   bottom so the two in a row line up when one card's copy runs longer, and it loses its own frame
+   here because the card is the frame. */
+.mk-features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
 .mk-feature {
-  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--z-border);
+  overflow: hidden;
+  background: var(--z-bg-panel);
+}
+
+.mk-feature .mk-shot {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .mk-features {
+    grid-template-columns: 1fr;
+  }
 }
 
 .mk-feature-copy {
-  margin-bottom: 22px;
+  padding: 28px 32px 24px;
+}
+
+.mk-feature-copy .mk-card-kind {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.mk-feature-copy p {
   max-width: 62ch;
+}
+
+.mk-feature .mk-shot {
+  max-width: none;
+  border: 0;
+  border-top: 1px solid var(--z-border);
+  box-shadow: none;
+}
+
+@media (max-width: 760px) {
+  .mk-feature-copy {
+    padding: 20px 20px 18px;
+  }
 }
 
 .mk-feature-copy h3 {
@@ -764,6 +979,150 @@ three steps and the three ways into the project all draw the same box — so it 
 /* The charts are drawn on white, so on `.mk-band-alt`'s grey they read as cards without needing a
    fill of their own. Text inside them is real SVG paths at a fixed 9.6:6 ratio, which is why the
    figures are given no padding — anything that shrinks them shrinks their axis labels too. */
+/*
+The benchmark readout: a slider over the seven loads the charts are drawn at, and three tiles that
+answer at the load picked — peak RAM, average CPU, and how many of the five replies per request came
+back. Teal and Jupyter's orange, the two colours of the charts beneath it, so the readout and the
+charts read as one figure. Bars are scaled to the larger of the pair at that load: the ratio is the
+point, and the charts carry the growth.
+*/
+.mk-bench {
+  margin-bottom: 32px;
+  padding: 24px;
+  border: 1px solid var(--z-border);
+  background: var(--z-bg-panel);
+}
+
+.mk-bench-head {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+
+.mk-bench-label {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 15px;
+  color: var(--z-fg-muted);
+}
+
+.mk-bench-k {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--z-fg-default);
+}
+
+.mk-bench-control {
+  flex: 1 1 auto;
+}
+
+.mk-bench-control input {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--z-accent);
+}
+
+/* Seven stops spread over the track, centred under where each one lands; the first and last sit at
+   the ends, as the thumb does. */
+.mk-bench-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-family: var(--z-mono-font-family);
+  font-size: 11px;
+  color: var(--z-fg-subtle);
+}
+
+.mk-bench-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mk-bench-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--z-border);
+}
+
+.mk-bench-kind {
+  font-family: var(--z-mono-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--z-fg-subtle);
+}
+
+.mk-bench-row {
+  display: grid;
+  grid-template-columns: 7.5em minmax(0, 1fr) 5.5em;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.mk-bench-who {
+  color: var(--z-fg-muted);
+}
+
+.mk-bench-row strong {
+  text-align: right;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-bench-bar {
+  height: 8px;
+  background: var(--z-border-subtle);
+}
+
+.mk-bench-bar i {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  background: #0c6862;
+  transition: width 0.25s ease;
+}
+
+.mk-bench-row.is-jupyter .mk-bench-bar i {
+  background: #f37626;
+}
+
+.mk-bench-ratio {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--z-fg-accent);
+}
+
+.mk-bench-ratio.is-warning {
+  color: #c4501a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mk-bench-bar i {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .mk-bench-tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .mk-bench-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+}
+
 .mk-charts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -773,7 +1132,6 @@ three steps and the three ways into the project all draw the same box — so it 
 .mk-chart {
   margin: 0;
   border: 1px solid var(--z-border);
-  border-radius: 10px;
   overflow: hidden;
   background: #fff;
 }
@@ -790,6 +1148,161 @@ three steps and the three ways into the project all draw the same box — so it 
   line-height: 1.6;
   color: var(--z-fg-subtle);
   max-width: 72ch;
+}
+
+.mk-band-dark .mk-charts-note {
+  color: #ffffffa6;
+}
+
+/*
+Four short cards in a row, used twice. The agents band lays a turn out as steps — whose agent it is,
+what it can reach, what it asks first, and how its work is undone — because the fourth is the answer
+to the worry the first three raise. The open band uses the same shape for what stays yours: files,
+agent, machine and license.
+*/
+.mk-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mk-step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border: 1px solid var(--z-border);
+  background: var(--z-bg-panel);
+}
+
+.mk-step-kind {
+  font-family: var(--z-mono-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--z-fg-accent);
+}
+
+.mk-step h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.mk-step p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--z-fg-muted);
+}
+
+.mk-band-dark .mk-step {
+  border-color: #ffffff2e;
+  background: #ffffff0f;
+}
+
+.mk-band-dark .mk-step-kind {
+  color: var(--a-200);
+}
+
+.mk-band-dark .mk-step p {
+  color: #ffffffb3;
+}
+
+/* Two real sessions under the steps: a turn reviewed in the panel, and the same notebook driven from
+   a terminal through `zasper mcp`, so the band shows the agent in both places it works. */
+.mk-agents-shots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.mk-agents-shot {
+  margin: 0;
+}
+
+.mk-agents-shot figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--z-fg-muted);
+}
+
+.mk-band-dark .mk-agents-shot figcaption {
+  color: #ffffffb3;
+}
+
+@media (max-width: 900px) {
+  .mk-agents-shots {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The way in for an agent that already lives in a terminal: one line of copy and the command. */
+.mk-agents-mcp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 16px;
+  padding: 24px;
+  border: 1px solid var(--z-border);
+}
+
+.mk-band-dark .mk-agents-mcp {
+  border-color: #ffffff2e;
+}
+
+.mk-agents-mcp h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mk-agents-mcp p {
+  margin: 0;
+  max-width: 60ch;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--z-fg-muted);
+}
+
+.mk-band-dark .mk-agents-mcp p {
+  color: #ffffffb3;
+}
+
+.mk-agents-mcp .mk-install {
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .mk-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mk-agents-mcp {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .mk-steps {
+    grid-template-columns: 1fr;
+  }
+
+  /* The command is one unbreakable line; on a phone it scrolls inside its box rather than the page. */
+  .mk-agents-mcp .mk-install {
+    max-width: 100%;
+    overflow-x: auto;
+  }
 }
 
 /* Below this the two charts sit one above the other, which is the point at which each is wide enough
@@ -900,13 +1413,175 @@ three steps and the three ways into the project all draw the same box — so it 
   }
 
   .mk-hero-title {
-    font-size: 34px;
+    font-size: 38px;
   }
 
-  .mk-footer-groups {
-    margin-left: 0;
-    gap: 32px;
+  .mk-section-title {
+    font-size: 30px;
   }
+
+  /* Four columns do not fit a phone; two by two, so the last one does not run off the edge. */
+  .mk-footer-groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-left: 0;
+    gap: 28px 32px;
+  }
+}
+
+/* --- Compare pages ----------------------------------------------------------- */
+/* Read by assistive technology, drawn nowhere: the empty corner cell of a comparison table. */
+.mk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.mk-band-compare-hero {
+  padding-top: 88px;
+  padding-bottom: 64px;
+}
+
+/* The table scrolls inside its own box on a phone, so three columns of sentences never push the page
+   sideways; the first column stays the row's label rather than becoming a fourth heading. */
+.mk-compare-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--z-border);
+}
+
+.mk-compare {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.mk-compare th,
+.mk-compare td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--z-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.mk-compare tbody tr:last-child th,
+.mk-compare tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.mk-compare thead th {
+  background: var(--z-bg-panel-alt);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* Zasper's column carries the accent in its heading only: the table is a comparison, and tinting a
+   whole column would make it a sales sheet. */
+.mk-compare thead th:nth-child(2) {
+  color: var(--z-fg-accent);
+}
+
+.mk-compare tbody th {
+  width: 22%;
+  font-family: var(--z-mono-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--z-fg-subtle);
+}
+
+.mk-compare td {
+  width: 39%;
+  color: var(--z-fg-default);
+}
+
+/* On a phone each row becomes a small block: the question, then each tool's answer under its name,
+   which the cells carry as `data-label` because the column headings are no longer above them. */
+@media (max-width: 640px) {
+  .mk-compare-wrap {
+    overflow-x: visible;
+  }
+
+  .mk-compare {
+    min-width: 0;
+  }
+
+  .mk-compare thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .mk-compare tr,
+  .mk-compare th,
+  .mk-compare td {
+    display: block;
+    width: auto;
+  }
+
+  .mk-compare tbody tr {
+    border-bottom: 1px solid var(--z-border);
+  }
+
+  .mk-compare tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .mk-compare tbody th,
+  .mk-compare td {
+    padding: 0 16px 10px;
+    border-bottom: 0;
+  }
+
+  .mk-compare tbody th {
+    width: auto;
+    padding-top: 16px;
+  }
+
+  .mk-compare td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--z-fg-accent);
+  }
+
+  .mk-compare td + td::before {
+    color: var(--z-fg-default);
+  }
+
+  .mk-compare tbody tr td:last-child {
+    padding-bottom: 16px;
+  }
+}
+
+.mk-compare-list {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--z-fg-muted);
+}
+
+.mk-sources {
+  margin: 0;
+  padding-left: 18px;
+  max-width: 80ch;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--z-fg-muted);
+}
+
+.mk-sources a,
+.mk-compare-list a {
+  color: var(--z-fg-accent);
 }
 
 /* --- Docs ------------------------------------------------------------------ */
@@ -1477,7 +2152,6 @@ three steps and the three ways into the project all draw the same box — so it 
 .mk-install-method {
   padding: 16px;
   border: 1px solid var(--z-border);
-  border-radius: 8px;
   background: var(--z-bg-panel);
 }
 
@@ -1610,51 +2284,6 @@ no quote to hold a card open.
 }
 
 /*
-What carries over and what does not, as one list rather than two: a page that only prints the ticks is
-a page nobody believes, and the crosses are what make the ticks worth reading.
-*/
-.mk-checks {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  /* Down the first column, then down the second, so each column is one kind: what carries over on
-     the left, what does not on the right. Filling by row interleaves them and the ticks and crosses
-     read as a checklist somebody shuffled. */
-  grid-auto-flow: column;
-  grid-template-rows: repeat(4, auto);
-  gap: 10px 40px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.mk-check {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--z-fg-muted);
-}
-
-.mk-check strong {
-  color: var(--z-fg-default);
-  font-weight: 500;
-}
-
-/* The tick is the git-added green, which is the one place in the system a colour already means "this
-   is here". The cross takes no colour at all: a red list of seven things reads as a bug report. */
-.mk-check svg {
-  flex: 0 0 auto;
-  width: 16px;
-  height: 16px;
-  color: #1a7f37;
-}
-
-.mk-check.is-no svg {
-  color: var(--z-fg-subtle);
-}
-
-/*
 The smaller half of the feature story: nine things that each need a line, not a screenshot. Three
 columns of heading-and-sentence, which is what a `.mk-card` carries with the frame taken off — a
 bordered box around one sentence makes nine boxes and a busy band.
@@ -1741,6 +2370,23 @@ it is the one interactive thing on the page that works with the script blocked.
   text-align: center;
 }
 
+/* The last screen gets the hero's room back, and the heading a size up from the bands before it, so
+   the page ends on a call to action rather than on a band. The grid and glow come from `.mk-band-dark`. */
+.mk-band-closing {
+  padding-top: 112px;
+  padding-bottom: 112px;
+}
+
+.mk-band-closing .mk-section-title {
+  font-size: 52px;
+}
+
+@media (max-width: 760px) {
+  .mk-band-closing .mk-section-title {
+    font-size: 34px;
+  }
+}
+
 .mk-closing .mk-section-sub {
   margin-left: auto;
   margin-right: auto;
@@ -1748,8 +2394,8 @@ it is the one interactive thing on the page that works with the script blocked.
 
 /* The responsive half of this section, and it lives here rather than with the other media queries
    further up the file: these shapes are declared above, and a query that comes before a base rule of
-   the same specificity loses to it — which is exactly what left the tick list in two columns on a
-   phone the first time this was ported. */
+   the same specificity loses to it — which is exactly what left a grid in two columns on a phone
+   the first time this was ported. */
 @media (max-width: 900px) {
   .mk-minis {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1757,7 +2403,6 @@ it is the one interactive thing on the page that works with the script blocked.
 }
 
 @media (max-width: 760px) {
-  .mk-checks,
   .mk-minis {
     grid-template-columns: 1fr;
   }
@@ -1783,14 +2428,7 @@ it is the one interactive thing on the page that works with the script blocked.
     scroll-snap-align: start;
     padding: 16px;
     border: 1px solid var(--z-border);
-    border-radius: 8px;
     background: var(--z-bg-panel);
-  }
-
-  /* One column, in reading order, rather than two columns' worth of rows stacked out of sequence. */
-  .mk-checks {
-    grid-auto-flow: row;
-    grid-template-rows: none;
   }
 
   /* The label stops being a column and becomes the first line of the row. */

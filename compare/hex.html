@@ -1,0 +1,190 @@
+---
+layout: page
+permalink: /compare/hex/
+title: "Zasper vs Hex"
+description: "Zasper and Hex compared: where each runs, what happens to your notebooks, how the AI agent is paid for, and which one fits your team."
+---
+{% comment %}
+Every statement about Hex below is taken from Hex's own pages, listed under Sources with the date they
+were read. Hex changes its plans and prices; re-read those pages before editing a row, and move the
+`checked` date when you do. A row that cannot be sourced from Hex does not go in.
+{% endcomment %}
+{% assign checked = "19 October 2026" %}
+
+<div class="mk-band mk-band-dark mk-band-compare-hero">
+  <div class="mk-wrap">
+    <p class="mk-eyebrow">Compare</p>
+    <h1 class="mk-section-title">Zasper and Hex, <span class="mk-accent">side by side</span></h1>
+    <p class="mk-section-sub">
+      Hex is a hosted analytics platform for data teams and the people they share their work with.
+      Zasper is an open-source IDE for Jupyter that runs on your own machine. Both put an AI agent
+      beside your notebooks; where they differ is where the work lives, what it is saved as, and who
+      pays for the agent.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band">
+  <div class="mk-wrap">
+    <div class="mk-compare-wrap">
+      <table class="mk-compare">
+        <thead>
+          <tr>
+            <th scope="col"><span class="mk-visually-hidden">Question</span></th>
+            <th scope="col">Zasper</th>
+            <th scope="col">Hex</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">What it is</th>
+            <td data-label="Zasper">An IDE for Jupyter notebooks</td>
+            <td data-label="Hex">A hosted analytics and BI platform</td>
+          </tr>
+          <tr>
+            <th scope="row">Where it runs</th>
+            <td data-label="Zasper">Your laptop, or a server you run</td>
+            <td data-label="Hex">Hex's cloud, on AWS; a single-tenant deployment is an Enterprise add-on</td>
+          </tr>
+          <tr>
+            <th scope="row">Your notebooks</th>
+            <td data-label="Zasper">
+              <code>.ipynb</code>, read and written as Jupyter writes them, in your own folder
+            </td>
+            <td data-label="Hex">
+              Hex projects, saved as YAML; <code>.ipynb</code> can be imported, and exporting back to
+              it breaks SQL cells and inputs
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Languages</th>
+            <td data-label="Zasper">
+              Any Jupyter kernel: Python, R, Julia, C++, Scala, Go, Bash and more, with SQL cells
+              beside them
+            </td>
+            <td data-label="Hex">SQL, Python and R, with R not yet at parity with Python</td>
+          </tr>
+          <tr>
+            <th scope="row">The AI agent</th>
+            <td data-label="Zasper">
+              Claude Code, Gemini CLI, Codex or any ACP agent, on your own subscription; every change
+              it makes can be reviewed and undone
+            </td>
+            <td data-label="Hex">
+              The Hex agent, with AI usage drawn from monthly per-seat credits; bring your own key on
+              Enterprise
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Agents outside the app</th>
+            <td data-label="Zasper">An MCP server, on every install</td>
+            <td data-label="Hex">An MCP server, on Team and Enterprise</td>
+          </tr>
+          <tr>
+            <th scope="row">Git</th>
+            <td data-label="Zasper">Built in: branch, stage, commit and diff, notebooks included</td>
+            <td data-label="Hex">Export projects to a Git repo, on Team and Enterprise</td>
+          </tr>
+          <tr>
+            <th scope="row">Price</th>
+            <td data-label="Zasper">Free under the AGPL-3.0, with a commercial license for products that need one</td>
+            <td data-label="Hex">
+              A free Community plan; Professional at $36 and Team at $75 per editor a month;
+              Enterprise priced on request
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Source</th>
+            <td data-label="Zasper">Open source</td>
+            <td data-label="Hex">Proprietary</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mk-charts-note">
+      Hex's column is from Hex's own pricing, documentation and security pages, read on
+      {{ checked }}; the links are under Sources below. Prices are as listed on that day.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band mk-band-alt">
+  <div class="mk-wrap">
+    <p class="mk-eyebrow">Which one</p>
+    <h2 class="mk-section-title">Pick the one <span class="mk-accent">built for your work</span></h2>
+    <p class="mk-section-sub">
+      They overlap less than a feature list suggests. The question is who the notebooks are for and
+      where they have to live.
+    </p>
+    <div class="mk-cards-2">
+      <div class="mk-card">
+        <span class="mk-card-kind">Choose Hex if</span>
+        <ul class="mk-compare-list">
+          <li>You publish dashboards and data apps to people who do not write code.</li>
+          <li>You want semantic models, scheduled runs and alerts managed for you.</li>
+          <li>Your team wants a hosted workspace with nothing to install.</li>
+        </ul>
+      </div>
+      <div class="mk-card">
+        <span class="mk-card-kind">Choose Zasper if</span>
+        <ul class="mk-compare-list">
+          <li>Your notebooks are <code>.ipynb</code> and should stay that way, in your git.</li>
+          <li>Your code and data have to stay on your machine or a server you control.</li>
+          <li>You already pay for Claude Code, Codex or Gemini and want it in your notebooks.</li>
+          <li>You work in kernels beyond Python, SQL and R.</li>
+          <li>You want it free and open source.</li>
+        </ul>
+        <a href="/downloads/">Download Zasper</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mk-band">
+  <div class="mk-wrap">
+    <p class="mk-eyebrow">Sources</p>
+    <h2 class="mk-section-title">Where the Hex column <span class="mk-accent">comes from</span></h2>
+    <p class="mk-section-sub">Read on {{ checked }}.</p>
+    <ul class="mk-sources">
+      <li>
+        <a href="https://hex.tech/pricing/">Hex pricing</a>: plans, per-editor prices, AI credits,
+        bring-your-own-key and the single-tenant add-on
+      </li>
+      <li>
+        <a href="https://hex.tech/security/">Hex security</a>: "Hex uses AWS for data processing and
+        storage", and single-tenant deployment
+      </li>
+      <li>
+        <a href="https://learn.hex.tech/docs/explore-data/projects/import-export">Import and export
+        projects</a>: <code>.ipynb</code> import, the YAML format, what breaks on export, and Git export
+        on Team and Enterprise
+      </li>
+      <li>
+        <a href="https://learn.hex.tech/docs/api-integrations/mcp-server">Hex MCP server</a>: available
+        on Team and Enterprise
+      </li>
+      <li>
+        <a href="https://learn.hex.tech/docs/explore-data/projects/environment-configuration/environment-views">Hex
+        environment</a> and the R project changelog: SQL, Python and R
+      </li>
+    </ul>
+    <p class="mk-charts-note">
+      Something here out of date? <a href="https://github.com/zasper-io/zasper-io.github.io/issues">Open
+      an issue</a> and it will be corrected.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band mk-band-dark mk-band-closing">
+  <div class="mk-wrap mk-closing">
+    <h2 class="mk-section-title">One binary, <span class="mk-accent">and your notebooks open in it</span></h2>
+    <p class="mk-section-sub">No account to make, and your files stay on your machine.</p>
+    <div class="mk-cta">
+      <a class="mk-button" href="/downloads/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" /></svg>
+        Download Zasper
+      </a>
+      <a class="mk-button mk-button-quiet" href="/try-zasper/">Try it in the browser</a>
+    </div>
+  </div>
+</div>
