@@ -13,13 +13,14 @@ author: Prasun Anand
 A `.ipynb` file is for someone who has Jupyter. For anyone else, Zasper can export the notebook as an
 HTML page, as Markdown or as a script.
 
-{% include tut/sprite.html %}
+The pictures on this page are of `tutorials/04-data-analysis.ipynb`, a small analysis of the Palmer
+Penguins from [zasper-tutorials](https://github.com/zasper-io/zasper-tutorials), run from top to bottom.
 
 ## The Export Menu
 
 The button is at the end of the notebook's toolbar, past the kernel and set apart from it.
 
-{% include tut/export-menu.html %}
+{% include tut/shot.html name="export-menu" width="513" height="204" alt="The end of the notebook toolbar: the kernel pill reading Python (zasper-tutorials), then the Export button with its menu open. Under the heading Export as, the menu lists HTML page…, Markdown and Script, then Download notebook below a line. HTML page… is ringed and labelled A page anyone can open." caption="The **Export** button sits past the kernel, at the end of the toolbar." %}
 
 It exports **what is on the screen**, not what is on disk. Unsaved edits and the output the kernel
 produced a moment ago are in the file you get, which is usually what you want and worth knowing when
@@ -36,6 +37,9 @@ light theme so it reads the same on any machine. This is the row to pick when th
 have to install anything.
 
 It is the one format that asks a question first. **Export as HTML** offers two checkboxes:
+
+{% include tut/shot.html name="export-html" width="906" height="225" alt="The Export as HTML dialog. Include the code and Include the outputs are both checked, and Include the outputs is ringed and labelled Code, outputs, or both. Under them: Saved as 04-data-analysis.html. Figures become still images and widgets become their text, an exported page runs nothing. Then the Cancel and Export buttons." caption="The dialog names the file, and says what a page can't keep." %}
+
 
 - **Include the code**: turned off, it gives a report of prose and results with no source.
 - **Include the outputs**: turned off, it gives a blank worksheet, the code with no results.

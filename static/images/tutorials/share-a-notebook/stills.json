@@ -1,0 +1,14 @@
+{
+  "export-html": {
+    "light": "export-html.light.webp",
+    "dark": "export-html.dark.webp",
+    "width": 906,
+    "height": 225
+  },
+  "export-menu": {
+    "light": "export-menu.light.webp",
+    "dark": "export-menu.dark.webp",
+    "width": 513,
+    "height": 204
+  }
+}
