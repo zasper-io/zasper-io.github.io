@@ -7,7 +7,6 @@ track: zasper
 cover: long-run
 cover_width: 602
 cover_height: 232
-cover_alt: "The new cell running. Its border reads running \u00b7 6 s, ringed and labelled Running, and printing as it goes. Under it, the output begins Step 1 of 60, Step 2 of 60."
 author: Prasun Anand
 ---
 

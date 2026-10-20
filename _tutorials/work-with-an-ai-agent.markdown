@@ -7,7 +7,6 @@ track: zasper
 cover: start
 cover_width: 468
 cover_height: 278
-cover_alt: "The agent panel, headed Work with an agent. Under Ready, Claude Code by Anthropic has a Start button, ringed and labelled Your own agent, your own subscription."
 author: Prasun Anand
 ---
 

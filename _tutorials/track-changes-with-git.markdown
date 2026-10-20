@@ -7,7 +7,6 @@ track: zasper
 cover: committed
 cover_width: 635
 cover_height: 391
-cover_alt: "Source control after the commit. The Push button beside main shows 1 and is ringed, labelled One commit to push. The message box is empty, Staged is gone, helpers.py is still under Changes and notes.md under Untracked, and History begins with Run the hello notebook."
 author: Prasun Anand
 ---
 

@@ -46,7 +46,7 @@ cannot read that file. The step count is the number of sections in the tutorial,
                 height="{{ lesson.cover_height }}"
                 loading="lazy"
                 decoding="async"
-                alt="{{ lesson.cover_alt | escape }}"
+                alt=""
               />
             </span>
             <span class="mk-tut-card-body">
@@ -55,7 +55,6 @@ cannot read that file. The step count is the number of sections in the tutorial,
                 >{% if sections > 0 %}<span>{{ sections }} steps</span>{% endif %}</span
               >
               <h3>{{ lesson.title }}</h3>
-              <p>{{ lesson.description }}</p>
             </span>
           </a>
         </li>

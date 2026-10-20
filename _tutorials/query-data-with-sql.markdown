@@ -7,7 +7,6 @@ track: zasper
 cover: data-panel
 cover_width: 492
 cover_height: 401
-cover_alt: "The Data panel: the penguins connection, SQLite, with its penguins table open, listing species, island and sex as TEXT, the four measurements as REAL and year as INTEGER. Below, under Dataframes, df_penguins and mass_by_island; mass_by_island is ringed and labelled Frames the kernel holds."
 author: Prasun Anand
 ---
 

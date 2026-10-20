@@ -2211,56 +2211,74 @@ its sidebar; the only rule it adds is the number in front of each lesson there.
   list-style: none;
 }
 
+/* A card is its cover, dimmed under the dark bands' teal, with the number, steps and title over it in
+   white. The screenshot is the backdrop, not something to read at this size, so it fills the card and
+   is cropped from the top; the lesson page shows it whole. No description: the title is the card. */
 .mk-tut-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
   border: 1px solid var(--z-border);
-  background: var(--z-bg-panel);
-  color: inherit;
+  background: var(--a-900);
+  color: #fff;
   text-decoration: none;
 }
 
-.mk-tut-card:hover {
+.mk-tut-card:hover,
+.mk-tut-card:focus-visible {
   border-color: var(--z-fg-accent);
 }
 
-/* The still is set whole on the code surface, not cropped to fill the frame: every cover carries a
-   callout, and a crop would cut it. Each image keeps its own shape inside a frame of one shape, so
-   the cards line up. */
 .mk-tut-card-cover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 16 / 10;
-  padding: 16px;
-  border-bottom: 1px solid var(--z-border);
+  position: absolute;
+  inset: 0;
   background: var(--z-bg-code);
-  overflow: hidden;
 }
 
+/* Fitted to the card's width and hung from the top: a narrow still is not zoomed into fragments, and a
+   short one leaves the code surface below it, which the fade covers anyway. */
 .mk-tut-card-cover img {
   display: block;
-  width: auto;
+  width: 100%;
   height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  border: 1px solid var(--z-border);
-  background: var(--z-bg-panel);
+}
+
+/* A light tint over the top, so it reads as the app, then solid teal well before the text starts, so the
+   title always sits on plain colour, whatever the screenshot has under it. */
+.mk-tut-card-cover::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--a-900) 20%, transparent) 0%,
+    color-mix(in srgb, var(--a-900) 45%, transparent) 30%,
+    var(--a-900) 62%
+  );
+  content: '';
+  transition: opacity 0.15s ease;
+}
+
+.mk-tut-card:hover .mk-tut-card-cover::after,
+.mk-tut-card:focus-visible .mk-tut-card-cover::after {
+  opacity: 0.88;
 }
 
 .mk-tut-card-body {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 18px 20px 22px;
+  padding: 20px 22px 22px;
 }
 
-/* The lesson's number and its length, in the card labels' mono voice. */
 .mk-tut-card-meta {
   display: flex;
   gap: 10px;
-  color: var(--z-fg-subtle);
+  color: #ffffffb3;
   font-family: var(--z-mono-font-family);
   font-size: 11px;
   font-weight: 500;
@@ -2269,31 +2287,20 @@ its sidebar; the only rule it adds is the number in front of each lesson there.
 }
 
 .mk-tut-card-n {
-  color: var(--z-fg-accent);
+  color: var(--a-200);
 }
 
 .mk-tut-card h3 {
   margin: 0;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.35;
-  color: var(--z-fg-default);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-.mk-tut-card:hover h3 {
-  color: var(--z-fg-accent);
-}
-
-/* Held to three lines, so one long description does not make its row taller than the rest. */
-.mk-tut-card p {
-  display: -webkit-box;
-  margin: 0;
-  overflow: hidden;
-  color: var(--z-fg-muted);
-  font-size: 15px;
-  line-height: 1.6;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+.mk-tut-card:hover h3,
+.mk-tut-card:focus-visible h3 {
+  color: var(--a-200);
 }
 
 /* A lesson's sidebar: the track, each lesson behind its number, so a long title wraps under itself. */
@@ -2323,6 +2330,11 @@ its sidebar; the only rule it adds is the number in front of each lesson there.
 @media (max-width: 600px) {
   .mk-tuts {
     padding-top: 40px;
+  }
+
+  /* One column: wider than tall, so eleven cards are not a long scroll. */
+  .mk-tut-card {
+    aspect-ratio: 16 / 10;
   }
 
   .mk-tuts-grid {

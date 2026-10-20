@@ -7,7 +7,6 @@ track: zasper
 cover: export-menu
 cover_width: 513
 cover_height: 204
-cover_alt: "The end of the notebook toolbar: the kernel pill reading Python (zasper-tutorials), then the Export button with its menu open. Under the heading Export as, the menu lists HTML page\u2026, Markdown and Script, then Download notebook below a line. HTML page\u2026 is ringed and labelled A page anyone can open."
 author: Prasun Anand
 ---
 

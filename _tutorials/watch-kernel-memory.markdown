@@ -7,7 +7,6 @@ track: zasper
 cover: meters
 cover_width: 433
 cover_height: 183
-cover_alt: "The menu above the status bar's memory figure. Under Memory, the This kernel meter reads about 2 GB, and the This machine meter shows how much of the machine's 16 GB is in use. Both meters are ringed. Restart kernel is at the foot of the menu."
 author: Prasun Anand
 ---
 

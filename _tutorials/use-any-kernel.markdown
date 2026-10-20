@@ -7,7 +7,6 @@ track: zasper
 cover: r-plot
 cover_width: 1506
 cover_height: 831
-cover_alt: "An R cell of ggplot2 code and its output below it: a scatter chart of body mass in grams against flipper length in millimetres, with points and a straight fitted line for each species, Adelie in red, Chinstrap in green and Gentoo in blue."
 author: Prasun Anand
 ---
 

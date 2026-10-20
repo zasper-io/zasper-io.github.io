@@ -7,7 +7,6 @@ track: zasper
 cover: new-notebook
 cover_width: 600
 cover_height: 269
-cover_alt: "The file explorer, headed ZASPER-TUTORIALS, with the New notebook button ringed at the right of that strip. Under README.md a new row has an empty name box with Untitled.ipynb greyed in it, ringed and labelled Type a name, then Enter."
 author: Prasun Anand
 ---
 

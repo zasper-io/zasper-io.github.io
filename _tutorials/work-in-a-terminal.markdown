@@ -7,7 +7,6 @@ track: zasper
 cover: open-here
 cover_width: 454
 cover_height: 351
-cover_alt: "The right-click menu of the tutorials folder in the file explorer: Rename, Add file, Add Notebook, Add Folder, Upload, Open Terminal Here, Open as Root, Cut, Copy, Paste, Duplicate, Copy Path and Delete Folder. Open Terminal Here is ringed and labelled A shell in this folder."
 author: Prasun Anand
 ---
 

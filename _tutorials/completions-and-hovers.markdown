@@ -7,7 +7,6 @@ track: zasper
 cover: underline
 cover_width: 499
 cover_height: 160
-cover_alt: "A new cell reading describe_penguin(penguins), with a red squiggle under describe_penguin. The card above it reads (function) describe_penguin: Any, then the problem: describe_penguin is not defined, from basedpyright. The name is ringed and labelled Underlined before it runs."
 author: Prasun Anand
 ---
 
