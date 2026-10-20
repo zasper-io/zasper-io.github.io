@@ -11,8 +11,8 @@ author: Prasun Anand
 ---
 
 Zasper uses the Language Server Protocol for what an editor cannot work out on its own: errors as you
-type, completion with documentation, hover, go to definition, find references, rename, quick fixes,
-symbols and formatting. Files and notebook cells both get them.
+type, completion, hover, go to definition, find references, rename, quick fixes, symbols and
+formatting. Files get all of them; notebook cells get most, as [In a Notebook](#in-a-notebook) says.
 
 Zasper ships no language servers. It starts one you already have, and tells you when you have none.
 
@@ -44,6 +44,11 @@ Zasper looks on your `PATH` first, then in the project's `.venv/bin`, `venv/bin`
 `~/go/bin`, `~/.cargo/bin`, `~/.local/bin`, `~/.juliaup/bin` and Homebrew. Zasper started from a
 desktop launcher or as a service has a thinner `PATH` than your shell, and without that list `gopls`
 in `~/go/bin` would look uninstalled.
+
+In a folder you have not trusted, only basedpyright, pyright and clangd start, because they read code
+without running it. They are looked for outside the folder: its `.venv`, `venv` and `node_modules` are
+skipped. Every other server waits until you trust the folder. [Trusted
+Folders](/docs/trusted-folders) has the details.
 
 ## The Status Bar
 
@@ -87,7 +92,9 @@ every line they appear on.
 ### Which Type-Checking Mode
 
 `off` still reports the mistakes worth stopping for: undefined names, imports that cannot be found,
-and a module whose type stubs are missing. That is the same set Pylance keeps with its defaults.
+and an import that has type stubs but is not installed. That is the same set Pylance keeps with its
+defaults. It does not report type errors, such as an argument of the wrong type, or an attribute a
+value does not have. `basic` and the stricter modes do.
 
 The stricter modes also report correct code that uses libraries without type information. The
 checker reads the library's source, infers a type it cannot narrow, and faults an attribute that is
@@ -124,6 +131,16 @@ typing on purpose: it answers one request at a time, so asking it on every keyst
 behind a running cell.
 
 **Shift+Tab** shows the kernel's documentation for the name at the cursor, as Jupyter does.
+Hovering a name asks the server first, and the kernel when the server has nothing and the kernel is
+idle.
+
+## Documentation
+
+Hover shows the server's documentation for a name, in files and in cells. A suggestion in the
+completion list shows documentation only when the server sends it with the list: Zasper does not ask
+the server for one suggestion's details. basedpyright, pyright and pylsp send documentation only when
+asked, so a Python suggestion shows only its name and an icon for its kind. To read a Python
+name's documentation, hover it, or press **Shift+Tab** in a cell.
 
 ## Formatting
 

@@ -66,9 +66,10 @@ goes back to the list of agents.
 
 ## What the Agent May Do Without Asking
 
-An agent asks before it edits a file or runs a command. The question appears in the chat with the
-agent's options as buttons, and the agent waits for your answer. The menu above the chat sets which
-questions are answered for you:
+The agent decides what to ask about. Claude Code asks before it edits a file, runs a command or uses
+one of Zasper's notebook tools, even one that only reads a notebook. The question appears in the chat
+with the agent's options as buttons, and the agent waits for your answer. The menu above the chat sets
+which questions are answered for you:
 
 | Mode | Answered without asking |
 | --- | --- |
@@ -76,8 +77,9 @@ questions are answered for you:
 | **Allow edits** | Edits, moves and deletes of files |
 | **Allow edits and commands** | Those, and commands |
 
-A question the mode answered says *Allowed by this chat's mode*. The mode belongs to the chat, and
-every tab showing the chat sees it change.
+Any other question, such as one about a notebook tool, is asked in every mode. A question the mode
+answered says *Allowed by this chat's mode*. The mode belongs to the chat, and every tab showing the
+chat sees it change.
 
 ## Mentioning a File, a Cell or an Output
 

@@ -71,9 +71,10 @@ tab's footer says how many of them are shown.
 
 A copied value is the one the kernel sent, not the rounded one on screen.
 
-A filter compares a column with a value. Number and date columns offer `=`, `≠`, `>`, `≥`, `<`, `≤`;
-text columns offer **contains**, **does not contain** and **starts with**, which ignore case; every
-column offers **is missing** and **is not missing**. Filters show as chips above the rows.
+A filter compares a column with a value. Number and date columns offer `=`, `≠`, `>`, `≥`, `<`, `≤`.
+Text columns offer **contains**, **does not contain** and **starts with**, which ignore case, and `=`
+and `≠`, which match the whole value exactly. True-or-false columns offer `=` and `≠`. Every column
+offers **is missing** and **is not missing**. Filters show as chips above the rows.
 
 **Copy as CSV** and **Download as CSV** export the rows that match the filters, in the sorted order,
 with the columns as they are arranged and hidden ones left out. An export carries at most 100,000
