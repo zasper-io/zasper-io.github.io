@@ -2,14 +2,20 @@
   "complete": {
     "light": "complete.light.webp",
     "dark": "complete.dark.webp",
-    "width": 713,
-    "height": 146
+    "width": 714,
+    "height": 148
   },
   "hover": {
     "light": "hover.light.webp",
     "dark": "hover.dark.webp",
-    "width": 730,
-    "height": 278
+    "width": 640,
+    "height": 183
+  },
+  "quickfix": {
+    "light": "quickfix.light.webp",
+    "dark": "quickfix.dark.webp",
+    "width": 756,
+    "height": 194
   },
   "references": {
     "light": "references.light.webp",
@@ -26,13 +32,13 @@
   "underline": {
     "light": "underline.light.webp",
     "dark": "underline.dark.webp",
-    "width": 549,
-    "height": 198
+    "width": 499,
+    "height": 160
   },
   "unrun": {
     "light": "unrun.light.webp",
     "dark": "unrun.dark.webp",
-    "width": 677,
-    "height": 289
+    "width": 678,
+    "height": 290
   }
 }

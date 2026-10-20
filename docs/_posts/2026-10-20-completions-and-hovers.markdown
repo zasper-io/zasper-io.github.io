@@ -47,7 +47,7 @@ says where it came from: `kernel` for a name the kernel holds now, `source` for 
 code defines. `load_penguins` is tagged `kernel`, because the import cell has run. `%load_ext` is an
 IPython magic, which only the kernel knows.
 
-{% include tut/shot.html name="complete" width="713" height="146" alt="A cell reading load_ with its completion list open. load_penguins and %load_ext are tagged kernel, and __loader__ is tagged source. The list is ringed and labelled Each row says where it came from." caption="After **Tab**, each row is tagged `kernel` or `source`." %}
+{% include tut/shot.html name="complete" width="714" height="148" alt="A cell reading load_ with its completion list open. load_penguins and %load_ext are tagged kernel, and __loader__ is tagged source. The list is ringed and labelled Each row says where it came from." caption="After **Tab**, each row is tagged `kernel` or `source`." %}
 
 Press **Enter** to take the highlighted row.
 
@@ -63,7 +63,7 @@ Run the cell under *Documentation*. Then rest the pointer on `describe_penguins`
 function's signature and its docstring. It comes from the language server, which read them in
 `helpers.py`.
 
-{% include tut/shot.html name="hover" width="730" height="278" alt="The cell that calls describe_penguins, with a card open above it: (function) def describe_penguins(penguins: list[Penguin]) returning dict[str, dict[str, float]], then Count the penguins of each species and average their body mass in grams. The name is ringed and labelled Hover for the signature and docstring." caption="A hover shows the signature and the docstring." %}
+{% include tut/shot.html name="hover" width="640" height="183" alt="The cell that calls describe_penguins, with a card open above it: (function) def describe_penguins(penguins: list[Penguin]) returning dict[str, dict[str, float]], then Count the penguins of each species and average their body mass in grams. The name is ringed and labelled Hover for the signature and docstring." caption="A hover shows the signature and the docstring." %}
 
 With the cursor in a name, **Shift+Tab** asks the kernel instead, as Jupyter does. Its card shows the
 object as it is right now.
@@ -72,7 +72,7 @@ Now add a code cell below it and type a name with a letter missing: `describe_pe
 squiggle appears under it straight away, before you run anything. Hover the squiggle to read the
 problem: `"describe_penguin" is not defined`.
 
-{% include tut/shot.html name="underline" width="549" height="198" alt="A new cell reading describe_penguin(penguins), with a red squiggle under describe_penguin. The hover card above it says describe_penguin is not defined, from basedpyright. The name is ringed and labelled Underlined before it runs." caption="The mistake is marked as you type." %}
+{% include tut/shot.html name="underline" width="499" height="160" alt="A new cell reading describe_penguin(penguins), with a red squiggle under describe_penguin. The card above it reads (function) describe_penguin: Any, then the problem: describe_penguin is not defined, from basedpyright. The name is ringed and labelled Underlined before it runs." caption="The mistake is marked as you type." %}
 
 Fix the name, and the squiggle goes. Each problem is also a row in the **Problems** panel under the
 editor, and a count in the status bar.
@@ -90,7 +90,7 @@ that hasn't run yet.
 The cell under *Names from cells you have not run* defines `wingspan_ratio`. Don't run it. Click into
 the empty cell below it, type `w` and press **Tab**.
 
-{% include tut/shot.html name="unrun" width="677" height="289" alt="Two cells. The first defines wingspan_ratio and has never run; the name is ringed and labelled Defined in a cell that never ran. In the cell below, w is typed, and the completion list shows while and with tagged kernel, then wingspan_ratio, Warning and WindowsError tagged source. The list is ringed and labelled wingspan_ratio, from the source." caption="`wingspan_ratio` is tagged `source`: the kernel has never seen it." %}
+{% include tut/shot.html name="unrun" width="678" height="290" alt="Two cells. The first defines wingspan_ratio and has never run; the name is ringed and labelled Defined in a cell that never ran. In the cell below, w is typed, and the completion list shows while and with tagged kernel, then wingspan_ratio, Warning and WindowsError tagged source. The list is ringed and labelled wingspan_ratio, from the source." caption="`wingspan_ratio` is tagged `source`: the kernel has never seen it." %}
 
 `while` and `with` are tagged `kernel`. `wingspan_ratio` is tagged `source`, because only the code
 defines it. Calling it now would raise a `NameError`, because the kernel has never seen it. The tag
@@ -116,9 +116,16 @@ Click `Penguin` where `load_penguins` builds one, and press **F12**. The cursor 
 **F2** opens a box over the name. Type the new name and press **Enter**, and
 every use in the file changes. Renaming doesn't reach into a notebook's cells yet.
 
-The **Problems** tab lists the problems in the project, and names the cell for a notebook's. In a file,
-**⌘.** (**Ctrl+.**) on an underlined name offers quick fixes. For `median` used without its import,
-basedpyright offers `from statistics import median`.
+The **Problems** tab lists the problems in the project, and names the cell for a notebook's.
+
+Now use a name without importing it. Click at the end of the first line, the docstring, press
+**Enter**, and type `print(median([1, 2]))`. `median` isn't imported in this file. Put the
+cursor in `median` and press **⌘.** (**Ctrl+.**). A **Quick fix** menu opens under the line.
+
+{% include tut/shot.html name="quickfix" width="756" height="194" alt="helpers.py with a new second line, print(median([1, 2])), and the cursor in median. Below it, a menu headed Quick fix offers from statistics import median, then a fix that adds a pyright ignore comment. The menu is ringed and labelled The missing import, as a quick fix." caption="**⌘.** offers the import that's missing." %}
+
+Choose `from statistics import median`. The import is added at the top of the file, under the
+docstring.
 
 ## Recap
 
