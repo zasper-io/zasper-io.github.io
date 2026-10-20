@@ -1,0 +1,32 @@
+{
+  "chart": {
+    "light": "chart.light.webp",
+    "dark": "chart.dark.webp",
+    "width": 1385,
+    "height": 555
+  },
+  "filter": {
+    "light": "filter.light.webp",
+    "dark": "filter.dark.webp",
+    "width": 1495,
+    "height": 577
+  },
+  "grid": {
+    "light": "grid.light.webp",
+    "dark": "grid.dark.webp",
+    "width": 1495,
+    "height": 533
+  },
+  "million": {
+    "light": "million.light.webp",
+    "dark": "million.dark.webp",
+    "width": 1495,
+    "height": 576
+  },
+  "variables": {
+    "light": "variables.light.webp",
+    "dark": "variables.dark.webp",
+    "width": 1514,
+    "height": 461
+  }
+}
