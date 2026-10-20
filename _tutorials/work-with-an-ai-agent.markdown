@@ -1,12 +1,13 @@
 ---
-layout: docs
+layout: tutorial
 title: "Work with an AI Agent"
 description: "Start Claude Code beside a notebook, ask it about a chart, let it add and run a new section, then review the turn and undo it."
-date: 2026-10-20 01:00:00 +0530
-index: 16
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 6
+track: zasper
+cover: start
+cover_width: 468
+cover_height: 278
+cover_alt: "The agent panel, headed Work with an agent. Under Ready, Claude Code by Anthropic has a Start button, ringed and labelled Your own agent, your own subscription."
 author: Prasun Anand
 ---
 
@@ -139,4 +140,4 @@ file, or one cell, instead of the whole turn.
 - Review each turn, and undo it
 
 **Next:** [Coding Agents](/docs/coding-agents) and [MCP Server](/docs/mcp-server) for reference, then
-[Explore a DataFrame and Chart It](/docs/explore-a-dataframe).
+[Explore a DataFrame and Chart It](/tutorials/explore-a-dataframe).

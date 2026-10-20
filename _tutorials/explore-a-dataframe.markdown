@@ -1,12 +1,13 @@
 ---
-layout: docs
+layout: tutorial
 title: "Explore a DataFrame and Chart It"
 description: "Show a pandas DataFrame as a grid, read its columns, sort and filter it in the kernel, page through a million rows, and turn it into a chart you keep as code."
-date: 2026-10-20 01:05:00 +0530
-index: 17
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 7
+track: zasper
+cover: summary
+cover_width: 636
+cover_height: 446
+cover_alt: "The menu of the body_mass_g header, over the grid. Its actions are Sort ascending, Sort descending, Filter this column\u2026, Chart this column, Hide column, Move left and Move right. Below them the Summary heading is ringed, labelled A summary of body_mass_g, and lists Rows 344, Missing 2 (0.6%), Distinct 94, Min 2,700, Max 6,300, Mean 4,201.75 and Std dev 801.955."
 author: Prasun Anand
 ---
 
@@ -142,5 +143,5 @@ against, so it works when the cell ends in a bare name such as `penguins`. For a
 - Chart it, then insert the chart as code
 
 **Next:** [Exploring Data](/docs/exploring-data) has the rest of the grid and the charts for reference,
-then [Keep a Run Going When You Close the Browser](/docs/keep-a-run-going).
-To get a DataFrame out of a database instead, try [Query Data with SQL](/docs/query-data-with-sql).
+then [Keep a Run Going When You Close the Browser](/tutorials/keep-a-run-going).
+To get a DataFrame out of a database instead, try [Query Data with SQL](/tutorials/query-data-with-sql).

@@ -1,0 +1,9 @@
+# The tracks on /tutorials/, in the order they are shown. A tutorial joins one with `track:` in its front
+# matter, set to the track's `id`. A track with no tutorials is not shown, so a track can be listed here
+# before its first lesson is written.
+- id: zasper
+  title: Get to know Zasper
+  sub: From a first notebook to running R and Julia, one feature at a time.
+- id: data-science
+  title: Learn data science with Zasper
+  sub: A beginner's course in data science, done in Zasper.

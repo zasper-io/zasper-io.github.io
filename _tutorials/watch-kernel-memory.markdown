@@ -1,12 +1,13 @@
 ---
-layout: docs
+layout: tutorial
 title: "Watch Kernel Memory"
 description: "Fill a kernel with two gigabytes, read its memory in the status bar, open the meters, then find the kernel in the Jupyter info panel after its tab is closed, and shut it down."
-date: 2026-10-20 01:15:00 +0530
-index: 19
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 9
+track: zasper
+cover: meters
+cover_width: 433
+cover_height: 183
+cover_alt: "The menu above the status bar's memory figure. Under Memory, the This kernel meter reads about 2 GB, and the This machine meter shows how much of the machine's 16 GB is in use. Both meters are ringed. Restart kernel is at the foot of the menu."
 author: Prasun Anand
 ---
 
@@ -119,4 +120,4 @@ another terminal. This tutorial was made on a Mac, which has no NVIDIA GPU;
 - See the GPU without `nvidia-smi`
 
 **Next:** [Exploring Data](/docs/exploring-data#kernel-memory) for reference, then
-[Get Completions and Hovers in a Notebook](/docs/completions-and-hovers).
+[Get Completions and Hovers in a Notebook](/tutorials/completions-and-hovers).

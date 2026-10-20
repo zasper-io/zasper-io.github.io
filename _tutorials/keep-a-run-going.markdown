@@ -1,12 +1,13 @@
 ---
-layout: docs
+layout: tutorial
 title: "Keep a Run Going When You Close the Browser"
 description: "Start a cell that runs for a minute, close its tab while it prints, open it again to find every line, and let a run finish with no tab open to find its output in the file."
-date: 2026-10-20 01:10:00 +0530
-index: 18
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 8
+track: zasper
+cover: long-run
+cover_width: 602
+cover_height: 232
+cover_alt: "The new cell running. Its border reads running \u00b7 6 s, ringed and labelled Running, and printing as it goes. Under it, the output begins Step 1 of 60, Step 2 of 60."
 author: Prasun Anand
 ---
 
@@ -113,4 +114,4 @@ run keeps, runs started in a second tab or by an agent, and an `input()` asked w
 - A run that ends with no tab open is written into the file
 
 **Next:** [Notebook Support](/docs/notebook-support) for reference, then
-[Watch Kernel Memory](/docs/watch-kernel-memory).
+[Watch Kernel Memory](/tutorials/watch-kernel-memory).

@@ -1,23 +1,68 @@
 ---
+layout: page
+title: "Tutorials"
+description: "Step-by-step lessons in Zasper, each on a real notebook from zasper-io/zasper-tutorials."
 permalink: /tutorials/
-sitemap: false
 ---
-<!doctype html>
-<!--
-Tutorials are a group in the docs sidebar now, not a section of their own: one page behind a nav link
-that was commented out anyway, on a layout copied from the blog. This file is what is left of the
-section — a redirect, because /tutorials was in the footer for a year and may be in somebody's
-history. Delete it when that stops being true.
--->
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Redirecting to the documentation</title>
-    <meta name="robots" content="noindex" />
-    <link rel="canonical" href="https://zasper.io/docs" />
-    <meta http-equiv="refresh" content="0; url=/docs" />
-  </head>
-  <body>
-    <p>Tutorials are part of <a href="/docs">the documentation</a>.</p>
-  </body>
-</html>
+{% comment %}
+Drawn in the prototype as the first screen of tutorials.html: the blog's short dark band, then each
+track from _data/tutorial_tracks.yml with its tutorials in `order`, as cards. A track with no tutorials
+is skipped, so a track can be listed before its first lesson exists.
+
+A card's cover is one of the tutorial's own stills, named by `cover` in its front matter. Its width and
+height are copied into the front matter from stills.json (`cover_width`, `cover_height`), because Liquid
+cannot read that file. The step count is the number of sections in the tutorial, less its recap.
+{% endcomment %}
+
+<div class="mk-band mk-band-dark mk-band-blog-hero">
+  <div class="mk-wrap">
+    <p class="mk-eyebrow">Tutorials</p>
+    <h1 class="mk-section-title">Learn Zasper <span class="mk-accent">step by step</span></h1>
+    <p class="mk-section-sub">
+      Short lessons on real notebooks. The notebooks are in
+      <a href="https://github.com/zasper-io/zasper-tutorials">zasper-io/zasper-tutorials</a>.
+    </p>
+  </div>
+</div>
+
+<div class="mk-band mk-tuts">
+  <div class="mk-wrap">
+    {% for track in site.data.tutorial_tracks %}
+    {% assign lessons = site.tutorials | where: "track", track.id | sort: "order" %}
+    {% if lessons.size > 0 %}
+    <section class="mk-tuts-track" aria-labelledby="track-{{ track.id }}">
+      <h2 class="mk-tuts-track-title" id="track-{{ track.id }}">{{ track.title }}</h2>
+      {% if track.sub %}<p class="mk-tuts-track-sub">{{ track.sub }}</p>{% endif %}
+      <ol class="mk-tuts-grid">
+        {% for lesson in lessons %}
+        {% assign sections = lesson.content | split: "<h2" | size | minus: 1 %}
+        {% if lesson.content contains 'id="recap"' %}{% assign sections = sections | minus: 1 %}{% endif %}
+        <li>
+          <a class="mk-tut-card" href="{{ lesson.url }}">
+            <span class="mk-tut-card-cover">
+              <img
+                src="/static/images/tutorials/{{ lesson.slug }}/{{ lesson.cover }}.light.webp"
+                width="{{ lesson.cover_width }}"
+                height="{{ lesson.cover_height }}"
+                loading="lazy"
+                decoding="async"
+                alt="{{ lesson.cover_alt | escape }}"
+              />
+            </span>
+            <span class="mk-tut-card-body">
+              <span class="mk-tut-card-meta"
+                ><span class="mk-tut-card-n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span
+                >{% if sections > 0 %}<span>{{ sections }} steps</span>{% endif %}</span
+              >
+              <h3>{{ lesson.title }}</h3>
+              <p>{{ lesson.description }}</p>
+            </span>
+          </a>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>

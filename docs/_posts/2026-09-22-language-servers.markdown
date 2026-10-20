@@ -16,6 +16,8 @@ formatting. Files get all of them; notebook cells get most, as [In a Notebook](#
 
 Zasper ships no language servers. It starts one you already have, and tells you when you have none.
 
+Step by step: [Get Completions and Hovers in a Notebook](/tutorials/completions-and-hovers).
+
 ## What You Need
 
 | Language | Server | Install |

@@ -23,6 +23,14 @@ baseurl: ""
 lang: en_US
 author: "Prasun Anand"
 
+# The tutorials are a collection of their own rather than posts filed under docs: they have an order
+# and a track, not a date and a sidebar group, and they live at /tutorials/<name>. `:name` is the file's
+# name, which is also the folder their screenshots are in, under static/images/tutorials/.
+collections:
+  tutorials:
+    output: true
+    permalink: /tutorials/:name
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap

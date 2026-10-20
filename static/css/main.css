@@ -1933,7 +1933,7 @@ agent, machine and license.
   }
 }
 
-/* --- Blog / tutorials ---------------------------------------------------- */
+/* --- Blog ------------------------------------------------------------------ */
 .mk-blog {
   /* The measure plus the side padding, so the text itself gets the full 720px. */
   max-width: calc(var(--mk-measure) + 48px);
@@ -2161,6 +2161,172 @@ shared with the docs. A post ends on the landing page's closing band, the one pl
 @media (max-width: 760px) {
   .mk-band-blog-hero h1.mk-section-title {
     font-size: 34px;
+  }
+}
+
+/* --- Tutorials ------------------------------------------------------------- */
+/*
+Ported unchanged from the prototype's tutorials.html. The index opens on the blog's short dark band
+(`.mk-band-blog-hero`), held to the page's wrap rather than the reading measure so the title starts
+where the first card does. Below it, on a plain white band, each track is a heading, a line and its
+lessons as cards, numbered in order. A lesson's own page is a docs page (`.mk-docs`), with the track as
+its sidebar; the only rule it adds is the number in front of each lesson there.
+*/
+.mk-band-dark .mk-section-sub a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.mk-tuts {
+  padding-top: 56px;
+}
+
+.mk-tuts-track + .mk-tuts-track {
+  margin-top: 64px;
+}
+
+.mk-tuts-track-title {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  color: var(--z-fg-default);
+}
+
+.mk-tuts-track-sub {
+  margin: 0 0 28px;
+  color: var(--z-fg-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.mk-tuts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mk-tut-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--z-border);
+  background: var(--z-bg-panel);
+  color: inherit;
+  text-decoration: none;
+}
+
+.mk-tut-card:hover {
+  border-color: var(--z-fg-accent);
+}
+
+/* The still is set whole on the code surface, not cropped to fill the frame: every cover carries a
+   callout, and a crop would cut it. Each image keeps its own shape inside a frame of one shape, so
+   the cards line up. */
+.mk-tut-card-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+  padding: 16px;
+  border-bottom: 1px solid var(--z-border);
+  background: var(--z-bg-code);
+  overflow: hidden;
+}
+
+.mk-tut-card-cover img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid var(--z-border);
+  background: var(--z-bg-panel);
+}
+
+.mk-tut-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px 22px;
+}
+
+/* The lesson's number and its length, in the card labels' mono voice. */
+.mk-tut-card-meta {
+  display: flex;
+  gap: 10px;
+  color: var(--z-fg-subtle);
+  font-family: var(--z-mono-font-family);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mk-tut-card-n {
+  color: var(--z-fg-accent);
+}
+
+.mk-tut-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--z-fg-default);
+}
+
+.mk-tut-card:hover h3 {
+  color: var(--z-fg-accent);
+}
+
+/* Held to three lines, so one long description does not make its row taller than the rest. */
+.mk-tut-card p {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--z-fg-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* A lesson's sidebar: the track, each lesson behind its number, so a long title wraps under itself. */
+.mk-tut-side a {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.mk-tut-side-n {
+  flex: 0 0 1.5em;
+  color: var(--z-fg-subtle);
+  font-family: var(--z-mono-font-family);
+  font-size: 12px;
+}
+
+.mk-tut-side a.is-current .mk-tut-side-n {
+  color: inherit;
+}
+
+@media (max-width: 900px) {
+  .mk-tuts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .mk-tuts {
+    padding-top: 40px;
+  }
+
+  .mk-tuts-grid {
+    grid-template-columns: 1fr;
   }
 }
 

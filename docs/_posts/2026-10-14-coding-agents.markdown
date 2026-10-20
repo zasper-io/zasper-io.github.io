@@ -18,6 +18,8 @@ asks of the editor.
 The agent is yours, signed in with your own account and subscription. The conversation stays between
 the agent and the Zasper on your machine, which sends none of it anywhere.
 
+Step by step: [Work with an AI Agent](/tutorials/work-with-an-ai-agent).
+
 ## What You Need
 
 | Agent | Install | Then |

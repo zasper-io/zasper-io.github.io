@@ -1,0 +1,70 @@
+{% include head.html %}
+{% include nav.html %}
+
+{% comment %}
+One tutorial, drawn in the prototype as the second screen of tutorials.html. It is the docs page's
+reading layout (`.mk-docs`, so main.js gives it the same copy buttons, scrolling tables and "On this
+page" list), with the tutorial's track as the sidebar instead of the docs, and Previous / Next moving
+through that track in `order`. The track's title comes from _data/tutorial_tracks.yml.
+{% endcomment %}
+
+{% assign track = site.data.tutorial_tracks | where: "id", page.track | first %}
+{% assign lessons = site.tutorials | where: "track", page.track | sort: "order" %}
+{% for lesson in lessons %}
+  {% if lesson.url == page.url %}
+    {% unless forloop.first %}
+      {% assign prev_index = forloop.index0 | minus: 1 %}
+      {% assign prev_lesson = lessons[prev_index] %}
+    {% endunless %}
+    {% unless forloop.last %}
+      {% assign next_index = forloop.index0 | plus: 1 %}
+      {% assign next_lesson = lessons[next_index] %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+
+<div class="mk-docs">
+  <details class="mk-docs-side mk-tut-side" open>
+    <summary class="mk-docs-mobile-toggle">
+      Lessons
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+    </summary>
+    <div class="mk-docs-group">
+      <span class="mk-docs-group-name">{{ track.title }}</span>
+      {% for lesson in lessons %}
+      <a
+        href="{{ lesson.url | escape }}"
+        {% if lesson.url == page.url %}class="is-current" aria-current="page"{% endif %}
+        ><span class="mk-tut-side-n">{{ forloop.index }}</span>{{ lesson.title }}</a
+      >
+      {% endfor %}
+    </div>
+  </details>
+
+  <article class="mk-docs-body">
+    <nav class="mk-docs-crumbs" aria-label="Breadcrumb">
+      <a href="/tutorials/">Tutorials</a><span aria-hidden="true">/</span><span>{{ track.title }}</span>
+    </nav>
+    <h1>{{ page.title }}</h1>
+    {{ content }}
+
+    <nav class="mk-docs-pager" aria-label="Lessons">
+      {% if prev_lesson %}
+      <a class="mk-docs-prev" href="{{ prev_lesson.url }}">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        <span><em>Previous lesson</em>{{ prev_lesson.title }}</span>
+      </a>
+      {% endif %}
+      {% if next_lesson %}
+      <a class="mk-docs-next" href="{{ next_lesson.url }}">
+        <span><em>Next lesson</em>{{ next_lesson.title }}</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+      </a>
+      {% endif %}
+    </nav>
+  </article>
+
+  <nav class="mk-docs-toc" aria-label="On this page" id="docs-toc"></nav>
+</div>
+
+{% include footer.html %}

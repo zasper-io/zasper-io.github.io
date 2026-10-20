@@ -1,12 +1,13 @@
 ---
-layout: docs
-title:  "Track Changes with Git"
+layout: tutorial
+title: "Track Changes with Git"
 description: "Use Zasper's source control panel: see what changed, read a diff, stage and commit, fetch and push, and keep notebook commits clean."
-date:   2026-09-17 09:10:00 +0530
-index: 12
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 2
+track: zasper
+cover: committed
+cover_width: 635
+cover_height: 391
+cover_alt: "Source control after the commit. The Push button beside main shows 1 and is ringed, labelled One commit to push. The message box is empty, Staged is gone, helpers.py is still under Changes and notes.md under Untracked, and History begins with Run the hello notebook."
 author: Prasun Anand
 ---
 
@@ -92,4 +93,6 @@ you are keeping as code.
 
 **Clear All Outputs** before a commit, from the palette, is the quickest answer when you want the
 second kind. [Notebook Support](/docs/notebook-support) has what Zasper writes into the file, and
-[Your First Notebook](/docs/your-first-notebook) covers the rest of the notebook itself.
+[Your First Notebook](/tutorials/your-first-notebook) covers the rest of the notebook itself.
+
+**Next:** [Work in a Terminal](/tutorials/work-in-a-terminal).

@@ -1,12 +1,13 @@
 ---
-layout: docs
-title:  "Your First Notebook"
+layout: tutorial
+title: "Your First Notebook"
 description: "A first notebook in Zasper, step by step: make it, put it on a kernel, run a cell, read the output, write Markdown and save it."
-date:   2026-09-17 09:00:00 +0530
-index: 11
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 1
+track: zasper
+cover: new-notebook
+cover_width: 600
+cover_height: 269
+cover_alt: "The file explorer, headed ZASPER-TUTORIALS, with the New notebook button ringed at the right of that strip. Under README.md a new row has an empty name box with Untitled.ipynb greyed in it, ringed and labelled Type a name, then Enter."
 author: Prasun Anand
 ---
 
@@ -144,3 +145,5 @@ Tabs, including this one, are remembered between sessions. [Files and Tabs](/doc
 covers what reopens and what does not. Every chord Zasper listens for, including the ones this page
 skipped, is on [Key Bindings](/docs/key-bindings), and the **Help** tab (`F1`) lists them inside the
 app with a filter.
+
+**Next:** [Track Changes with Git](/tutorials/track-changes-with-git).

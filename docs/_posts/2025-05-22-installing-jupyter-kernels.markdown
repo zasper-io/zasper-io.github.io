@@ -15,6 +15,8 @@ Zasper implements the [Jupyter wire protocol](https://jupyter-client.readthedocs
 so it runs any language that has a Jupyter kernel. A kernel installed with a kernelspec, for Python,
 R, Julia, Go, JavaScript or anything else, shows up in the Launcher with nothing to configure.
 
+Step by step: [Use R, Julia or Any Kernel](/tutorials/use-any-kernel).
+
 ## No Kernel Yet? Let Zasper Set One Up
 
 If Zasper finds no kernel at all, the Launcher says so and offers **Set up a Python kernel**. Click

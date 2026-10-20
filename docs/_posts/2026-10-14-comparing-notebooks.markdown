@@ -18,7 +18,7 @@ cells instead: each cell that changed is a card with its source, its outputs and
 Press a notebook's row in the source control panel, under **Changes**, **Staged** or a commit in
 **History**. The diff opens in a tab, and its header names the two sides: **Index** and **Working
 tree** for a row under Changes, **HEAD** and **Index** for one under Staged, and the commit against
-its parent for one in History. [Track Changes with Git](/docs/track-changes-with-git) covers the
+its parent for one in History. [Track Changes with Git](/tutorials/track-changes-with-git) covers the
 panel itself.
 
 ## Reading It

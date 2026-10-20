@@ -1,12 +1,13 @@
 ---
-layout: docs
+layout: tutorial
 title: "Get Completions and Hovers in a Notebook"
 description: "Check which language server a notebook runs on, complete names from the server and the kernel, read a hover, fix an underline before you run, and find every use of a name in a Python file."
-date: 2026-10-20 01:20:00 +0530
-index: 20
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 10
+track: zasper
+cover: underline
+cover_width: 499
+cover_height: 160
+cover_alt: "A new cell reading describe_penguin(penguins), with a red squiggle under describe_penguin. The card above it reads (function) describe_penguin: Any, then the problem: describe_penguin is not defined, from basedpyright. The name is ringed and labelled Underlined before it runs."
 author: Prasun Anand
 ---
 
@@ -136,4 +137,4 @@ docstring.
 - Definition, references and rename in Python files
 
 **Next:** [Language Servers](/docs/language-servers) for reference, then
-[Use R, Julia or Any Kernel](/docs/use-any-kernel).
+[Use R, Julia or Any Kernel](/tutorials/use-any-kernel).

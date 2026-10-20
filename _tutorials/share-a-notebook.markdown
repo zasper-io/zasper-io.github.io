@@ -1,12 +1,13 @@
 ---
-layout: docs
-title:  "Share a Notebook"
+layout: tutorial
+title: "Share a Notebook"
 description: "Export a Zasper notebook as an HTML page, as Markdown or as a script: what each one keeps, and what the HTML export asks first."
-date:   2026-09-17 09:30:00 +0530
-index: 14
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 4
+track: zasper
+cover: export-menu
+cover_width: 513
+cover_height: 204
+cover_alt: "The end of the notebook toolbar: the kernel pill reading Python (zasper-tutorials), then the Export button with its menu open. Under the heading Export as, the menu lists HTML page\u2026, Markdown and Script, then Download notebook below a line. HTML page\u2026 is ringed and labelled A page anyone can open."
 author: Prasun Anand
 ---
 
@@ -71,5 +72,7 @@ which VS Code and jupytext reopen as cells, though without the outputs. To keep 
 the `.ipynb`.
 
 [Notebook Support](/docs/notebook-support) lists what renders in a notebook and therefore what can
-appear in an export, and [Track Changes with Git](/docs/track-changes-with-git) covers keeping the
+appear in an export, and [Track Changes with Git](/tutorials/track-changes-with-git) covers keeping the
 notebook itself reviewable.
+
+**Next:** [Query Data with SQL](/tutorials/query-data-with-sql).

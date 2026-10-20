@@ -24,7 +24,9 @@ feed and the sitemap read the same values.
      alike. {% endcomment %}
 {%- assign meta_path = page.url | remove: "index.html" | remove: ".html" -%}
 {%- assign meta_url = base_url | append: meta_path -%}
-{%- if page.date -%}
+{% comment %} Posts only: a tutorial is a collection document, which Jekyll dates with the build time when
+     its front matter gives none, and the time of a build is not when anything was written. {% endcomment %}
+{%- if page.collection == "posts" -%}
   {%- assign meta_type = "article" -%}
 {%- else -%}
   {%- assign meta_type = "website" -%}
@@ -64,7 +66,7 @@ feed and the sitemap read the same values.
 <meta name="twitter:description" content="{{ meta_desc | escape }}">
 <meta name="twitter:image" content="{{ base_url }}/static/images/og-preview.png">
 
-{%- if page.date %}
+{%- if page.collection == "posts" %}
 {% comment %} A post says when it was written, which is what a search result's date comes from and what
      tells a reader whether a release note is the current one. {% endcomment %}
 <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">

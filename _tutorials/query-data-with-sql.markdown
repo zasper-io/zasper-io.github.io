@@ -1,12 +1,13 @@
 ---
-layout: docs
-title:  "Query Data with SQL"
+layout: tutorial
+title: "Query Data with SQL"
 description: "Connect a SQLite database of penguins to Zasper, look at its tables in the Data panel, query it from a SQL cell, and use the answer in Python."
-date:   2026-10-16 09:00:00 +0530
-index: 15
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 5
+track: zasper
+cover: data-panel
+cover_width: 492
+cover_height: 401
+cover_alt: "The Data panel: the penguins connection, SQLite, with its penguins table open, listing species, island and sex as TEXT, the four measurements as REAL and year as INTEGER. Below, under Dataframes, df_penguins and mass_by_island; mass_by_island is ringed and labelled Frames the kernel holds."
 author: Prasun Anand
 ---
 
@@ -140,4 +141,4 @@ runs only in Zasper.
 
 **Next:** [SQL Cells](/docs/sql-cells) has the rest for reference: PostgreSQL, MySQL and the other
 databases, **Load all** for answers bigger than the limit, querying the kernel's own DataFrames, and
-the answer cache. Then [Work with an AI Agent](/docs/work-with-an-ai-agent).
+the answer cache. Then [Work with an AI Agent](/tutorials/work-with-an-ai-agent).

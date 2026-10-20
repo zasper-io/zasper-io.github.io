@@ -1,12 +1,13 @@
 ---
-layout: docs
+layout: tutorial
 title: "Use R, Julia or Any Kernel"
 description: "Find your kernels in the Launcher, register a uv environment as a new one, move a notebook to another kernel, and run the same penguins in R and in Julia."
-date: 2026-10-20 01:25:00 +0530
-index: 21
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 11
+track: zasper
+cover: r-plot
+cover_width: 1506
+cover_height: 831
+cover_alt: "An R cell of ggplot2 code and its output below it: a scatter chart of body mass in grams against flipper length in millimetres, with points and a straight fitted line for each species, Adelie in red, Chinstrap in green and Gentoo in blue."
 author: Prasun Anand
 ---
 
@@ -127,4 +128,4 @@ has the commands for each one.
 
 **Next:** [Installing Jupyter Kernels](/docs/installing-jupyter-kernels) has every kernel's install
 command and the full list of places Zasper looks. For more on the penguins, in Python this time, try
-[Explore a DataFrame and Chart It](/docs/explore-a-dataframe).
+[Explore a DataFrame and Chart It](/tutorials/explore-a-dataframe).

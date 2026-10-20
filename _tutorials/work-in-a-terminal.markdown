@@ -1,12 +1,13 @@
 ---
-layout: docs
-title:  "Work in a Terminal"
+layout: tutorial
+title: "Work in a Terminal"
 description: "Open a terminal inside Zasper, which shell it runs, and the two things to know: terminals are not restored, and are unavailable on Windows."
-date:   2026-09-17 09:20:00 +0530
-index: 13
-group: Tutorials
-categories: docs
-permalink: docs/:title
+order: 3
+track: zasper
+cover: open-here
+cover_width: 454
+cover_height: 351
+cover_alt: "The right-click menu of the tutorials folder in the file explorer: Rename, Add file, Add Notebook, Add Folder, Upload, Open Terminal Here, Open as Root, Cut, Copy, Paste, Duplicate, Copy Path and Delete Folder. Open Terminal Here is ringed and labelled A shell in this folder."
 author: Prasun Anand
 ---
 
@@ -63,3 +64,5 @@ Anything you want to keep, keep in a script.
 button and no **Open Terminal Here**, because the terminal backend is built on a Unix pseudo-terminal.
 Running the server under WSL gives you both, and is the recommended way to use Zasper on Windows.
 [Installation](/docs/installation) has the details.
+
+**Next:** [Share a Notebook](/tutorials/share-a-notebook).

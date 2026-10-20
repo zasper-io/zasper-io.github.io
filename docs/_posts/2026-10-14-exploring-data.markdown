@@ -18,6 +18,8 @@ in the kernel, so a million-row frame is never sent to the browser to be sorted.
 This works with Python kernels only. Any other kernel's notebook says that variables can only be read
 from a Python kernel.
 
+Step by step: [Explore a DataFrame and Chart It](/tutorials/explore-a-dataframe).
+
 ## The Variables Panel
 
 The panel is the **Variables** tab of the dock under the editor, beside **Problems** and the

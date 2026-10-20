@@ -14,7 +14,7 @@ A SQL cell runs a query and leaves the answer in the kernel as a pandas DataFram
 cells after it can use. It runs on a **connection**, a database you describe once in Settings, or on
 **Dataframes**, the pandas and polars frames the kernel already holds.
 
-SQL cells need a Python kernel with pandas installed. [Query Data with SQL](/docs/query-data-with-sql)
+SQL cells need a Python kernel with pandas installed. [Query Data with SQL](/tutorials/query-data-with-sql)
 walks through one from start to finish.
 
 <figure class="tut-figure">

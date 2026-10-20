@@ -13,7 +13,7 @@ author: Prasun Anand
 Everything you open in Zasper, whether a notebook, a file, a diff, the Help page, Settings or What's
 New, opens in a tab.
 Terminals are the exception: they open in the panel under the editor, as
-[Work in a Terminal](/docs/work-in-a-terminal) describes. This page covers how each kind of file
+[Work in a Terminal](/tutorials/work-in-a-terminal) describes. This page covers how each kind of file
 opens, how tabs behave, and what Zasper remembers between visits.
 
 ## How Files Open
