@@ -1,0 +1,26 @@
+{
+  "open-here": {
+    "light": "open-here.light.webp",
+    "dark": "open-here.dark.webp",
+    "width": 454,
+    "height": 351
+  },
+  "status-terminal": {
+    "light": "status-terminal.light.webp",
+    "dark": "status-terminal.dark.webp",
+    "width": 478,
+    "height": 97
+  },
+  "terminal": {
+    "light": "terminal.light.webp",
+    "dark": "terminal.dark.webp",
+    "width": 922,
+    "height": 252
+  },
+  "terminal-list": {
+    "light": "terminal-list.light.webp",
+    "dark": "terminal-list.dark.webp",
+    "width": 260,
+    "height": 118
+  }
+}

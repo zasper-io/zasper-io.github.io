@@ -13,24 +13,32 @@ author: Prasun Anand
 Zasper has a terminal built in, so you can install a package, run the tests or check `git log`
 without leaving the window.
 
-{% include tut/sprite.html %}
-
 ## Open One
 
-The terminal button is in the status bar, at the bottom of the window, after the branch name and the
-problem counts. It is there whatever tab is in front.
+The **Terminal** button is in the status bar, at the bottom of the window, after the branch name and the
+problem counts. It is there whatever tab is in front. The first click starts a shell in the project root;
+after that, it shows the shells you have.
+
+{% include tut/shot.html name="status-terminal" width="478" height="97" alt="The left end of the status bar: the branch, main, then the problem counts, then a Terminal button, ringed and labelled Opens a terminal." caption="**Terminal**, in the status bar." %}
 
 To start one somewhere other than the project root, right-click a folder in the file explorer and
 choose **Open Terminal Here**. The shell starts in that folder.
 
-{% include tut/terminal.html %}
+{% include tut/shot.html name="open-here" width="454" height="351" alt="The right-click menu of the tutorials folder in the file explorer: Rename, Add file, Add Notebook, Add Folder, Upload, Open Terminal Here, Open as Root, Cut, Copy, Paste, Duplicate, Copy Path and Delete Folder. Open Terminal Here is ringed and labelled A shell in this folder." caption="A folder's right-click menu." %}
 
 A terminal opens in the **Terminals** panel under the editor, beside Problems, References and
-Variables, so the notebook you are working on stays in view above it. **Toggle Terminal** shows and
-hides the panel. Its chord is `` ⌃` `` on macOS (Control, not Command) and `` Ctrl+` `` elsewhere,
-and it is in the command palette too. Open as many as you want, with the **+** in the panel's
-header; each one is its own shell, and the list beside it says where each was started and switches
-between them. Close one from its row in that list.
+Variables, so the file you are working on stays in view above it.
+
+{% include tut/shot.html name="terminal" width="922" height="252" alt="The Terminals tab of the panel under the editor, with a count of 2. The prompt reads tutorials %. git log --oneline shows one commit, Zasper tutorials, and ls lists the tutorial notebooks and helpers.py. The last prompt is ringed and labelled Started in tutorials." caption="A shell opened with **Open Terminal Here** on the tutorials folder." %}
+
+**Toggle Terminal** shows and hides the panel. Its chord is `` ⌃` `` on macOS (Control, not Command)
+and `` Ctrl+` `` elsewhere, and it is in the command palette too.
+
+Open as many as you want with **New terminal**, the **+** in the panel's header. Each one is its own
+shell, started in the project root. The list beside it names them **Terminal 1**, **Terminal 2** and
+so on, and switches between them. Close one with the **×** on its row.
+
+{% include tut/shot.html name="terminal-list" width="260" height="118" alt="The right-hand end of the Terminals panel: the + button, ringed and labelled Another shell, and below it a list of Terminal 1 and Terminal 2, each with a close button. Terminal 2 is selected." caption="**New terminal**, and the list of shells." %}
 
 ## Which Shell It Runs
 
