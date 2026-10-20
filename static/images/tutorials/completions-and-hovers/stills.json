@@ -1,0 +1,38 @@
+{
+  "complete": {
+    "light": "complete.light.webp",
+    "dark": "complete.dark.webp",
+    "width": 713,
+    "height": 146
+  },
+  "hover": {
+    "light": "hover.light.webp",
+    "dark": "hover.dark.webp",
+    "width": 730,
+    "height": 278
+  },
+  "references": {
+    "light": "references.light.webp",
+    "dark": "references.dark.webp",
+    "width": 672,
+    "height": 254
+  },
+  "server": {
+    "light": "server.light.webp",
+    "dark": "server.dark.webp",
+    "width": 502,
+    "height": 97
+  },
+  "underline": {
+    "light": "underline.light.webp",
+    "dark": "underline.dark.webp",
+    "width": 549,
+    "height": 198
+  },
+  "unrun": {
+    "light": "unrun.light.webp",
+    "dark": "unrun.dark.webp",
+    "width": 677,
+    "height": 289
+  }
+}
