@@ -55,7 +55,11 @@ Run them outside any other uv project. Inside one, `uv init` adds `demo` to that
 instead of making a project of its own.
 
 Zasper reads the list of kernels when it loads. Reload the page, and **demo** has a tile under
-**Python**. It also appears in every notebook's kernel picker. A conda environment works the same
+**Python**.
+
+{% include tut/shot.html name="launcher-demo" width="883" height="156" alt="The top of the Launcher's Notebook section after a reload. Under Python, two tiles: demo, ringed, and Python (zasper-tutorials)." caption="The new kernel's tile shows its name, **demo**." %}
+
+It also appears in every notebook's kernel picker. A conda environment works the same
 way: install `ipykernel` into it and register it. See [Working with Conda](/docs/working-with-conda).
 
 ## Switch A Notebook's Kernel
@@ -104,7 +108,7 @@ Open `live-talk/05-julia.ipynb`. It is saved on **Julia 1.13**. Your Julia may b
 if Zasper asks for a kernel, pick yours. Run the cell under **Fast loops, no vectorising needed**. It
 estimates pi from 100 million random points, in a plain loop, and times it with Julia's `@time`.
 
-{% include tut/shot.html name="julia-time" width="1506" height="334" alt="A Julia cell defining estimate_pi with a for loop, then calling estimate_pi(10) and @time estimate_pi(100_000_000). Its first output line is ringed: the run time, about 0.14 seconds. Below it is the estimate, 3.1414924." caption="`@time` prints the run time first. The estimate comes after it." %}
+{% include tut/shot.html name="julia-time" width="1506" height="334" alt="A Julia cell defining estimate_pi with a for loop, then calling estimate_pi(10) and @time estimate_pi(100_000_000). Its output is ringed: the run time on the first line, about 0.14 seconds, and the estimate under it, 3.14157664." caption="`@time` prints the run time first. The estimate comes after it." %}
 
 The time comes first because it is printed as the call runs. The estimate is the cell's value. Your
 time and your estimate will differ a little; the points are random. Further down, the notebook reads

@@ -17,6 +17,12 @@
     "width": 883,
     "height": 316
   },
+  "launcher-demo": {
+    "light": "launcher-demo.light.webp",
+    "dark": "launcher-demo.dark.webp",
+    "width": 883,
+    "height": 156
+  },
   "r-plot": {
     "light": "r-plot.light.webp",
     "dark": "r-plot.dark.webp",
