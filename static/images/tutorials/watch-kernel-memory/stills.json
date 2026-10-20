@@ -1,0 +1,26 @@
+{
+  "forgotten": {
+    "light": "forgotten.light.webp",
+    "dark": "forgotten.dark.webp",
+    "width": 537,
+    "height": 206
+  },
+  "meters": {
+    "light": "meters.light.webp",
+    "dark": "meters.dark.webp",
+    "width": 433,
+    "height": 183
+  },
+  "shut-down": {
+    "light": "shut-down.light.webp",
+    "dark": "shut-down.dark.webp",
+    "width": 983,
+    "height": 155
+  },
+  "status-bar": {
+    "light": "status-bar.light.webp",
+    "dark": "status-bar.dark.webp",
+    "width": 286,
+    "height": 159
+  }
+}
