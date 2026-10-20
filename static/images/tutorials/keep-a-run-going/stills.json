@@ -1,0 +1,26 @@
+{
+  "caught-up": {
+    "light": "caught-up.light.webp",
+    "dark": "caught-up.dark.webp",
+    "width": 883,
+    "height": 612
+  },
+  "in-the-file": {
+    "light": "in-the-file.light.webp",
+    "dark": "in-the-file.dark.webp",
+    "width": 912,
+    "height": 138
+  },
+  "long-run": {
+    "light": "long-run.light.webp",
+    "dark": "long-run.dark.webp",
+    "width": 602,
+    "height": 232
+  },
+  "still-running": {
+    "light": "still-running.light.webp",
+    "dark": "still-running.dark.webp",
+    "width": 557,
+    "height": 226
+  }
+}
