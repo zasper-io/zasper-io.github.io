@@ -1,7 +1,7 @@
 ---
 layout: docs
 title:  "Query Data with SQL"
-description: "Build a SQLite database of New York's taxi trips, connect Zasper to it, ask it a question in a SQL cell, and chart the answer in Python."
+description: "Connect a SQLite database of penguins to Zasper, look at its tables in the Data panel, query it from a SQL cell, and use the answer in Python."
 date:   2026-10-16 09:00:00 +0530
 index: 15
 group: Tutorials
@@ -10,182 +10,134 @@ permalink: docs/:title
 author: Prasun Anand
 ---
 
-A SQL cell runs a query and leaves the answer in the kernel as a pandas DataFrame, for the Python
-cells after it. This tutorial builds a database of every yellow taxi trip in New York in January 2024,
-about three million of them, connects Zasper to it, and asks it which boroughs the trips start in and
-what they cost.
+A SQL cell runs a query on a database and leaves the answer in the kernel as a pandas DataFrame. In
+this tutorial you connect a database to Zasper, look at its tables, query it from a SQL cell, write a
+query of your own, and use the answer in Python.
 
-You need a Python kernel with pandas in it. [Your First Notebook](/docs/your-first-notebook) covers
-getting one.
+The database holds the Palmer penguins: 344 penguins of three species, from three islands. The data is
+`data/penguins.csv` in [zasper-tutorials](https://github.com/zasper-io/zasper-tutorials). Its README
+sets up the kernel, **Python (zasper-tutorials)**, which has pandas in it. This page assumes Zasper is
+[installed](/docs/installation) and open on that folder.
 
-## Get the Data
+## Connect A Database
 
-New York's Taxi and Limousine Commission publishes every trip as a Parquet file. Make a notebook at the
-root of your project. The build reads the Parquet file with DuckDB, so install it first, in a cell of
-its own:
+Start a new notebook at the root of the folder: on the Launcher, pick **Python (zasper-tutorials)**.
 
-```
-%pip install duckdb
-```
-
-Then run this. It downloads January 2024 and the list of taxi zones, and writes them to
-`data/nyc_taxi.db`, a SQLite database of about 400 MB:
+First, make the database. SQLite keeps a whole database in one file, and Python can write one with
+no extra installs. Run this in the notebook's first cell:
 
 ```python
-import csv, io, os, sqlite3, urllib.request
+import sqlite3
+import pandas as pd
 
-import duckdb
-
-TLC = "https://d37ci6vzurychx.cloudfront.net"
-os.makedirs("data", exist_ok=True)
-urllib.request.urlretrieve(f"{TLC}/trip-data/yellow_tripdata_2024-01.parquet", "data/yellow_2024-01.parquet")
-with urllib.request.urlopen(f"{TLC}/misc/taxi_zone_lookup.csv") as response:
-    zones = list(csv.reader(io.TextIOWrapper(response)))[1:]
-
-db = sqlite3.connect("data/nyc_taxi.db")
-db.executescript("""
-CREATE TABLE zones (location_id INTEGER PRIMARY KEY, borough TEXT, zone TEXT, service_zone TEXT);
-CREATE TABLE payment_types (payment_type INTEGER PRIMARY KEY, name TEXT);
-CREATE TABLE trips (
-  vendor_id INTEGER, pickup_at TEXT, dropoff_at TEXT, passenger_count INTEGER, trip_distance REAL,
-  rate_code_id INTEGER, store_and_fwd_flag TEXT, pickup_location_id INTEGER, dropoff_location_id INTEGER,
-  payment_type INTEGER, fare_amount REAL, extra REAL, mta_tax REAL, tip_amount REAL, tolls_amount REAL,
-  improvement_surcharge REAL, total_amount REAL, congestion_surcharge REAL, airport_fee REAL);
-INSERT INTO payment_types VALUES (0, 'Flex fare'), (1, 'Credit card'), (2, 'Cash'), (3, 'No charge'),
-  (4, 'Dispute'), (5, 'Unknown'), (6, 'Voided trip');
-""")
-db.executemany("INSERT INTO zones VALUES (?, ?, ?, ?)", zones)
-trips = duckdb.sql("""
-  SELECT VendorID, strftime(tpep_pickup_datetime, '%Y-%m-%d %H:%M:%S'),
-         strftime(tpep_dropoff_datetime, '%Y-%m-%d %H:%M:%S'), passenger_count, trip_distance,
-         RatecodeID, store_and_fwd_flag, PULocationID, DOLocationID, payment_type, fare_amount, extra,
-         mta_tax, tip_amount, tolls_amount, improvement_surcharge, total_amount, congestion_surcharge,
-         Airport_fee
-  FROM 'data/yellow_2024-01.parquet'
-  WHERE tpep_pickup_datetime >= '2024-01-01' AND tpep_pickup_datetime < '2024-02-01'
-  ORDER BY tpep_pickup_datetime""")
-while batch := trips.fetchmany(200_000):
-    db.executemany(f"INSERT INTO trips VALUES ({', '.join('?' * 19)})", batch)
-db.execute("CREATE INDEX trips_pickup_at ON trips (pickup_at)")
-db.commit()
-db.close()
-os.remove("data/yellow_2024-01.parquet")
+penguins = pd.read_csv("data/penguins.csv")
+with sqlite3.connect("data/penguins.sqlite") as db:
+    penguins.to_sql("penguins", db, index=False, if_exists="replace")
 ```
 
-It takes a few minutes, most of them downloading. The database has three tables:
+It writes `data/penguins.sqlite`, with one table, `penguins`, holding every row of the CSV.
 
-| Table | Holds |
-| ----- | ----- |
-| `trips` | one row per trip: pickup and dropoff times and zones, distance, fare, tip, tolls and surcharges |
-| `zones` | the 265 taxi zones, by `location_id`, with their borough |
-| `payment_types` | the names of the `payment_type` codes |
+| Action | macOS | Windows / Linux |
+| --- | --- | --- |
+| Run Cell and Select Next | `⇧⏎` | `Shift+Enter` |
 
-## Add a Connection
+Connections are set up once, in **Settings**. Open it from the gear in the sidebar, just above Help.
+Search for `connection`, and press **Add…** beside **Add a connection**. Fill in the form:
 
-Open **Settings** from the gear in the sidebar, go to **Data connections**, and press **Add…**. Fill
-in:
+- **Name**: `penguins`. You'll see it in every SQL cell that uses this connection.
+- **Type**: **SQLite**. The list also has PostgreSQL, MySQL, DuckDB, Snowflake and more.
+- **File**: `data/penguins.sqlite`. A path like this is read from your project's folder.
+- **Kept for**: **This project**. The connection is saved in `.zasper/connections.json`, in the
+  project, so anyone who opens the project gets it too. Passwords are never saved there. A database
+  that has one keeps it in your system's keychain. SQLite has none.
 
-- **Name**: `taxi`. A SQL cell names the connection it runs on by this.
-- **Type**: SQLite.
-- **File**: `data/nyc_taxi.db`. A path that is not absolute is read from the project's root.
-- **Kept for**: **This project**, so the connection is saved in the project's
-  `.zasper/connections.json` and can be committed with it. SQLite has no password. For a database
-  that does, the password goes into your system keychain, never into that file.
+**Test** connects with what's in the form. It tells you which database answered, and how quickly. It
+works, so press **Save**.
 
-**Test** opens the database and says how quickly it answered. Then **Save**.
+{% include tut/shot.html name="connection" width="1040" height="334" alt="The Add a connection dialog: Name penguins, Type SQLite, File data/penguins.sqlite, Kept for This project. The line Connected · SQLite 3.47.1 · 210 ms is ringed and labelled The database answered, above the Test, Cancel and Save buttons." caption="**Test** says which database answered, and how quickly." %}
 
-<figure class="tut-figure">
-  <div class="tut-shot is-image">
-    <img src="/static/images/docs/sql-connection.png" alt="The Add a connection dialog, with Name taxi, Type SQLite, File data/nyc_taxi.db, and Kept for set to This project, above the Test, Cancel and Save buttons." width="1200" height="420" loading="lazy" />
-  </div>
-  <figcaption class="tut-caption">A SQLite connection needs only a name and a file.</figcaption>
-</figure>
+## Explore Its Tables
 
-**Data** in the sidebar now lists **taxi**. Open it to see its tables, and a table to see its columns
-and their types.
+Your connections are listed in the **Data** panel. Open it from the database icon in the sidebar.
+**penguins** is there, under **Connections**.
 
-## Ask a Question
+Open a connection to see its tables. Open a table to see its columns, and the type of each one,
+before you write any SQL. Here there is one table, `penguins`. Its `species`, `island` and `sex` are
+`TEXT`, the measurements are `REAL`, and `year` is an `INTEGER`. The last figure on this page shows the
+whole tree.
 
-Point at the gap below the cell you ran, and choose **SQL** on the rail that appears. The new cell's
-head says where it runs and where the answer goes: on **taxi**, the project's first connection, into
-`df_1`. Click `df_1` and rename it `df_boroughs`. Then type the query, and run it with
-**Shift+Enter**:
+## Query It In A SQL Cell
+
+Click your notebook's tab, so the notebook is in front again. Now the `penguins` table's row in the
+Data panel has a button at its end. Hover over it, and its tooltip reads **Query penguins in a new SQL
+cell**. Press it. Zasper writes a SQL cell for you, below the cell you're in. It reads the table's
+first hundred rows.
+
+{% include tut/shot.html name="query-button" width="565" height="73" alt="The penguins table's row in the Data panel, under the penguins connection. The button at the end of the row is ringed and labelled Query this table, and its tooltip reads Query penguins in a new SQL cell." caption="The button at the end of a table's row writes the query for you." %}
+
+A SQL cell has a head. On the left is the connection it runs on: **penguins**. On the right is the
+name of the DataFrame its answer goes into: `df_penguins`. Click either one to change it.
+
+Run it like any other cell, with **Shift+Enter**. The first line of the output tells you where the
+rows came from: the DataFrame, the connection, how many rows, and how long the query took.
+
+The answer itself is a grid, like any other DataFrame. Each column's header shows how its values are
+spread out, and how many are missing. Here, `body_mass_g` is missing for 1% of the hundred rows.
+
+{% include tut/shot.html name="sql-cell" width="1484" height="631" alt="A SQL cell whose head reads penguins SQLite, then an arrow and df_penguins, over the query SELECT * FROM penguins LIMIT 100. The output's first line, df_penguins · penguins · 100 rows · 0.1 s, is ringed and labelled DataFrame · connection · rows · time. Below it is a grid of 100 rows × 8 columns, each header with its type and a small chart; body_mass_g says 1% missing." caption="The output's first line says where the rows came from." %}
+
+## Write Your Own Query
+
+Now a question of your own: how heavy is each species, on each island? Replace the query in the cell
+with this one. As you type, Zasper suggests the table's columns.
 
 ```sql
-SELECT z.borough, count(*) AS trips, round(avg(t.total_amount), 2) AS avg_total
-FROM trips t JOIN zones z ON z.location_id = t.pickup_location_id
-WHERE t.fare_amount > 0 AND t.dropoff_at > t.pickup_at
-GROUP BY 1 ORDER BY 2 DESC
+SELECT species, island,
+count(*) AS penguins,
+round(avg(body_mass_g)) AS mass_g
+FROM penguins
+GROUP BY species, island
+ORDER BY mass_g DESC
 ```
 
-As you type, the editor completes table and column names from the database. The `WHERE` line leaves
-out refunds and corrections, which are recorded as trips with a negative fare, and trips that end
-before they start.
+Give the answer a name that says what it holds. Click `df_penguins` in the cell's head, and type
+`mass_by_island`.
 
-The query runs in the database, over all three million trips, and brings back only its eight rows.
-The output's first line names the DataFrame and the connection, counts the rows and says how long the
-query took. The rows follow as a table you can page, sort, filter and chart.
+Run it. Five rows come back: one for each species on each island, the heaviest first. Gentoo live
+only on Biscoe, Chinstrap only on Dream, and Adelie on all three islands.
 
-<figure class="tut-figure">
-  <div class="tut-shot is-image">
-    <img src="/static/images/screens/sql-cells.png" alt="A SQL cell on taxi writing df_boroughs, with the query above and its 8 rows below: trips and average total by borough, Manhattan first with 2,615,336 trips. The Data panel beside it lists the taxi connection's three tables and the DataFrames the kernel holds." width="1400" height="800" loading="lazy" />
-  </div>
-  <figcaption class="tut-caption">The query and its answer. Under <strong>Dataframes</strong>, the Data panel lists the frames the kernel now holds.</figcaption>
-</figure>
+{% include tut/shot.html name="own-query" width="1484" height="575" alt="The SQL cell now writes to mass_by_island and holds the GROUP BY query. Its first line, mass_by_island · penguins · 5 rows, is ringed and labelled 5 rows, in mass_by_island. The grid shows Gentoo on Biscoe, 124 penguins at 5076 grams, then Chinstrap on Dream at 3733, and Adelie on Biscoe, Torgersen and Dream, around 3700." caption="The cell writes its five rows into `mass_by_island`." %}
 
-## More Rows Than It Shows
+The query runs in the database, and only its answer comes back. On a table of millions of rows, that
+is the difference between five rows and millions.
 
-Now ask for every trip, in a SQL cell of its own:
+## Use The Answer In Python
 
-```sql
-SELECT * FROM trips
-```
-
-A SQL cell reads at most 1,000 rows unless told otherwise, and says when it left rows behind. Press
-**Load all** once, and it counts them and estimates the memory reading them would take:
-
-<figure class="tut-figure">
-  <div class="tut-shot is-image">
-    <img src="/static/images/docs/sql-load-all.png" alt="A SQL cell reading SELECT * FROM trips. Its output line says df_trips, taxi, first 1,000 of 2,964,606 rows, then Load all, about 885 MB, above the first rows of the table." width="2164" height="660" loading="lazy" />
-  </div>
-  <figcaption class="tut-caption">The first 1,000 of 2,964,606 rows, and what reading them all would take.</figcaption>
-</figure>
-
-Pressing it again reads all 2,964,606 rows. Usually you do not want to: a query that groups, counts or
-averages in the database, like the one before it, brings back the answer rather than the rows.
-
-## Use the Answer in Python
-
-`df_boroughs` is an ordinary DataFrame. In a code cell below it:
+The answer is an ordinary pandas DataFrame in the kernel. So the next cell can use it straight away.
+Add a code cell below, and keep only the Adelie penguins:
 
 ```python
-boroughs = df_boroughs[~df_boroughs["borough"].isin(["Unknown", "N/A"])].sort_values("avg_total")
-ax = boroughs.plot.barh(x="borough", y="avg_total", legend=False, title="Average paid per trip, by pickup borough")
+mass_by_island[mass_by_island.species == "Adelie"]
 ```
 
-`Unknown` and `N/A` are zones with no borough. The language server knows `df_boroughs` too, so it is
-not flagged as undefined, and `df_boroughs.` completes as a DataFrame.
+The Data panel lists `mass_by_island` under **Dataframes**, beside every other frame the kernel
+holds.
 
-<figure class="tut-figure">
-  <div class="tut-shot is-image">
-    <img src="/static/images/docs/sql-chart.png" alt="A code cell plotting df_boroughs as horizontal bars: EWR is the most expensive pickup at about 111 dollars a trip, then Queens, Staten Island, the Bronx and Brooklyn, with Manhattan the cheapest at about 23 dollars." width="2164" height="990" loading="lazy" />
-  </div>
-  <figcaption class="tut-caption">Manhattan has nearly nine trips in ten, and the cheapest. EWR, Newark airport, is the dearest.</figcaption>
-</figure>
+{% include tut/shot.html name="data-panel" width="492" height="401" alt="The Data panel: the penguins connection, SQLite, with its penguins table open, listing species, island and sex as TEXT, the four measurements as REAL and year as INTEGER. Below, under Dataframes, df_penguins and mass_by_island; mass_by_island is ringed and labelled Frames the kernel holds." caption="**Dataframes** in the Data panel lists the frames the kernel holds." %}
 
-## In the Notebook File
+In the notebook file, a SQL cell is a code cell whose first line is a cell magic,
+`%%zasper_sql penguins --out mass_by_island`. Zasper hides that line and shows the cell's head
+instead, so the notebook stays an ordinary `.ipynb`. JupyterLab does not know the magic, so the cell
+runs only in Zasper.
 
-A SQL cell is saved as a code cell whose first line is a cell magic, so the notebook stays an ordinary
-`.ipynb`:
+## Recap
 
-```
-%%zasper_sql taxi --out df_boroughs
-SELECT z.borough, count(*) AS trips, round(avg(t.total_amount), 2) AS avg_total
-...
-```
+- Add a connection once, in Settings
+- See tables and columns in the Data panel
+- Query writes a SQL cell for you
+- The cell's head names the DataFrame
+- Use it from Python in the next cell
 
-Zasper hides that line and shows the cell's head instead. JupyterLab does not know the magic, so the
-cell runs only in Zasper.
-
-[SQL Cells](/docs/sql-cells) has the rest: PostgreSQL, MySQL, Snowflake and the other databases,
-querying the kernel's own DataFrames with DuckDB, the answer cache, and the Data panel.
+**Next:** [SQL Cells](/docs/sql-cells) has the rest for reference: PostgreSQL, MySQL and the other
+databases, **Load all** for answers bigger than the limit, querying the kernel's own DataFrames, and
+the answer cache. Then [Work with an AI Agent](/docs/work-with-an-ai-agent).

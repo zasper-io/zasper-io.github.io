@@ -15,10 +15,10 @@ start Claude Code, ask it about a chart, let it add a new section to the noteboo
 changed and take it back.
 
 The notebook is `examples/nyc_taxi.ipynb`: every yellow taxi trip in New York in January 2024, almost
-three million of them, queried with SQL cells and charted in Python. Its SQL cells run on the `taxi`
-database and connection that [Query Data with SQL](/docs/query-data-with-sql) builds. Any notebook
-with a chart in it works the same way. The notebooks for the other tutorials are in
-[zasper-tutorials](https://github.com/zasper-io/zasper-tutorials).
+three million of them, queried with SQL cells and charted in Python. Its SQL cells run on a SQLite
+database of those trips, through a connection called `taxi`. You don't need that notebook or its
+database to follow along: any notebook with a chart in it works the same way. The notebooks for the
+other tutorials are in [zasper-tutorials](https://github.com/zasper-io/zasper-tutorials).
 
 This page assumes Zasper is [installed](/docs/installation), open on a folder you trust, with the
 notebook open and run once. It also assumes Claude Code is installed and signed in: run `claude` once

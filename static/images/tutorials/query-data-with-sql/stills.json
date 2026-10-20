@@ -1,0 +1,32 @@
+{
+  "connection": {
+    "light": "connection.light.webp",
+    "dark": "connection.dark.webp",
+    "width": 1040,
+    "height": 334
+  },
+  "data-panel": {
+    "light": "data-panel.light.webp",
+    "dark": "data-panel.dark.webp",
+    "width": 492,
+    "height": 401
+  },
+  "own-query": {
+    "light": "own-query.light.webp",
+    "dark": "own-query.dark.webp",
+    "width": 1484,
+    "height": 575
+  },
+  "query-button": {
+    "light": "query-button.light.webp",
+    "dark": "query-button.dark.webp",
+    "width": 565,
+    "height": 73
+  },
+  "sql-cell": {
+    "light": "sql-cell.light.webp",
+    "dark": "sql-cell.dark.webp",
+    "width": 1484,
+    "height": 631
+  }
+}
