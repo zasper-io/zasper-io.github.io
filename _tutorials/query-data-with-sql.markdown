@@ -7,6 +7,10 @@ track: zasper
 cover: data-panel
 cover_width: 492
 cover_height: 401
+youtube: NUVxPI3wMLY
+video_length: "2:28"
+video_duration: PT2M28S
+video_uploaded: 2026-10-20T14:38:28+00:00
 author: Prasun Anand
 ---
 

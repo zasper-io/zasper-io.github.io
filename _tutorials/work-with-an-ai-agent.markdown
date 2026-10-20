@@ -7,6 +7,10 @@ track: zasper
 cover: start
 cover_width: 468
 cover_height: 278
+youtube: lK5zGQXeEN0
+video_length: "2:19"
+video_duration: PT2M19S
+video_uploaded: 2026-10-20T14:34:23+00:00
 author: Prasun Anand
 ---
 

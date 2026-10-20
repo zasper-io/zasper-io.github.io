@@ -52,7 +52,7 @@ cannot read that file. The step count is the number of sections in the tutorial,
             <span class="mk-tut-card-body">
               <span class="mk-tut-card-meta"
                 ><span class="mk-tut-card-n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span
-                >{% if sections > 0 %}<span>{{ sections }} steps</span>{% endif %}</span
+                >{% if sections > 0 %}<span>{{ sections }} steps</span>{% endif %}{% if lesson.youtube %}<span>Video</span>{% endif %}</span
               >
               <h3>{{ lesson.title }}</h3>
             </span>

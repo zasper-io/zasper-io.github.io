@@ -46,6 +46,7 @@ through that track in `order`. The track's title comes from _data/tutorial_track
       <a href="/tutorials/">Tutorials</a><span aria-hidden="true">/</span><span>{{ track.title }}</span>
     </nav>
     <h1>{{ page.title }}</h1>
+    {% if page.youtube %}{% include tut/video.html %}{% endif %}
     {{ content }}
 
     <nav class="mk-docs-pager" aria-label="Lessons">

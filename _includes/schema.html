@@ -82,6 +82,21 @@ prose here rather than quoted.
   ]
 }
 </script>
+{%- if page.youtube %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "thumbnailUrl": ["{{ site.url }}/static/images/tutorials/{{ page.slug }}/video.webp", "https://i.ytimg.com/vi/{{ page.youtube }}/hqdefault.jpg"],
+  "uploadDate": {{ page.video_uploaded | date_to_xmlschema | jsonify }},
+  "duration": {{ page.video_duration | jsonify }},
+  "embedUrl": "https://www.youtube-nocookie.com/embed/{{ page.youtube }}",
+  "url": "https://www.youtube.com/watch?v={{ page.youtube }}"
+}
+</script>
+{%- endif %}
 {%- endif %}
 
 {%- if page.url == "/" %}

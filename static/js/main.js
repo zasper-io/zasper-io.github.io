@@ -94,6 +94,22 @@ container is never the element that scrolls, which would carry the button off th
 
 Only trailing whitespace is trimmed: leading indentation is part of what someone is copying.
 */
+/*
+A tutorial's video is its thumbnail until someone presses play: only then does anything load from YouTube,
+and from youtube-nocookie.com, which sets no cookie until the video plays. The button gives way to the player.
+*/
+for (const button of document.querySelectorAll('.mk-tut-video-play')) {
+  button.addEventListener('click', () => {
+    const frame = document.createElement('iframe');
+    frame.src = `https://www.youtube-nocookie.com/embed/${button.dataset.youtube}?autoplay=1&rel=0`;
+    frame.title = button.getAttribute('aria-label').replace(/^Play the video: /, '');
+    frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    frame.allowFullscreen = true;
+    button.replaceWith(frame);
+    frame.focus();
+  });
+}
+
 for (const pre of document.querySelectorAll('.mk-docs-body pre')) {
   const host = document.createElement('div');
   host.className = 'mk-code';

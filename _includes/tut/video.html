@@ -1,0 +1,15 @@
+{%- comment -%}
+A tutorial's video, at the top of the lesson: the YouTube thumbnail from this site, and a play button.
+Nothing loads from YouTube until someone presses play; main.js then swaps in the privacy-enhanced player
+(youtube-nocookie.com). A tutorial gets one with `youtube:` (the video's id) and `video_length:` in its
+front matter, and its thumbnail at static/images/tutorials/<slug>/video.webp, 1280x720.
+{%- endcomment -%}
+<figure class="mk-tut-video">
+  <div class="mk-tut-video-box">
+    <button class="mk-tut-video-play" type="button" data-youtube="{{ page.youtube }}" aria-label="Play the video: {{ page.title | escape }}">
+      <img src="/static/images/tutorials/{{ page.slug }}/video.webp" width="1280" height="720" alt="" />
+      <span class="mk-tut-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+    </button>
+  </div>
+  <figcaption>The lesson as a video, {{ page.video_length }}. Every step is also written below.</figcaption>
+</figure>

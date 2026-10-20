@@ -7,6 +7,10 @@ track: zasper
 cover: new-notebook
 cover_width: 600
 cover_height: 269
+youtube: oqe8b0zStnw
+video_length: "0:58"
+video_duration: PT0M58S
+video_uploaded: 2026-10-20T13:20:32+00:00
 author: Prasun Anand
 ---
 

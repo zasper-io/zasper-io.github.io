@@ -2303,6 +2303,78 @@ its sidebar; the only rule it adds is the number in front of each lesson there.
   color: var(--a-200);
 }
 
+/* A lesson's video, at the top of the lesson. Until someone presses play it is the video's own thumbnail,
+   served from this site, and nothing loads from YouTube; the click swaps in the player (main.js). */
+.mk-tut-video {
+  margin: 4px 0 36px;
+}
+
+.mk-tut-video-box {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--z-border);
+  background: #000;
+}
+
+.mk-tut-video-play {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Three classes, to outweigh `.mk-docs-body img:not(.mk-shot img)` and its frame and margins. */
+.mk-docs-body .mk-tut-video .mk-tut-video-play img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  object-fit: cover;
+}
+
+.mk-tut-video-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: -38px 0 0 -38px;
+  background: var(--a-900);
+  border: 1px solid #ffffff33;
+  transition: background 0.15s ease;
+}
+
+.mk-tut-video-icon svg {
+  width: 34px;
+  height: 34px;
+  fill: #fff;
+}
+
+.mk-tut-video-play:hover .mk-tut-video-icon,
+.mk-tut-video-play:focus-visible .mk-tut-video-icon {
+  background: var(--z-fg-accent);
+}
+
+.mk-tut-video-box iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.mk-tut-video figcaption {
+  margin-top: 10px;
+  color: var(--z-fg-muted);
+  font-size: 14px;
+}
+
 /* A lesson's sidebar: the track, each lesson behind its number, so a long title wraps under itself. */
 .mk-tut-side a {
   display: flex;
