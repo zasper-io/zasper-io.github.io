@@ -1,0 +1,38 @@
+{
+  "add-output": {
+    "light": "add-output.light.webp",
+    "dark": "add-output.dark.webp",
+    "width": 1467,
+    "height": 550
+  },
+  "agent-cell": {
+    "light": "agent-cell.light.webp",
+    "dark": "agent-cell.dark.webp",
+    "width": 1022,
+    "height": 907
+  },
+  "answer": {
+    "light": "answer.light.webp",
+    "dark": "answer.dark.webp",
+    "width": 467,
+    "height": 193
+  },
+  "changes": {
+    "light": "changes.light.webp",
+    "dark": "changes.dark.webp",
+    "width": 467,
+    "height": 164
+  },
+  "mode": {
+    "light": "mode.light.webp",
+    "dark": "mode.dark.webp",
+    "width": 466,
+    "height": 119
+  },
+  "start": {
+    "light": "start.light.webp",
+    "dark": "start.dark.webp",
+    "width": 468,
+    "height": 278
+  }
+}
