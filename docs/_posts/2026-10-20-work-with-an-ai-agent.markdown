@@ -56,7 +56,7 @@ The output shows as a chip above the message field. Then ask your question, the 
 colleague:
 
 ```
-Why is Staten Island's average less reliable than the other boroughs'? Answer in two sentences.
+Why is Staten Island's average less reliable than the other boroughs'? Check its fares in the kernel, then answer in two sentences.
 ```
 
 Press **Enter** to send. The agent's words stream into the panel as it works.
@@ -67,12 +67,15 @@ Press **Enter** to send. The agent's words stream into the panel as it works.
 | New line in the message | `⇧⏎` | `Shift+Enter` |
 
 Before Claude reads or runs anything, it asks. The question appears in the chat, with Claude's options
-as buttons. Choose the one that says yes and not to ask again, and it won't ask again for that kind of
-action.
+as buttons. Here it asks to read the notebook, through Zasper's `read_notebook` tool.
+
+{% include tut/shot.html name="question" width="467" height="287" alt="Claude's question in the agent panel, for the tool mcp__zasper__read_notebook, ringed and labelled Claude asks before it acts. Its buttons: Yes; Yes, and don't ask again for Read Notebook commands; No." caption="Claude asks before it reads the notebook." %}
+
+Choose **Yes, and don't ask again**, and it won't ask again for that kind of action.
 
 Its answer comes from the trip counts in the chart: Staten Island's average rests on 67 trips.
 
-{% include tut/shot.html name="answer" width="467" height="193" alt="Claude's answer in the agent panel: Staten Island's average comes from just 67 trips, so a few unusual rides can move it a lot." caption="Claude's own words differ every time you ask." %}
+{% include tut/shot.html name="answer" width="467" height="294" alt="Claude's answer in the agent panel: Staten Island's average comes from only 67 trips, against hundreds of thousands for Queens and millions for Manhattan, so a few unusually long or short rides can move it a lot." caption="Claude's own words differ every time you ask." %}
 
 ## Let It Extend The Notebook
 
@@ -109,8 +112,11 @@ marked **M** for modified.
 
 {% include tut/shot.html name="changes" width="467" height="164" alt="Under the agent's turn: 1 file changed, examples/nyc_taxi.ipynb marked M, with an Undo this turn button." caption="What this turn changed." %}
 
-Open the file to see the change as a notebook diff, **Before the turn** against **Now**: the cells it
-added, with their outputs.
+Open the file to see the change as a notebook diff, **Before the turn** against **Now**. A line at the
+top counts the cells the turn changed. Each cell it added is a card of its own, and the cells it didn't
+touch fold away into one line.
+
+{% include tut/shot.html name="diff" width="1022" height="974" alt="The notebook diff, Before the turn against Now. Its summary, 3 of 23 cells changed, 3 added, is ringed and labelled The cells it added. Below it, three added cells: a Markdown heading, the SQL cell writing df_hourly, and the chart's code." caption="The turn's change, cell by cell." %}
 
 The first turn's list may name `.claude/settings.local.json`. That is where Claude Code keeps a yes
 you gave for good. Zasper lists every file a turn changed, however it was changed.

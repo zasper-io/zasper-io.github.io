@@ -15,7 +15,7 @@
     "light": "answer.light.webp",
     "dark": "answer.dark.webp",
     "width": 467,
-    "height": 193
+    "height": 294
   },
   "changes": {
     "light": "changes.light.webp",
@@ -23,11 +23,23 @@
     "width": 467,
     "height": 164
   },
+  "diff": {
+    "light": "diff.light.webp",
+    "dark": "diff.dark.webp",
+    "width": 1022,
+    "height": 974
+  },
   "mode": {
     "light": "mode.light.webp",
     "dark": "mode.dark.webp",
     "width": 466,
     "height": 119
+  },
+  "question": {
+    "light": "question.light.webp",
+    "dark": "question.dark.webp",
+    "width": 467,
+    "height": 287
   },
   "start": {
     "light": "start.light.webp",
