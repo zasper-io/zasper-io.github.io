@@ -1,0 +1,26 @@
+{
+  "committed": {
+    "light": "committed.light.webp",
+    "dark": "committed.dark.webp",
+    "width": 635,
+    "height": 391
+  },
+  "diff": {
+    "light": "diff.light.webp",
+    "dark": "diff.dark.webp",
+    "width": 1514,
+    "height": 580
+  },
+  "git-panel": {
+    "light": "git-panel.light.webp",
+    "dark": "git-panel.dark.webp",
+    "width": 772,
+    "height": 481
+  },
+  "staged": {
+    "light": "staged.light.webp",
+    "dark": "staged.dark.webp",
+    "width": 486,
+    "height": 474
+  }
+}
