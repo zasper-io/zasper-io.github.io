@@ -56,7 +56,7 @@ The output shows as a chip above the message field. Then ask your question, the 
 colleague:
 
 ```
-Why is Staten Island's average less reliable than the other boroughs'? Check its fares in the kernel, then answer in two sentences.
+Why is Staten Island's average less reliable than the other boroughs'? Check its fares in the kernel, then answer in two sentences, without dollar signs.
 ```
 
 Press **Enter** to send. The agent's words stream into the panel as it works.
