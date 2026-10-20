@@ -1,0 +1,32 @@
+{
+  "julia-time": {
+    "light": "julia-time.light.webp",
+    "dark": "julia-time.dark.webp",
+    "width": 1506,
+    "height": 334
+  },
+  "kernel-name": {
+    "light": "kernel-name.light.webp",
+    "dark": "kernel-name.dark.webp",
+    "width": 468,
+    "height": 318
+  },
+  "launcher": {
+    "light": "launcher.light.webp",
+    "dark": "launcher.dark.webp",
+    "width": 883,
+    "height": 316
+  },
+  "r-plot": {
+    "light": "r-plot.light.webp",
+    "dark": "r-plot.dark.webp",
+    "width": 1506,
+    "height": 831
+  },
+  "switch-kernel": {
+    "light": "switch-kernel.light.webp",
+    "dark": "switch-kernel.dark.webp",
+    "width": 828,
+    "height": 278
+  }
+}
