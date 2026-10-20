@@ -2,8 +2,8 @@
   "chart": {
     "light": "chart.light.webp",
     "dark": "chart.dark.webp",
-    "width": 1385,
-    "height": 555
+    "width": 1391,
+    "height": 479
   },
   "filter": {
     "light": "filter.light.webp",
@@ -23,10 +23,16 @@
     "width": 1495,
     "height": 576
   },
+  "summary": {
+    "light": "summary.light.webp",
+    "dark": "summary.dark.webp",
+    "width": 636,
+    "height": 446
+  },
   "variables": {
     "light": "variables.light.webp",
     "dark": "variables.dark.webp",
-    "width": 1514,
-    "height": 461
+    "width": 807,
+    "height": 208
   }
 }

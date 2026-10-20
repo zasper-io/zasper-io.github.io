@@ -58,9 +58,14 @@ Each column's header shows its type, a small chart of its values, and how much i
 them in the grid above. Body mass has a few gaps: `body_mass_g` is a `float64`, and its header says 1%
 missing. Hover the small chart for the numbers behind it.
 
-Click a header for its menu. At the bottom is a **Summary** of the column: how many rows, how many are
-missing, how many distinct values, the range, the mean and the standard deviation. For `body_mass_g`,
-**Missing** reads 2 (0.6%): two of the 344 penguins have no body mass.
+Click a header for its menu. At the top are the actions: sort, filter, chart, hide and move the column.
+At the bottom is a **Summary** of the column: **Rows**, **Missing**, **Distinct**, **Min**, **Max**,
+**Mean** and **Std dev**. For `body_mass_g`, **Missing** reads 2 (0.6%): two of the 344 penguins have no
+body mass. **Min** and **Max** give the range: from 2,700 to 6,300 grams.
+
+{% include tut/shot.html name="summary" width="636" height="446" alt="The menu of the body_mass_g header, over the grid. Its actions are Sort ascending, Sort descending, Filter this column…, Chart this column, Hide column, Move left and Move right. Below them the Summary heading is ringed, labelled A summary of body_mass_g, and lists Rows 344, Missing 2 (0.6%), Distinct 94, Min 2,700, Max 6,300, Mean 4,201.75 and Std dev 801.955." caption="The **Summary** at the bottom of a column's menu." %}
+
+A text column, such as `species`, lists its commonest values instead, under **Summary · commonest**.
 
 ## Sort And Filter
 
@@ -106,7 +111,7 @@ The **Variables** panel, under the editor, lists everything the kernel holds, wi
 size. Open it from its tab in the dock, or with **Variables** in the command palette. Any table there
 opens the same way: click its row.
 
-{% include tut/shot.html name="variables" width="1514" height="461" alt="The Variables tab of the dock under the editor, ringed and labelled Every variable in the kernel, with its type and size. It lists big, DataFrame, 1,000,000 × 2, n, square, and penguins, DataFrame, 344 × 8, with its first column names." caption="**Variables** lists what the kernel holds, and opens any table in a tab." %}
+{% include tut/shot.html name="variables" width="807" height="208" alt="The Variables tab of the dock under the editor. It lists big, DataFrame · 1,000,000 × 2 · n, square, and penguins, DataFrame · 344 × 8, with its column names. The penguins line is ringed and labelled Every variable in the kernel, with its type and size." caption="**Variables** lists what the kernel holds, and opens any table in a tab." %}
 
 ## Chart It, And Keep The Chart As Code
 
@@ -121,7 +126,7 @@ With the Biscoe filter on, two species are left: Adelie and Gentoo.
 When the chart is right, **Insert as code** writes the Plotly code for it into a new cell below, with
 the filter. It does not run it. Run that cell, and the notebook draws the chart again by itself.
 
-{% include tut/shot.html name="chart" width="1385" height="555" alt="The penguins grid shown as a scatter chart, with the island = Biscoe chip above it: bill_depth_mm against bill_length_mm, coloured by species, Adelie in blue and Gentoo in orange. The foot reads bill_depth_mm against bill_length_mm, over 168 of 344 rows, and the Insert as code button beside it is ringed." caption="**Insert as code** turns the chart on screen into a cell of Plotly code." %}
+{% include tut/shot.html name="chart" width="1391" height="479" alt="The penguins output shown as a scatter chart: its top line reads DataFrame, 168 of 344 rows × 8 columns, with the island = Biscoe chip below it, then the chart kinds and the X, Y and Colour choices. bill_depth_mm is plotted against bill_length_mm, coloured by species, Adelie in blue and Gentoo in orange. The foot reads bill_depth_mm against bill_length_mm, over 168 of 344 rows, and the Insert as code button at its right is ringed and labelled Insert as code." caption="**Insert as code** turns the chart on screen into a cell of Plotly code." %}
 
 The chart itself is never saved in the notebook; the code is. Insert as code needs a name to write
 against, so it works when the cell ends in a bare name such as `penguins`. For an expression such as
