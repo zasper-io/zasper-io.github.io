@@ -2723,6 +2723,58 @@ ul.tut-legend .tut-mark {
   color: var(--z-fg-muted);
 }
 
+/*
+A screenshot from the studio, placed by `_includes/tut/shot.html` — the figure every tutorial uses from
+20 October 2026, and the one the drawn `.tut-shot` fragments give way to. The recorder puts the real
+Zasper in each state with the episode's own steps and saves it in the light theme and the dark one,
+callout rings and all, so the figure is two `<img>`s and nothing drawn over them. Settled in the
+prototype's `tutorial-basics.html` and `css/tutorial.css`.
+
+Two images rather than a `<picture>`: a `<source media>` can only ask the operating system, and this site
+does not follow the operating system — it has no dark mode. The dark image shows only under
+`data-theme="dark"` on <html>, the prototype's switch, which nothing on the site sets; so today the light
+image always shows, as the page is always light. The hidden image is `display: none` and lazy, and no
+browser fetches it.
+
+Three classes in each selector, for the weight: `.mk-docs-body img:not(.mk-shot img)` frames every
+screenshot in a document and scores two classes and two elements, and its 8px/20px margins would open a
+gap between the picture and its caption.
+*/
+.tut-figure.tut-still .tut-still-img {
+  display: block;
+  /* The column's width, capped by the include at the still's own size, so a narrow crop is not blown up. */
+  width: 100%;
+  /* The attributes carry the still's own size, so the box has its shape before a byte arrives. */
+  height: auto;
+  margin: 0;
+  /* Square and thin: a white screenshot on a white page needs an edge, and nothing more. */
+  border: 1px solid var(--z-border);
+  background: var(--z-bg-app);
+  box-shadow: var(--z-shadow-low, 0 1px 2px rgba(0, 0, 0, 0.08));
+}
+
+.tut-figure.tut-still .tut-still-img.is-dark {
+  display: none;
+}
+
+[data-theme='dark'] .tut-figure.tut-still .tut-still-img.is-light {
+  display: none;
+}
+
+[data-theme='dark'] .tut-figure.tut-still .tut-still-img.is-dark {
+  display: block;
+}
+
+/* What the include says instead of a figure when a parameter or a file is missing: loud enough to be
+   seen in a review screenshot, and not something a published page should ever show. */
+.tut-still-error {
+  margin: 0 0 24px;
+  padding: 10px 12px;
+  border: 1px dashed var(--z-fg-default);
+  font-family: var(--z-mono-font-family);
+  font-size: 13px;
+}
+
 /* The icon size the fragments assume, from the prototype's `.z-icon`. Both the fill and the stroke are
    restated here because the symbols are referenced by `<use>`. */
 .tut-shot .z-icon {

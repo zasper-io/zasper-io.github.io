@@ -1,0 +1,73 @@
+{%- comment -%}
+A screenshot in a tutorial: one still the studio's recorder took of the real Zasper, in the light theme
+and the dark one, with the episode's callout rings already on it.
+
+  include tut/shot.html name="add-output" width="1600" height="900"
+    alt="The Add Output to Chat button under a chart's output." caption="**Add Output to Chat** sends the chart."
+
+(in a Liquid include tag; the braces are left off here so this comment does not run it)
+
+  name     required. The still's name from the episode's `shot:` step. The files are
+           <dir>/<name>.light.webp and <name>.dark.webp (or .png), as `pipeline/stills.py` writes them.
+  width    required. The still's width and height from the `stills.json` beside it. They give the image
+  height   its shape before it loads, so the page does not jump, and cap it at its own size, so a narrow
+           crop is never blown up to the column's width.
+  alt      required. What the still shows, for someone who cannot see it.
+  caption  optional. One line under the still. Inline Markdown works: **bold** for a label.
+  dir      optional. The folder, with no trailing slash. Defaults to /static/images/tutorials/<the page's
+           slug>, which is where a tutorial's stills go.
+
+Width and height are passed by hand because Liquid cannot read a JSON file outside `_data` without a
+plugin, and GitHub Pages allows none that would. The files themselves are looked up in
+`site.static_files`, so a missing still, a missing parameter or a mistyped name shows up on the page as a
+dashed box saying what is wrong, instead of a broken image.
+
+The light image shows unless `<html>` carries `data-theme="dark"`, the same switch the prototype uses.
+The site has no dark mode yet, so today the light image always shows, which matches the page. The dark
+image is lazy and hidden, so no browser fetches it. A still with no dark file shows its light file in
+both themes.
+{%- endcomment -%}
+{%- assign tut_shot_dir = include.dir | default: "" -%}
+{%- if tut_shot_dir == "" -%}
+  {%- assign tut_shot_dir = "/static/images/tutorials/" | append: page.slug -%}
+{%- endif -%}
+{%- assign tut_shot_light = nil -%}
+{%- assign tut_shot_dark = nil -%}
+{%- assign tut_shot_problems = "" -%}
+{%- if include.name -%}
+  {%- assign tut_shot_exts = "webp,png" | split: "," -%}
+  {%- for tut_shot_ext in tut_shot_exts -%}
+    {%- assign tut_shot_path = tut_shot_dir | append: "/" | append: include.name | append: ".light." | append: tut_shot_ext -%}
+    {%- assign tut_shot_light = site.static_files | where: "path", tut_shot_path | first -%}
+    {%- if tut_shot_light -%}
+      {%- assign tut_shot_path = tut_shot_dir | append: "/" | append: include.name | append: ".dark." | append: tut_shot_ext -%}
+      {%- assign tut_shot_dark = site.static_files | where: "path", tut_shot_path | first -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- unless tut_shot_light -%}
+    {%- assign tut_shot_problems = tut_shot_problems | append: "no " | append: tut_shot_dir | append: "/" | append: include.name | append: ".light.webp or .png. " -%}
+  {%- endunless -%}
+{%- else -%}
+  {%- assign tut_shot_problems = tut_shot_problems | append: "name is missing. " -%}
+{%- endif -%}
+{%- assign tut_shot_alt = include.alt | strip -%}
+{%- if tut_shot_alt == "" -%}
+  {%- assign tut_shot_problems = tut_shot_problems | append: "alt is missing. " -%}
+{%- endif -%}
+{%- unless include.width and include.height -%}
+  {%- assign tut_shot_problems = tut_shot_problems | append: "width and height are missing; copy them from stills.json. " -%}
+{%- endunless -%}
+{%- if tut_shot_problems != "" %}
+<p class="tut-still-error">tut/shot.html: {{ tut_shot_problems | strip | escape }}</p>
+{%- else %}
+<figure class="tut-figure tut-still">
+  <img class="tut-still-img{% if tut_shot_dark %} is-light{% endif %}" src="{{ tut_shot_light.path | relative_url }}" width="{{ include.width }}" height="{{ include.height }}" style="max-width: {{ include.width }}px" loading="lazy" decoding="async" alt="{{ tut_shot_alt | escape }}" />
+  {%- if tut_shot_dark %}
+  <img class="tut-still-img is-dark" src="{{ tut_shot_dark.path | relative_url }}" width="{{ include.width }}" height="{{ include.height }}" style="max-width: {{ include.width }}px" loading="lazy" decoding="async" alt="{{ tut_shot_alt | escape }}" />
+  {%- endif -%}
+  {%- if include.caption %}
+  <figcaption class="tut-caption">{{ include.caption | markdownify | remove: "<p>" | remove: "</p>" | strip }}</figcaption>
+  {%- endif %}
+</figure>
+{%- endif %}
