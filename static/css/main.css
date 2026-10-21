@@ -3339,9 +3339,3 @@ square. It ends on the landing page's closing band.
   line-height: 1.6;
   color: var(--z-fg-muted);
 }
-
-/* The mark is drawn in teal; in Ink and leaf it is black and white. */
-.mk-nav-logo img,
-.mk-footer-brand > img {
-  filter: grayscale(1) contrast(2.2);
-}
