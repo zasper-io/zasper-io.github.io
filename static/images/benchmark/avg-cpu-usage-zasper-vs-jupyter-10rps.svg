@@ -928,10 +928,10 @@ L 258 -79.92
 L 187.92 -79.92 
 L 117.84 -79.92 
 z
-" style="stroke: #0c6862; stroke-opacity: 0.1"/>
+" style="stroke: #1f8a3b; stroke-opacity: 0.1"/>
     </defs>
     <g clip-path="url(#p2cc81e8b25)">
-     <use xlink:href="#m7c904348c0" x="0" y="432" style="fill: #0c6862; fill-opacity: 0.1; stroke: #0c6862; stroke-opacity: 0.1"/>
+     <use xlink:href="#m7c904348c0" x="0" y="432" style="fill: #1f8a3b; fill-opacity: 0.1; stroke: #1f8a3b; stroke-opacity: 0.1"/>
     </g>
    </g>
    <g id="line2d_26">
@@ -1172,7 +1172,7 @@ z
    </g>
    <g id="text_19">
     <!-- Zasper -->
-    <g style="fill: #0c6862" transform="translate(548.32 156.793705) scale(0.135 -0.135)">
+    <g style="fill: #1f8a3b" transform="translate(548.32 156.793705) scale(0.135 -0.135)">
      <defs>
       <path id="InterSemiBold-1f0" d="M 375 0 
 L 375 519 
@@ -1626,7 +1626,7 @@ L 328.08 296.759458
 L 398.16 270.150861 
 L 468.24 221.294021 
 L 538.32 151.882817 
-" clip-path="url(#p2cc81e8b25)" style="fill: none; stroke: #0c6862; stroke-width: 2.75; stroke-linecap: square"/>
+" clip-path="url(#p2cc81e8b25)" style="fill: none; stroke: #1f8a3b; stroke-width: 2.75; stroke-linecap: square"/>
     <defs>
      <path id="m35e11d5ed2" d="M 0 3.25 
 C 0.86191 3.25 1.688635 2.907559 2.298097 2.298097 
@@ -1638,16 +1638,16 @@ C -2.907559 -1.688635 -3.25 -0.86191 -3.25 0
 C -3.25 0.86191 -2.907559 1.688635 -2.298097 2.298097 
 C -1.688635 2.907559 -0.86191 3.25 0 3.25 
 z
-" style="stroke: #0c6862; stroke-width: 2.25"/>
+" style="stroke: #1f8a3b; stroke-width: 2.25"/>
     </defs>
     <g clip-path="url(#p2cc81e8b25)">
-     <use xlink:href="#m35e11d5ed2" x="117.84" y="338.821543" style="fill: #ffffff; stroke: #0c6862; stroke-width: 2.25"/>
-     <use xlink:href="#m35e11d5ed2" x="187.92" y="333.829675" style="fill: #ffffff; stroke: #0c6862; stroke-width: 2.25"/>
-     <use xlink:href="#m35e11d5ed2" x="258" y="298.436345" style="fill: #ffffff; stroke: #0c6862; stroke-width: 2.25"/>
-     <use xlink:href="#m35e11d5ed2" x="328.08" y="296.759458" style="fill: #ffffff; stroke: #0c6862; stroke-width: 2.25"/>
-     <use xlink:href="#m35e11d5ed2" x="398.16" y="270.150861" style="fill: #ffffff; stroke: #0c6862; stroke-width: 2.25"/>
-     <use xlink:href="#m35e11d5ed2" x="468.24" y="221.294021" style="fill: #ffffff; stroke: #0c6862; stroke-width: 2.25"/>
-     <use xlink:href="#m35e11d5ed2" x="538.32" y="151.882817" style="fill: #ffffff; stroke: #0c6862; stroke-width: 2.25"/>
+     <use xlink:href="#m35e11d5ed2" x="117.84" y="338.821543" style="fill: #ffffff; stroke: #1f8a3b; stroke-width: 2.25"/>
+     <use xlink:href="#m35e11d5ed2" x="187.92" y="333.829675" style="fill: #ffffff; stroke: #1f8a3b; stroke-width: 2.25"/>
+     <use xlink:href="#m35e11d5ed2" x="258" y="298.436345" style="fill: #ffffff; stroke: #1f8a3b; stroke-width: 2.25"/>
+     <use xlink:href="#m35e11d5ed2" x="328.08" y="296.759458" style="fill: #ffffff; stroke: #1f8a3b; stroke-width: 2.25"/>
+     <use xlink:href="#m35e11d5ed2" x="398.16" y="270.150861" style="fill: #ffffff; stroke: #1f8a3b; stroke-width: 2.25"/>
+     <use xlink:href="#m35e11d5ed2" x="468.24" y="221.294021" style="fill: #ffffff; stroke: #1f8a3b; stroke-width: 2.25"/>
+     <use xlink:href="#m35e11d5ed2" x="538.32" y="151.882817" style="fill: #ffffff; stroke: #1f8a3b; stroke-width: 2.25"/>
     </g>
    </g>
    <g id="line2d_30">
@@ -1960,7 +1960,7 @@ L 526.042656 147.881781
 L 520.542656 155.884281 
 L 519.495937 155.884281 
 z
-" style="fill: #0c6862; stroke: #ffffff; stroke-width: 4"/>
+" style="fill: #1f8a3b; stroke: #ffffff; stroke-width: 4"/>
     <path d="M 509.618281 147.881781 
 L 509.618281 155.884281 
 L 508.195156 155.884281 
@@ -2061,7 +2061,7 @@ L 526.042656 147.881781
 L 520.542656 155.884281 
 L 519.495937 155.884281 
 z
-" style="fill: #0c6862"/>
+" style="fill: #1f8a3b"/>
    </g>
    <g id="text_23">
     <path d="M 104.803281 295.660086 
@@ -2442,7 +2442,7 @@ L 129.691641 317.165723
 L 124.191641 325.168223 
 L 123.144922 325.168223 
 z
-" style="fill: #0c6862; stroke: #ffffff; stroke-width: 4"/>
+" style="fill: #1f8a3b; stroke: #ffffff; stroke-width: 4"/>
     <path d="M 107.335859 325.276504 
 Q 106.369922 325.276504 105.682422 324.790098 
 Q 104.994922 324.303691 104.628828 323.387598 
@@ -2597,7 +2597,7 @@ L 129.691641 317.165723
 L 124.191641 325.168223 
 L 123.144922 325.168223 
 z
-" style="fill: #0c6862"/>
+" style="fill: #1f8a3b"/>
    </g>
   </g>
   <g id="text_25">
@@ -4121,7 +4121,7 @@ z
   </g>
   <g id="text_29">
    <!-- zasper.io -->
-   <g style="fill: #0c6862" transform="translate(629.630937 423.36) scale(0.1 -0.1)">
+   <g style="fill: #1f8a3b" transform="translate(629.630937 423.36) scale(0.1 -0.1)">
     <defs>
      <path id="InterSemiBold-3fe" d="M 381 0 
 L 381 519 

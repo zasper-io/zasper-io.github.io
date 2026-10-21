@@ -4,8 +4,9 @@ owl.carousel.min.css + owl.theme.default.min.css (4 KB), nice-select.css (4 KB),
 (33 KB) and style.css (23 KB) — about 280 KB, none of it shared with the product. Neither is this file:
 it is a hand-written port of the `.mk-*` design in zasper-io/zasper-prototype (`landing.html`,
 `docs.html`, `blog.html`), which is where any future change to this site's look should be made and
-proven before it lands here. The token values below are that repository's `teal-light` theme, read
-live and copied in as plain hex — this site has no theme switcher, so there is nothing to switch.
+proven before it lands here. The token values below are that repository's Ink and leaf palette
+(`css/ink-leaf.css`, chosen 21 October 2026): near-black ink, neutral greys, and leaf green as the one
+accent. This site has no theme switcher, so there is nothing to switch.
 
 Two libraries this site no longer loads, and why: `owl.carousel` was wired to
 `.login-sign-up-form-slider`, a class that exists in main.js and nowhere in any page; `nice-select` was
@@ -14,15 +15,15 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
 
 /* --- Tokens --------------------------------------------------------------- */
 :root {
-  /* the teal ramp, `css/accents.css` in the prototype */
-  --a-50: #eaf5f4;
-  --a-100: #cfe9e7;
-  --a-200: #a3d5d1;
-  --a-400: #2c8f88;
-  --a-600: #0c6862;
-  --a-700: #0a5651;
-  --a-800: #084541;
-  --a-900: #063733;
+  /* Ink and leaf, `css/ink-leaf.css` in the prototype: a leaf-green ramp, and ink at its dark end */
+  --a-50: #f3f6f3;
+  --a-100: #e1e6e1;
+  --a-200: #5fd47e;
+  --a-400: #2fa64f;
+  --a-600: #1f8a3b;
+  --a-700: #187030;
+  --a-800: #145a27;
+  --a-900: #0f120f;
 
   --z-accent: var(--a-600);
   --z-accent-hover: var(--a-700);
@@ -33,17 +34,17 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
   --z-bg-app: #e4e4e5;
   --z-bg-panel: #ffffff;
   --z-bg-panel-alt: var(--a-50);
-  --z-bg-code: #f4f4f4;
+  --z-bg-code: #f0f3f0;
   --z-bg-login-page: linear-gradient(119deg, #ffffff 0%, var(--a-100) 100%);
-  --z-bg-login-hero: linear-gradient(133deg, var(--a-600) 0%, var(--a-900) 100%);
+  --z-bg-login-hero: #0f120f;
 
   --z-border: var(--a-100);
-  --z-border-strong: #969696;
-  --z-border-subtle: #f3f2f6;
+  --z-border-strong: #c7cec7;
+  --z-border-subtle: #edf0ed;
 
-  --z-fg-default: #393939;
-  --z-fg-muted: #6d6d6d;
-  --z-fg-subtle: #767676;
+  --z-fg-default: #121512;
+  --z-fg-muted: #586058;
+  --z-fg-subtle: #6b726b;
 
   --z-status-idle: #139513;
   --z-shadow-panel: 0 3px 20px #0000001c;
@@ -69,10 +70,9 @@ wired to `select`, and no page has one. Both were dead weight for as long as any
   --mk-measure: 720px;
   /* How far the hero's screenshot hangs into the band below it; both bands read it. */
   --mk-hero-overlap: min(160px, 14vw);
-  /* The texture every dark band carries over its gradient: a glow from the top centre and a faint
-     56px grid. One value, so the hero, the agents band and the closing band cannot drift apart. */
+  /* The texture every dark band carries over its flat ink: a faint 56px grid, and no glow. One value, so
+     the hero, the agents band and the closing band cannot drift apart. */
   --mk-dark-texture:
-    radial-gradient(ellipse 60% 55% at 50% 0%, #ffffff24, transparent 70%),
     linear-gradient(#ffffff0d 1px, transparent 1px) 0 0 / 56px 56px,
     linear-gradient(90deg, #ffffff0d 1px, transparent 1px) 0 0 / 56px 56px;
 }
@@ -205,7 +205,7 @@ a {
   align-items: center;
   gap: 8px;
   padding: 4px 14px;
-  background: var(--a-800);
+  background: #191c19;
   color: #eef2f0;
   font-family: var(--z-mono-font-family);
   font-size: 8px;
@@ -927,7 +927,7 @@ a.mk-proof-item:hover {
 /*
 The benchmark readout: a slider over the seven loads the charts are drawn at, and three tiles that
 answer at the load picked — peak RAM, average CPU, and how many of the five replies per request came
-back. Teal and Jupyter's orange, the two colours of the charts beneath it, so the readout and the
+back. Leaf and Jupyter's own orange, the two colours of the charts beneath it, so the readout and the
 charts read as one figure. Bars are scaled to the larger of the pair at that load: the ratio is the
 point, and the charts carry the growth.
 */
@@ -1031,7 +1031,7 @@ point, and the charts carry the growth.
   display: block;
   height: 100%;
   min-width: 2px;
-  background: #0c6862;
+  background: var(--z-fg-accent);
   transition: width 0.25s ease;
 }
 
@@ -1047,7 +1047,7 @@ point, and the charts carry the growth.
 }
 
 .mk-bench-ratio.is-warning {
-  color: #c4501a;
+  color: #b42318;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2211,7 +2211,7 @@ its sidebar; the only rule it adds is the number in front of each lesson there.
   list-style: none;
 }
 
-/* A card is its cover, dimmed under the dark bands' teal, with the number, steps and title over it in
+/* A card is its cover, dimmed under the dark bands' ink, with the number, steps and title over it in
    white. The screenshot is the backdrop, not something to read at this size, so it fills the card and
    is cropped from the top; the lesson page shows it whole. No description: the title is the card. */
 .mk-tut-card {
@@ -2244,7 +2244,7 @@ its sidebar; the only rule it adds is the number in front of each lesson there.
   height: auto;
 }
 
-/* A light tint over the top, so it reads as the app, then solid teal well before the text starts, so the
+/* A light tint over the top, so it reads as the app, then solid ink well before the text starts, so the
    title always sits on plain colour, whatever the screenshot has under it. */
 .mk-tut-card-cover::after {
   position: absolute;
@@ -2720,7 +2720,7 @@ it is the one interactive thing on the page that works with the script blocked.
   }
 }
 
-/* On the gradient, the filled accent button is teal on teal: the band is the accent's own dark end,
+/* On ink, the filled accent button would be dark on dark: the band is the accent's own dark end,
    so the primary action inverts — white plate, accent ink, the strongest thing on the page. */
 .mk-band-dark .mk-button {
   background: #ffffff;
@@ -3338,4 +3338,10 @@ square. It ends on the landing page's closing band.
   font-size: 18px;
   line-height: 1.6;
   color: var(--z-fg-muted);
+}
+
+/* The mark is drawn in teal; in Ink and leaf it is black and white. */
+.mk-nav-logo img,
+.mk-footer-brand > img {
+  filter: grayscale(1) contrast(2.2);
 }
