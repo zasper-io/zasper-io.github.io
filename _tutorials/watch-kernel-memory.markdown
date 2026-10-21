@@ -1,7 +1,7 @@
 ---
 layout: tutorial
 title: "Watch Kernel Memory"
-description: "Fill a kernel with two gigabytes, read its memory in the status bar, open the meters, then find the kernel in the Jupyter info panel after its tab is closed, and shut it down."
+description: "Read a kernel's memory in the status bar, open the meters, and find and shut down a kernel you forgot about, even after its tab is closed."
 order: 9
 track: zasper
 cover: meters

@@ -4,5 +4,6 @@
 
 layout: blog
 title: "Blog"
+seo_title: "Blog: Building a Fast Jupyter IDE · Zasper"
 description: "Notes from building Zasper: benchmarks against Jupyter Server, design decisions, and release write-ups."
 ---

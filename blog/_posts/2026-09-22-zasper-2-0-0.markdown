@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Zasper 2.0.0"
-description: "Zasper 2.0.0 brings language servers to files and notebooks, search and replace across the project, notebook export and a table of contents, and closes two ways a session could leak."
+description: "Zasper 2.0.0 brings language servers to files and notebooks, project-wide search and replace, notebook export and a table of contents."
 date:   2026-09-22 09:00:00 +0530
 categories: blog
 kind: Release

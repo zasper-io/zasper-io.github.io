@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Zasper 2.1.0"
-description: "Zasper 2.1.0 brings the coding agent you already use into a panel beside your notebooks, with Zasper's own tools to read, edit and run them and an undo for everything it changes, plus notebooks that keep up with changes on disk, a variables panel, SQL cells and trusted folders."
+description: "Zasper 2.1.0 puts your coding agent beside your notebooks, with undo for every change, plus a variables panel, SQL cells and trusted folders."
 date:   2026-10-16 09:00:00 +0530
 categories: blog
 kind: Release

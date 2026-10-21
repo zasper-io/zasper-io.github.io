@@ -1,7 +1,7 @@
 ---
 layout: tutorial
 title: "Get Completions and Hovers in a Notebook"
-description: "Check which language server a notebook runs on, complete names from the server and the kernel, read a hover, fix an underline before you run, and find every use of a name in a Python file."
+description: "See which language server a notebook uses, complete names as you type, read hovers, fix underlines before you run, and find every use of a name."
 order: 10
 track: zasper
 cover: underline

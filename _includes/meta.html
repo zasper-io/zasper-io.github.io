@@ -13,7 +13,11 @@ feed and the sitemap read the same values.
 {%- assign site_desc = site.description -%}
 {%- assign base_url = site.url | append: site.baseurl -%}
 
-{%- if page.title -%}
+{% comment %} `seo_title`, where a page has one, is the whole <title> as search results show it: longer and
+     more descriptive than the short name the page's own heading uses. {% endcomment %}
+{%- if page.seo_title -%}
+  {%- assign meta_title = page.seo_title -%}
+{%- elsif page.title -%}
   {%- assign meta_title = page.title | append: " · Zasper" -%}
 {%- else -%}
   {%- assign meta_title = site_title -%}

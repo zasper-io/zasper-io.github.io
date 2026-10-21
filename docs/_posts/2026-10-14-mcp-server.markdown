@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "MCP Server"
+seo_title: "MCP Server for Jupyter Notebooks · Zasper"
 description: "Let a coding agent such as Claude Code, Codex or Cursor read, edit and run your notebooks through the Zasper you have open."
 date:   2026-10-14 09:00:00 +0530
 index: 9.8

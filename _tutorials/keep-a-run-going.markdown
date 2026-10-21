@@ -1,7 +1,7 @@
 ---
 layout: tutorial
 title: "Keep a Run Going When You Close the Browser"
-description: "Start a cell that runs for a minute, close its tab while it prints, open it again to find every line, and let a run finish with no tab open to find its output in the file."
+description: "Start a long-running cell, close its tab mid-run, reopen it to find every line, and let a run finish with no tab open."
 order: 8
 track: zasper
 cover: long-run

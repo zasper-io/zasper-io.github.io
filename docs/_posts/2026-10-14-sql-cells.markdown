@@ -1,6 +1,7 @@
 ---
 layout: docs
 title:  "SQL Cells"
+seo_title: "SQL Cells in Jupyter Notebooks · Zasper"
 description: "Query a database or the kernel's own dataframes from a notebook cell, and use the answer as a pandas DataFrame in the cells after it."
 date:   2026-10-14 09:00:00 +0530
 index: 9.3
