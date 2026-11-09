@@ -1,0 +1,67 @@
+{
+  "version": "v1.1.0",
+  "entity": {
+    "type": "individual",
+    "role": "owner",
+    "name": "Prasun Anand",
+    "email": "prasun@zasper.io",
+    "description": "Creator and maintainer of Zasper, an open-source Jupyter IDE you run on your own machine.",
+    "webpageUrl": {
+      "url": "https://zasper.io"
+    }
+  },
+  "projects": [
+    {
+      "guid": "zasper",
+      "name": "Zasper",
+      "description": "An open-source Jupyter IDE you run yourself, with your coding agent working in your notebooks. It uses 5x less CPU and 40x less memory than JupyterLab.",
+      "webpageUrl": {
+        "url": "https://zasper.io"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/zasper-io/zasper",
+        "wellKnown": "https://github.com/zasper-io/zasper/blob/main/.well-known/funding-manifest-urls"
+      },
+      "licenses": ["spdx:AGPL-3.0-only"],
+      "tags": ["jupyter", "notebooks", "ide", "data-science", "developer-tools", "artificial-intelligence"]
+    }
+  ],
+  "funding": {
+    "channels": [
+      {
+        "guid": "github-sponsors",
+        "type": "payment-provider",
+        "address": "https://github.com/sponsors/prasunanand",
+        "description": "Monthly or one-time sponsorship through GitHub Sponsors."
+      },
+      {
+        "guid": "grants",
+        "type": "other",
+        "address": "prasun@zasper.io",
+        "description": "Write to discuss a grant."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "sponsor",
+        "status": "active",
+        "name": "Sponsor Zasper",
+        "description": "Support Zasper's development with any amount, monthly.",
+        "amount": 100,
+        "currency": "USD",
+        "frequency": "monthly",
+        "channels": ["github-sponsors"]
+      },
+      {
+        "guid": "grant",
+        "status": "active",
+        "name": "Grant for Zasper",
+        "description": "A yearly grant to fund Zasper's development.",
+        "amount": 50000,
+        "currency": "USD",
+        "frequency": "yearly",
+        "channels": ["grants"]
+      }
+    ]
+  }
+}
