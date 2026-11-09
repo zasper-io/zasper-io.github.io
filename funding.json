@@ -5,7 +5,7 @@
     "role": "owner",
     "name": "Prasun Anand",
     "email": "prasun@zasper.io",
-    "description": "Creator and maintainer of Zasper, an open-source Jupyter IDE you run on your own machine.",
+    "description": "Creator and maintainer of Zasper, an open-source High Performance Jupyter IDE you run on your own machine.",
     "webpageUrl": {
       "url": "https://zasper.io"
     }
@@ -14,7 +14,7 @@
     {
       "guid": "zasper",
       "name": "Zasper",
-      "description": "An open-source Jupyter IDE you run yourself, with your coding agent working in your notebooks. It uses 5x less CPU and 40x less memory than JupyterLab.",
+      "description": "An open-source Jupyter IDE you run yourself, with your coding agent working in your notebooks. It uses upto 5x less CPU and upto 40x less memory than JupyterLab.",
       "webpageUrl": {
         "url": "https://zasper.io"
       },
