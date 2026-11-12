@@ -96,6 +96,23 @@ no browser opens, for example because you passed `--no-browser` or are connected
 The Linux archives are static binaries, so one build works on every distribution, Debian and Red
 Hat alike.
 
+## Upgrading from 2.1.0
+
+Nothing needs doing for most people. Four things behave differently:
+
+- **Gemini CLI is no longer listed in the agent panel.** It stopped serving personal Google accounts
+  on 18 June 2026. Antigravity CLI takes its place and signs in with those, a Gemini API key or a
+  business account. Gemini CLI still starts as any other agent, by its command line:
+  `gemini --experimental-acp`. Codex's adapter is now `@agentclientprotocol/codex-acp`. See
+  [Coding Agents](/docs/coding-agents).
+- **An output's scripts run in a sandboxed frame.** HTML and SVG output that runs scripts now runs
+  them with no access to Zasper's page, its cookies or its storage, so a script that reached into the
+  page will no longer find it. Output with nothing to run is drawn as before. See
+  [Notebook Support](/docs/notebook-support#what-renders).
+- **A Python kernel is reached through Unix sockets** in `~/.zasper/runtime` on macOS and Linux, so
+  other accounts on the machine can no longer read its traffic. Other kernels, and Windows, keep TCP.
+- **Building from source needs Go 1.26.10** or later.
+
 ## Upgrading from 2.0.0
 
 Zasper now asks whether you trust each folder before it runs anything the folder controls. After

@@ -4,6 +4,48 @@
 # `upgrading`, `highlights` and `changes` are lists of Markdown. `shot` is for a release worth showing
 # and is left out otherwise.
 
+- version: "2.2.0"
+  date: 2026-11-12
+  summary: >-
+    Zasper from the keyboard alone and with a screen reader: F6 moves between the window's parts, every
+    menu, dialog, tab strip and grid has its keyboard, and cells say what they hold and when they
+    finish. Zasper can also be served under a path behind a hub, kernel outputs' scripts run in a
+    sandbox rather than in the page, and Antigravity CLI takes Gemini CLI's place in the agent panel.
+  upgrading_from: "2.1.0"
+  upgrading:
+    - "Gemini CLI is no longer listed in the agent panel; Antigravity CLI takes its place. Gemini CLI still starts by its command line, `gemini --experimental-acp`."
+    - HTML and SVG output that runs scripts runs them in a sandboxed frame, with no access to Zasper's page. Output with nothing to run is drawn as before.
+    - A Python kernel is reached through Unix sockets on macOS and Linux. Other kernels, and Windows, keep TCP.
+    - Building from source needs Go 1.26.10 or later.
+  highlights:
+    - "**The keyboard alone, and screen readers**: `F6` between the window's parts, every menu, dialog and tab strip by keyboard, and cells that say what they hold and when they finish."
+    - "**`--base-url`** serves Zasper under a path, such as a hub's `/user/<name>/`."
+    - "**Outputs' scripts in a sandbox**, and Bokeh's `show()` in the notebook."
+    - "**Antigravity CLI** in the agent panel, and tabs you reorder by dragging."
+  changes:
+    added:
+      - "`F6` and `Shift+F6` move between the window's parts, and out of a terminal or an editor."
+      - Menus, dialogs, the command palette, the tab strip, the file tree and the data grid work from the keyboard.
+      - Cells, editors and the window are named after what they hold, and a cell finishing or failing, the kernel's state, saves and an agent's replies are announced.
+      - A screen reader mode for the terminal, in Settings.
+      - One focus ring on every surface, and selection, state and dialogs that stay visible under forced colours.
+      - "`--base-url` and `ZASPER_BASE_URL`, to serve Zasper under a path."
+      - "Bokeh's `output_notebook()` and `show()`."
+      - Reorder tabs by dragging; the strip scrolls with a mouse wheel and keeps the front tab in view.
+      - SQL connections are added, edited and removed in the Data panel.
+      - "`Shift+O` in command mode expands or collapses a cell's output."
+    changed:
+      - An output's scripts run in a sandboxed frame rather than in the page.
+      - A Python kernel is reached through Unix sockets on macOS and Linux.
+      - Antigravity CLI replaces Gemini CLI in the agent panel, and Codex's adapter is `@agentclientprotocol/codex-acp`.
+    fixed:
+      - "A SQL connection's password pasted as part of its URL goes to the keychain, not `connections.json`."
+      - "`input()`'s reply box is labelled with its prompt, and `getpass()` is masked."
+      - Text, field edges and git colours meet WCAG AA contrast; prose links are underlined.
+      - The active cell is marked by its left edge, its output included.
+      - Dollar amounts in an agent's answer are shown as money, not maths.
+      - "Security updates for dompurify, sanitize-html, vite, klauspost/compress, andybalholm/brotli and the Go toolchain."
+
 - version: "2.1.0"
   date: 2026-10-16
   summary: >-

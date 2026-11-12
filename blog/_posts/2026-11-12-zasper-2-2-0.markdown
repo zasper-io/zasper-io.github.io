@@ -1,0 +1,71 @@
+---
+layout: post
+title:  "Zasper 2.2.0"
+description: "Zasper 2.2.0 works from the keyboard alone and with a screen reader, serves under a path behind a hub, and runs outputs' scripts in a sandbox."
+date:   2026-11-12 09:00:00 +0530
+categories: blog
+kind: Release
+permalink: blog/:title
+author: Prasun Anand
+banner: /static/images/logo.svg
+---
+
+Zasper 2.2.0 makes the whole IDE usable from the keyboard alone and with a screen reader. It can also
+be served under a path, as a hub serves each person's server, and a kernel output's scripts now run in
+a sandbox rather than in the page. Antigravity CLI takes Gemini CLI's place in the agent panel.
+
+```bash
+brew upgrade zasper                   # Homebrew
+sudo snap refresh zasper              # Snap
+conda update zasper -c conda-forge    # conda
+```
+
+Prebuilt binaries are on the [Downloads page](/downloads/).
+
+## The Keyboard and Screen Readers
+
+- **`F6` moves between the window's parts**: the editor, the panel under it, the agent panel, the
+  activity bar and the sidebar. It is the way out of a terminal or a code editor, which keep `Tab` for
+  themselves, and each part keeps the place the focus last had in it.
+- **Every menu, dialog, tab strip and tree has its keyboard.** Menus take arrows, `Home`, `End` and a
+  first letter. Dialogs keep the focus inside and hand it back when they close. The tab strip is a tab
+  list the arrows walk along, and `Delete` closes the focused tab.
+- **A screen reader is told what is going on**: each cell's name and run, when a cell finishes or
+  fails, what the kernel is doing, saves and an agent's replies. The window's parts are landmarks.
+- **The terminal has a screen reader mode**, in Settings.
+- **One focus ring**, visible on every surface in every theme, and selection and state that stay
+  visible under Windows' contrast themes.
+
+[Accessibility](/docs/accessibility) has the whole list. If something cannot be reached from the
+keyboard, please [open an issue](https://github.com/zasper-io/zasper/issues).
+
+## Behind a Hub
+
+`--base-url` serves Zasper under a path, such as `https://example.com/zasper/` or a hub's
+`/user/<name>/`. Pages, the API, WebSockets and the session cookie all stay under it, and nothing
+outside it is served. [Deploying on Cloud](/docs/deploying-on-cloud#under-a-path) shows the proxy
+setup.
+
+## Outputs
+
+- **An output's scripts run in a sandboxed frame**, with no access to Zasper's page, its cookies or
+  the server's API, so an output cannot act as you. Output with nothing to run is drawn in the page as
+  before, and charts' own menus can still download and open windows.
+- **Bokeh's `output_notebook()` and `show()`** draw in the notebook.
+
+## And
+
+- **Antigravity CLI in the agent panel**, in place of Gemini CLI, which no longer serves personal
+  Google accounts. Gemini CLI still starts by its command line.
+- **Reorder tabs by dragging.** The strip scrolls with a mouse wheel and keeps the front tab in view.
+- **SQL connections are added, edited and removed in the Data panel.** A connection string's password
+  goes to the keychain, never into `connections.json`.
+- **A Python kernel is reached through Unix sockets** on macOS and Linux, so other accounts on the
+  machine can no longer read its traffic.
+
+## Upgrading from 2.1.0
+
+Nothing needs doing for most people. A script in an HTML output that reached into Zasper's page will
+no longer find it, and an agent set up as Gemini CLI is now started by its command line.
+[Installation](/docs/installation#upgrading-from-210) explains both, and the
+[changelog](/changelog/#2.2.0) has the full list.

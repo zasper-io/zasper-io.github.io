@@ -3,10 +3,10 @@
 # right on the day they were written and wrong after that.
 #
 # Measured on the published archives: `ls -l` over what the release uploaded.
-version: "2.1.0"
-date: 2026-10-16
+version: "2.2.0"
+date: 2026-11-12
 # The landing page's "Latest release" row: "<version>, with <headline>".
-headline: coding agents, a variables panel and SQL cells
+headline: keyboard and screen reader access, hub support and sandboxed outputs
 
 # Each entry is one operating system's card, and `slug` is the archive's name in the release, which is
 # also what the OS detection matches to point its button at the right file.
@@ -37,10 +37,10 @@ platforms:
     files:
       - arch: x86-64
         slug: windows-amd64
-        size: 10.4 MB
+        size: 10.5 MB
       - arch: ARM64
         slug: windows-arm64
-        size: 9.7 MB
+        size: 9.8 MB
       - arch: i386
         slug: windows-386
         size: 10.2 MB
