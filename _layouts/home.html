@@ -63,6 +63,16 @@
         <span>to download. One app, nothing else to install.</span>
       </div>
     </div>
+    {% if site.data.used_at.size > 0 %}
+    <div class="mk-used-at-card">
+      <p class="mk-used-at-label">Used at</p>
+      <ul class="mk-used-at">
+        {% for org in site.data.used_at %}
+        <li><img src="/static/images/used-at/{{ org.logo }}" alt="{{ org.name }}" title="{{ org.name }}" loading="lazy"{% if org.height %} style="--logo-height: {{ org.height }}px"{% endif %} /></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
     <p class="mk-proof-label">Featured and supported by</p>
     <div class="mk-proof">
       <a class="mk-proof-item" href="https://news.ycombinator.com/item?id=42572057">

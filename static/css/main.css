@@ -850,6 +850,56 @@ a.mk-proof-item:hover {
   }
 }
 
+/* Where Zasper is used, above the press strip and as wide as it: tinted and framed in the accent, so it
+   is the one green block on the white band, with each logo in its own colours. Logos, not tiles: a row
+   that wraps and centres lines up however many places it lists. */
+.mk-used-at-card {
+  margin: 56px 0 0;
+  padding: 22px 32px 30px;
+  background: var(--z-bg-panel-alt);
+  border: 2px solid var(--z-accent);
+  text-align: center;
+}
+
+.mk-used-at-label {
+  margin: 0 0 22px;
+  font-family: var(--z-mono-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--z-fg-accent);
+}
+
+.mk-used-at {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 28px 56px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mk-used-at img {
+  display: block;
+  height: var(--logo-height, 32px);
+  max-width: 160px;
+  object-fit: contain;
+}
+
+/* Two logos to a row on a phone, where the desktop gaps would leave the widest ones alone on theirs. */
+@media (max-width: 600px) {
+  .mk-used-at-card {
+    padding: 20px 16px 26px;
+  }
+
+  .mk-used-at {
+    gap: 24px 28px;
+  }
+}
+
 .mk-number span {
   font-size: 14px;
   color: var(--z-fg-muted);

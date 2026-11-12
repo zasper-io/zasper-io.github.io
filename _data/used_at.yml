@@ -1,0 +1,19 @@
+# The landing page's "Used at" row. Adding a place is its logo in static/images/used-at/ and an entry
+# here. `height`, in pixels, evens out a logo that looks too small or too heavy beside the others at the
+# default 32, such as a round seal or a bold wordmark.
+
+- name: Paul Scherrer Institute
+  logo: psi.svg
+- name: UC Berkeley
+  logo: uc-berkeley.svg
+  height: 26
+- name: Institute for Basic Science
+  logo: ibs.svg
+- name: IIT Madras
+  logo: iit-madras.svg
+  height: 52
+- name: Barclays
+  logo: barclays.svg
+- name: Boltz
+  logo: boltz.svg
+  height: 24
