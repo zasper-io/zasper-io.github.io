@@ -53,6 +53,11 @@ that are not open now. **Running** lists the server's kernels and terminals, inc
 notebook has no tab open, which is marked **no tab**. Click a kernel to open its notebook, or shut
 down a kernel or terminal from its row.
 
+Drag a tab along the strip to reorder it. When there are more tabs than fit, the strip scrolls: a
+mouse wheel scrolls it sideways, and the tab in front is kept in view. From the keyboard, `←` and `→`
+move along the strip, `Home` and `End` go to its ends, `Enter` or `Space` brings the focused tab
+forward, and `Delete` closes it.
+
 A dot on a tab means it has unsaved changes. Closing it asks whether to save, discard or cancel, and
 closing several tabs at once asks about all their unsaved changes in one dialog.
 

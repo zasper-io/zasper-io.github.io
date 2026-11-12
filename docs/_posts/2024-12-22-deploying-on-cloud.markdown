@@ -169,6 +169,25 @@ server {
 `proxy_read_timeout` keeps a quiet terminal or kernel connection from being closed after nginx's
 default 60 seconds.
 
+### Under a Path
+
+Since 2.2.0, Zasper can be served under a path of the proxy's, such as `https://example.com/zasper/`,
+rather than at the root of a host of its own:
+
+```bash
+zasper --allow-host=example.com --base-url=/zasper/
+```
+
+Every page, API call, WebSocket and the session cookie are then under `/zasper/`, and nothing outside
+it is served. `/zasper` without the slash redirects to `/zasper/`. The proxy passes requests through
+with the path unchanged, so with nginx it is a `location /zasper/` block whose `proxy_pass` names no
+path: `proxy_pass http://127.0.0.1:8048;`. The sign-in link becomes
+`https://example.com/zasper/?token=…`.
+
+This is how a hub serves each person's server at `/user/<name>/`. `ZASPER_BASE_URL` does the same as
+the flag. The path may hold only letters, digits and `- . _ ~` between its slashes; Zasper refuses to
+start with anything else.
+
 ## Running It in Docker
 
 The [`docker/`](https://github.com/zasper-io/zasper/tree/main/docker) directory in the main

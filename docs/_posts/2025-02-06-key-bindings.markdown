@@ -29,9 +29,16 @@ Zasper used first, and it still works.
 | Problems | `⇧⌘M` | `Ctrl+Shift+M` |
 | Toggle Terminal | ``⌃` `` | ``Ctrl+` `` |
 | Keyboard Shortcuts (Help tab) | `F1` | `F1` |
+| Focus Next Region | `F6` | `F6` |
+| Focus Previous Region | `⇧F6` | `Shift+F6` |
 | Zoom In | `⌘=` or `⌘+` | `Ctrl+=` or `Ctrl++` |
 | Zoom Out | `⌘-` | `Ctrl+-` |
 | Reset Zoom | `⌘0` | `Ctrl+0` |
+
+**Focus Next / Previous Region** moves between the parts of the window: the editor, the panel under
+it, the agent panel, the activity bar and the sidebar. It is the way out of a terminal or a code
+editor, which keep `Tab` for themselves, and each part gets back the place the focus last had in it.
+[Accessibility](/docs/accessibility) has the rest of what works from the keyboard.
 
 Zoom scales the whole window, including toolbars and menus. To change only the size of code,
 terminal text and cell output, use **Increase / Decrease Font Size** from the palette. Those have
@@ -62,6 +69,9 @@ the palette there.
 
 Right-click a tab for the same actions, plus **Copy Path** and **Reveal in File Explorer**. When the
 tabs you close have unsaved changes, Zasper asks about all of them in one dialog.
+
+With the focus on the tab strip, `←` and `→` move along it, `Home` and `End` go to its ends, `Enter`
+or `Space` brings the focused tab forward, and `Delete` closes it.
 
 ## Notebook
 
@@ -94,8 +104,7 @@ selection and the arrows move the cell. Focus moves with the cell, so you can ho
 move one cell several places.
 
 These actions have no key binding; run them from the palette: **Run All Cells**, **Cut / Copy /
-Paste Cell**, **Change Cell to Raw**, **Change Cell to SQL**, **Expand or Collapse Output**, **Clear
-Cell Output**, **Clear All Outputs**, **Interrupt Kernel**, **Restart Kernel**, **Restart Kernel and
+Paste Cell**, **Change Cell to Raw**, **Change Cell to SQL**, **Clear Cell Output**, **Clear All Outputs**, **Interrupt Kernel**, **Restart Kernel**, **Restart Kernel and
 Run All Cells**, **Reconnect to Kernel**, **Change Kernel**, and **Add Cell to Chat** and **Add
 Output to Chat** for the [agent panel](/docs/coding-agents). The notebook toolbar and a cell's hover
 toolbar reach most of them in one click.
@@ -113,8 +122,10 @@ keys work only then:
 | Select Previous Cell | `↑` | `Up` |
 | Select Next Cell | `↓` | `Down` |
 | Edit Cell | `⏎` | `Enter` |
+| Expand or Collapse Output | `⇧O` | `Shift+O` |
 
-**Edit Cell** opens the selected cell for editing. **Run Cell** and **Run Cell and Select Next** work
+**Edit Cell** opens the selected cell for editing. **Expand or Collapse Output** is JupyterLab's
+binding, and is in the palette too. **Run Cell** and **Run Cell and Select Next** work
 in command mode as well.
 
 ## Inside a Cell

@@ -97,6 +97,7 @@ execution count. See [Installing Jupyter Kernels](/docs/installing-jupyter-kerne
 | `image/svg+xml` | ✅ |
 | `text/latex` | ✅ |
 | Plotly figures (`application/vnd.plotly.v1+json`) | ✅ |
+| Bokeh, through `output_notebook()` and `show()` | ✅ |
 | ipywidgets (`application/vnd.jupyter.widget-view+json`) | ✅ |
 | `application/json` | ✅ |
 | Markdown cells: GFM tables, task lists, raw HTML, LaTeX via KaTeX | ✅ |
@@ -106,6 +107,12 @@ is typeset with KaTeX, the same renderer markdown cells use. `image/svg+xml`, wh
 networkx produce, and matplotlib under `%config InlineBackend.figure_format = 'svg'`, is placed
 directly in the page rather than inside an `<img>`, so a figure that sizes itself to the cell still
 can. SVG, JPEG and LaTeX output render from 1.1.0.
+
+Since 2.2.0, HTML and SVG output that runs scripts runs them in a sandboxed frame rather than in the
+page. The frame has no access to Zasper's page, its cookies or the server's API, so an output cannot act
+as you; it can still offer a download, open a window and ask with `prompt()`, which the menus of Vega
+and Bokeh charts need. Output with nothing to run is drawn in the page as before. Bokeh's scripts run
+in one frame with the HTML before them, and load BokehJS from its CDN. Widgets are not affected.
 
 ## Known Limitations
 

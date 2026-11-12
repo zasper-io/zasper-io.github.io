@@ -21,6 +21,7 @@ in the app are stored in `~/.zasper/config.json`.
 | `--host` | `127.0.0.1` | The network interface to listen on. `0.0.0.0` makes the server reachable from other machines; see [Deploying on Cloud](/docs/deploying-on-cloud) |
 | `--port` | `:8048` | The port to listen on. `8888` and `:8888` both work |
 | `--allow-host` | | Other host names the server answers to while it listens on `127.0.0.1`, comma-separated, such as a reverse proxy's `zasper.example.com`; see [Deploying on Cloud](/docs/deploying-on-cloud#behind-a-reverse-proxy-with-https) |
+| `--base-url` | `/` | The path to serve Zasper under, such as `/zasper/` behind a reverse proxy or `/user/<name>/` behind a hub. Nothing outside it is served; see [Deploying on Cloud](/docs/deploying-on-cloud#under-a-path). Since 2.2.0 |
 | `--no-browser` | `false` | Don't open Zasper in a browser on startup. Zasper only opens one when it is running in a terminal, and on Linux only when there is a display |
 | `--tracking` | `true` | Send [anonymous usage data](#anonymous-usage-data) |
 | `--trust` | `false` | Trust the project folder for this run, so its kernels, `.venv` and language servers start without asking; see [Trusted Folders](/docs/trusted-folders) |
@@ -46,6 +47,7 @@ address. This keeps scripts written before 1.0 working unchanged.
 | `ZASPER_LOG_FORMAT` | `console` or `json`. By default Zasper uses console format in a terminal and JSON otherwise |
 | `ZASPER_ACCESS_LOG` | `1`, `true`, `on` or `yes` logs every HTTP request |
 | `ZASPER_ALLOWED_HOSTS` | Host names added to `--allow-host`'s, comma-separated |
+| `ZASPER_BASE_URL` | The path to serve Zasper under, when `--base-url` is not given |
 | `ZASPER_TRUST_ALL` | `1` trusts every folder for this run; see [Trusted Folders](/docs/trusted-folders). The Docker image sets it |
 
 `ZASPER_JWT_SECRET` was removed in 1.1.0 and is ignored; use `ZASPER_ACCESS_TOKEN` instead.

@@ -1,7 +1,7 @@
 ---
 layout: docs
 title:  "Coding Agents"
-description: "Work with Claude Code, Gemini CLI, Codex or another ACP agent in a panel beside the editor, and review or undo what each turn changed."
+description: "Work with Claude Code, Codex, Antigravity CLI or another ACP agent in a panel beside the editor, and review or undo what each turn changed."
 date:   2026-10-14 09:00:00 +0530
 index: 9.7
 group: Guides
@@ -25,13 +25,25 @@ Step by step: [Work with an AI Agent](/tutorials/work-with-an-ai-agent).
 | Agent | Install | Then |
 | --- | --- | --- |
 | Claude Code | `npm install -g @agentclientprotocol/claude-agent-acp` | Sign in once by running `claude` in a terminal |
-| Gemini CLI | `npm install -g @google/gemini-cli` | Sign in once by running `gemini` in a terminal |
-| Codex | `npm install -g @zed-industries/codex-acp` | Sign in once by running `codex` in a terminal |
+| Codex | `npm install -g @agentclientprotocol/codex-acp`, beside the `codex` CLI | Sign in once by running `codex` in a terminal |
+| Antigravity CLI | Google's install script, below | Sign in once by running `agy` in a terminal |
+
+Antigravity CLI installs with Google's script, or with `install.ps1` from the same address on Windows:
+
+```bash
+curl -fsSL https://antigravity.google/cli/install.sh | bash
+```
 
 Claude Code is started as `claude-agent-acp` when that is on your `PATH`. Without it, but with `npx`
 and `claude` both installed, Zasper starts the adapter through `npx`. That first start downloads the
-adapter and can take a minute or two; later starts take seconds. Gemini CLI is started as
-`gemini --experimental-acp` and Codex as `codex-acp`.
+adapter and can take a minute or two; later starts take seconds. Codex is started as `codex-acp` and
+Antigravity CLI as `agy acp`.
+
+Since 2.2.0, Antigravity CLI takes Gemini CLI's place in the list. Gemini CLI has not served personal
+Google accounts since 18 June 2026, and Antigravity CLI signs in with those, a Gemini API key or a
+business account alike. Gemini CLI still works as any other agent, started by its command line:
+`gemini --experimental-acp`. Codex's adapter moved from `@zed-industries/codex-acp` to
+`@agentclientprotocol/codex-acp`; the command is still `codex-acp`.
 
 Claude Code is the agent tested most so far. Any other agent that speaks ACP can be started by its
 command line.

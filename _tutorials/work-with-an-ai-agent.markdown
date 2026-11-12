@@ -26,8 +26,8 @@ other tutorials are in [zasper-tutorials](https://github.com/zasper-io/zasper-tu
 
 This page assumes Zasper is [installed](/docs/installation), open on a folder you trust, with the
 notebook open and run once. It also assumes Claude Code is installed and signed in: run `claude` once
-in a terminal. [Coding Agents](/docs/coding-agents) has the install commands for Claude Code, Gemini
-CLI and Codex.
+in a terminal. [Coding Agents](/docs/coding-agents) has the install commands for Claude Code, Codex
+and Antigravity CLI.
 
 ## Start The Agent You Already Use
 
