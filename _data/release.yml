@@ -65,7 +65,7 @@ channels:
     upgrade: sudo snap refresh zasper
     note: Snaps also update themselves, several times a day.
   - name: conda
-    where: Linux · Windows · Intel Mac
+    where: Linux · Windows · macOS
     for: windows
     install: conda install zasper -c conda-forge
     upgrade: conda update zasper -c conda-forge

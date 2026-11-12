@@ -41,11 +41,15 @@ records.
 sudo snap install zasper
 ```
 
-## Conda (Linux x86-64, Windows, Intel Mac)
+## Conda (Linux, Windows, macOS)
 
 ```bash
 conda install zasper -c conda-forge
 ```
+
+conda-forge builds Zasper for Linux on x86-64 and ARM64, Windows on x86-64, and macOS on Apple Silicon
+and Intel; the ARM64 and Apple Silicon builds are new in 2.2.0. Its macOS packages need macOS 13 or
+later, since conda-forge builds them with a newer Go than the other downloads.
 
 ## Prebuilt Binaries
 
