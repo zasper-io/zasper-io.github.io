@@ -1,7 +1,7 @@
 ---
 layout: docs
 title:  "Coding Agents"
-description: "Work with Claude Code, Codex, Antigravity CLI or another ACP agent in a panel beside the editor, and review or undo what each turn changed."
+description: "Work with Claude Code, Codex, Antigravity CLI, OpenCode or another ACP agent in a panel beside the editor, and review or undo what each turn changed."
 date:   2026-10-14 09:00:00 +0530
 index: 9.7
 group: Guides
@@ -24,26 +24,28 @@ Step by step: [Work with an AI Agent](/tutorials/work-with-an-ai-agent).
 
 | Agent | Install | Then |
 | --- | --- | --- |
-| Claude Code | `npm install -g @agentclientprotocol/claude-agent-acp` | Sign in once by running `claude` in a terminal |
+| Claude Code | `npm install -g @agentclientprotocol/claude-agent-acp` | Sign in from the panel, or by running `claude` in a terminal |
 | Codex | `npm install -g @agentclientprotocol/codex-acp`, beside the `codex` CLI | Sign in once by running `codex` in a terminal |
-| Antigravity CLI | Google's install script, below | Sign in once by running `agy` in a terminal |
+| Antigravity CLI | Google's install script, below | Sign in from the panel, or by running `agy` in a terminal |
+| OpenCode | OpenCode's install script, below, or its desktop app | Nothing for its free models; `opencode auth login` connects a provider's |
 
-Antigravity CLI installs with Google's script, or with `install.ps1` from the same address on Windows:
+Antigravity CLI and OpenCode install with their own scripts. On Windows, Antigravity CLI has
+`install.ps1` at the same address, and OpenCode has a download on its site.
 
 ```bash
-curl -fsSL https://antigravity.google/cli/install.sh | bash
+curl -fsSL https://antigravity.google/cli/install.sh | bash   # Antigravity CLI
+curl -fsSL https://opencode.ai/v2/install | bash             # OpenCode
 ```
 
 Claude Code is started as `claude-agent-acp` when that is on your `PATH`. Without it, but with `npx`
 and `claude` both installed, Zasper starts the adapter through `npx`. That first start downloads the
-adapter and can take a minute or two; later starts take seconds. Codex is started as `codex-acp` and
-Antigravity CLI as `agy acp`.
+adapter and can take a minute or two; later starts take seconds. Codex is started as `codex-acp`,
+Antigravity CLI as `agy acp`, and OpenCode as `opencode acp`: from your `PATH`, else from
+`~/.opencode/bin`, where its script puts it, else from inside its desktop app on a Mac.
 
-Since 2.2.0, Antigravity CLI takes Gemini CLI's place in the list. Gemini CLI has not served personal
-Google accounts since 18 June 2026, and Antigravity CLI signs in with those, a Gemini API key or a
-business account alike. Gemini CLI still works as any other agent, started by its command line:
-`gemini --experimental-acp`. Codex's adapter moved from `@zed-industries/codex-acp` to
-`@agentclientprotocol/codex-acp`; the command is still `codex-acp`.
+Gemini CLI is not in the list: it has not served personal Google accounts since 18 June 2026, and
+Antigravity CLI signs in with those, a Gemini API key or a business account alike. Gemini CLI still
+works as any other agent, started by its command line: `gemini --experimental-acp`.
 
 Claude Code is the agent tested most so far. Any other agent that speaks ACP can be started by its
 command line.
@@ -65,25 +67,75 @@ lists the agents Zasper knows:
 While an agent starts, the panel shows how long it has taken. **Cancel** gives up and stops the
 agent's process.
 
+## Signing In
+
+An agent that is installed but not signed in says so when it starts, and the panel lists the ways it
+offers to sign in, in its own words:
+
+- **A way in a terminal**, such as Claude Code's **Claude Subscription**: Zasper opens a terminal in the
+  project with the agent's sign-in command typed in. Finish there, often in your browser, then press
+  **Try again**.
+- **A way the agent carries out itself**, such as Antigravity CLI's **Log in with Google**: the agent
+  opens your browser and the chat starts once you are signed in. A way that takes an API key asks for
+  it in the panel, and Zasper keeps the key in your keychain.
+
+A message the agent refused for want of a sign-in waits in the field of the next chat. **More**, under
+the message field, shows who the agent is signed in as, and **Sign out** where the agent has one. The
+sign-in is the agent's own, kept where the agent keeps it; Zasper stores none of it.
+
 ## A Chat
 
 Type in the field at the bottom and press Enter to send; Shift+Enter starts a new line. While the agent
 works the send button becomes **Stop**, which cancels the turn.
 
+A `/` at the start of a message lists the agent's own commands, such as Claude Code's `/compact`.
+Typing narrows the list, `Tab` completes a command, and `Enter` sends one typed in full.
+
 The conversation streams in as the agent works: its messages, its thinking folded under **Thinking**,
 its plan, and a row for each tool call. A row opens to what the call did: the output of a command and
-how it exited, or the change it made to a file. Pressing the row's file opens it.
+how it exited, or the change it made to a file. Pressing the row's file opens it. A command still
+running when the turn ends says so. When the agent compacts the conversation to free up context, or
+sends a notice, the chat shows it where it happened.
+
+The panel's title is the chat's title, as the agent names it, and beside it a meter shows how full
+the agent's context is.
+
+A document the agent writes for you, such as Antigravity CLI's plan, opens from the chat as a read-only
+tab; to change it, reply in the chat. Other links in an answer open the file in the project, or the
+web page in a new browser tab.
+
+When the agent asks you something, such as Antigravity CLI's questions, the question is a form in the
+chat, under the call that asked it. Answer it, or press **Skip**.
+
+A subagent's calls are listed under the row that sent it off, and its report is that row's output. An
+OpenCode subagent works in the background after the turn ends; its row says so until it reports back.
+
+Antigravity CLI and OpenCode take a message while they work: **Send** stays beside **Stop**, and the
+message joins the turn under way. With other agents, wait for the turn to end, or stop it.
 
 The chat is kept on the server, not in the tab. A reload or a second tab shows the same conversation,
 and a turn carries on with no tab open. **New chat** in the panel's title stops this chat's agent and
 goes back to the list of agents.
 
-## What the Agent May Do Without Asking
+## The Agent's Settings
 
-The agent decides what to ask about. Claude Code asks before it edits a file, runs a command or uses
-one of Zasper's notebook tools, even one that only reads a notebook. The question appears in the chat
-with the agent's options as buttons, and the agent waits for your answer. The menu above the chat sets
-which questions are answered for you:
+Under the message field, the agent's own settings for the chat are chips, as the agent words them: its
+model, its effort and its mode. Its other settings are under **More**. A setting lasts for the chat; a
+new chat starts with the agent's defaults.
+
+The mode decides what the agent asks you before it acts. When it asks, the question appears in the chat
+with the agent's options as buttons, and the agent waits for your answer. Claude Code's modes:
+
+| Mode | What Claude Code asks first |
+| --- | --- |
+| **Manual** | Every change: an edit, a command, or one of Zasper's notebook tools, even one that only reads |
+| **Accept edits** | Commands and notebook tools; file edits go ahead |
+| **Plan** | It makes a plan before it changes anything |
+| **Auto** | Claude decides which actions need your yes. Its default, when your model offers it |
+| **Bypass permissions** | Nothing. Listed only when your Claude Code settings allow it |
+
+An agent with no modes of its own gets Zasper's, as a chip labelled **What the agent may do without
+asking**:
 
 | Mode | Answered without asking |
 | --- | --- |
@@ -91,9 +143,8 @@ which questions are answered for you:
 | **Allow edits** | Edits, moves and deletes of files |
 | **Allow edits and commands** | Those, and commands |
 
-Any other question, such as one about a notebook tool, is asked in every mode. A question the mode
-answered says *Allowed by this chat's mode*. The mode belongs to the chat, and every tab showing the
-chat sees it change.
+A question that mode answered says *Allowed by this chat's mode*. Every tab showing the chat sees a
+setting change.
 
 ## Mentioning a File, a Cell or an Output
 
@@ -170,7 +221,8 @@ history of its own.
 - **An agent is listed as Not installed after installing it**: Zasper looks for its command on the
   `PATH` the server was started with. Press **Check again**; if the install added a new folder to
   your `PATH`, restart Zasper from a shell that has it.
-- **The agent fails to start**: sign in once by running the agent in a terminal, as its card says.
+- **The agent fails to start**: it may need signing in; see [Signing In](#signing-in), or run the agent
+  once in a terminal, as its card says.
 - **No files listed under a turn**: git is not installed, or the turn changed only files that are not
   snapshotted.
 - **The field says the agent has stopped**: its process ended. Start a new chat.

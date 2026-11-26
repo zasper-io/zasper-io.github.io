@@ -25,9 +25,9 @@ database to follow along: any notebook with a chart in it works the same way. Th
 other tutorials are in [zasper-tutorials](https://github.com/zasper-io/zasper-tutorials).
 
 This page assumes Zasper is [installed](/docs/installation), open on a folder you trust, with the
-notebook open and run once. It also assumes Claude Code is installed and signed in: run `claude` once
-in a terminal. [Coding Agents](/docs/coding-agents) has the install commands for Claude Code, Codex
-and Antigravity CLI.
+notebook open and run once. It also assumes Claude Code is installed. If it isn't signed in yet, the
+panel offers to sign it in when you start it. [Coding Agents](/docs/coding-agents) has the install
+commands for Claude Code, Codex, Antigravity CLI and OpenCode.
 
 ## Start The Agent You Already Use
 
@@ -38,7 +38,7 @@ The bot button in the top bar, **Toggle the agent panel**, opens the agent panel
 your notebook. With no chat open, it lists the agents Zasper knows. The ones installed are under
 **Ready**, each with a **Start** button.
 
-{% include tut/shot.html name="start" width="468" height="278" alt="The agent panel, headed Work with an agent. Under Ready, Claude Code by Anthropic has a Start button, ringed and labelled Your own agent, your own subscription." caption="Installed agents are under **Ready**." %}
+{% include tut/shot.html name="start" width="468" height="278" alt="The agent panel, headed Work with an agent. Under Ready, Claude Code by Anthropic has a Start button, ringed and labelled Your own agent, your own subscription; the other agents installed are listed below it." caption="Installed agents are under **Ready**." %}
 
 Zasper doesn't bring a model of its own. It runs Claude Code, signed in with your own account and
 on your own subscription. Press **Start** beside Claude Code. When the field at the bottom of the panel
@@ -54,10 +54,17 @@ group has two items:
 
 Open the menu on the borough chart's cell and choose **Add Output to Chat**.
 
-{% include tut/shot.html name="add-output" width="1467" height="550" alt="The borough chart's cell with its menu open. Under Agent, Add Output to Chat is ringed." caption="**Add Output to Chat** sends the chart with your next message." %}
+{% include tut/shot.html name="add-output" width="1467" height="551" alt="The borough chart's cell with its menu open. Under Agent, Add Output to Chat is ringed." caption="**Add Output to Chat** sends the chart with your next message." %}
 
-The output shows as a chip above the message field. Then ask your question, the way you'd ask a
-colleague:
+The output shows as a chip above the message field.
+
+Under the message field are Claude Code's own settings, as chips: its model, its effort and its mode.
+The mode decides what Claude asks you before it acts. It starts in **Auto**, where Claude decides for
+itself. Open the **Mode** chip and choose **Manual**, and Claude asks before every change.
+
+{% include tut/shot.html name="mode" width="449" height="166" alt="The Mode chip's menu open under the message field, listing Manual, Accept edits, Plan, Auto and Bypass permissions, with Auto ticked. Manual is ringed and labelled Asks before every change." caption="Claude Code's own modes, under the message field." %}
+
+Then ask your question, the way you'd ask a colleague:
 
 ```
 Why is Staten Island's average less reliable than the other boroughs'? Check its fares in the kernel, then answer in two sentences, without dollar signs.
@@ -73,26 +80,19 @@ Press **Enter** to send. The agent's words stream into the panel as it works.
 Before Claude reads or runs anything, it asks. The question appears in the chat, with Claude's options
 as buttons. Here it asks to read the notebook, through Zasper's `read_notebook` tool.
 
-{% include tut/shot.html name="question" width="467" height="287" alt="Claude's question in the agent panel, for the tool mcp__zasper__read_notebook, ringed and labelled Claude asks before it acts. Its buttons: Yes; Yes, and don't ask again for Read Notebook commands; No." caption="Claude asks before it reads the notebook." %}
+{% include tut/shot.html name="question" width="467" height="287" alt="Claude's question in the agent panel, for the tool zasper: read_notebook, ringed and labelled Claude asks before it acts. Its buttons: Yes; Yes, and don't ask again for Read Notebook commands; No." caption="Claude asks before it reads the notebook." %}
 
 Choose **Yes, and don't ask again**, and it won't ask again for that kind of action.
 
-Its answer comes from the trip counts in the chart: Staten Island's average rests on 67 trips.
+Its answer comes from the trip counts in the chart and the fares in the kernel: Staten Island's
+average rests on 67 trips.
 
-{% include tut/shot.html name="answer" width="467" height="294" alt="Claude's answer in the agent panel: Staten Island's average comes from only 67 trips, against hundreds of thousands for Queens and millions for Manhattan, so a few unusually long or short rides can move it a lot." caption="Claude's own words differ every time you ask." %}
+{% include tut/shot.html name="answer" width="467" height="319" alt="Claude's answer in the agent panel: Staten Island's average of 60.16 comes from only 67 trips with widely spread fares, from 4.50 to 354.23, so a handful of large fares pull the mean up and it could be off by about 7 either way, while the other boroughs rest on thousands of trips or more." caption="Claude's own words differ every time you ask." %}
 
 ## Let It Extend The Notebook
 
-Now something bigger. The menu at the top of the chat is labelled **What the agent may do without
-asking**. It has three settings:
-
-- **Ask every time**: every question comes to you.
-- **Allow edits**: edits, moves and deletes of files are answered for you.
-- **Allow edits and commands**: edits and commands are answered for you.
-
-Choose **Allow edits and commands**.
-
-{% include tut/shot.html name="mode" width="466" height="119" alt="The menu at the top of the agent panel, set to Allow edits and commands, labelled What it may do without asking." caption="The menu belongs to this chat." %}
+Now something bigger. Open the **Mode** chip again and choose **Auto**, so Claude decides for itself
+which actions need your yes. The mode belongs to this chat.
 
 Then ask for a new section: taxi trips by hour of day, as a SQL cell and a chart.
 
@@ -117,10 +117,11 @@ marked **M** for modified.
 {% include tut/shot.html name="changes" width="467" height="164" alt="Under the agent's turn: 1 file changed, examples/nyc_taxi.ipynb marked M, with an Undo this turn button." caption="What this turn changed." %}
 
 Open the file to see the change as a notebook diff, **Before the turn** against **Now**. A line at the
-top counts the cells the turn changed. Each cell it added is a card of its own, and the cells it didn't
+top counts the cells the turn changed. If the notebook has changes you haven't saved, as it does
+after you ran it, the diff says so and **Save and compare** saves it first. Each cell it added is a card of its own, and the cells it didn't
 touch fold away into one line.
 
-{% include tut/shot.html name="diff" width="1022" height="974" alt="The notebook diff, Before the turn against Now. Its summary, 3 of 23 cells changed, 3 added, is ringed and labelled The cells it added. Below it, three added cells: a Markdown heading, the SQL cell writing df_hourly, and the chart's code." caption="The turn's change, cell by cell." %}
+{% include tut/shot.html name="diff" width="1022" height="974" alt="The notebook diff, Before the turn against Now, under a notice that the notebook has unsaved changes, with Save and compare. Its summary, 3 of 23 cells changed, 3 added, is ringed and labelled The cells it added. Below it, the added cells: a Markdown heading, Trips by hour, and the SQL cell writing df_hourly with its 24 rows." caption="The turn's change, cell by cell." %}
 
 The first turn's list may name `.claude/settings.local.json`. That is where Claude Code keeps a yes
 you gave for good. Zasper lists every file a turn changed, however it was changed.

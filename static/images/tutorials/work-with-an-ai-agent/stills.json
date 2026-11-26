@@ -3,7 +3,7 @@
     "light": "add-output.light.webp",
     "dark": "add-output.dark.webp",
     "width": 1467,
-    "height": 550
+    "height": 551
   },
   "agent-cell": {
     "light": "agent-cell.light.webp",
@@ -15,7 +15,7 @@
     "light": "answer.light.webp",
     "dark": "answer.dark.webp",
     "width": 467,
-    "height": 294
+    "height": 319
   },
   "changes": {
     "light": "changes.light.webp",
@@ -32,8 +32,8 @@
   "mode": {
     "light": "mode.light.webp",
     "dark": "mode.dark.webp",
-    "width": 466,
-    "height": 119
+    "width": 449,
+    "height": 166
   },
   "question": {
     "light": "question.light.webp",
