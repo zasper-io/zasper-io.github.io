@@ -1,7 +1,7 @@
 ---
 layout: docs
 title:  "Installation"
-description: "Install Zasper on macOS, Linux or Windows with Homebrew, Snap, conda or a prebuilt binary, then check it works and upgrade an older release."
+description: "Install Zasper on macOS, Linux or Windows with the install script, Homebrew, Snap, conda or a prebuilt binary, then check it works and upgrade an older release."
 date:   2024-12-22 07:39:59 +0530
 categories: docs
 index: 1
@@ -23,6 +23,28 @@ machine, and you use it in your browser: Chrome, Firefox, Safari or Edge.
   starts, and the Launcher offers **Set up a Python kernel**, which makes a `.venv` with ipykernel in
   your project when you click it, once the folder is trusted.
 - **A modern browser.**
+
+## Install Script (Linux, macOS)
+
+```bash
+curl -fsSL https://zasper.io/install.sh | sh
+```
+
+The script downloads the latest release for your machine, checks it against the release's checksums
+and installs it to `/usr/local/bin`. Without root or sudo, it installs to `~/.local/bin` instead. It
+asks nothing, so it also works on a new cloud machine. Run it again to upgrade, and delete the
+binary to uninstall.
+
+To install a particular release, or choose the folder:
+
+```bash
+curl -fsSL https://zasper.io/install.sh | ZASPER_VERSION=2.1.0 sh
+curl -fsSL https://zasper.io/install.sh | ZASPER_INSTALL_DIR=~/bin sh
+```
+
+You can read the script before running it: it is
+[scripts/install.sh](https://github.com/zasper-io/zasper/blob/main/scripts/install.sh) in the main
+repository.
 
 ## Homebrew (macOS, Linux)
 
@@ -53,7 +75,8 @@ later, since conda-forge builds them with a newer Go than the other downloads.
 
 ## Prebuilt Binaries
 
-Download the archive for your platform from the [Downloads page](/downloads/) or from
+The install script does these steps for you. To do them by hand, download the archive for your
+platform from the [Downloads page](/downloads/) or from
 [GitHub Releases](https://github.com/zasper-io/zasper/releases), unpack it, and put `zasper`
 somewhere on your `PATH`:
 
@@ -207,8 +230,9 @@ The full list is in the
 
 **`zasper: command not found`**
 
-The folder you put `zasper` in is not on your `PATH`. For Homebrew, snap or conda, check that the
-package manager itself is on your `PATH`.
+The folder you put `zasper` in is not on your `PATH`. The install script says so when that happens,
+usually because it installed to `~/.local/bin`; add that folder to your `PATH`. For Homebrew, snap or
+conda, check that the package manager itself is on your `PATH`.
 
 **The sign-in page asks for a token**
 

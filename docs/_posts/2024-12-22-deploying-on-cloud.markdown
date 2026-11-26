@@ -1,7 +1,7 @@
 ---
 layout: docs
 title:  "Deploying on Cloud"
-description: "Host Zasper on your own server: signing in, making it reachable, keeping the access token across restarts, HTTPS, Docker and running it as a service."
+description: "Host Zasper on your own server: installing it, signing in, reaching it over an SSH tunnel or the network, keeping the access token across restarts, HTTPS, Docker, running it as a service and setting up a new machine with cloud-init."
 date:   2024-12-22 07:39:59 +0530
 index: 5
 group: Guides
@@ -14,6 +14,22 @@ You can host your own instance of Zasper on a server and use it from anywhere.
 
 Zasper gives whoever signs in your project files and a terminal. Every Zasper server requires an
 access token to sign in, so treat that token, and any link that carries it, like a password.
+
+## Installing It
+
+On the server, install Zasper and a Python kernel:
+
+```bash
+curl -fsSL https://zasper.io/install.sh | sh
+pip install ipykernel
+```
+
+On Debian 12 and Ubuntu 24.04, pip refuses to install outside a virtual environment, so install the
+kernel with apt instead: `sudo apt install python3-ipykernel`.
+
+The script works on any Linux distribution, x86-64 or ARM64, and asks nothing. Without root or sudo
+it installs to `~/.local/bin`. [Installation](/docs/installation#install-script-linux-macos) has the
+options.
 
 ## Signing In
 
@@ -56,6 +72,29 @@ A session lasts 24 hours, after which you sign in again.
 Before 1.1.0, authentication was off unless you passed `--protected=true`. That flag is no longer
 needed. Zasper still accepts it, so existing scripts keep starting, but `--protected=false` is
 ignored.
+
+## Over an SSH Tunnel
+
+If you're the only one using the server, you don't need to open a port. Leave Zasper on the default
+`127.0.0.1` and reach it through SSH, which encrypts the connection, so no proxy or certificate is
+needed either. On the server:
+
+```bash
+zasper
+```
+
+On your own machine, forward the port:
+
+```bash
+ssh -L 8048:localhost:8048 user@my-server
+```
+
+While that SSH session is open, the banner's **Sign in with** link works in your own browser as it
+is, because `127.0.0.1:8048` on your machine now leads to the server. If port 8048 is taken on your
+machine, forward another one, such as `-L 9000:localhost:8048`, and change the port in the link.
+
+Zasper stops when you close the SSH session it runs in. To keep it running, start it in `tmux` or
+`screen`, or [run it as a service](#running-it-as-a-service) and tunnel to that.
 
 ## Reaching It from Another Machine
 
@@ -266,6 +305,45 @@ prompt.
 Zasper finds the kernels that the service's user has installed. Under systemd, logs are written as
 JSON, so the token is in the startup line's `access_token` field; [Configuration](/docs/configuration#logging)
 explains how to change the format.
+
+### Setting Up a New Machine with cloud-init
+
+Most cloud providers accept cloud-init *user data* when you create a machine. This user data starts
+the machine with Zasper already running as a service, on `127.0.0.1` for an SSH tunnel. It is
+written for Ubuntu, whose default user is `ubuntu`; on another image, change `ubuntu` to that image's
+default user:
+
+```yaml
+#cloud-config
+packages:
+  - python3-ipykernel
+write_files:
+  - path: /etc/systemd/system/zasper.service
+    content: |
+      [Unit]
+      Description=Zasper
+      After=network.target
+
+      [Service]
+      User=ubuntu
+      WorkingDirectory=/home/ubuntu/notebooks
+      EnvironmentFile=/etc/zasper.env
+      ExecStart=/usr/local/bin/zasper --trust
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target
+runcmd:
+  - curl -fsSL https://zasper.io/install.sh | sh
+  - install -d -o ubuntu -g ubuntu /home/ubuntu/notebooks
+  - umask 077 && printf 'ZASPER_ACCESS_TOKEN=%s\n' "$(openssl rand -hex 32)" > /etc/zasper.env
+  - systemctl daemon-reload
+  - systemctl enable --now zasper
+```
+
+The token is generated on the machine rather than written in the user data, because on most
+providers any program on the machine can read the user data back. Once the machine is up, read the token
+with `sudo cat /etc/zasper.env`, then connect [over an SSH tunnel](#over-an-ssh-tunnel).
 
 ## Tips
 
