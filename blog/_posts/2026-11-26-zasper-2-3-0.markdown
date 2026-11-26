@@ -1,0 +1,70 @@
+---
+layout: post
+title:  "Zasper 2.3.0"
+description: "Zasper 2.3.0 adds OpenCode to the agent panel, signs agents in from the panel, brings an agent's plans and questions into the chat, and installs with one line."
+date:   2026-11-26 09:00:00 +0530
+categories: blog
+kind: Release
+permalink: blog/:title
+author: Prasun Anand
+banner: /static/images/logo.svg
+---
+
+Zasper 2.3.0 grows the agent panel. OpenCode joins it, an agent is signed in from the panel, and its
+settings, commands, plans and questions live in the chat. A subagent's work nests under the row that
+sent it off. Zasper can also be installed on Linux and macOS with one line.
+
+```bash
+curl -fsSL https://zasper.io/install.sh | sh   # Linux, macOS
+brew upgrade zasper                            # Homebrew
+sudo snap refresh zasper                       # Snap
+conda update zasper -c conda-forge             # conda
+```
+
+Prebuilt binaries are on the [Downloads page](/downloads/).
+
+## The Agent Panel
+
+- **OpenCode is offered in the Agents panel**, found on `PATH`, in `~/.opencode/bin` or inside its
+  desktop app. Its models are listed by name, and its subagents are followed in the background.
+- **Sign an agent in from the panel.** Its own sign-in runs in a Zasper terminal, and the account and
+  Sign out are under More. Antigravity offers every way it signs in, an API key included.
+- **The agent's own settings are chips**: model, effort and mode, as the agent reports them. Past
+  conversations are a menu, and the panel's head shows the chat's title and how full its context is.
+- **A `/` that starts a message lists the agent's commands.** `Tab` completes one, and `Enter` sends a
+  command typed in full.
+
+[Coding Agents](/docs/coding-agents) covers setting each agent up.
+
+## In the Chat
+
+- **An agent's plan opens as a read-only tab**, and links in its answer open the document, a project
+  file or a new browser tab.
+- **An agent's questions are a form**, answered or skipped in place.
+- **A subagent's calls nest under the row that sent it off**, and its report is that row's output. A
+  command left running says so.
+- **Send Antigravity a message while it works.** It joins the turn already under way.
+- **An edit's permission prompt shows the change** it asks to make.
+- **Compactions and notices are drawn in the chat**, and a turn that ends with no reply says so.
+
+## Notebooks
+
+- **A run an agent asks for is saved to the notebook**, even with its tab open. A diff of a file with
+  unsaved changes says so, and offers to save.
+- **A file whose line endings alone changed on disk counts as changed**, so the next save no longer
+  turns them back.
+
+## One-Line Install
+
+```bash
+curl -fsSL https://zasper.io/install.sh | sh
+```
+
+The script installs the current release for your system and checks it against the release's
+checksums. [Installation](/docs/installation#install-script-linux-macos) has its options.
+
+## Upgrading from 2.2.0
+
+Nothing needs doing. Analytics record a country and city again, as 0.1 and 0.2 did, and
+`zasper --tracking=false` still turns them off. [Installation](/docs/installation#upgrading-from-220)
+says the same, and the [changelog](/changelog/#2.3.0) has the full list.

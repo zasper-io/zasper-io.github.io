@@ -123,6 +123,13 @@ no browser opens, for example because you passed `--no-browser` or are connected
 The Linux archives are static binaries, so one build works on every distribution, Debian and Red
 Hat alike.
 
+## Upgrading from 2.2.0
+
+Nothing needs doing. One thing behaves differently:
+
+- **Analytics record a country and city again**, as 0.1 and 0.2 did. `zasper --tracking=false` still
+  turns analytics off entirely.
+
 ## Upgrading from 2.1.0
 
 Nothing needs doing for most people. Four things behave differently:
