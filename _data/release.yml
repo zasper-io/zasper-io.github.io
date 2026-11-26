@@ -8,6 +8,8 @@ date: 2026-11-12
 # The landing page's "Latest release" row: "<version>, with <headline>".
 headline: keyboard and screen reader access, hub support and sandboxed outputs
 # The install script, zasper/scripts/install.sh served from this site's root. Linux and macOS only.
+# The landing page's hero offers it on Linux: it works on every distribution, and the snap's strict
+# confinement limits what it can reach on the host.
 script: curl -fsSL https://zasper.io/install.sh | sh
 
 # Each entry is one operating system's card, and `slug` is the archive's name in the release, which is
@@ -62,7 +64,6 @@ channels:
     note: Homebrew 6 loads nothing from a third-party tap until you trust it.
   - name: Snap
     where: Linux
-    for: linux
     install: sudo snap install zasper
     upgrade: sudo snap refresh zasper
     note: Snaps also update themselves, several times a day.

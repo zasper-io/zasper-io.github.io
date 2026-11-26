@@ -252,10 +252,10 @@ if (primary && platform) {
 }
 
 /*
-The landing page: the hero shows the package manager that platform installs from — Homebrew on macOS,
-snap on Linux, conda on Windows, which is the one of the three that has a Windows build. The commands
-are the downloads page's own, carried here in data attributes so both pages read _data/release.yml
-and cannot drift.
+The landing page: the hero shows how that platform installs — Homebrew on macOS, the install script
+on Linux, and conda on Windows, the one package manager of the three with a Windows build. The
+commands are the downloads page's own, carried here in data attributes so both pages read
+_data/release.yml and cannot drift.
 */
 const heroCommand = document.getElementById('install-cmd');
 if (heroCommand && platform) {
