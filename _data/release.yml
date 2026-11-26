@@ -7,6 +7,8 @@ version: "2.2.0"
 date: 2026-11-12
 # The landing page's "Latest release" row: "<version>, with <headline>".
 headline: keyboard and screen reader access, hub support and sandboxed outputs
+# The install script, zasper/scripts/install.sh served from this site's root. Linux and macOS only.
+script: curl -fsSL https://zasper.io/install.sh | sh
 
 # Each entry is one operating system's card, and `slug` is the archive's name in the release, which is
 # also what the OS detection matches to point its button at the right file.

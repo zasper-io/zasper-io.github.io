@@ -5,5 +5,5 @@ layout: downloads
 permalink: /downloads/
 title: "Downloads"
 seo_title: "Download Zasper for macOS, Linux and Windows"
-description: "Download Zasper for macOS, Linux or Windows, or install it with Homebrew, snap or conda. The whole app is one static binary."
+description: "Download Zasper for macOS, Linux or Windows, or install it with one command, Homebrew, snap or conda. The whole app is one static binary."
 ---

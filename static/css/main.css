@@ -3162,6 +3162,21 @@ keep `.mk-dl` for its link and code rules, without its own padding, which the ba
   color: #ffffffa6;
 }
 
+/* The install script under the download button, as wide as a package manager's card would be. */
+.mk-dl-script {
+  max-width: 520px;
+  margin-top: 24px;
+}
+
+.mk-band-dark .mk-dl-cmd-label,
+.mk-band-dark .mk-dl-script .mk-dl-note {
+  color: #ffffffa6;
+}
+
+.mk-band-dark .mk-dl-script .mk-dl-note a {
+  color: #ffffff;
+}
+
 .mk-band-dark .z-badge-accent {
   background: #ffffff;
   color: var(--z-accent);

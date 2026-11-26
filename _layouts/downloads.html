@@ -26,8 +26,8 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
   </p>
   <h1 class="mk-section-title">Download Zasper <span class="mk-accent">{{ release.version }}</span></h1>
   <p class="mk-docs-lede">
-    One static binary for macOS, Linux and Windows. Install it with the package manager you already
-    use, or download it directly. To run notebooks you also need a Jupyter kernel, which Zasper does
+    One static binary for macOS, Linux and Windows. Install it with one command, with the package
+    manager you already use, or download it directly. To run notebooks you also need a Jupyter kernel, which Zasper does
     not install; <code>pip install ipykernel</code> is enough to start, and
     <a href="/docs/installing-jupyter-kernels">Installing Jupyter Kernels</a> covers other languages.
   </p>
@@ -41,6 +41,15 @@ Silicon archive, and main.js swaps it for the visitor's own platform.
       <span id="dl-primary-size">{{ first.size }}</span> ·
       <a href="#binaries">Other platforms</a>
     </span>
+  </div>
+
+  <div class="mk-dl-cmd mk-dl-script">
+    <span class="mk-dl-cmd-label">Or in one line, on Linux and macOS</span>
+    <div class="mk-install">
+      <span id="cmd-install-script">{{ release.script | split: " " | join: '</span> <span class="mk-dl-word">' | prepend: '<span class="mk-dl-word">' | append: '</span>' }}</span>
+      <button type="button" aria-label="Copy" data-copy="cmd-install-script">{{ copy_icon }}</button>
+    </div>
+    <p class="mk-dl-note">Checks the download and installs it to <code>/usr/local/bin</code>, asking nothing, so it suits a new cloud machine too. <a href="/docs/installation#install-script-linux-macos">Options</a></p>
   </div>
 </div>
 </div>
