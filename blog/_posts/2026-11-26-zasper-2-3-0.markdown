@@ -25,14 +25,27 @@ Prebuilt binaries are on the [Downloads page](/downloads/).
 
 ## The Agent Panel
 
+{% include tut/shot.html name="agent-panel" dir="/static/images/blog/zasper-2-3-0" width="1920" height="1080"
+  alt="A penguins notebook open in Zasper with Claude Code in the agent panel beside it. The panel's head shows the chat's title and a context meter at 4%, the chat lists the tools Claude called, including run_code, and its answer that Gentoo penguins are the heaviest. Under the message field are the chips Opus 5.5, High and Auto."
+  caption="**Claude Code in the agent panel**, after checking the notebook's data in the kernel: the chat's title and how full its context is in the head, and the agent's own model, effort and mode as chips." %}
+
 - **OpenCode is offered in the Agents panel**, found on `PATH`, in `~/.opencode/bin` or inside its
   desktop app. Its models are listed by name, and its subagents are followed in the background.
 - **Sign an agent in from the panel.** Its own sign-in runs in a Zasper terminal, and the account and
   Sign out are under More. Antigravity offers every way it signs in, an API key included.
+
+{% include tut/shot.html name="agents" dir="/static/images/blog/zasper-2-3-0" width="467" height="605"
+  alt="The agent panel's start screen. Under Ready are Claude Code, Antigravity CLI and OpenCode, each with a Start button; under Not installed is Codex, with the command that installs it."
+  caption="**OpenCode joins the agents Zasper finds**, beside Claude Code and Antigravity CLI." %}
+
 - **The agent's own settings are chips**: model, effort and mode, as the agent reports them. Past
   conversations are a menu, and the panel's head shows the chat's title and how full its context is.
 - **A `/` that starts a message lists the agent's commands.** `Tab` completes one, and `Enter` sends a
   command typed in full.
+
+{% include tut/shot.html name="commands" dir="/static/images/blog/zasper-2-3-0" width="472" height="128"
+  alt="The agent's message field with /compact typed in it, and above it a list of two commands, /compact and /autocompact, each with its description."
+  caption="**Type `/`** and the agent's own commands are listed as you type." %}
 
 [Coding Agents](/docs/coding-agents) covers setting each agent up.
 

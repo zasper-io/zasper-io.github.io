@@ -1,0 +1,20 @@
+{
+  "agent-panel": {
+    "light": "agent-panel.light.webp",
+    "dark": "agent-panel.dark.webp",
+    "width": 1920,
+    "height": 1080
+  },
+  "agents": {
+    "light": "agents.light.webp",
+    "dark": "agents.dark.webp",
+    "width": 467,
+    "height": 605
+  },
+  "commands": {
+    "light": "commands.light.webp",
+    "dark": "commands.dark.webp",
+    "width": 472,
+    "height": 128
+  }
+}
